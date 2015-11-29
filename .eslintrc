@@ -1,0 +1,28 @@
+{
+	"extends": [
+		"airbnb"
+	],
+	"plugins": [
+		"react"
+	],
+	"env": {
+		"node": true
+	},
+	"ecmaFeatures": {
+		"jsx": true
+	},
+	"settings": {
+		"import/ignore": [
+			"node_modules",
+			"\\.json$"
+		],
+		"import/parser": "babel-eslint",
+		"import/resolve": {
+			"extensions": [
+				".js",
+				".jsx",
+				".json"
+			]
+		}
+	}
+}

@@ -1,0 +1,35 @@
+{
+  "name": "max",
+  "version": "0.1.0",
+  "description": "blog",
+  "main": "build/server",
+  "private": true,
+  "scripts": {
+    "start": "gulp"
+  },
+  "author": "Max GJ Panas <m@maxpanas.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.8.29",
+    "babel-core": "^5.8.29",
+    "babel-eslint": "^4.1.6",
+    "eslint": "^1.10.2",
+    "eslint-config-airbnb": "^1.0.2",
+    "eslint-plugin-react": "^3.10.0",
+    "gulp": "^3.9.0",
+    "gulp-bg": "0.0.7",
+    "gulp-shell": "^0.5.1",
+    "nodemon": "^1.8.1",
+    "run-sequence": "^1.1.5",
+    "webpack": "^1.12.9",
+    "yargs": "^3.30.0"
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-redux": "^4.0.0",
+    "react-router": "^1.0.0",
+    "redux": "^3.0.4"
+  }
+}
