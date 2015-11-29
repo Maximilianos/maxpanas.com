@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
+import Header from './elements/Header';
+
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object,
@@ -8,7 +10,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <h1>MaxPanas.com</h1>
+        <Header />
         {this.props.children}
       </div>
     );

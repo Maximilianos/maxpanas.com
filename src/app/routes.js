@@ -1,15 +1,17 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
-import App from './components/App';
-import Home from './components/Home';
-import NotFound from './components/NotFound';
+import App from './App';
+import Home from './pages/Home';
+import About from './pages/About';
+import NotFound from './pages/NotFound';
 
 export function createRoutes() {
   return (
-    <Route component={App} path="/">
+    <Route path="/" component={App}>
       <IndexRoute component={Home} />
-      <Route component={NotFound} path="*"/>
+      <Route path="/about" component={About}/>
+      <Route path="*" component={NotFound}/>
     </Route>
   );
 }
