@@ -1,0 +1,3 @@
+# maxpanas.com
+
+My Blog. More coming soon...
