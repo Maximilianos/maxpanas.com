@@ -1,12 +1,13 @@
 import express from 'express';
 
+import frontend from './frontend';
+
 const app = express();
 
-app.get('*', (req, res) => {
-  res.send('Hello!');
-});
+app.use(frontend);
 
+const host = 'localhost';
 const port = 3000;
-app.listen(port, () => {
-  global.console.log(`Server listening at http://localhost:${port}`);
+app.listen(port, host, () => {
+  console.log('Server listening at http://%s:%s', host, port);
 });
