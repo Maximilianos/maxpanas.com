@@ -14,6 +14,7 @@ gulp.task('env', () => {
 });
 
 gulp.task('server-node', bg('node', './src/server'));
+gulp.task('server-hot', bg('node', './webpack/server'));
 gulp.task('server-nodemon', shell.task(
   path.normalize('node_modules/.bin/nodemon src/server')
 ));
@@ -22,7 +23,7 @@ gulp.task('server', ['env'], done => {
   if (args.production) {
     runSequence('server-node', done);
   } else {
-    runSequence('server-nodemon', done);
+    runSequence('server-hot', 'server-nodemon', done);
   }
 });
 
