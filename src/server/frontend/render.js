@@ -36,7 +36,6 @@ function getScriptHtml({hostname, filename}) {
 async function renderPageAsync({renderProps, req: {hostname}}) {
   const appHtml = getAppHtml(renderProps);
   const {js: filename} = await getAppAssetFilenamesCachedAsync();
-  console.log(filename);
   const scriptHtml = getScriptHtml({hostname, filename});
 
   const bodyHtml = `<div id="app">${appHtml}</div>${scriptHtml}`;
