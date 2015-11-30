@@ -4,8 +4,20 @@ import {RoutingContext, match} from 'react-router';
 import {createMemoryHistory} from 'history';
 
 import {HOT_RELOAD_PORT} from '../../../webpack/constants';
+import getAppAssetFilenamesAsync from './assets';
+
 import {createRoutes} from '../../app/routes';
 import Html from './Html';
+
+let appAssetFilenameCache = null;
+async function getAppAssetFilenamesCachedAsync() {
+  if (appAssetFilenameCache) {
+    return appAssetFilenameCache;
+  }
+
+  appAssetFilenameCache = await getAppAssetFilenamesAsync();
+  return appAssetFilenameCache;
+}
 
 function getAppHtml(renderProps) {
   return ReactDOMServer.renderToString(
@@ -21,9 +33,11 @@ function getScriptHtml({hostname, filename}) {
   return `<script src="${appScriptSrc}"></script>`;
 }
 
-function renderPageAsync({renderProps, req: {hostname}}) {
+async function renderPageAsync({renderProps, req: {hostname}}) {
   const appHtml = getAppHtml(renderProps);
-  const scriptHtml = getScriptHtml({hostname});
+  const {js: filename} = await getAppAssetFilenamesCachedAsync();
+  console.log(filename);
+  const scriptHtml = getScriptHtml({hostname, filename});
 
   const bodyHtml = `<div id="app">${appHtml}</div>${scriptHtml}`;
 

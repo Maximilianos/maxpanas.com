@@ -36,7 +36,7 @@ export default function getConfig(isProduction) {
     } else {
       plugins.push(
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccuranceOrderPlugin(),
+        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
           sourceMap: false,
           comments: false,

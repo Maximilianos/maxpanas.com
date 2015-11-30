@@ -1,9 +1,12 @@
 import path from 'path';
+import del from 'del';
 import gulp from 'gulp';
 import bg from 'gulp-bg';
 import shell from 'gulp-shell';
 import runSequence from 'run-sequence';
 import yargs from 'yargs';
+
+import webpackBuild from './webpack/build';
 
 const args = yargs
   .alias('p', 'production')
@@ -13,6 +16,10 @@ gulp.task('env', () => {
   process.env.NODE_ENV = args.production ? 'production' : 'development';
 });
 
+gulp.task('clean', done => del('build/*', done));
+
+gulp.task('build', ['env'], webpackBuild);
+
 gulp.task('server-node', bg('node', './src/server'));
 gulp.task('server-hot', bg('node', './webpack/server'));
 gulp.task('server-nodemon', shell.task(
@@ -21,7 +28,7 @@ gulp.task('server-nodemon', shell.task(
 
 gulp.task('server', ['env'], done => {
   if (args.production) {
-    runSequence('server-node', done);
+    runSequence('clean', 'build', 'server-node', done);
   } else {
     runSequence('server-hot', 'server-nodemon', done);
   }
