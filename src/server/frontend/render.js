@@ -27,7 +27,7 @@ function getAppHtml(renderProps) {
 
 function getScriptHtml({hostname, filename}) {
   const appScriptSrc = process.env.NODE_ENV === 'production'
-    ? `/_assets/${filename}`
+    ? `/public/${filename}`
     : `//${hostname}:${HOT_RELOAD_PORT}/build/app.js`;
 
   return `<script src="${appScriptSrc}"></script>`;
