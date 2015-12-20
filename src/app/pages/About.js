@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
+import Entry from '../elements/Entry';
 
 export default class About extends Component {
   render() {
     return (
-      <div>
-        <h1>Hello!</h1>
+      <Entry title="Hello!">
         <p>
           I am Max GJ Panas, web developer.
         </p>
-      </div>
+      </Entry>
     );
   }
 }

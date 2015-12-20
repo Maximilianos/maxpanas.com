@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
+import Entry from '../elements/Entry';
 
 export default class Home extends Component {
   render() {
-    return (
-      <div>
-        <h1>Welcome to my blog</h1>
-      </div>
-    );
+    return <Entry title="Welcome to my Website!" />;
   }
 }

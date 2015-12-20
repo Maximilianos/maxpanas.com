@@ -1,0 +1,38 @@
+/* =========================================
+    Entry
+   ========================================= */
+
+.entry {
+	margin: 150px 0;
+}
+
+.entry__body {
+	margin: 0 auto;
+	padding: 0 20px;
+	max-width: 700px;
+	font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 21px;
+	line-height: 1.58;
+	color: rgba(0,0,0,0.8);
+}
+
+.entry__title {
+	margin: 0 0 10px;
+	font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Verdana,sans-serif;
+	font-size: 36px;
+	font-weight: 700;
+	font-style: normal;
+	line-height: 1.15;
+	letter-spacing: -0.02em;
+}
+
+.entry__subtitle {
+	@extend .entry__title;
+	font-size: 28px;
+}
+
+.entry__content {
+	letter-spacing: -0.003em;
+}

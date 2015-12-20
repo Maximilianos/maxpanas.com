@@ -7,24 +7,34 @@
 	align-items: center;
 	justify-content: space-between;
 	margin: 0 auto;
+	padding: 0 20px;
 	max-width: 1024px;
 }
 
-.logo {
-	font-family: 'Arial Black', sans-serif;
+.header__logo {
+	margin: 0;
+}
+
+.header__logo-link {
+	font-family: 'FilsonProBlack', 'Arial Black', sans-serif;
 	font-weight: 900;
 	font-size: 72px;
+	letter-spacing: 0.04em;
 	line-height: 1;
 	text-transform: uppercase;
 	text-decoration: none;
 	color: tomato;
+
+	abbr[title] {
+		border: none;
+	}
 }
 
-.navItem {
+.header__nav-item {
 	display: inline-block;
 }
 
-.navLink {
+.header__nav-link {
 	display: block;
 	padding: 10px 20px;
 	font-family: Arial, sans-serif;
