@@ -5,7 +5,7 @@ export default class Html extends Component {
     lang: PropTypes.string.isRequired,
     bodyHtml: PropTypes.string.isRequired,
     cssFilename: PropTypes.string,
-    isDevelopment: PropTypes.boolean,
+    isDevelopment: PropTypes.bool,
   };
 
   render() {

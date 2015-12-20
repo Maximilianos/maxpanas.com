@@ -5,7 +5,7 @@ export default class Entry extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string,
-    children: PropTypes.object,
+    children: PropTypes.node,
   };
 
   render() {
