@@ -3,6 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import {RoutingContext, match} from 'react-router';
 import {createMemoryHistory} from 'history';
 
+import config from '../config';
 import {HOT_RELOAD_PORT} from '../../../webpack/constants';
 import getAppAssetFilenamesAsync from './assets';
 
@@ -35,13 +36,18 @@ function getScriptHtml({hostname, filename}) {
 
 async function renderPageAsync({renderProps, req: {hostname}}) {
   const appHtml = getAppHtml(renderProps);
-  const {js: filename} = await getAppAssetFilenamesCachedAsync();
-  const scriptHtml = getScriptHtml({hostname, filename});
+  const {js: jsFilename, css: cssFilename} = await getAppAssetFilenamesCachedAsync();
+  const scriptHtml = getScriptHtml({hostname, jsFilename});
 
   const bodyHtml = `<div id="app">${appHtml}</div>${scriptHtml}`;
 
   return '<!doctype html>' + ReactDOMServer.renderToStaticMarkup(
-    <Html lang="en" bodyHtml={bodyHtml} />
+    <Html
+      lang="en"
+      bodyHtml={bodyHtml}
+      cssFilename={cssFilename}
+      isDevelopment={config.isDevelopment}
+    />
   );
 }
 

@@ -1,5 +1,7 @@
 import path from 'path';
 import webpack from 'webpack';
+import autoprefixer from 'autoprefixer';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 import {
   ABSOLUTE_BASE,
@@ -16,6 +18,14 @@ const devtools = process.env.CONTINUOUS_INTEGRATION
 
 export default function getConfig(isProduction) {
   const isDevelopment = !isProduction;
+
+  function styleLoader() {
+    const loaders = `css?${isDevelopment ? 'sourceMap&' : ''}importLoaders=1!postcss!sass`;
+    return {
+      loader: isDevelopment ? `style!${loaders}` : ExtractTextPlugin.extract('style', loaders),
+      test: /\.s?css$/,
+    };
+  }
 
   function pluginsToUse() {
     const plugins = [
@@ -35,6 +45,11 @@ export default function getConfig(isProduction) {
       );
     } else {
       plugins.push(
+        // Render styles into separate cacheable file to prevent FOUC and
+        // optimize for critical rendering path.
+        new ExtractTextPlugin('app-[hash].css', {
+          allChunks: true,
+        }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
@@ -70,15 +85,15 @@ export default function getConfig(isProduction) {
     },
     module: {
       loaders: [{
-        test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)$/,
         loader: 'url',
+        test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)$/,
         query: {
           limit: 100000,
         },
       }, {
+        loader: 'babel',
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
         query: {
           stage: 0,
           env: {
@@ -99,8 +114,9 @@ export default function getConfig(isProduction) {
             },
           },
         },
-      }],
+      }, styleLoader()],
     },
+    postcss: () => [autoprefixer({browsers: 'last 2 version'})],
     output: isDevelopment ? {
       path: BUILD_DIR,
       filename: '[name].js',

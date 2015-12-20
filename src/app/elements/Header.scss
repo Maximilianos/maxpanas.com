@@ -1,0 +1,40 @@
+/* =========================================
+    Header
+   ========================================= */
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 auto;
+	max-width: 1024px;
+}
+
+.logo {
+	font-family: 'Arial Black', sans-serif;
+	font-weight: 900;
+	font-size: 72px;
+	line-height: 1;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: tomato;
+}
+
+.navItem {
+	display: inline-block;
+}
+
+.navLink {
+	display: block;
+	padding: 10px 20px;
+	font-family: Arial, sans-serif;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #444;
+	transition: color 0.3s ease;
+
+	&:hover {
+		color: tomato;
+	}
+}
