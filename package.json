@@ -49,6 +49,7 @@
     "express": "^4.13.3",
     "history": "^1.13.1",
     "nconf": "^0.8.2",
+    "normalize.css": "^3.0.3",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-helmet": "^2.2.0",

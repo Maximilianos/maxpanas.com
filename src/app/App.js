@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+if (process.env.IS_BROWSER) require('normalize.css');
 
 import Header from './elements/Header';
 
