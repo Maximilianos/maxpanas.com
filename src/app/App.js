@@ -9,7 +9,7 @@ import Header from './elements/Header';
 
 export default class App extends Component {
   static propTypes = {
-    children: PropTypes.object,
+    children: PropTypes.node,
   };
 
   render() {
