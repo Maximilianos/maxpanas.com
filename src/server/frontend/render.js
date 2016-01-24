@@ -61,7 +61,7 @@ function renderPage(renderProps) {
       <Html
         lang="en"
         bodyHtml={bodyHtml}
-        cssFilename={config.isProduction && cssFilename}
+        cssFilename={config.isProduction ? cssFilename : null}
       />
     );
 }
