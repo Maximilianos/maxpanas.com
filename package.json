@@ -65,6 +65,8 @@
     "compression": "^1.6.0",
     "express": "^4.13.3",
     "history": "^1.17.0",
+    "isomorphic-fetch": "^2.2.1",
+    "js-base64": "^2.1.9",
     "nconf": "^0.8.2",
     "nodemon": "^1.8.1",
     "normalize.css": "^3.0.3",

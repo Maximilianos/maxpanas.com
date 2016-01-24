@@ -6,6 +6,7 @@ if (!process.env.NODE_ENV) {
 }
 
 require('babel-register');
+require('isomorphic-fetch');
 
 // http://bluebirdjs.com/docs/why-bluebird.html
 global.Promise = require('bluebird');
