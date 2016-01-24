@@ -1,140 +1,152 @@
+import ip from 'ip';
 import path from 'path';
 import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
 
+import webpackIsomorphicAssets from './assets';
 import {
   ABSOLUTE_BASE,
   NODE_MODULES_DIR,
   SRC_DIR,
   BUILD_DIR,
-  HOSTNAME,
   HOT_RELOAD_PORT,
 } from './constants';
 
-const devtools = process.env.CONTINUOUS_INTEGRATION
-  ? 'inline-source-map'
-  : 'cheap-module-eval-source-map';
 
-export default function getConfig(isProduction) {
-  const isDevelopment = !isProduction;
+/**
+ * Generate the necessary loader
+ * config for the given styles
+ *
+ * @param isDevelopment
+ * @returns {Array}
+ */
+function stylesLoaders(isDevelopment) {
+  const loaders = {
+    css: '',
+    scss: '!sass'
+  };
 
-  function styleLoader() {
-    const loaders = `css?${isDevelopment ? 'sourceMap&' : ''}importLoaders=1!postcss!sass`;
+  return Object.keys(loaders).map(ext => {
+    const prefix = 'css!postcss';
+    const extLoaders = prefix + loaders[ext];
+    const loader = isDevelopment
+      ? `style!${extLoaders}`
+      : ExtractTextPlugin.extract('style', extLoaders);
+
     return {
-      loader: isDevelopment ? `style!${loaders}` : ExtractTextPlugin.extract('style', loaders),
-      test: /\.s?css$/,
+      loader,
+      test: new RegExp(`\\.(${ext})$`)
     };
-  }
+  });
+}
 
-  function pluginsToUse() {
-    const plugins = [
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
-          IS_BROWSER: true,
-        },
-      }),
-    ];
 
-    if (isDevelopment) {
-      plugins.push(
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
-      );
-    } else {
-      plugins.push(
-        // Render styles into separate cacheable file to prevent FOUC and
-        // optimize for critical rendering path.
-        new ExtractTextPlugin('app-[hash].css', {
-          allChunks: true,
-        }),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-          sourceMap: false,
-          comments: false,
-          compress: {
-            drop_console: true,
-            pure_getters: true,
-            unsafe: true,
-            unsafe_comps: true,
-            screw_ie8: true,
-            warnings: false,
-          },
-        })
-      );
-    }
+const serverIp = ip.address();
+const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicAssets);
 
-    return plugins;
-  }
 
+/**
+ * Generate the webpack config
+ * object
+ *
+ * @param isDevelopment
+ * @returns {*}
+ */
+export default function makeConfig(isDevelopment) {
   return {
     hotPort: HOT_RELOAD_PORT,
     cache: isDevelopment,
     debug: isDevelopment,
-    devtool: isDevelopment ? devtools : '',
+    devtool: isDevelopment ? 'cheap-module-eval-source-map' : '',
     entry: {
       app: isDevelopment ? [
-        `webpack-hot-middleware/client?path=http://${HOSTNAME}:${HOT_RELOAD_PORT}/__webpack_hmr`,
-        path.join(SRC_DIR, 'app/client.js'),
+        `webpack-hot-middleware/client?path=http://${serverIp}:${HOT_RELOAD_PORT}/__webpack_hmr`,
+        path.join(SRC_DIR, 'app/client.js')
       ] : [
-        path.join(SRC_DIR, 'app/client.js'),
-      ],
+        path.join(SRC_DIR, 'app/client.js')
+      ]
     },
     module: {
       loaders: [{
-        loader: 'url',
-        test: /\.(gif|jpg|png|woff|woff2|eot|ttf|svg)$/,
-        query: {
-          limit: 100000,
-        },
+        loader: 'url?limit=10000',
+        test: /\.(gif|jpg|png|svg)$/
+      }, {
+        loader: 'url?limit=1',
+        test: /favicon\.ico$/
+      }, {
+        loader: 'url?limit=100000',
+        test: /\.(eot|ttf|woff|woff2)$/
       }, {
         loader: 'babel',
         test: /\.js$/,
         exclude: /node_modules/,
         query: {
-          stage: 0,
+          cacheDirectory: true,
+          plugins: ['transform-runtime', 'add-module-exports'],
+          presets: ['es2015', 'react', 'stage-1'],
           env: {
             development: {
-              plugins: ['react-transform'],
-              extra: {
-                'react-transform': {
-                  transforms: [{
-                    transform: 'react-transform-hmr',
-                    imports: ['react'],
-                    locals: ['module'],
-                  }, {
-                    transform: 'react-transform-catch-errors',
-                    imports: ['react', 'redbox-react'],
-                  }],
-                },
-              },
-            },
-          },
-        },
-      }, styleLoader()],
+              presets: ['react-hmre']
+            }
+          }
+        }
+      }].concat(stylesLoaders(isDevelopment))
     },
-    postcss: () => [autoprefixer({browsers: 'last 2 version'})],
     output: isDevelopment ? {
       path: BUILD_DIR,
       filename: '[name].js',
       chunkFilename: '[name]-[chunkhash].js',
-      publicPath: `http://${HOSTNAME}:${HOT_RELOAD_PORT}/build/`,
+      publicPath: `http://${serverIp}:${HOT_RELOAD_PORT}/build/`
     } : {
       path: BUILD_DIR,
       filename: '[name]-[hash].js',
       chunkFileName: '[name]-[chunkhash].js',
+      publicPath: '/assets/'
     },
-    plugins: pluginsToUse(),
+    plugins: (() => {
+      const plugins = [
+        new webpack.DefinePlugin({
+          'process.env': {
+            NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
+            IS_BROWSER: true
+          }
+        })
+      ];
+      if (isDevelopment) {
+        plugins.push(
+          new webpack.optimize.OccurenceOrderPlugin(),
+          new webpack.HotModuleReplacementPlugin(),
+          new webpack.NoErrorsPlugin(),
+          webpackIsomorphicToolsPlugin.development()
+        );
+      } else {
+        plugins.push(
+          new ExtractTextPlugin('app-[hash].css', {
+            allChunks: true
+          }),
+          new webpack.optimize.DedupePlugin(),
+          new webpack.optimize.OccurenceOrderPlugin(),
+          new webpack.optimize.UglifyJsPlugin({
+            compress: {
+              screw_ie8: true,
+              warnings: false
+            }
+          }),
+          webpackIsomorphicToolsPlugin
+        );
+      }
+      return plugins;
+    })(),
+    postcss: () => [autoprefixer({browsers: 'last 2 version'})],
     resolve: {
-      extensions: ['', '.js', '.json'],
+      extensions: ['', '.js'],
       modulesDirectories: ['src', 'node_modules'],
       root: ABSOLUTE_BASE,
       alias: {
-        'react$': require.resolve(path.join(NODE_MODULES_DIR, 'react')),
-      },
-    },
+        react$: require.resolve(path.join(NODE_MODULES_DIR, 'react'))
+      }
+    }
   };
 }

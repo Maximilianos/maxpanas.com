@@ -1,17 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Router from 'react-router';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
+import Router, {browserHistory} from 'react-router';
+import Bluebird from 'bluebird';
 
-import {createRoutes} from './routes';
+import createRoutes from './createRoutes';
 
-if (process.env.IS_BROWSER) {
-  require('regenerator/runtime');
-}
+// http://bluebirdjs.com/docs/why-bluebird.html
+window.Promise = Bluebird;
 
 ReactDOM.render(
-  <Router history={createBrowserHistory()}>
+  <Router history={browserHistory}>
     {createRoutes()}
   </Router>,
-  document.getElementById('app')
+  document.getElementById('root')
 );

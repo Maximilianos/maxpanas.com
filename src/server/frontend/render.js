@@ -1,61 +1,85 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import {RoutingContext, match} from 'react-router';
+import {RouterContext, match} from 'react-router';
 import {createMemoryHistory} from 'history';
 
 import config from '../config';
-import {HOT_RELOAD_PORT} from '../../../webpack/constants';
-import getAppAssetFilenamesAsync from './assets';
+import createRoutes from '../../app/createRoutes';
 
-import {createRoutes} from '../../app/routes';
 import Html from './Html';
 
-let appAssetFilenameCache = null;
-async function getAppAssetFilenamesCachedAsync() {
-  if (appAssetFilenameCache) {
-    return appAssetFilenameCache;
-  }
 
-  appAssetFilenameCache = await getAppAssetFilenamesAsync();
-  return appAssetFilenameCache;
-}
-
+/**
+ * Render the application's
+ * HTML to a string
+ *
+ * @param renderProps
+ * @returns {string}
+ */
 function getAppHtml(renderProps) {
   return ReactDOMServer.renderToString(
-    <RoutingContext {...renderProps} />
+    <RouterContext {...renderProps} />
   );
 }
 
-function getScriptHtml({hostname, filename}) {
-  const appScriptSrc = process.env.NODE_ENV === 'production'
-    ? `/public/${filename}`
-    : `//${hostname}:${HOT_RELOAD_PORT}/build/app.js`;
 
-  return `<script src="${appScriptSrc}"></script>`;
+/**
+ * Render the application's
+ * scripts to a string
+ *
+ * @param jsFilename
+ * @returns {string}
+ */
+function getScriptHtml(jsFilename) {
+  return `<script src="${jsFilename}"></script>`;
 }
 
-async function renderPageAsync({renderProps, req: {hostname}}) {
-  const appHtml = getAppHtml(renderProps);
-  const {js: jsFilename, css: cssFilename} = await getAppAssetFilenamesCachedAsync();
-  const scriptHtml = getScriptHtml({hostname, jsFilename});
 
-  const bodyHtml = `<div id="app">${appHtml}</div>${scriptHtml}`;
+/**
+ * Render the full markup of
+ * a page for a given request
+ *
+ * @param renderProps
+ * @returns {string}
+ */
+function renderPage(renderProps) {
+  const {
+    styles: {app: cssFilename},
+    javascript: {app: jsFilename}
+  } = webpackIsomorphicTools.assets();
+
+  if (!config.isProduction) {
+    webpackIsomorphicTools.refresh();
+  }
+
+  const appHtml = getAppHtml(renderProps);
+  const scriptHtml = getScriptHtml(jsFilename);
+
+  const bodyHtml = `<div id="root">${appHtml}</div>${scriptHtml}`;
 
   return '<!doctype html>' + ReactDOMServer.renderToStaticMarkup(
-    <Html
-      lang="en"
-      bodyHtml={bodyHtml}
-      cssFilename={cssFilename}
-      isDevelopment={config.isDevelopment}
-    />
-  );
+      <Html
+        lang="en"
+        bodyHtml={bodyHtml}
+        cssFilename={config.isProduction && cssFilename}
+      />
+    );
 }
 
+
+/**
+ * Handle requests to the frontend
+ * and send responses appropriately
+ *
+ * @param req
+ * @param res
+ * @param next
+ */
 export default function render(req, res, next) {
   const routes = createRoutes();
   const location = createMemoryHistory().createLocation(req.url);
 
-  match({routes, location}, async (error, redirectLocation, renderProps) => {
+  match({routes, location}, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(301, redirectLocation.pathname + redirectLocation.search);
       return;
@@ -67,8 +91,15 @@ export default function render(req, res, next) {
     }
 
     try {
-      const html = await renderPageAsync({renderProps, req});
-      res.send(html);
+      const html = renderPage(renderProps);
+
+      // renderProps are always defined with * route
+      const isNotFoundRoute = renderProps.routes
+        .some(route => route.path === '*');
+
+      const status = isNotFoundRoute ? 404 : 200;
+
+      res.status(status).send(html);
     } catch (e) {
       next(e);
     }

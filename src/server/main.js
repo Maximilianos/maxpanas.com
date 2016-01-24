@@ -1,13 +1,15 @@
 import express from 'express';
 
+import {port} from './config';
+
 import frontend from './frontend';
+import errorHandler from './errors/errorHandler';
 
 const app = express();
 
 app.use(frontend);
+app.use(errorHandler);
 
-const host = 'localhost';
-const port = 3000;
-app.listen(port, host, () => {
-  console.log('Server listening at http://%s:%s', host, port);
+app.listen(port, () => {
+  console.log('Server listening at http://localhost:%s', port);
 });

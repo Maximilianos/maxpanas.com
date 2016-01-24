@@ -3,3 +3,4 @@ node_modules
 build
 npm-debug.log
 assets/fonts/black/private/
+webpack-assets.json

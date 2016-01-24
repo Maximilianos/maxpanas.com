@@ -3,23 +3,21 @@ import webpackDev from 'webpack-dev-middleware';
 import webpackHot from 'webpack-hot-middleware';
 import express from 'express';
 
-import getWebpackConfig from '../makeConfig';
+import makeWebpackConfig from '../makeConfig';
 
 const app = express();
 
-const webpackConfig = getWebpackConfig();
+const webpackConfig = makeWebpackConfig(true);
 const compiler = webpack(webpackConfig);
 
 app.use(webpackDev(compiler, {
   headers: {'Access-Control-Allow-Origin': '*'},
   noInfo: true,
-  publicPath: webpackConfig.output.publicPath,
+  publicPath: webpackConfig.output.publicPath
 }));
 
 app.use(webpackHot(compiler));
 
-const host = 'localhost';
-const port = webpackConfig.hotPort;
-app.listen(port, host, () => {
-  console.log('Hot server listening at http://%s:%s', host, port);
+app.listen(webpackConfig.hotPort, () => {
+  console.log('Hot server started at port %d', webpackConfig.hotPort);
 });

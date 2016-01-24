@@ -1,6 +1,7 @@
 import path from 'path';
 import del from 'del';
 import gulp from 'gulp';
+import eslint from 'gulp-eslint';
 import bg from 'gulp-bg';
 import shell from 'gulp-shell';
 import runSequence from 'run-sequence';
@@ -12,13 +13,27 @@ const args = yargs
   .alias('p', 'production')
   .argv;
 
+const runEslint = () => {
+  return gulp.src([
+      'gulpfile.babel.js',
+      'src/**/*.js',
+      'webpack/*.js'
+    ])
+    .pipe(eslint())
+    .pipe(eslint.format());
+};
+
 gulp.task('env', () => {
   process.env.NODE_ENV = args.production ? 'production' : 'development';
 });
 
-gulp.task('clean', done => del('build/*', done));
+gulp.task('clean', () => del('build/*'));
 
 gulp.task('build', ['env'], webpackBuild);
+
+gulp.task('eslint', () => {
+  return runEslint();
+});
 
 gulp.task('server-node', bg('node', './src/server'));
 gulp.task('server-hot', bg('node', './webpack/server'));

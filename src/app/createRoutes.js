@@ -7,12 +7,12 @@ import About from './pages/About';
 import Article from './pages/Article';
 import NotFound from './pages/NotFound';
 
-export function createRoutes() {
+export default function createRoutes() {
   return (
     <Route path="/" component={App}>
-      <IndexRoute component={Home} />
+      <IndexRoute component={Home}/>
       <Route path="/about" component={About}/>
-	    <Route path="/:article" component={Article} />
+      <Route path="/:article" component={Article}/>
       <Route path="*" component={NotFound}/>
     </Route>
   );
