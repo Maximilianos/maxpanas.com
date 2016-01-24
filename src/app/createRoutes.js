@@ -7,6 +7,13 @@ import About from './pages/About';
 import Article from './pages/Article';
 import NotFound from './pages/NotFound';
 
+
+/**
+ * Create the application's
+ * routes
+ *
+ * @returns {*}
+ */
 export default function createRoutes() {
   return (
     <Route path="/" component={App}>

@@ -1,5 +1,14 @@
 import config from '../config';
 
+
+/**
+ * Display errors in a better
+ * way on client and server
+ *
+ * @param err
+ * @param req
+ * @param res
+ */
 export default function errorHandler(err, req, res) {
   const errorDetails = err.stack || err;
 

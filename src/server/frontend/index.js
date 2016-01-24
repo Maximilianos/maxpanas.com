@@ -6,6 +6,7 @@ const app = express();
 
 app.use(compression());
 
+// hook up static file serving
 app.use('/assets', express.static('build', {maxAge: '200d'}));
 
 app.get('*', render);
