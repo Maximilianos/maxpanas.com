@@ -1,15 +1,14 @@
 import React, {Component, PropTypes} from 'react';
-if (process.env.IS_BROWSER) {
-  require('../../assets/fonts/black/private/webfonts.css');
-  require('normalize.css');
-  require('./App.scss');
-}
+
+import 'normalize.css';
+import '../../assets/fonts/black/private/webfonts.css';
+import './App.scss';
 
 import Header from './elements/Header';
 
 export default class App extends Component {
   static propTypes = {
-    children: PropTypes.node,
+    children: PropTypes.node
   };
 
   render() {

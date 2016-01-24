@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-if (process.env.IS_BROWSER) require('./Entry.scss');
+
+import './Entry.scss';
 
 export default class Entry extends Component {
   static propTypes = {

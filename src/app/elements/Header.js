@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {IndexLink, Link} from 'react-router';
-if (process.env.IS_BROWSER) require('./Header.scss');
+
+import './Header.scss';
 
 const nav = [{
   to: '/about',
-  text: 'About Me',
+  text: 'About Me'
 }, {
   to: '/non-existent-page',
-  text: '404',
+  text: '404'
 }];
 
 export default class Header extends Component {
