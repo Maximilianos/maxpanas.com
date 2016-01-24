@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import {RouterContext, match} from 'react-router';
 import {createMemoryHistory} from 'history';
+import Helmet from 'react-helmet';
 
 import config from '../config';
 import createRoutes from '../../app/createRoutes';
@@ -60,6 +61,7 @@ function renderPage(renderProps) {
   return '<!doctype html>' + ReactDOMServer.renderToStaticMarkup(
       <Html
         lang="en"
+        helmet={Helmet.rewind()}
         bodyHtml={bodyHtml}
         cssFilename={config.isProduction ? cssFilename : null}
       />
