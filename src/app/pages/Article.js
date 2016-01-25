@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import Helmet from 'react-helmet';
 import {Base64} from 'js-base64';
+import frontMatter from 'front-matter';
 import marked from 'marked';
 import Entry from '../elements/Entry';
 
@@ -12,7 +13,9 @@ export default class Article extends Component {
   constructor() {
     super();
     this.state = {
-      content: ''
+      title: '',
+      description: '',
+      body: ''
     };
 
     this.fetchArticle = this.fetchArticle.bind(this);
@@ -41,17 +44,19 @@ export default class Article extends Component {
       error.response = res;
       throw error;
     }).then(response => response.json())
-      .then(json => ({...json, content: Base64.decode(json.content)}))
-      .then(json => ({...json, content: marked(json.content)}))
-      .then(({content}) => !this.ignoreLastFetch && this.setState({content}))
-      .catch(err => !this.ignoreLastFetch && this.setState({content: err.toString()}));
+      .then(json => Base64.decode(json.content))
+      .then(content => frontMatter(content))
+      .then(({attributes: {title, description}, body}) => ({title, description, body: marked(body)}))
+      .then(json => !this.ignoreLastFetch && this.setState(json))
+      .catch(err => !this.ignoreLastFetch && this.setState({body: err.toString()}));
   }
 
   render() {
+    const {title, description, body} = this.state;
     return (
       <Entry>
-        <Helmet title={`Article - ${this.props.params.article}`} />
-        <div dangerouslySetInnerHTML={{__html: this.state.content}}></div>
+        <Helmet title={`Article - ${title}`} meta={[{name: 'description', content: description}]} />
+        <div dangerouslySetInnerHTML={{__html: body}}></div>
       </Entry>
     );
   }
