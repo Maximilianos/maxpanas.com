@@ -1,11 +1,11 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
-import App from './App';
-import Home from './pages/Home';
-import About from './pages/About';
-import Article from './pages/Article';
-import NotFound from './pages/NotFound';
+import App from './containers/App';
+import Home from './containers/pages/Home';
+import About from './containers/pages/About';
+import Article from './containers/pages/Article';
+import NotFound from './containers/pages/NotFound';
 
 
 /**

@@ -4,7 +4,7 @@ import './Entry.scss';
 
 export default class Entry extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     subtitle: PropTypes.string,
     children: PropTypes.node,
   };
