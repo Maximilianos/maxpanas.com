@@ -15,15 +15,23 @@ import {
  */
 export default function content(state = {}, {type, payload}) {
   switch (type) {
+
     case FETCH_CONTENT_PENDING: return {
       ...state,
-      pending: true
+      isFetching: payload
     };
+
     case FETCH_CONTENT_SUCCESS:
-    case FETCH_CONTENT_FAILURE: return {
-      pending: false,
-      data: payload
-    };
+    case FETCH_CONTENT_FAILURE: {
+      const {data, id} = payload;
+      return {
+        ...state,
+        isFetching: false,
+        currentContent: id,
+        data
+      };
+    }
+
     default: return state;
   }
 }

@@ -1,12 +1,12 @@
 /**
  *
  *
- * @param dispatch
+ * @param store
  * @param components
  * @param location
  * @param params
  */
-export function fetchComponentDataAsync(dispatch, {components, location, params}) {
+export function fetchComponentDataAsync(store, {components, location, params}) {
   const promises = components
     .reduce((actions, component) =>
       actions.concat(component.fetchActions || [])
@@ -14,7 +14,7 @@ export function fetchComponentDataAsync(dispatch, {components, location, params}
     .map(action =>
       // Server side fetching can use only router location and params props
       // There is no easy way to support custom component props
-      dispatch(action({location, params})).payload.promise
+      store.dispatch(action({location, params, store})).payload.promise
     );
 
   return Promise.all(promises);

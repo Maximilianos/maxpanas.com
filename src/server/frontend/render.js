@@ -115,7 +115,7 @@ export default function render(req, res, next) {
     }
 
     try {
-      await fetchComponentDataAsync(store.dispatch, renderProps);
+      await fetchComponentDataAsync(store, renderProps);
       const html = renderPage(store, renderProps);
 
       // renderProps are always defined with * route

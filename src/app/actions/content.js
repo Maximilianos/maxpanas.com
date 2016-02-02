@@ -9,18 +9,25 @@ const GITHUB_API = 'https://api.github.com';
 const REPOS_API = GITHUB_API + '/repos';
 const ARTICLES_REPO = REPOS_API + '/Maximilianos/articles/contents';
 
+
 /**
  *
  *
  * @param article
+ * @param store
  * @returns {{type: string, payload: {promise}}}
  */
-export function fetchContent({params: {article}}) {
+export function fetchContent({params: {article}, store}) {
+  const {content: {isFetching, currentContent}} = store.getState();
+  if (isFetching === article || (currentContent === article && !isFetching)) return {};
+
   return {
     type: FETCH_CONTENT,
     payload: {
+      data: article,
       promise: fetch(`${ARTICLES_REPO}/articles/${article}.md`)
         .then(response => response.json())
+        .then(data => ({data, id: article}))
     }
   };
 }
