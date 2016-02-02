@@ -27,10 +27,13 @@ export default function fetch(...actions) {
     static fetchActions = actions;
 
     // For client side rendering
-    componentDidMount() {
-      const {store: {dispatch}} = this.context;
+    componentDidMount = this.runFetchActions;
+    componentDidUpdate = this.runFetchActions;
+
+    runFetchActions() {
+      const {store} = this.context;
       const {location, params} = this.props;
-      actions.forEach(action => dispatch(action({location, params})));
+      actions.forEach(action => store.dispatch(action({location, params, store})));
     }
 
     render() {
