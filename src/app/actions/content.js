@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch';
-import throwErrorResponse from '../../utils/fetch-throw-error-response';
+import {Base64} from 'js-base64';
+import frontMatter from 'front-matter';
+import marked from 'marked';
 
 export const FETCH_CONTENT_PENDING = 'FETCH_CONTENT_PENDING';
 export const FETCH_CONTENT_SUCCESS = 'FETCH_CONTENT_SUCCESS';
@@ -98,6 +100,9 @@ export function fetchContent(content) {
     return fetch(REPO_URI + content)
       .then(throwResponseError)
       .then(response => response.json())
+      .then(json => Base64.decode(json.content))
+      .then(file => frontMatter(file))
+      .then(({attributes, body}) => ({...attributes, body: marked(body)}))
       .then(data => dispatch(requestSuccess(content, data)))
       .catch(error => dispatch(requestFailure(content, error)));
   };
