@@ -7,10 +7,6 @@ export const FETCH_CONTENT_PENDING = 'FETCH_CONTENT_PENDING';
 export const FETCH_CONTENT_SUCCESS = 'FETCH_CONTENT_SUCCESS';
 export const FETCH_CONTENT_FAILURE = 'FETCH_CONTENT_FAILURE';
 
-const GITHUB_API = 'https://api.github.com';
-const REPOS_API = GITHUB_API + '/repos';
-const REPO_URI = REPOS_API + '/Maximilianos/articles/contents';
-
 
 /**
  * Notify state that a content
@@ -83,6 +79,11 @@ async function throwResponseError(response) {
   throw error;
 }
 
+
+const GITHUB_API = 'https://api.github.com';
+const REPOS_API = GITHUB_API + '/repos';
+
+const REPO_URI = REPOS_API + '/Maximilianos/articles/contents';
 
 /**
  * Handle fetching and parsing the

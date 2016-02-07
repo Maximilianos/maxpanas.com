@@ -5,6 +5,14 @@ import {
 } from '../actions/content';
 
 
+const initialState = {
+  isFetching: false,
+  currentContent: false,
+  error: false,
+  data: false
+};
+
+
 /**
  * Manage how any content related actions
  * affect the state of the application
@@ -15,7 +23,7 @@ import {
  * @param payload
  * @returns {*}
  */
-export default function content(state = {}, {type, content, ...payload}) {
+export default function content(state = initialState, {type, content, ...payload}) {
   switch (type) {
 
     case FETCH_CONTENT_PENDING: return {
@@ -27,6 +35,7 @@ export default function content(state = {}, {type, content, ...payload}) {
       return {
         isFetching: false,
         currentContent: content,
+        error: false,
         data: payload.data
       };
     }
@@ -35,7 +44,8 @@ export default function content(state = {}, {type, content, ...payload}) {
       return {
         isFetching: false,
         currentContent: content,
-        error: payload.error
+        error: payload.error,
+        data: false
       };
     }
 
