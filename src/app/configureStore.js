@@ -21,9 +21,11 @@ export default function configureStore(initialState) {
     thunkMiddleware
   ];
 
-  const createReduxStore = BROWSER_DEVELOPMENT && window.devToolsExtension
-    ? compose(applyMiddleware(...middleware), window.devToolsExtension())
-    : applyMiddleware(...middleware);
+  const createReduxStore = (
+    BROWSER_DEVELOPMENT && window.devToolsExtension
+      ? compose(applyMiddleware(...middleware), window.devToolsExtension())
+      : applyMiddleware(...middleware)
+  );
 
   const store = createReduxStore(createStore)(rootReducer, initialState);
 
