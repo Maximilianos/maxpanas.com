@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import throwErrorResponse from '../../utils/fetch-throw-error-response';
 
 export const FETCH_CONTENT_PENDING = 'FETCH_CONTENT_PENDING';
 export const FETCH_CONTENT_SUCCESS = 'FETCH_CONTENT_SUCCESS';
@@ -73,6 +74,7 @@ export function fetchContent(content) {
     dispatch(requestPending(content));
 
     return fetch(`${ARTICLES_REPO}/articles/${content}.md`)
+      .then(throwErrorResponse)
       .then(response => response.json())
       .then(json => dispatch(requestSuccess(content, json)))
       .catch(error => dispatch(requestFailure(content, error)));
