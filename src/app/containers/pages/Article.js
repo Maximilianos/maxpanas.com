@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
 import fetch from '../../../utils/redux-universal-fetch/container';
-import {fetchContentIfNeeded} from '../../actions/content';
+import {fetchArticleIfNeeded} from '../../actions/content';
 
 import Entry from '../../components/Entry';
 
@@ -27,4 +27,4 @@ class Article extends Component {
 
 export default connect(
   ({content}) => ({content})
-)(fetch(fetchContentIfNeeded)(Article));
+)(fetch(fetchArticleIfNeeded)(Article));

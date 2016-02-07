@@ -7,7 +7,7 @@ export const FETCH_CONTENT_FAILURE = 'FETCH_CONTENT_FAILURE';
 
 const GITHUB_API = 'https://api.github.com';
 const REPOS_API = GITHUB_API + '/repos';
-const ARTICLES_REPO = REPOS_API + '/Maximilianos/articles/contents';
+const REPO_URI = REPOS_API + '/Maximilianos/articles/contents';
 
 
 /**
@@ -62,9 +62,31 @@ function requestFailure(content, error) {
 
 
 /**
- * Handle fetching the requested content
- * and dispatching actions to update
- * the state accordingly
+ * Catch any api response with non-success
+ * status codes and force throw them as
+ * errors. Useful in fetch promise chains
+ *
+ * @param response
+ * @returns {*}
+ */
+async function throwResponseError(response) {
+  if (response.status >= 200 && response.status < 300) return response;
+
+  const error = new Error(response.statusText);
+  error.response = {
+    status: response.status,
+    data: await response.json()
+  };
+
+  throw error;
+}
+
+
+/**
+ * Handle fetching and parsing the
+ * requested content and dispatching
+ * actions to update the state
+ * accordingly
  *
  * @param content
  * @returns {Function}
@@ -73,10 +95,10 @@ export function fetchContent(content) {
   return dispatch => {
     dispatch(requestPending(content));
 
-    return fetch(`${ARTICLES_REPO}/articles/${content}.md`)
-      .then(throwErrorResponse)
+    return fetch(REPO_URI + content)
+      .then(throwResponseError)
       .then(response => response.json())
-      .then(json => dispatch(requestSuccess(content, json)))
+      .then(data => dispatch(requestSuccess(content, data)))
       .catch(error => dispatch(requestFailure(content, error)));
   };
 }
@@ -100,12 +122,11 @@ function shouldFetchContent({content: {isFetching, currentContent}}, content) {
 /**
  * Fetch the requested content only if
  * it has not already been fetched
- * and cached
  *
  * @param content
  * @returns {Function}
  */
-export function fetchContentIfNeeded({params: {content}}) {
+export function fetchContentIfNeeded(content) {
   return (dispatch, getState) => {
     if (shouldFetchContent(getState(), content)) {
       return dispatch(fetchContent(content));
@@ -113,4 +134,17 @@ export function fetchContentIfNeeded({params: {content}}) {
 
     return Promise.resolve();
   };
+}
+
+
+/**
+ * Fetch the requested article only if
+ * it has not already been fetched
+ *
+ * @param article
+ * @returns {Function}
+ */
+export function fetchArticleIfNeeded({params: {article}}) {
+  return dispatch =>
+    dispatch(fetchContentIfNeeded(`/articles/${article}.md`));
 }

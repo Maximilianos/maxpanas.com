@@ -19,7 +19,7 @@ export default function createRoutes() {
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
       <Route path="/about" component={About}/>
-      <Route path="/:content" component={Article}/>
+      <Route path="/:article" component={Article}/>
       <Route path="*" component={NotFound}/>
     </Route>
   );
