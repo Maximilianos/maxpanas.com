@@ -16,7 +16,7 @@ const BROWSER_DEVELOPMENT = (
  * @param initialState
  * @returns {*}
  */
-export default function configureStore(initialState) {
+export default function configureStore(initialState = {}) {
   const middleware = [
     thunkMiddleware
   ];

@@ -94,11 +94,7 @@ function renderPage(store, renderProps) {
  * @param next
  */
 export default function render(req, res, next) {
-  const initialState = {
-    content: {}
-  };
-
-  const store = configureStore(initialState);
+  const store = configureStore();
 
   const routes = createRoutes();
   const location = createMemoryHistory().createLocation(req.url);
