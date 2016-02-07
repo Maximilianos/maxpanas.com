@@ -10,24 +10,52 @@ const REPOS_API = GITHUB_API + '/repos';
 const ARTICLES_REPO = REPOS_API + '/Maximilianos/articles/contents';
 
 
-/**
- *
- *
- * @param article
- * @param store
- * @returns {{type: string, payload: {promise}}}
- */
-export function fetchContent({params: {article}, store}) {
-  const {content: {isFetching, currentContent}} = store.getState();
-  if (isFetching === article || (currentContent === article && !isFetching)) return {};
+function shouldFetchContent({content: {isFetching, currentContent}}, content) {
+  return currentContent !== content && isFetching !== content;
+}
 
+
+function requestPending(content) {
   return {
-    type: FETCH_CONTENT,
-    payload: {
-      data: article,
-      promise: fetch(`${ARTICLES_REPO}/articles/${article}.md`)
-        .then(response => response.json())
-        .then(data => ({data, id: article}))
+    type: FETCH_CONTENT_PENDING,
+    payload: content
+  };
+}
+
+function requestSuccess(content, data) {
+  return {
+    type: FETCH_CONTENT_SUCCESS,
+    payload: data,
+    meta: {content}
+  };
+}
+
+function requestFailure(content, err) {
+  return {
+    type: FETCH_CONTENT_FAILURE,
+    payload: err,
+    meta: {content}
+  };
+}
+
+
+export function fetchContent(content) {
+  return dispatch => {
+    dispatch(requestPending(content));
+    return fetch(`${ARTICLES_REPO}/articles/${content}.md`)
+      .then(response => response.json())
+      .then(json => dispatch(requestSuccess(content, json)))
+      .catch(err => dispatch(requestFailure(content, err)));
+  };
+}
+
+
+export function fetchContentIfNeeded({params: {content}}) {
+  return (dispatch, getState) => {
+    if (shouldFetchContent(getState(), content)) {
+      return dispatch(fetchContent(content));
     }
+
+    return Promise.resolve();
   };
 }

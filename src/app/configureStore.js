@@ -1,5 +1,5 @@
 import {compose, applyMiddleware, createStore} from 'redux';
-import promiseMiddleware from 'redux-promise-middleware';
+import thunkMiddleware from 'redux-thunk';
 
 import rootReducer from './reducers';
 
@@ -10,9 +10,7 @@ const BROWSER_DEVELOPMENT = (
 
 export default function configureStore(initialState) {
   const middleware = [
-    promiseMiddleware({
-      promiseTypeSuffixes: ['PENDING', 'SUCCESS', 'FAILURE']
-    })
+    thunkMiddleware
   ];
 
   const createReduxStore = BROWSER_DEVELOPMENT && window.devToolsExtension
