@@ -10,24 +10,31 @@ import {
  *
  * @param state
  * @param type
+ * @param content
  * @param payload
  * @returns {*}
  */
-export default function content(state = {}, {type, payload, meta}) {
+export default function content(state = {}, {type, content, ...payload}) {
   switch (type) {
 
     case FETCH_CONTENT_PENDING: return {
       ...state,
-      isFetching: payload
+      isFetching: content
     };
 
-    case FETCH_CONTENT_SUCCESS:
+    case FETCH_CONTENT_SUCCESS: {
+      return {
+        isFetching: false,
+        currentContent: content,
+        data: payload.data
+      };
+    }
+
     case FETCH_CONTENT_FAILURE: {
       return {
-        ...state,
         isFetching: false,
-        currentContent: meta.content,
-        data: payload
+        currentContent: content,
+        error: payload.error
       };
     }
 
