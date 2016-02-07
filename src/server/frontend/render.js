@@ -1,11 +1,16 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import {Provider} from 'react-redux';
 import {RouterContext, match} from 'react-router';
 import {createMemoryHistory} from 'history';
+import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 
 import config from '../config';
 import createRoutes from '../../app/createRoutes';
+import configureStore from '../../app/configureStore';
+
+import {fetchComponentDataAsync} from '../../utils/redux-universal-fetch/server';
 
 import Html from './Html';
 
@@ -14,12 +19,15 @@ import Html from './Html';
  * Render the application's
  * HTML to a string
  *
+ * @param store
  * @param renderProps
  * @returns {string}
  */
-function getAppHtml(renderProps) {
+function getAppHtml(store, renderProps) {
   return ReactDOMServer.renderToString(
-    <RouterContext {...renderProps} />
+    <Provider store={store}>
+      <RouterContext {...renderProps} />
+    </Provider>
   );
 }
 
@@ -28,11 +36,17 @@ function getAppHtml(renderProps) {
  * Render the application's
  * scripts to a string
  *
+ * @param state
  * @param jsFilename
  * @returns {string}
  */
-function getScriptHtml(jsFilename) {
-  return `<script src="${jsFilename}"></script>`;
+function getScriptHtml(state, jsFilename) {
+  return `
+    <script>
+      window.__INITIAL_STATE__ = ${serialize(state)};
+    </script>
+    <script src="${jsFilename}"></script>
+  `;
 }
 
 
@@ -40,10 +54,11 @@ function getScriptHtml(jsFilename) {
  * Render the full markup of
  * a page for a given request
  *
+ * @param store
  * @param renderProps
  * @returns {string}
  */
-function renderPage(renderProps) {
+function renderPage(store, renderProps) {
   const {
     styles: {app: cssFilename},
     javascript: {app: jsFilename}
@@ -53,8 +68,9 @@ function renderPage(renderProps) {
     webpackIsomorphicTools.refresh();
   }
 
-  const appHtml = getAppHtml(renderProps);
-  const scriptHtml = getScriptHtml(jsFilename);
+  const state = store.getState();
+  const appHtml = getAppHtml(store, renderProps);
+  const scriptHtml = getScriptHtml(state, jsFilename);
 
   const bodyHtml = `<div id="root">${appHtml}</div>${scriptHtml}`;
 
@@ -78,10 +94,16 @@ function renderPage(renderProps) {
  * @param next
  */
 export default function render(req, res, next) {
+  const initialState = {
+    content: {}
+  };
+
+  const store = configureStore(initialState);
+
   const routes = createRoutes();
   const location = createMemoryHistory().createLocation(req.url);
 
-  match({routes, location}, (error, redirectLocation, renderProps) => {
+  match({routes, location}, async (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(301, redirectLocation.pathname + redirectLocation.search);
       return;
@@ -93,11 +115,14 @@ export default function render(req, res, next) {
     }
 
     try {
-      const html = renderPage(renderProps);
+      await fetchComponentDataAsync(store, renderProps);
+      const html = renderPage(store, renderProps);
 
       // renderProps are always defined with * route
-      const isNotFoundRoute = renderProps.routes
-        .some(route => route.path === '*');
+      // https://github.com/rackt/react-router/blob/master/docs/guides/advanced/ServerRendering.md
+      const isNotFoundRoute = renderProps.routes.some(
+        route => route.path === '*'
+      );
 
       const status = isNotFoundRoute ? 404 : 200;
 

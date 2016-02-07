@@ -7,6 +7,9 @@ const nav = [{
   to: '/about',
   text: 'About Me'
 }, {
+  to: '/test-1',
+  text: 'Article'
+}, {
   to: '/non-existent-page',
   text: '404'
 }];

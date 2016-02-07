@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
-import Entry from '../elements/Entry';
+import Entry from '../../components/Entry';
 
 export default class About extends Component {
   render() {
