@@ -6,7 +6,8 @@ import {
 
 
 /**
- *
+ * Manage how any content related actions
+ * affect the state of the application
  *
  * @param state
  * @param type

@@ -8,6 +8,14 @@ const BROWSER_DEVELOPMENT = (
   && process.env.IS_BROWSER
 );
 
+
+/**
+ * Configure the redux store given
+ * an intial state
+ *
+ * @param initialState
+ * @returns {*}
+ */
 export default function configureStore(initialState) {
   const middleware = [
     thunkMiddleware
