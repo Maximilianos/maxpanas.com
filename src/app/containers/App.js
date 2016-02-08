@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import NestedStatus from 'react-nested-status';
 import Helmet from 'react-helmet';
 
 import Header from '../components/Header';
@@ -17,6 +18,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <NestedStatus code={200}/>
         <Helmet
           link={[{
             rel: 'shortcut icon',

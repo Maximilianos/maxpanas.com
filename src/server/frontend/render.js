@@ -5,6 +5,7 @@ import {RouterContext, match} from 'react-router';
 import {createMemoryHistory} from 'history';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
+import NestedStatus from 'react-nested-status';
 
 import config from '../config';
 import createRoutes from '../../app/createRoutes';
@@ -114,13 +115,15 @@ export default function render(req, res, next) {
       await fetchComponentDataAsync(store, renderProps);
       const html = renderPage(store, renderProps);
 
+      const nestedStatus = NestedStatus.rewind();
+
       // renderProps are always defined with * route
       // https://github.com/rackt/react-router/blob/master/docs/guides/advanced/ServerRendering.md
       const isNotFoundRoute = renderProps.routes.some(
         route => route.path === '*'
       );
 
-      const status = isNotFoundRoute ? 404 : 200;
+      const status = isNotFoundRoute ? 404 : nestedStatus;
 
       res.status(status).send(html);
     } catch (e) {
