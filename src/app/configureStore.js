@@ -1,12 +1,23 @@
-import {compose, applyMiddleware, createStore} from 'redux';
+import {
+  compose,
+  combineReducers,
+  applyMiddleware,
+  createStore
+} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import rootReducer from './reducers';
+import content from './reducers/content';
+
 
 const BROWSER_DEVELOPMENT = (
   process.env.NODE_ENV !== 'production'
   && process.env.IS_BROWSER
 );
+
+
+const rootReducer = combineReducers({
+  content
+});
 
 
 /**
