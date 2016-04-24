@@ -3,6 +3,8 @@ import {Base64} from 'js-base64';
 import frontMatter from 'front-matter';
 import marked from 'marked';
 
+import {API_BASE} from '../config';
+
 export const FETCH_CONTENT_PENDING = 'FETCH_CONTENT_PENDING';
 export const FETCH_CONTENT_SUCCESS = 'FETCH_CONTENT_SUCCESS';
 export const FETCH_CONTENT_FAILURE = 'FETCH_CONTENT_FAILURE';
@@ -79,12 +81,6 @@ async function throwResponseError(response) {
   throw error;
 }
 
-
-const GITHUB_API = 'https://api.github.com';
-const REPOS_API = GITHUB_API + '/repos';
-
-const REPO_URI = REPOS_API + '/Maximilianos/articles/contents';
-
 /**
  * Handle fetching and parsing the
  * requested content and dispatching
@@ -94,11 +90,11 @@ const REPO_URI = REPOS_API + '/Maximilianos/articles/contents';
  * @param content
  * @returns {Function}
  */
-export function fetchContent(content) {
+function fetchContent(content) {
   return dispatch => {
     dispatch(requestPending(content));
 
-    return fetch(REPO_URI + content)
+    return fetch(API_BASE + content)
       .then(throwResponseError)
       .then(response => response.json())
       .then(json => Base64.decode(json.content))
@@ -132,7 +128,7 @@ function shouldFetchContent({content: {isFetching, currentContent}}, content) {
  * @param content
  * @returns {Function}
  */
-export function fetchContentIfNeeded(content) {
+function fetchContentIfNeeded(content) {
   return (dispatch, getState) => {
     if (shouldFetchContent(getState(), content)) {
       return dispatch(fetchContent(content));
