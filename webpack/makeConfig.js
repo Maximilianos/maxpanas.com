@@ -59,7 +59,7 @@ export default function makeConfig(isDevelopment) {
     hotPort: HOT_RELOAD_PORT,
     cache: isDevelopment,
     debug: isDevelopment,
-    devtool: isDevelopment ? 'cheap-module-eval-source-map' : '',
+    devtool: isDevelopment ? 'eval-source-map' : 'source-map',
     entry: {
       app: isDevelopment ? [
         `webpack-hot-middleware/client?path=http://${serverIp}:${HOT_RELOAD_PORT}/__webpack_hmr`,
