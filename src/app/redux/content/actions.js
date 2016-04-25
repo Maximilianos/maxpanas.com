@@ -3,7 +3,7 @@ import {Base64} from 'js-base64';
 import frontMatter from 'front-matter';
 import marked from 'marked';
 
-import {API_BASE} from '../config';
+import {API_BASE} from '../../config';
 
 export const FETCH_CONTENT_PENDING = 'FETCH_CONTENT_PENDING';
 export const FETCH_CONTENT_SUCCESS = 'FETCH_CONTENT_SUCCESS';

@@ -2,7 +2,7 @@ import {
   FETCH_CONTENT_PENDING,
   FETCH_CONTENT_SUCCESS,
   FETCH_CONTENT_FAILURE
-} from '../actions/content';
+} from './actions';
 
 
 const initialState = {

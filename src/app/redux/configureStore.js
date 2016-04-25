@@ -1,7 +1,7 @@
 import {compose, applyMiddleware, createStore} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
-import rootReducer from './reducers';
+import rootReducer from './rootReducer';
 
 const BROWSER_DEVELOPMENT = (
   process.env.NODE_ENV !== 'production'
@@ -32,8 +32,8 @@ export default function configureStore(initialState = {}) {
   // Enable hot reload where available.
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers.
-    module.hot.accept('./reducers', () => {
-      const nextAppReducer = require('./reducers');
+    module.hot.accept('./rootReducer', () => {
+      const nextAppReducer = require('./rootReducer');
       store.replaceReducer(nextAppReducer);
     });
   }

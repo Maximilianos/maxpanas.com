@@ -1,11 +1,14 @@
 import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
-import App from './containers/App';
-import Home from './containers/pages/Home';
-import About from './containers/pages/About';
-import Article from './containers/pages/Article';
-import NotFound from './containers/pages/NotFound';
+// static components
+import App from './components/App';
+import Home from './components/pages/Home';
+import About from './components/pages/About';
+import NotFound from './components/pages/NotFound';
+
+// dynamic components
+import Article from './containers/Article';
 
 
 /**

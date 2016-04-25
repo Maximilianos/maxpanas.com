@@ -1,14 +1,9 @@
 import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
-import Helmet from 'react-helmet';
 import NestedStatus from 'react-nested-status';
-import Entry from '../../components/Entry';
+import Helmet from 'react-helmet';
+import Entry from '../Entry';
 
-import fetch from '../../../utils/redux-universal-fetch/container';
-import {fetchArticleIfNeeded} from '../../actions/content';
-
-
-class Article extends Component {
+export default class Article extends Component {
   static propTypes = {
     content: PropTypes.object
   };
@@ -32,13 +27,17 @@ class Article extends Component {
   }
 
   render() {
-    const {content: {
-      isFetching,
-      data: {title, description, body},
-      error
-    }} = this.props;
+    const {
+      content: {
+        isFetching,
+        data: {title, description, body},
+        error
+      }
+    } = this.props;
 
-    if (isFetching) return <Entry title="Loading..."/>;
+    if (isFetching) {
+      return <Entry title="Loading..."/>;
+    }
 
     if (error || !title || !body) {
       if (error.response && error.response.status === 404) {
@@ -63,7 +62,3 @@ class Article extends Component {
     );
   }
 }
-
-export default connect(
-  ({content}) => ({content})
-)(fetch(fetchArticleIfNeeded)(Article));

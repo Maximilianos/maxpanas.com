@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
-import Entry from '../../components/Entry';
+import Entry from '../Entry';
 
 export default class Home extends Component {
   render() {

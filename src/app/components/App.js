@@ -2,13 +2,13 @@ import React, {Component, PropTypes} from 'react';
 import NestedStatus from 'react-nested-status';
 import Helmet from 'react-helmet';
 
-import Header from '../components/Header';
+import Header from './Header';
 
 import 'normalize.css';
-import '../../../assets/fonts/black/private/webfonts.css';
+import '../assets/fonts/black/private/webfonts.css';
 import './App.scss';
 
-import favicon from '../../../assets/favicon/favicon.ico';
+import favicon from '../assets/favicon/favicon.ico';
 
 export default class App extends Component {
   static propTypes = {

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
 import {IndexLink} from 'react-router';
-import Entry from '../../components/Entry';
+import Entry from '../Entry';
 
 export default class NotFound extends Component {
   render() {

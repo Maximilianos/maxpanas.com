@@ -4,8 +4,8 @@ import {Router, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
 import Bluebird from 'bluebird';
 
-import createRoutes from './createRoutes';
-import configureStore from './configureStore';
+import createRoutes from '../app/createRoutes';
+import configureStore from '../app/redux/configureStore';
 
 // http://bluebirdjs.com/docs/why-bluebird.html
 window.Promise = Bluebird;

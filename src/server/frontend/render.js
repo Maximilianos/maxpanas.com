@@ -9,7 +9,7 @@ import NestedStatus from 'react-nested-status';
 
 import config from '../config';
 import createRoutes from '../../app/createRoutes';
-import configureStore from '../../app/configureStore';
+import configureStore from '../../app/redux/configureStore';
 
 import {fetchComponentDataAsync} from '../../utils/redux-universal-fetch/server';
 
