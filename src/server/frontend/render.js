@@ -76,13 +76,13 @@ function renderPage(store, renderProps) {
   const bodyHtml = `<div id="root">${appHtml}</div>${scriptHtml}`;
 
   return '<!doctype html>' + ReactDOMServer.renderToStaticMarkup(
-      <Html
-        lang="en"
-        helmet={Helmet.rewind()}
-        bodyHtml={bodyHtml}
-        cssFilename={config.isProduction ? cssFilename : null}
-      />
-    );
+    <Html
+      lang="en"
+      helmet={Helmet.rewind()}
+      bodyHtml={bodyHtml}
+      cssFilename={config.isProduction ? cssFilename : null}
+    />
+  );
 }
 
 
