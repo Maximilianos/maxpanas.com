@@ -1,11 +1,21 @@
 import {connect} from 'react-redux';
 import fetch from '../../utils/redux-universal-fetch/container';
 import {fetchArticleIfNeeded} from '../redux/content/actions';
-import Article from '../components/pages/Article';
+import Article from '../components/Article';
 
-function mapStateToProps({content}) {
+function mapStateToProps({
+  content: {
+    isFetching,
+    error,
+    data: {title, description, body}
+  }
+}) {
   return {
-    content
+    isFetching,
+    error,
+    title,
+    description,
+    body
   };
 }
 

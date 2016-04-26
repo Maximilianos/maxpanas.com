@@ -3,9 +3,9 @@ import {Route, IndexRoute} from 'react-router';
 
 // static components
 import App from './components/App';
-import Home from './components/pages/Home';
-import About from './components/pages/About';
-import NotFound from './components/pages/NotFound';
+import Home from './components/Home';
+import About from './components/About';
+import NotFound from './components/NotFound';
 
 // dynamic components
 import Article from './containers/Article';
