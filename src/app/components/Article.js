@@ -27,7 +27,7 @@ function Article({
   body
 }) {
   if (isFetching) {
-    return <Entry title="Loading..."/>;
+    return <Entry title="Loading..." />;
   }
 
   if (error || !title || !body) {

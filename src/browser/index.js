@@ -10,7 +10,7 @@ import configureStore from '../app/redux/configureStore';
 // http://bluebirdjs.com/docs/why-bluebird.html
 window.Promise = Bluebird;
 
-const initialState = window.__INITIAL_STATE__;
+const initialState = window.__INITIAL_STATE__; // eslint-disable-line no-underscore-dangle
 const store = configureStore(initialState);
 
 ReactDOM.render(
