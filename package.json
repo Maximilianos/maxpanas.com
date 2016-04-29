@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "gulp",
+    "lint": "gulp lint",
     "start": "gulp -p"
   },
   "author": "Max GJ Panas <m@maxpanas.com>",

@@ -13,39 +13,37 @@ const args = yargs
   .alias('p', 'production')
   .argv;
 
-const runEslint = () => {
-  return gulp.src([
-      'gulpfile.babel.js',
-      'src/**/*.js',
-      'webpack/*.js'
-    ])
-    .pipe(eslint())
-    .pipe(eslint.format());
-};
-
 gulp.task('env', () => {
-  process.env.NODE_ENV = args.production ? 'production' : 'development';
+  process.env.NODE_ENV = (
+    args.production ? 'production' : 'development'
+  );
 });
 
 gulp.task('clean', () => del('build/*'));
 
 gulp.task('build', ['env'], webpackBuild);
 
-gulp.task('eslint', () => {
-  return runEslint();
-});
+gulp.task('lint', () => gulp
+  .src([
+    'gulpfile.babel.js',
+    'src/**/*.js',
+    'webpack/*.js'
+  ])
+  .pipe(eslint())
+  .pipe(eslint.format())
+);
 
-gulp.task('server-node', bg('node', './src/server'));
-gulp.task('server-hot', bg('node', './webpack/server'));
-gulp.task('server-nodemon', shell.task(
+gulp.task('server:node', bg('node', './src/server'));
+gulp.task('server:hot', bg('node', './webpack/server'));
+gulp.task('server:nodemon', shell.task(
   path.normalize('node_modules/.bin/nodemon src/server')
 ));
 
 gulp.task('server', ['env'], done => {
   if (args.production) {
-    runSequence('clean', 'build', 'server-node', done);
+    runSequence('clean', 'build', 'server:node', done);
   } else {
-    runSequence('server-hot', 'server-nodemon', done);
+    runSequence('server-hot', 'server:nodemon', done);
   }
 });
 
