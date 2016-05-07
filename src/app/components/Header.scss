@@ -3,48 +3,49 @@
    ========================================= */
 
 .header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin: 0 auto;
-	padding: 0 20px;
-	max-width: 1024px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1024px;
 }
 
 .header__logo {
-	margin: 0;
+  margin: 0;
 }
 
 .header__logo-link {
-	font-family: 'FilsonProBlack', 'Arial Black', sans-serif;
-	font-weight: 900;
-	font-size: 72px;
-	letter-spacing: 0.04em;
-	line-height: 1;
-	text-transform: uppercase;
-	text-decoration: none;
-	color: tomato;
+  font-family: 'FilsonProBlack', 'Arial Black', sans-serif;
+  font-weight: 900;
+  font-size: 72px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: tomato;
 
-	abbr[title] {
-		border: none;
-	}
+  abbr[title] {
+    border: none;
+    text-decoration: none;
+  }
 }
 
 .header__nav-item {
-	display: inline-block;
+  display: inline-block;
 }
 
 .header__nav-link {
-	display: block;
-	padding: 10px 20px;
-	font-family: Arial, sans-serif;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	text-decoration: none;
-	color: #444;
-	transition: color 0.3s ease;
+  display: block;
+  padding: 10px 20px;
+  font-family: Arial, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #444;
+  transition: color 0.3s ease;
 
-	&:hover {
-		color: tomato;
-	}
+  &:hover {
+    color: tomato;
+  }
 }
