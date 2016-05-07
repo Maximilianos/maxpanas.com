@@ -21,5 +21,5 @@ const config = require('./config');
 global.webpackIsomorphicTools = (
   new WebpackIsomorphicTools(webpackIsomorphicAssets)
   .development(!config.isProduction)
-  .server(rootDir, () => global.require('./main'))
+  .server(rootDir, () => require('./main'))
 );
