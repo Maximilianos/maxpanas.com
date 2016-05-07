@@ -1,9 +1,8 @@
 import fetch from 'isomorphic-fetch';
+
 import {Base64} from 'js-base64';
 import frontMatter from 'front-matter';
 import marked from 'marked';
-
-import {API_BASE} from '../../config';
 
 export const FETCH_CONTENT_PENDING = 'FETCH_CONTENT_PENDING';
 export const FETCH_CONTENT_SUCCESS = 'FETCH_CONTENT_SUCCESS';
@@ -14,13 +13,13 @@ export const FETCH_CONTENT_FAILURE = 'FETCH_CONTENT_FAILURE';
  * Notify state that a content
  * request is pending
  *
- * @param content
+ * @param contentID
  * @returns {{type: string, content: *}}
  */
-function requestPending(content) {
+function requestPending(contentID) {
   return {
     type: FETCH_CONTENT_PENDING,
-    content
+    contentID
   };
 }
 
@@ -30,14 +29,14 @@ function requestPending(content) {
  * received from a content
  * request
  *
- * @param content
+ * @param contentID
  * @param data
  * @returns {{type: string, content: *, data: *}}
  */
-function requestSuccess(content, data) {
+function requestSuccess(contentID, data) {
   return {
     type: FETCH_CONTENT_SUCCESS,
-    content,
+    contentID,
     data
   };
 }
@@ -48,14 +47,14 @@ function requestSuccess(content, data) {
  * received from a content
  * request
  *
- * @param content
+ * @param contentID
  * @param error
  * @returns {{type: string, content: *, error: *}}
  */
-function requestFailure(content, error) {
+function requestFailure(contentID, error) {
   return {
     type: FETCH_CONTENT_FAILURE,
-    content,
+    contentID,
     error
   };
 }
@@ -70,9 +69,12 @@ function requestFailure(content, error) {
  * @returns {*}
  */
 async function throwResponseError(response) {
-  if (response.status >= 200 && response.status < 300) return response;
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  }
 
   const error = new Error(response.statusText);
+
   error.response = {
     status: response.status,
     data: await response.json()
@@ -94,12 +96,14 @@ function fetchContent(content) {
   return dispatch => {
     dispatch(requestPending(content));
 
-    return fetch(API_BASE + content)
+    return fetch(content)
       .then(throwResponseError)
       .then(response => response.json())
+
       .then(json => Base64.decode(json.content))
       .then(file => frontMatter(file))
       .then(({attributes, body}) => ({...attributes, body: marked(body)}))
+
       .then(data => dispatch(requestSuccess(content, data)))
       .catch(error => dispatch(requestFailure(content, error)));
   };
@@ -111,13 +115,18 @@ function fetchContent(content) {
  * been fetched and cached or is in the
  * process of being fetched and cached
  *
- * @param isFetching
- * @param currentContent
  * @param content
+ * @param contentID
  * @returns {boolean}
  */
-function shouldFetchContent({content: {isFetching, currentContent}}, content) {
-  return currentContent !== content && isFetching !== content;
+function shouldFetchContent({content}, contentID) {
+  return Boolean(
+    typeof content[contentID] === 'undefined'
+    || (
+      content[contentID].fetching === false
+      && content[contentID].error !== false
+    )
+  );
 }
 
 
@@ -128,7 +137,7 @@ function shouldFetchContent({content: {isFetching, currentContent}}, content) {
  * @param content
  * @returns {Function}
  */
-function fetchContentIfNeeded(content) {
+export function fetchContentIfNeeded(content) {
   return (dispatch, getState) => {
     if (shouldFetchContent(getState(), content)) {
       return dispatch(fetchContent(content));
@@ -136,17 +145,4 @@ function fetchContentIfNeeded(content) {
 
     return Promise.resolve();
   };
-}
-
-
-/**
- * Fetch the requested article only if
- * it has not already been fetched
- *
- * @param article
- * @returns {Function}
- */
-export function fetchArticleIfNeeded({params: {article}}) {
-  return dispatch =>
-    dispatch(fetchContentIfNeeded(`/articles/${article}.md`));
 }

@@ -5,47 +5,50 @@ import {
 } from './actions';
 
 
-const initialState = {
-  isFetching: false,
-  currentContent: false,
-  error: false,
-  data: false
-};
-
-
 /**
  * Manage how any content related actions
  * affect the state of the application
  *
  * @param state
  * @param type
- * @param content
+ * @param contentID
  * @param payload
  * @returns {*}
  */
-export default function content(state = initialState, {type, content, ...payload}) {
+export default function content(state = {}, {type, contentID, ...payload}) {
   switch (type) {
 
-    case FETCH_CONTENT_PENDING: return {
-      ...state,
-      isFetching: content
-    };
+    case FETCH_CONTENT_PENDING: {
+      return {
+        ...state,
+        [contentID]: {
+          error: false,
+          data: false,
+          ...state[contentID],
+          fetching: true
+        }
+      };
+    }
 
     case FETCH_CONTENT_SUCCESS: {
       return {
-        isFetching: false,
-        currentContent: content,
-        error: false,
-        data: payload.data
+        ...state,
+        [contentID]: {
+          fetching: false,
+          error: false,
+          data: payload.data
+        }
       };
     }
 
     case FETCH_CONTENT_FAILURE: {
       return {
-        isFetching: false,
-        currentContent: content,
-        error: payload.error,
-        data: false
+        ...state,
+        [contentID]: {
+          fetching: false,
+          error: payload.error,
+          data: false
+        }
       };
     }
 

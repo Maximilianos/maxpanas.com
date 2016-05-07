@@ -8,3 +8,13 @@ const REPOS_API = `${GITHUB_API}/repos`;
  * @type {string}
  */
 export const API_BASE = `${REPOS_API}/Maximilianos/articles/contents`;
+
+/**
+ *
+ *
+ * @param article
+ * @returns {string}
+ */
+export function getArticlePath(article) {
+  return `${API_BASE}/articles/${article}.md`;
+}

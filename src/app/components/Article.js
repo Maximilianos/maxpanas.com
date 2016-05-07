@@ -20,17 +20,17 @@ function NoArticleFound() {
 }
 
 function Article({
-  isFetching,
+  fetching,
   error,
   title,
   description,
   body
 }) {
-  if (isFetching) {
+  if (fetching) {
     return <Entry title="Loading..." />;
   }
 
-  if (error || !title || !body) {
+  if (error) {
     return (
       (error.response && error.response.status === 404)
         ? <NoArticleFound />
@@ -44,14 +44,14 @@ function Article({
         title={title}
         meta={[{name: 'description', content: description}]}
       />
-      <div dangerouslySetInnerHTML={{__html: body}}></div>
+      <div dangerouslySetInnerHTML={{__html: body}} />
     </Entry>
   );
 }
 
 Article.propTypes = {
-  isFetching: PropTypes.bool,
-  error: PropTypes.object,
+  fetching: PropTypes.bool,
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   title: PropTypes.string,
   description: PropTypes.string,
   body: PropTypes.string

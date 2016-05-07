@@ -31,9 +31,10 @@ export default function fetch(...actions) {
     componentDidUpdate = this.runFetchActions;
 
     runFetchActions() {
-      const {store} = this.context;
-      const {location, params} = this.props;
-      actions.forEach(action => store.dispatch(action({location, params, store})));
+      const {store: {getState, dispatch}} = this.context;
+      actions.forEach(
+        action => dispatch(action(this.props, getState))
+      );
     }
 
     render() {
