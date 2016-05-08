@@ -59,7 +59,7 @@ export default function makeConfig(isDevelopment) {
     hotPort: HOT_RELOAD_PORT,
     cache: isDevelopment,
     debug: isDevelopment,
-    devtool: isDevelopment ? 'eval-source-map' : 'source-map',
+    devtool: isDevelopment ? 'eval-source-map' : false,
     entry: {
       app: isDevelopment ? [
         `webpack-hot-middleware/client?path=http://${serverIp}:${HOT_RELOAD_PORT}/__webpack_hmr`,
@@ -70,13 +70,13 @@ export default function makeConfig(isDevelopment) {
     },
     module: {
       loaders: [{
-        loader: 'url?limit=10000',
+        loader: 'url?limit=1',
         test: /\.(gif|jpg|png|svg)$/
       }, {
         loader: 'url?limit=1',
         test: /favicon\.ico$/
       }, {
-        loader: 'url?limit=100000',
+        loader: 'url?limit=1',
         test: /\.(eot|ttf|woff|woff2)$/
       }, {
         loader: 'babel',
@@ -107,6 +107,7 @@ export default function makeConfig(isDevelopment) {
     },
     plugins: (() => {
       const plugins = [
+        new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.DefinePlugin({
           'process.env': {
             NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
@@ -116,7 +117,6 @@ export default function makeConfig(isDevelopment) {
       ];
       if (isDevelopment) {
         plugins.push(
-          new webpack.optimize.OccurenceOrderPlugin(),
           new webpack.HotModuleReplacementPlugin(),
           new webpack.NoErrorsPlugin(),
           webpackIsomorphicToolsPlugin.development()
@@ -127,9 +127,15 @@ export default function makeConfig(isDevelopment) {
             allChunks: true
           }),
           new webpack.optimize.DedupePlugin(),
-          new webpack.optimize.OccurenceOrderPlugin(),
           new webpack.optimize.UglifyJsPlugin({
+            sourceMap: false,
+            comments: false,
+            screw_ie8: true,
             compress: {
+              drop_console: true,
+              pure_getters: true,
+              unsafe: true,
+              unsafe_comps: true,
               screw_ie8: true,
               warnings: false
             }
