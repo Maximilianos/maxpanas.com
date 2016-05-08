@@ -11,7 +11,7 @@ import config from '../config';
 import createRoutes from '../../app/createRoutes';
 import configureStore from '../../app/redux/configureStore';
 
-import {fetchComponentDataAsync} from '../../utils/redux-universal-fetch/server';
+import runComponentFetchActions from '../../utils/redux-react-router-fetch/runComponentFetchActions';
 
 import Html from './Html';
 
@@ -114,7 +114,7 @@ export default function render(req, res, next) {
     }
 
     try {
-      await fetchComponentDataAsync(store, renderProps);
+      await runComponentFetchActions(store, renderProps);
       const html = renderPage(store, renderProps);
 
       const nestedStatus = NestedStatus.rewind();

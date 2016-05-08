@@ -142,7 +142,5 @@ export function fetchContentIfNeeded(content) {
     if (shouldFetchContent(getState(), content)) {
       return dispatch(fetchContent(content));
     }
-
-    return Promise.resolve();
   };
 }

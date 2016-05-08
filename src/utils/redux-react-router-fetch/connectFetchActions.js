@@ -1,4 +1,6 @@
 import React, {PropTypes, Component} from 'react';
+import runFetchAction from './runFetchAction';
+
 
 /**
  * Container decorator used to
@@ -8,9 +10,8 @@ import React, {PropTypes, Component} from 'react';
  * @param actions
  * @returns {Function}
  */
-export default function fetch(...actions) {
+export default function connectFetchActions(...actions) {
   return Wrapped => class Fetch extends Component {
-
     static contextTypes = {
       store: PropTypes.object // the Redux store
     };
@@ -23,19 +24,24 @@ export default function fetch(...actions) {
     };
 
     // For server side rendering
-    // use with ./server.js#fetchComponentDataAsync
+    // use with ./runComponentFetchActions.js#runComponentFetchActions
     static fetchActions = actions;
+
+    runFetchActions({location: prevLocation = {}, params: prevParams = {}} = {}) {
+      const {store} = this.context;
+      const {location, params} = this.props;
+
+      actions.forEach(action => runFetchAction(
+        store,
+        action,
+        {location, params},
+        {location: prevLocation, params: prevParams}
+      ));
+    }
 
     // For client side rendering
     componentDidMount = this.runFetchActions;
     componentDidUpdate = this.runFetchActions;
-
-    runFetchActions() {
-      const {store: {getState, dispatch}} = this.context;
-      actions.forEach(
-        action => dispatch(action(this.props, getState))
-      );
-    }
 
     render() {
       return <Wrapped {...this.props} />;
