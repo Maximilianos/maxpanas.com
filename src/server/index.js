@@ -20,6 +20,6 @@ const config = require('./config');
 
 global.webpackIsomorphicTools = (
   new WebpackIsomorphicTools(webpackIsomorphicAssets)
-  .development(!config.isProduction)
-  .server(rootDir, () => require('./main'))
+    .development(!config.isProduction)
+    .server(rootDir, () => require('./main'))
 );
