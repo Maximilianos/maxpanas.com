@@ -12,6 +12,7 @@
     "consistent-return": 0,
     "curly": 0,
     "default-case": 0,
+    "global-require": 0,
     "new-cap": [
       2,
       {
