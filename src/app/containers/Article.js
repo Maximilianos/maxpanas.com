@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import connectFetchActions from '../../utils/redux-react-router-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
-import {getArticlePath} from '../redux/content/github';
+import {getArticlePath, parseArticle} from '../redux/content/github';
 import Article from '../components/Article';
 
 
@@ -48,7 +48,7 @@ function fetchArticle({
   return dispatch => {
     if (key !== prevKey) {
       const contentURL = getArticlePath(article);
-      return dispatch(fetchContentIfNeeded(contentURL));
+      return dispatch(fetchContentIfNeeded(contentURL, {responseParser: parseArticle}));
     }
   };
 }

@@ -1,9 +1,5 @@
 import fetch from 'isomorphic-fetch';
 
-import {Base64} from 'js-base64';
-import frontMatter from 'front-matter';
-import marked from 'marked';
-
 export const FETCH_CONTENT_PENDING = 'FETCH_CONTENT_PENDING';
 export const FETCH_CONTENT_SUCCESS = 'FETCH_CONTENT_SUCCESS';
 export const FETCH_CONTENT_FAILURE = 'FETCH_CONTENT_FAILURE';
@@ -90,20 +86,16 @@ async function throwResponseError(response) {
  * accordingly
  *
  * @param content
+ * @param parseResponse
  * @returns {Function}
  */
-function fetchContent(content) {
+function fetchContent(content, {responseParser: parseResponse = response => response}) {
   return dispatch => {
     dispatch(requestPending(content));
 
     return fetch(content)
       .then(throwResponseError)
-      .then(response => response.json())
-
-      .then(json => Base64.decode(json.content))
-      .then(file => frontMatter(file))
-      .then(({attributes, body}) => ({...attributes, body: marked(body)}))
-
+      .then(parseResponse)
       .then(data => dispatch(requestSuccess(content, data)))
       .catch(error => dispatch(requestFailure(content, error)));
   };
@@ -135,12 +127,13 @@ function shouldFetchContent({content}, contentID) {
  * it has not already been fetched
  *
  * @param content
+ * @param responseParser
  * @returns {Function}
  */
-export function fetchContentIfNeeded(content) {
+export function fetchContentIfNeeded(content, {responseParser}) {
   return (dispatch, getState) => {
     if (shouldFetchContent(getState(), content)) {
-      return dispatch(fetchContent(content));
+      return dispatch(fetchContent(content, {responseParser}));
     }
   };
 }
