@@ -3,11 +3,11 @@ import {Route, IndexRoute} from 'react-router';
 
 // static components
 import App from './components/App';
-import Home from './components/Home';
 import About from './components/About';
 import NotFound from './components/NotFound';
 
 // dynamic components
+import Home from './containers/Home';
 import Article from './containers/Article';
 
 
