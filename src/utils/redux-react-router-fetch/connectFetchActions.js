@@ -27,15 +27,14 @@ export default function connectFetchActions(...actions) {
     // use with ./runComponentFetchActions.js#runComponentFetchActions
     static fetchActions = actions;
 
-    runFetchActions({location: prevLocation = {}, params: prevParams = {}} = {}) {
+    runFetchActions(prevProps = {}) {
       const {store} = this.context;
-      const {location, params} = this.props;
 
       actions.forEach(action => runFetchAction(
         store,
         action,
-        {location, params},
-        {location: prevLocation, params: prevParams}
+        this.props,
+        prevProps
       ));
     }
 

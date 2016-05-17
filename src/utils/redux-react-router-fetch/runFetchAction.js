@@ -16,12 +16,12 @@ const emptyProps = {
 export default function runFetchAction(
   {dispatch, getState},
   action,
-  props = emptyProps,
-  prevProps = emptyProps,
+  props,
+  prevProps,
 ) {
   return dispatch(action({
-    props,
-    prevProps,
+    props: {...emptyProps, ...props},
+    prevProps: {...emptyProps, ...prevProps},
     getState,
   }));
 }
