@@ -7,7 +7,7 @@ import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import NestedStatus from 'react-nested-status';
 
-import config from '../config';
+import * as config from '../config';
 import createRoutes from '../../app/createRoutes';
 import configureStore from '../../app/redux/configureStore';
 
