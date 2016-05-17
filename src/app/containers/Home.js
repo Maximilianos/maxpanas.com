@@ -21,10 +21,14 @@ function mapStateToProps({content}) {
     data
   } = content[contentID] || {};
 
+  const archive = data ? data.map(
+    ({name}) => name.slice(0, name.lastIndexOf('.'))
+  ) : [];
+
   return {
     fetching,
     error,
-    data
+    archive
   };
 }
 

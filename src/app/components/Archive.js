@@ -6,7 +6,7 @@ function Archive({fetching, error, archive}) {
   if (fetching) return <div>Loading Archive...</div>;
   if (error) return <div>Error Loading Archive.</div>;
 
-  return (archive && archive.length) && (
+  return archive ? (
     <ul>
       {archive.map(article => (
         <li key={article}>
@@ -14,7 +14,7 @@ function Archive({fetching, error, archive}) {
         </li>
       ))}
     </ul>
-  );
+  ) : <div />;
 }
 
 Archive.propTypes = {

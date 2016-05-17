@@ -4,8 +4,7 @@ import Helmet from 'react-helmet';
 import Entry from './Entry';
 import Archive from './Archive';
 
-function Home({fetching, error, data}) {
-  const archive = data.map(({name}) => name.slice(0, name.lastIndexOf('.')));
+function Home({fetching, error, archive}) {
   return (
     <div>
       <Entry title="Welcome to my Website!">
@@ -23,7 +22,7 @@ function Home({fetching, error, data}) {
 Home.propTypes = {
   fetching: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  data: PropTypes.arrayOf(PropTypes.object)
+  archive: PropTypes.arrayOf(PropTypes.string)
 };
 
 export default Home;
