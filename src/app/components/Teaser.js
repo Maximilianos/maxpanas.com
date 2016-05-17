@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-router';
 import Entry from './Entry';
 
 function TeaserError() {
@@ -18,7 +19,7 @@ function NoTeaserFound() {
 }
 
 
-function Teaser({fetching, error, title, description}) {
+function Teaser({fetching, error, article, title, description}) {
   if (fetching) return <Entry title="Loading..." />;
 
   if (error) {
@@ -30,15 +31,18 @@ function Teaser({fetching, error, title, description}) {
   }
 
   return (
-    <Entry title={title}>
-      {description}
-    </Entry>
+    <Link to={article}>
+      <Entry title={title}>
+        {description}
+      </Entry>
+    </Link>
   );
 }
 
 Teaser.propTypes = {
   fetching: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  article: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string
 };
