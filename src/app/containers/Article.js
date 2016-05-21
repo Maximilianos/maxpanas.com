@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import connectFetchActions from '../../utils/redux-react-router-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
 import {getArticlePath, parseArticle} from '../redux/content/github';
-import Article from '../components/Article';
+import Article from '../components/Articles/Article/Article';
 
 
 /**

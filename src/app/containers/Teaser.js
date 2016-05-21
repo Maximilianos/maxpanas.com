@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import connectFetchActions from '../../utils/redux-react-router-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
 import {getArticlePath, parseArticle} from '../redux/content/github';
-import Teaser from '../components/Teaser';
+import Teaser from '../components/Articles/Teaser/Teaser';
 
 
 /**

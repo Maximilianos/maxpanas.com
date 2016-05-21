@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
-import Entry from './Entry';
+import Entry from '../../Entry/Entry';
 
 function TeaserError() {
   return (

@@ -1,11 +1,11 @@
 import React from 'react';
 import {IndexLink, Link} from 'react-router';
 
-import './Header.scss';
+import './AppHeader.scss';
 
 const nav = [{
   to: '/about',
-  text: 'About Me'
+  text: 'Pages Me'
 }, {
   to: '/test-1',
   text: 'Article'
@@ -14,11 +14,11 @@ const nav = [{
   text: '404'
 }];
 
-export default function Header() {
+export default function AppHeader() {
   return (
-    <header className="header">
-      <h1 className="header__logo">
-        <IndexLink to="/" className="header__logo-link">
+    <header className="app-header">
+      <h1 className="app-header__logo">
+        <IndexLink to="/" className="app-header__logo-link">
           <abbr title="Max GJ Panas">
             MAX
           </abbr>
@@ -27,8 +27,8 @@ export default function Header() {
       <nav>
         <ul>
           {nav.map(({to, text}) => (
-            <li key={to} className="header__nav-item">
-              <Link to={to} className="header__nav-link">
+            <li key={to} className="app-header__nav-item">
+              <Link to={to} className="app-header__nav-link">
                 {text}
               </Link>
             </li>

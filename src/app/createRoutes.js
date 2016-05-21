@@ -2,9 +2,9 @@ import React from 'react';
 import {Route, IndexRoute} from 'react-router';
 
 // static components
-import App from './components/App';
-import About from './components/About';
-import NotFound from './components/NotFound';
+import App from './components/App/App';
+import About from './components/Pages/About';
+import NotFound from './components/Pages/NotFound';
 
 // dynamic components
 import Home from './containers/Home';

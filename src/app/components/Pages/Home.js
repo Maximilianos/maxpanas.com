@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import Helmet from 'react-helmet';
 
-import Entry from './Entry';
-import Archive from './Archive';
+import Entry from '../Entry/Entry';
+import Archive from '../Articles/Archive/Archive';
 
 function Home({fetching, error, archive}) {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import Entry from './Entry';
+import Entry from '../Entry/Entry';
 
 export default function About() {
   return (

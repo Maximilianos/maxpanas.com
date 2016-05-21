@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-import Teaser from '../containers/Teaser';
+import Teaser from '../../../containers/Teaser';
 
 function Archive({fetching, error, archive}) {
   if (fetching) return <div>Loading Archive...</div>;

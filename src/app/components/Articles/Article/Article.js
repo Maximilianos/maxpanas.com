@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import Helmet from 'react-helmet';
-import Entry from './Entry';
-import Error from './Error';
+import Entry from '../../Entry/Entry';
+import Error from '../../Error/Error';
 
 function ArticleError() {
   return (

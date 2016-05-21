@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import NestedStatus from 'react-nested-status';
 import Helmet from 'react-helmet';
-import Entry from './Entry';
+import Entry from '../Entry/Entry';
 
 function Error({code, title, subtitle, children}) {
   return (

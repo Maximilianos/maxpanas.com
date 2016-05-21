@@ -1,8 +1,8 @@
 /* =========================================
-    Header
+    App Header
    ========================================= */
 
-.header {
+.app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,11 +11,11 @@
   max-width: 1024px;
 }
 
-.header__logo {
+.app-header__logo {
   margin: 0;
 }
 
-.header__logo-link {
+.app-header__logo-link {
   font-family: 'FilsonProBlack', 'Arial Black', sans-serif;
   font-weight: 900;
   font-size: 72px;
@@ -31,11 +31,11 @@
   }
 }
 
-.header__nav-item {
+.app-header__nav-item {
   display: inline-block;
 }
 
-.header__nav-link {
+.app-header__nav-link {
   display: block;
   padding: 10px 20px;
   font-family: Arial, sans-serif;

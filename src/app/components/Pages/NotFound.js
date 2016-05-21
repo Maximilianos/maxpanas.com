@@ -1,6 +1,6 @@
 import React from 'react';
 import {IndexLink} from 'react-router';
-import Error from './Error';
+import Error from '../Error/Error';
 
 export default function NotFound() {
   return (
