@@ -2,5 +2,5 @@
 node_modules
 build
 npm-debug.log
-src/app/assets/fonts/black/private
+src/app/assets/fonts/private
 webpack-assets.json

@@ -3,29 +3,30 @@
    ========================================= */
 
 .entry {
-  margin: 150px 0;
+  margin: 100px 0;
 }
 
 .entry__body {
   margin: 0 auto;
   padding: 0 20px;
   max-width: 700px;
-  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  font-family: AvenirLTStd-Light, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 21px;
+  font-size: 24px;
   line-height: 1.58;
   color: rgba(0, 0, 0, 0.8);
 }
 
 .entry__title {
   margin: 0 0 10px;
-  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
-  font-size: 36px;
+  text-transform: uppercase;
+  font-family: FilsonProBlack, sans-serif;
+  font-size: 98px;
   font-weight: 700;
   font-style: normal;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
 }
 
 .entry__subtitle {
