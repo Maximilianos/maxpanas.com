@@ -5,8 +5,8 @@ import Helmet from 'react-helmet';
 import AppHeader from './AppHeader/AppHeader';
 
 import 'normalize.css';
-import '../../assets/fonts/private/black/webfonts.css';
-import '../../assets/fonts/private/avenir/webfonts.css';
+import '../../assets/fonts/filson-pro/webfonts.css';
+import '../../assets/fonts/avenir/webfonts.css';
 import './App.scss';
 
 import favicon from '../../assets/favicon/favicon.ico'; // eslint-disable-line

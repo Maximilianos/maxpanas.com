@@ -1,6 +1,12 @@
+# editor stuff
 .idea
+
+# build stuff
 node_modules
-build
 npm-debug.log
-src/app/assets/fonts/private
 webpack-assets.json
+build
+
+# private fonts
+src/app/assets/fonts/avenir/
+src/app/assets/fonts/filson-pro/
