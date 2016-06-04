@@ -2,38 +2,35 @@
     Entry
    ========================================= */
 
-.entry {
-  margin: 100px 0;
-}
+$header-bottom-margin: 95px;
 
-.entry__body {
-  margin: 0 auto;
-  padding: 0 20px;
-  max-width: 700px;
-  font-family: AvenirLTStd-Light, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1.58;
-  color: rgba(0, 0, 0, 0.8);
-}
+.entry {}
+
+.entry__header {}
 
 .entry__title {
-  margin: 0 0 10px;
+  margin: 100px 0 $header-bottom-margin;
+  padding: 0 20px;
+  text-align: center;
   text-transform: uppercase;
-  font-family: FilsonProBlack, sans-serif;
+  font-family: 'Filson Pro', 'Arial Black', sans-serif;
   font-size: 98px;
-  font-weight: 700;
+  font-weight: 900;
   font-style: normal;
   line-height: 1.1;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
 }
 
 .entry__subtitle {
   @extend .entry__title;
+
+  margin: #{10px - $header-bottom-margin} 0 $header-bottom-margin;
   font-size: 28px;
 }
 
 .entry__content {
-  letter-spacing: -0.003em;
+  margin: 0 auto;
+  max-width: 34em;
+  font-size: 24px;
+  line-height: 1.58;
 }

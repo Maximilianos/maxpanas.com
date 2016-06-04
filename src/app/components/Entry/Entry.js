@@ -5,17 +5,17 @@ import './Entry.scss';
 function Entry({title, subtitle, children}) {
   return (
     <article className="entry">
-      <div className="entry__body">
+      <header className="entry__header">
         <h1 className="entry__title">
           {title}
         </h1>
         {subtitle && <h2 className="entry__subtitle">
           {subtitle}
         </h2>}
-        {children && <div className="entry__content">
-          {children}
-        </div>}
-      </div>
+      </header>
+      {children && <div className="entry__content">
+        {children}
+      </div>}
     </article>
   );
 }

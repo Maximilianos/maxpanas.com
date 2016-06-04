@@ -16,7 +16,7 @@
 }
 
 .app-header__logo-link {
-  font-family: 'FilsonProBlack', 'Arial Black', sans-serif;
+  font-family: 'Filson Pro', 'Arial Black', sans-serif;
   font-weight: 900;
   font-size: 72px;
   letter-spacing: 0.04em;
@@ -38,12 +38,12 @@
 .app-header__nav-link {
   display: block;
   padding: 10px 20px;
-  font-family: AvenirLTStd-Light, Arial, sans-serif;
   font-size: 20px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
   color: #444;
+
   transition: color 0.3s ease;
 
   &:hover {
