@@ -25,7 +25,7 @@ function mapStateToProps({content}, {article}) {
     fetching,
     error,
     title,
-    description
+    excerpt: description
   };
 }
 

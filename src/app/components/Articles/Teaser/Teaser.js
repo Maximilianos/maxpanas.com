@@ -1,41 +1,20 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
-import Entry from '../../Entry/Entry';
 
-function TeaserError() {
-  return (
-    <Entry title="Error 500">
-      Sorry there was a problem completing this request
-    </Entry>
-  );
-}
+import './Teaser.scss';
 
-function NoTeaserFound() {
-  return (
-    <Entry title="Error 404">
-      Sorry there is no article at this url
-    </Entry>
-  );
-}
-
-
-function Teaser({fetching, error, article, title, description}) {
-  if (fetching) return <Entry title="Loading..." />;
-
-  if (error) {
-    return (
-      (error.response && error.response.status === 404)
-        ? <NoTeaserFound />
-        : <TeaserError />
-    );
-  }
-
-  return (
-    <Link to={article}>
-      <Entry title={title}>
-        {description}
-      </Entry>
-    </Link>
+function Teaser({fetching, error, article, title, excerpt}) {
+  return error || fetching ? null : (
+    <article className="teaser">
+      <Link className="teaser__link" to={article}>
+        <h2 className="teaser__title">
+          {title}
+        </h2>
+        {excerpt && <div className="teaser__excerpt">
+          {excerpt}
+        </div>}
+      </Link>
+    </article>
   );
 }
 
@@ -44,7 +23,7 @@ Teaser.propTypes = {
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   article: PropTypes.string,
   title: PropTypes.string,
-  description: PropTypes.string
+  excerpt: PropTypes.string
 };
 
 export default Teaser;
