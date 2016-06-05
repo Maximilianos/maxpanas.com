@@ -3,6 +3,7 @@ import NestedStatus from 'react-nested-status';
 import Helmet from 'react-helmet';
 
 import AppHeader from './AppHeader/AppHeader';
+import AppFooter from './AppFooter/AppFooter';
 
 import 'normalize.css';
 import '../../assets/fonts/filson-pro/webfonts.css';
@@ -28,6 +29,7 @@ function App({children}) {
       />
       <AppHeader />
       {children}
+      <AppFooter />
     </div>
   );
 }
