@@ -3,15 +3,12 @@ import {IndexLink, Link} from 'react-router';
 
 import './AppHeader.scss';
 
-const nav = [{
+const navLinks = [{
+  to: '/',
+  text: 'Home'
+}, {
   to: '/about',
-  text: 'Pages Me'
-}, {
-  to: '/test-1',
-  text: 'Article'
-}, {
-  to: '/non-existent-page',
-  text: '404'
+  text: 'About'
 }];
 
 export default function AppHeader() {
@@ -26,7 +23,7 @@ export default function AppHeader() {
       </h1>
       <nav>
         <ul>
-          {nav.map(({to, text}) => (
+          {navLinks.map(({to, text}) => (
             <li key={to} className="app-header__nav-item">
               <Link to={to} className="app-header__nav-link">
                 {text}
