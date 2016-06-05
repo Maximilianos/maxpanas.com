@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import connectFetchActions from '../../utils/redux-react-router-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
 import {getArchivePath, parseGitHubResponse} from '../redux/content/github';
-import Home from '../components/Pages/Home';
+import Home from '../components/Pages/Home/Home';
 
 const contentID = getArchivePath('articles');
 

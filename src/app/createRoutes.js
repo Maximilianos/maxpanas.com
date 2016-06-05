@@ -3,8 +3,8 @@ import {Route, IndexRoute} from 'react-router';
 
 // static components
 import App from './components/App/App';
-import About from './components/Pages/About';
-import NotFound from './components/Pages/NotFound';
+import About from './components/Pages/About/About';
+import NotFound from './components/Pages/NotFound/NotFound';
 
 // dynamic components
 import Home from './containers/Home';
