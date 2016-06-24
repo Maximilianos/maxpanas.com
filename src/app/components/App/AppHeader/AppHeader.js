@@ -9,6 +9,9 @@ const navLinks = [{
 }, {
   to: '/about',
   text: 'About'
+}, {
+  to: '/contact',
+  text: 'Contact'
 }];
 
 export default function AppHeader() {
