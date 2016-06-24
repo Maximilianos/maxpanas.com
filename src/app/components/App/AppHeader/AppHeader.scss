@@ -8,7 +8,7 @@
   justify-content: space-between;
   margin: 0 auto;
   padding: 0 20px;
-  max-width: 1024px;
+  max-width: 1400px;
 }
 
 .app-header__logo {
@@ -25,6 +25,12 @@
   text-decoration: none;
   color: tomato;
 
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #444;
+  }
+
   abbr[title] {
     border: none;
     text-decoration: none;
@@ -38,15 +44,16 @@
 .app-header__nav-link {
   display: block;
   padding: 10px 20px;
+  font-family: 'Filson Pro', 'Arial Black', sans-serif;
   font-size: 20px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  color: #444;
+  color: tomato;
 
   transition: color 0.3s ease;
 
   &:hover {
-    color: tomato;
+    color: #444;
   }
 }
