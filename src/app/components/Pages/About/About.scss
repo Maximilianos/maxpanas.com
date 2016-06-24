@@ -1,0 +1,39 @@
+/* =========================================
+		About
+   ========================================= */
+
+.about {
+  font-size: 22px;
+  margin: 100px auto;
+  max-width: 1400px;
+}
+
+.about__title {
+  margin: 0 0 0.5em;
+  font-size: 160px;
+  font-family: 'Filson Pro', 'Arial Black', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.05em;
+  line-height: 0.9;
+  color: #f0f0f0;
+  background: -webkit-linear-gradient(#f0f0f0, #fbfbfb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about__stories {
+  display: flex;
+
+  > section:not(:first-child) {
+    margin-left: 8em;
+  }
+}
+
+.about__back-story {
+  flex: 1.1;
+}
+
+.about__bio {
+  flex: 1;
+}
