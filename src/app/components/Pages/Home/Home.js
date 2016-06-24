@@ -15,9 +15,14 @@ function Home({fetching, error, archive}) {
           by Max GJ Panas.
         "
       />
-      <header className="">
-        
-      </header>
+      <div className="home__hero">
+        <p>
+          My name is <i className="home__logo">Max</i>. I write code
+          for the web. Sometimes I share the code that I've written.
+          Sometimes I give talks about code. This is <i>my</i> website.
+          This is where I focus on writing <i>about</i> code.
+        </p>
+      </div>
       <div className="home__archive">
         <Archive
           fetching={fetching}

@@ -2,6 +2,18 @@
     Home
    ========================================= */
 
+.home__hero {
+  box-sizing: border-box;
+  margin: 100px auto;
+  padding: 0 20px;
+  max-width: 1200px;
+
+  // text-align: justify;
+  font-weight: 800;
+  font-size: 60px;
+  line-height: 1.2;
+}
+
 .home__archive {
   margin: 150px 0;
 }
