@@ -39,7 +39,7 @@ function Article({
   }
 
   return (
-    <Entry title={title} subtitle={description}>
+    <Entry title={title}>
       <Helmet
         title={title}
         meta={[{name: 'description', content: description}]}

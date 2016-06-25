@@ -79,6 +79,7 @@ async function throwResponseError(response) {
   throw error;
 }
 
+
 /**
  * Handle fetching and parsing the
  * requested content and dispatching
