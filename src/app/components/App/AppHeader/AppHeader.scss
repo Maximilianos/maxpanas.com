@@ -16,23 +16,9 @@
 }
 
 .app-header__logo-link {
-  font-family: 'Filson Pro', 'Arial Black', sans-serif;
-  font-weight: 900;
-  font-size: 72px;
-  letter-spacing: 0.04em;
-  line-height: 1;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: tomato;
-
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #444;
-  }
-
-  abbr[title] {
+  &, abbr[title] {
     border: none;
+    font-size: 72px;
     text-decoration: none;
   }
 }

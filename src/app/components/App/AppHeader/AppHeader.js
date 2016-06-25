@@ -1,6 +1,8 @@
 import React from 'react';
 import {IndexLink, Link} from 'react-router';
 
+import Logo from '../../Logo/Logo';
+
 import './AppHeader.scss';
 
 const navLinks = [{
@@ -17,13 +19,17 @@ const navLinks = [{
 export default function AppHeader() {
   return (
     <header className="app-header">
+
+      {/* Logo */}
       <h1 className="app-header__logo">
         <IndexLink to="/" className="app-header__logo-link">
           <abbr title="Max GJ Panas">
-            MAX
+            <Logo />
           </abbr>
         </IndexLink>
       </h1>
+
+      {/* Primary Navigation */}
       <nav>
         <ul>
           {navLinks.map(({to, text}) => (
@@ -35,6 +41,7 @@ export default function AppHeader() {
           ))}
         </ul>
       </nav>
+
     </header>
   );
 }
