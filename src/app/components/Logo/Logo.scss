@@ -2,18 +2,21 @@
     Logo
    ========================================= */
 
+@import "../../theme/colors";
+@import "../../theme/typography";
+
 .logo {
-  font-family: 'Filson Pro', 'Arial Black', sans-serif;
+  font-family: $t-logo;
   font-weight: 900;
   letter-spacing: 0.04em;
   line-height: 1;
   text-transform: uppercase;
   text-decoration: none;
-  color: tomato;
+  color: $c-brand;
 
   transition: color 0.3s ease;
 
   a &:hover {
-    color: #444;
+    color: $c-body-copy;
   }
 }

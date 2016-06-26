@@ -2,14 +2,16 @@
     Base
    ========================================= */
 
+@import "../../theme/colors";
+@import "../../theme/typography";
+
 html {
-  font-family: Avenir, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+  font-family: $t-body;
   font-weight: 400;
   font-style: normal;
-  color: rgba(0, 0, 0, 0.8);
 
-  color: #444;
-  background-color: #fff;
+  color: $c-body-copy;
+  background-color: $c-body-bg;
 }
 
 body {

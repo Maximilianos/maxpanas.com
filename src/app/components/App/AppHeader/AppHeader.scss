@@ -2,6 +2,9 @@
     App Header
    ========================================= */
 
+@import "../../../theme/colors";
+@import "../../../theme/typography";
+
 .app-header {
   display: flex;
   align-items: center;
@@ -30,16 +33,16 @@
 .app-header__nav-link {
   display: block;
   padding: 10px 20px;
-  font-family: 'Filson Pro', 'Arial Black', sans-serif;
+  font-family: $t-display;
   font-size: 20px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  color: tomato;
+  color: $c-brand;
 
   transition: color 0.3s ease;
 
   &:hover {
-    color: #444;
+    color: $c-body-copy;
   }
 }

@@ -2,6 +2,8 @@
     Teaser
    ========================================= */
 
+@import "../../../theme/colors";
+
 .teaser {
   margin: 0 auto 30px;
   max-width: 760px;
@@ -19,9 +21,9 @@
   transition: 0.3s ease-in-out;
 
   &:hover {
-    color: white;
-    background-color: tomato;
-    box-shadow: 2px 2px 6px rgba(tomato, 0.4);
+    color: $c-body-bg;
+    background-color: $c-brand;
+    box-shadow: 2px 2px 6px rgba($c-brand, 0.4);
   }
 }
 
