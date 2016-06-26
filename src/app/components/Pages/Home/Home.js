@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import Helmet from 'react-helmet';
 
-import Logo from '../../Logo/Logo';
+import Max from '../../Logo/Max';
 import Archive from '../../Articles/Archive/Archive';
 
 import './Home.scss';
@@ -18,10 +18,10 @@ function Home({fetching, error, archive}) {
       />
       <div className="home__hero">
         <p>
-          My name is <span className="home__logo"><Logo /></span>.
-          I write code for the web. Sometimes I share the code that
-          I've written. Sometimes I give talks about code. This is
-          my website. This is where I focus on writing about code.
+          My name is <Max />. I write code for the web. Sometimes
+          I share the code that I've written. Sometimes I give talks
+          about code. This is my website. This is where I focus on
+          writing about code.
         </p>
       </div>
       <div className="home__archive">

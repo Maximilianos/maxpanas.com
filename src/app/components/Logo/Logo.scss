@@ -5,6 +5,8 @@
 @import "../../theme/colors";
 @import "../../theme/typography";
 
+$logo-transition: color 0.3s ease;
+
 .logo {
   font-family: $t-logo;
   font-weight: 900;
@@ -14,9 +16,19 @@
   text-decoration: none;
   color: $c-brand;
 
-  transition: color 0.3s ease;
+  transition: $logo-transition;
 
-  a &:hover {
+  a:hover & {
     color: $c-body-copy;
+  }
+}
+
+.logo__dot {
+  font-family: $t-body;
+  color: $c-body-copy;
+  transition: $logo-transition;
+
+  a:hover & {
+    color: $c-brand;
   }
 }

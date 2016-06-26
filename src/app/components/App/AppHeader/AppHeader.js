@@ -1,7 +1,7 @@
 import React from 'react';
 import {IndexLink, Link} from 'react-router';
 
-import Logo from '../../Logo/Logo';
+import Max from '../../Logo/Max';
 
 import './AppHeader.scss';
 
@@ -24,7 +24,7 @@ export default function AppHeader() {
       <h1 className="app-header__logo">
         <IndexLink to="/" className="app-header__logo-link">
           <abbr title="Max GJ Panas">
-            <Logo />
+            <Max dot />
           </abbr>
         </IndexLink>
       </h1>
