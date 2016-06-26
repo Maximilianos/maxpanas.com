@@ -8,7 +8,7 @@ function AppFooter() {
   return (
     <footer className="app-footer">
       {/* Copyright */}
-      <Copy start={2014} /> Max GJ Panas
+      <Copy start={2016} /> Max GJ Panas
     </footer>
   );
 }
