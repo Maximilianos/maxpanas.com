@@ -1,0 +1,20 @@
+/* =========================================
+    Base
+   ========================================= */
+
+html {
+  font-family: Avenir, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: rgba(0, 0, 0, 0.8);
+
+  background-color: #fff;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+html, body, #root {
+  height: 100%;
+}
