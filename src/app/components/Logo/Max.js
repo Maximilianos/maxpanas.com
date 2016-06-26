@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react';
 
-import './Logo.scss';
+import './Max.scss';
 
 function Max({dot = false}) {
   return (
-    <span className="logo">
+    <span className="max">
       MAX
-      {dot && <span className="logo__dot">.</span>}
+      {dot && <span className="max__dot">.</span>}
     </span>
   );
 }

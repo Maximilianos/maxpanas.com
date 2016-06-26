@@ -1,5 +1,5 @@
 /* =========================================
-    Logo
+    Max
    ========================================= */
 
 @import "../../theme/colors";
@@ -7,7 +7,7 @@
 
 $logo-transition: color 0.3s ease;
 
-.logo {
+.max {
   font-family: $t-logo;
   font-weight: 900;
   letter-spacing: 0.04em;
@@ -23,7 +23,7 @@ $logo-transition: color 0.3s ease;
   }
 }
 
-.logo__dot {
+.max__dot {
   font-family: $t-body;
   color: $c-body-copy;
   transition: $logo-transition;
