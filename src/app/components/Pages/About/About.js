@@ -18,7 +18,7 @@ export default function About() {
         My Web Story
       </h1>
       <div className="about__stories">
-        <section className="about__bio">
+        <section className="about__story about__story--bio">
           <h2>Short Story</h2>
           <p>
             I have been professionally writing code for the web for the past
@@ -39,7 +39,7 @@ export default function About() {
             I've also produced a number
           </p>
         </section>
-        <section className="about__back-story">
+        <section className="about__story about__story--back-story">
           <h2>Long Story</h2>
           <p>
             I didn't start coding when I was eight. I do not have a computer

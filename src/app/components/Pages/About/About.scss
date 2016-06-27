@@ -22,16 +22,20 @@
 
 .about__stories {
   display: flex;
+}
 
-  > section:not(:first-child) {
-    margin-left: 8em;
+.about__story {
+  margin-right: 3em;
+  &:first-child {
+    margin-left: 3em;
   }
-}
 
-.about__back-story {
-  flex: 1.1;
-}
+  &--bio {
+    flex: 1;
+    text-align: right;
+  }
 
-.about__bio {
-  flex: 1;
+  &--back-story {
+    flex: 1.1;
+  }
 }
