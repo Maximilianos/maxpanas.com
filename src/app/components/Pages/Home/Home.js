@@ -2,11 +2,11 @@ import React, {PropTypes} from 'react';
 import Helmet from 'react-helmet';
 
 import Max from '../../Logo/Max';
-import Archive from '../../Articles/Archive/Archive';
+import Archive from '../../../containers/Archive';
 
 import './Home.scss';
 
-function Home({fetching, error, archive}) {
+function Home({archive}) {
   return (
     <main className="home">
       <Helmet
@@ -27,20 +27,14 @@ function Home({fetching, error, archive}) {
         </p>
       </div>
       <div className="home__archive">
-        <Archive
-          fetching={fetching}
-          error={error}
-          archive={archive}
-        />
+        <Archive archive={archive} />
       </div>
     </main>
   );
 }
 
 Home.propTypes = {
-  fetching: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  archive: PropTypes.oneOfType([PropTypes.bool, PropTypes.arrayOf(PropTypes.string)])
+  archive: PropTypes.string
 };
 
 export default Home;

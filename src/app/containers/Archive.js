@@ -2,27 +2,29 @@ import {connect} from 'react-redux';
 import connectFetchActions from '../../utils/redux-react-router-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
 import {getArchivePath, parseArchive} from '../redux/content/github';
-import Home from '../components/Pages/Home/Home';
-
-
-/**
- * The archive to show on
- * the Homepage
- *
- * @type {string}
- */
-const archive = 'articles';
+import Archive from '../components/Articles/Archive/Archive';
 
 
 /**
  * Map the content state to the
  * currently viewed archive
  *
- * @returns {{archive}}
+ * @param content
+ * @param archive
+ * @returns {{fetching, error, data}}
  */
-function mapStateToProps() {
+function mapStateToProps({content}, {archive}) {
+  const contentID = getArchivePath(archive);
+  const {
+    fetching,
+    error,
+    data
+  } = content[contentID] || {};
+
   return {
-    archive
+    fetching,
+    error,
+    archive: data
   };
 }
 
@@ -31,16 +33,12 @@ function mapStateToProps() {
  * Create the archive fetching
  * action
  *
- * @param key
- * @param prevKey
+ * @param archive
  * @returns {function()}
  */
-function fetchArchive({
-  props: {location: {key}},
-  prevProps: {location: {key: prevKey}}
-}) {
+function fetchArchive({props: {archive}}) {
   return dispatch => {
-    if (key !== prevKey) {
+    if (archive) {
       return dispatch(fetchContentIfNeeded(
         getArchivePath(archive),
         {responseParser: parseArchive}
@@ -50,8 +48,8 @@ function fetchArchive({
 }
 
 
-export default connect(mapStateToProps)(
-  connectFetchActions(fetchArchive)(
-    Home
+export default connectFetchActions(fetchArchive)(
+  connect(mapStateToProps)(
+    Archive
   )
 );
