@@ -20,7 +20,7 @@ export const API_BASE = `${REPOS_API}/Maximilianos/articles/contents`;
  * Return the api endpoint on
  * github for the given article
  *
- * @param article
+ * @param {string} article
  * @returns {string}
  */
 export function getArticlePath(article) {
@@ -32,7 +32,7 @@ export function getArticlePath(article) {
  * Return the api endpoint on
  * github for the given archive
  *
- * @param archive
+ * @param {string} archive
  * @returns {string}
  */
 export function getArchivePath(archive) {
@@ -44,7 +44,7 @@ export function getArchivePath(archive) {
  * Get a list of contents from
  * a given archive
  *
- * @param archive
+ * @param {*} archive
  * @returns {Array}
  */
 export function getArchiveContents(archive) {
@@ -56,12 +56,12 @@ export function getArchiveContents(archive) {
 
 /**
  * Parse a response from the
- * GitHub Api
+ * GitHub Api into json
  *
  * @returns {Function}
  */
-export function parseGitHubResponse(response) {
-  return response.json();
+export function parseJSON() {
+  return response => response.json();
 }
 
 
@@ -72,7 +72,7 @@ export function parseGitHubResponse(response) {
  * @returns {Function}
  */
 export function parseArticle() {
-  return response => parseGitHubResponse(response)
+  return response => response.json()
     .then(json => Base64.decode(json.content))
     .then(file => frontMatter(file))
     .then(({attributes, body}) => ({...attributes, body: marked(body)}));
@@ -82,24 +82,25 @@ export function parseArticle() {
 /**
  * Parse a response from the
  * GitHub Api into an archive
+ * and load the contained
+ * articles as well
  *
- * @param dispatch
+ * @param {Function} dispatch
  * @returns {Function}
  */
 export function parseArchive(dispatch) {
-  return response => parseGitHubResponse(response)
-    .then(archive => {
+  return response => response.json().then(archive => {
 
-      const archiveContents = getArchiveContents(archive);
+    const archiveContents = getArchiveContents(archive);
 
-      const articles = archiveContents.map(
-        article => dispatch(fetchContentIfNeeded(
-          getArticlePath(article),
-          {responseParser: parseArticle}
-        ))
-      );
+    const articles = archiveContents.map(
+      article => dispatch(fetchContentIfNeeded(
+        getArticlePath(article),
+        {responseParser: parseArticle}
+      ))
+    );
 
-      return Promise.all(articles)
-        .then(() => archiveContents);
-    });
+    return Promise.all(articles)
+      .then(() => archiveContents);
+  });
 }
