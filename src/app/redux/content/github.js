@@ -2,6 +2,8 @@ import marked from 'marked';
 import frontMatter from 'front-matter';
 import {Base64} from 'js-base64';
 
+import {fetchContentIfNeeded} from './actions';
+
 const GITHUB_API = 'https://api.github.com';
 const REPOS_API = `${GITHUB_API}/repos`;
 
@@ -39,11 +41,24 @@ export function getArchivePath(archive) {
 
 
 /**
+ * Get a list of contents from
+ * a given archive
+ *
+ * @param archive
+ * @returns {Array}
+ */
+export function getArchiveContents(archive) {
+  return archive && archive.length
+    ? archive.map(({name}) => name.slice(0, name.lastIndexOf('.')))
+    : [];
+}
+
+
+/**
  * Parse a response from the
  * GitHub Api
  *
- * @param response
- * @returns {Promise.<Array>|*}
+ * @returns {Function}
  */
 export function parseGitHubResponse(response) {
   return response.json();
@@ -54,12 +69,37 @@ export function parseGitHubResponse(response) {
  * Parse a response from the
  * GitHub Api into an article
  *
- * @param response
- * @returns {Promise.<{body}>}
+ * @returns {Function}
  */
-export function parseArticle(response) {
-  return parseGitHubResponse(response)
+export function parseArticle() {
+  return response => parseGitHubResponse(response)
     .then(json => Base64.decode(json.content))
     .then(file => frontMatter(file))
     .then(({attributes, body}) => ({...attributes, body: marked(body)}));
+}
+
+
+/**
+ * Parse a response from the
+ * GitHub Api into an archive
+ *
+ * @param dispatch
+ * @returns {Function}
+ */
+export function parseArchive(dispatch) {
+  return response => parseGitHubResponse(response)
+    .then(archive => {
+      const articles = getArchiveContents(archive).map(
+        article => dispatch(fetchContentIfNeeded(
+          getArticlePath(article),
+          {responseParser: parseArticle}
+        ))
+      );
+
+      return Promise
+        // first load all articles
+        .all(articles)
+        // then return the archive
+        .then(() => archive);
+    });
 }

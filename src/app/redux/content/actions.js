@@ -90,13 +90,13 @@ async function throwResponseError(response) {
  * @param parseResponse
  * @returns {Function}
  */
-function fetchContent(content, {responseParser: parseResponse = response => response}) {
-  return dispatch => {
+function fetchContent(content, {responseParser: parseResponse = () => response => response}) {
+  return (dispatch, getState) => {
     dispatch(requestPending(content));
 
     return fetch(content)
       .then(throwResponseError)
-      .then(parseResponse)
+      .then(parseResponse(dispatch, getState))
       .then(data => dispatch(requestSuccess(content, data)))
       .catch(error => dispatch(requestFailure(content, error)));
   };
