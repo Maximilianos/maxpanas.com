@@ -43,7 +43,10 @@ function fetchArchive({
 }) {
   return dispatch => {
     if (key !== prevKey) {
-      return dispatch(fetchContentIfNeeded(contentID, {responseParser: parseArchive}));
+      return dispatch(fetchContentIfNeeded(
+        contentID,
+        {responseParser: parseArchive}
+      ));
     }
   };
 }

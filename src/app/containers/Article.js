@@ -15,7 +15,6 @@ import Article from '../components/Articles/Article/Article';
  */
 function mapStateToProps({content}, {params: {article}}) {
   const contentID = getArticlePath(article);
-
   const {
     fetching,
     error,
@@ -47,8 +46,10 @@ function fetchArticle({
 }) {
   return dispatch => {
     if (key !== prevKey) {
-      const contentURL = getArticlePath(article);
-      return dispatch(fetchContentIfNeeded(contentURL, {responseParser: parseArticle}));
+      return dispatch(fetchContentIfNeeded(
+        getArticlePath(article),
+        {responseParser: parseArticle}
+      ));
     }
   };
 }
