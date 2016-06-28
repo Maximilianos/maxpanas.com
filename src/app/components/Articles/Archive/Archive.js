@@ -4,33 +4,34 @@ import Teaser from '../../../containers/Teaser';
 import './Archive.scss';
 
 function Archive({fetching, error, archive}) {
+  let modifier;
+  let content;
+
   if (fetching) {
-    return (
-      <div className="archive archive--loading">
-        Loading Archive...
-      </div>
+    modifier = 'loading';
+    content = 'Loading Archive...';
+  } else if (error || !archive) {
+    modifier = 'error';
+    content = 'Error Loading Archive.';
+  } else if (!archive.length) {
+    modifier = 'empty';
+    content = 'There are no articles in this archive';
+  } else {
+    modifier = 'list';
+    content = (
+      <ul className="archive__list">
+        {archive.map(article => (
+          <li key={article} className="archive__item">
+            <Teaser article={article} />
+          </li>
+        ))}
+      </ul>
     );
   }
 
-  if (error) {
-    return (
-      <div className="archive archive--error">
-        Error Loading Archive.
-      </div>
-    );
-  }
-
-  return archive ? (
-    <ul className="archive archive--list">
-      {archive.map(article => (
-        <li key={article} className="archive__item">
-          <Teaser article={article} />
-        </li>
-      ))}
-    </ul>
-  ) : (
-    <div className="archive archive--empty">
-      There are no articles in this archive
+  return (
+    <div className={`archive archive--${modifier}`}>
+      {content}
     </div>
   );
 }
