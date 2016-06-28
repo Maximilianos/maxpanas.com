@@ -11,7 +11,8 @@
 }
 
 .about__title {
-  margin: 0 0 0.5em;
+  margin: 0 auto 0.5em;
+  max-width: 5em;
   font-size: 160px;
   font-family: $t-display;
   text-transform: uppercase;
