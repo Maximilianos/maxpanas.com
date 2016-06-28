@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import connectFetchActions from '../../utils/redux-react-router-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
-import {getArchivePath, getArchiveContents, parseArchive} from '../redux/content/github';
+import {getArchivePath, parseArchive} from '../redux/content/github';
 import Home from '../components/Pages/Home/Home';
 
 const contentID = getArchivePath('articles');
@@ -18,13 +18,13 @@ function mapStateToProps({content}) {
   const {
     fetching,
     error,
-    data
+    data: archive
   } = content[contentID] || {};
 
   return {
     fetching,
     error,
-    archive: getArchiveContents(data)
+    archive
   };
 }
 

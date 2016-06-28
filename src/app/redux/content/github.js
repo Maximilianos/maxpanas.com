@@ -89,7 +89,8 @@ export function parseArticle() {
 export function parseArchive(dispatch) {
   return response => parseGitHubResponse(response)
     .then(archive => {
-      const articles = getArchiveContents(archive).map(
+      const archiveContents = getArchiveContents(archive);
+      const articles = archiveContents.map(
         article => dispatch(fetchContentIfNeeded(
           getArticlePath(article),
           {responseParser: parseArticle}
@@ -97,9 +98,7 @@ export function parseArchive(dispatch) {
       );
 
       return Promise
-        // first load all articles
         .all(articles)
-        // then return the archive
-        .then(() => archive);
+        .then(() => archiveContents);
     });
 }
