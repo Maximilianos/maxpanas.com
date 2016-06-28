@@ -37,8 +37,8 @@ function Archive({fetching, error, archive}) {
 
 Archive.propTypes = {
   fetching: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  archive: PropTypes.arrayOf(PropTypes.string)
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  archive: PropTypes.oneOfType([PropTypes.bool, PropTypes.arrayOf(PropTypes.string)])
 };
 
 export default Archive;
