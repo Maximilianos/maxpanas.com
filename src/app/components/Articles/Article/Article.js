@@ -31,11 +31,9 @@ function Article({
   }
 
   if (error) {
-    return (
-      (error.response && error.response.status === 404)
-        ? <NoArticleFound />
-        : <ArticleError />
-    );
+    return error.code === 404
+      ? <NoArticleFound />
+      : <ArticleError />;
   }
 
   return (

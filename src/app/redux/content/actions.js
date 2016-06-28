@@ -43,15 +43,19 @@ function requestSuccess(contentID, data) {
  * received from a content
  * request
  *
- * @param contentID
- * @param error
+ * @param {string} contentID
+ * @param {number} code
+ * @param {string} message
  * @returns {{type: string, content: *, error: *}}
  */
-function requestFailure(contentID, error) {
+function requestFailure(contentID, code, message) {
   return {
     type: FETCH_CONTENT_FAILURE,
     contentID,
-    error
+    error: {
+      code,
+      message
+    }
   };
 }
 
@@ -71,10 +75,8 @@ async function throwResponseError(response) {
 
   const error = new Error(response.statusText);
 
-  error.response = {
-    status: response.status,
-    data: await response.json()
-  };
+  error.code = response.status;
+  error.message = response.statusText;
 
   throw error;
 }
@@ -98,7 +100,10 @@ function fetchContent(content, {responseParser: parseResponse = () => response =
       .then(throwResponseError)
       .then(parseResponse(dispatch, getState))
       .then(data => dispatch(requestSuccess(content, data)))
-      .catch(error => dispatch(requestFailure(content, error)));
+      .catch(
+        ({code = 500, message = 'Something went wrong'} = {}) =>
+          dispatch(requestFailure(content, code, message))
+      );
   };
 }
 
