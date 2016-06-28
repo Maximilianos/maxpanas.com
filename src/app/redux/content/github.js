@@ -89,7 +89,9 @@ export function parseArticle() {
 export function parseArchive(dispatch) {
   return response => parseGitHubResponse(response)
     .then(archive => {
+
       const archiveContents = getArchiveContents(archive);
+
       const articles = archiveContents.map(
         article => dispatch(fetchContentIfNeeded(
           getArticlePath(article),
@@ -97,8 +99,7 @@ export function parseArchive(dispatch) {
         ))
       );
 
-      return Promise
-        .all(articles)
+      return Promise.all(articles)
         .then(() => archiveContents);
     });
 }
