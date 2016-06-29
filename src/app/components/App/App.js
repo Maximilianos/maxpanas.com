@@ -23,17 +23,7 @@ export default function App({children}) {
 
       <NestedStatus code={200} />
       <Helmet
-        link={[{
-          rel: 'shortcut icon',
-          href: favicon
-        }]}
-        meta={[{
-          name: 'description',
-          content: 'My name is Max. I write code for the web. Sometimes ' +
-                   'I share the code that I\'ve written. Sometimes I ' +
-                   'give talks about code. This is my website. This is ' +
-                   'where I focus on writing about code.'
-        }]}
+        link={[{rel: 'shortcut icon', href: favicon}]}
         titleTemplate="%s - Max GJ Panas"
       />
 
