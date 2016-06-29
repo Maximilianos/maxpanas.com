@@ -11,10 +11,9 @@ export default function Copy({
   end = (new Date()).getFullYear(),
   sep = ' - '
 }) {
-  const duration = end > start ? `${start}${sep}${end}` : start;
   return (
     <span>
-      &copy; {duration}
+      &copy; {end > start ? `${start}${sep}${end}` : start}
     </span>
   );
 }
