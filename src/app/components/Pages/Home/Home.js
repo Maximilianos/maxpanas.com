@@ -6,7 +6,11 @@ import Archive from '../../../containers/Archive';
 
 import './Home.scss';
 
-function Home({archive}) {
+
+Home.propTypes = {
+  archive: PropTypes.string
+};
+export default function Home({archive}) {
   return (
     <main className="home">
       <Helmet
@@ -32,9 +36,3 @@ function Home({archive}) {
     </main>
   );
 }
-
-Home.propTypes = {
-  archive: PropTypes.string
-};
-
-export default Home;

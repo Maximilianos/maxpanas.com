@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import Entry from '../../Entry/Entry';
 import Error from '../../Error/Error';
 
+
 function ArticleError() {
   return (
     <Error code={500} title="Error 500">
@@ -10,6 +11,7 @@ function ArticleError() {
     </Error>
   );
 }
+
 
 function NoArticleFound() {
   return (
@@ -19,7 +21,15 @@ function NoArticleFound() {
   );
 }
 
-function Article({
+
+Article.propTypes = {
+  fetching: PropTypes.bool,
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  title: PropTypes.string,
+  description: PropTypes.string,
+  body: PropTypes.string
+};
+export default function Article({
   fetching,
   error,
   title,
@@ -46,13 +56,3 @@ function Article({
     </Entry>
   );
 }
-
-Article.propTypes = {
-  fetching: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  title: PropTypes.string,
-  description: PropTypes.string,
-  body: PropTypes.string
-};
-
-export default Article;

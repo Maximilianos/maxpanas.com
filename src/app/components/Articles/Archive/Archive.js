@@ -3,7 +3,13 @@ import Teaser from '../../../containers/Teaser';
 
 import './Archive.scss';
 
-function Archive({fetching, error, archive}) {
+
+Archive.propTypes = {
+  fetching: PropTypes.bool,
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  archive: PropTypes.oneOfType([PropTypes.bool, PropTypes.arrayOf(PropTypes.string)])
+};
+export default function Archive({fetching, error, archive}) {
   let modifier;
   let content;
 
@@ -35,11 +41,3 @@ function Archive({fetching, error, archive}) {
     </div>
   );
 }
-
-Archive.propTypes = {
-  fetching: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  archive: PropTypes.oneOfType([PropTypes.bool, PropTypes.arrayOf(PropTypes.string)])
-};
-
-export default Archive;

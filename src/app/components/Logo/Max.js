@@ -2,7 +2,10 @@ import React, {PropTypes} from 'react';
 
 import './Max.scss';
 
-function Max({dot = false}) {
+Max.propTypes = {
+  dot: PropTypes.bool
+};
+export default function Max({dot = false}) {
   return (
     <span className="max">
       MAX
@@ -10,9 +13,3 @@ function Max({dot = false}) {
     </span>
   );
 }
-
-Max.propTypes = {
-  dot: PropTypes.bool
-};
-
-export default Max;

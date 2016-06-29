@@ -13,7 +13,11 @@ import './App.scss';
 
 import favicon from '../../assets/favicon/favicon.ico'; // eslint-disable-line
 
-function App({children}) {
+
+App.propTypes = {
+  children: PropTypes.node
+};
+export default function App({children}) {
   return (
     <div className="app">
 
@@ -45,9 +49,3 @@ function App({children}) {
     </div>
   );
 }
-
-App.propTypes = {
-  children: PropTypes.node
-};
-
-export default App;

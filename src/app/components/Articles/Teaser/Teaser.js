@@ -3,7 +3,15 @@ import {Link} from 'react-router';
 
 import './Teaser.scss';
 
-function Teaser({fetching, error, article, title, excerpt}) {
+
+Teaser.propTypes = {
+  fetching: PropTypes.bool,
+  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  article: PropTypes.string,
+  title: PropTypes.string,
+  excerpt: PropTypes.string
+};
+export default function Teaser({fetching, error, article, title, excerpt}) {
   return error || fetching ? null : (
     <article className="teaser">
       <Link className="teaser__link" to={article}>
@@ -17,13 +25,3 @@ function Teaser({fetching, error, article, title, excerpt}) {
     </article>
   );
 }
-
-Teaser.propTypes = {
-  fetching: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  article: PropTypes.string,
-  title: PropTypes.string,
-  excerpt: PropTypes.string
-};
-
-export default Teaser;

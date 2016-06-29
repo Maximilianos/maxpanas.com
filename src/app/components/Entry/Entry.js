@@ -2,7 +2,13 @@ import React, {PropTypes} from 'react';
 
 import './Entry.scss';
 
-function Entry({title, subtitle, children}) {
+
+Entry.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  children: PropTypes.node,
+};
+export default function Entry({title, subtitle, children}) {
   return (
     <article className="entry">
       <header className="entry__header">
@@ -19,11 +25,3 @@ function Entry({title, subtitle, children}) {
     </article>
   );
 }
-
-Entry.propTypes = {
-  title: PropTypes.string,
-  subtitle: PropTypes.string,
-  children: PropTypes.node,
-};
-
-export default Entry;

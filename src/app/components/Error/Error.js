@@ -3,7 +3,13 @@ import NestedStatus from 'react-nested-status';
 import Helmet from 'react-helmet';
 import Entry from '../Entry/Entry';
 
-function Error({code, title, subtitle, children}) {
+Error.propTypes = {
+  code: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  children: PropTypes.node
+};
+export default function Error({code, title, subtitle, children}) {
   return (
     <Entry title={title} subtitle={subtitle}>
       <NestedStatus code={code} />
@@ -12,12 +18,3 @@ function Error({code, title, subtitle, children}) {
     </Entry>
   );
 }
-
-Error.propTypes = {
-  code: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string,
-  children: PropTypes.node
-};
-
-export default Error;

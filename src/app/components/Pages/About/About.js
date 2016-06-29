@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 
 import './About.scss';
 
+
 export default function About() {
   return (
     <main className="about">

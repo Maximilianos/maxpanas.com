@@ -1,6 +1,12 @@
 import React, {PropTypes} from 'react';
 
-function Copy({
+
+Copy.propTypes = {
+  start: PropTypes.number,
+  end: PropTypes.number,
+  sep: PropTypes.string
+};
+export default function Copy({
   start,
   end = (new Date()).getFullYear(),
   sep = ' - '
@@ -12,11 +18,3 @@ function Copy({
     </span>
   );
 }
-
-Copy.propTypes = {
-  start: PropTypes.number,
-  end: PropTypes.number,
-  sep: PropTypes.string
-};
-
-export default Copy;
