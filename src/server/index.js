@@ -8,9 +8,6 @@ if (!process.env.NODE_ENV) {
 require('babel-register');
 require('isomorphic-fetch');
 
-// http://bluebirdjs.com/docs/why-bluebird.html
-global.Promise = require('bluebird');
-
 const rootDir = require('path').resolve(__dirname, '..', '..');
 
 const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
