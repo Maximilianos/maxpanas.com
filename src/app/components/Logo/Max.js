@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 
 import './Max.scss';
 
+
 Max.propTypes = {
   dot: PropTypes.bool
 };

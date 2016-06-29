@@ -16,6 +16,7 @@ const navLinks = [{
   text: 'Contact'
 }];
 
+
 export default function AppHeader() {
   return (
     <header className="app-header">

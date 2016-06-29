@@ -4,7 +4,8 @@ import Copy from './Copy';
 
 import './AppFooter.scss';
 
-function AppFooter() {
+
+export default function AppFooter() {
   return (
     <footer className="app-footer">
       {/* Copyright */}
@@ -12,5 +13,3 @@ function AppFooter() {
     </footer>
   );
 }
-
-export default AppFooter;
