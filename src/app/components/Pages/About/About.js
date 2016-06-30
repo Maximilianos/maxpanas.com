@@ -60,7 +60,7 @@ export default function About() {
           </p>
           <p>
             One thing I have always had, was a knack for tinkering with
-            electronic devices. When I was a kid we had a computer running
+            electronics. When I was a kid we had a computer running
             DOS in my big sister's room, but all I knew how to do on that
             was get into Snake and a really obscure game called Dots that I
             never fully understood how to play.
