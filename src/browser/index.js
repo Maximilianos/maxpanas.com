@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, browserHistory} from 'react-router';
+import {Router, browserHistory, applyRouterMiddleware} from 'react-router';
+import useScroll from 'react-router-scroll';
 import {Provider} from 'react-redux';
 
 import createRoutes from '../app/createRoutes';
@@ -11,9 +12,11 @@ const store = configureStore(initialState);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory}>
-      {createRoutes()}
-    </Router>
+    <Router
+      history={browserHistory}
+      routes={createRoutes()}
+      render={applyRouterMiddleware(useScroll())}
+    />
   </Provider>,
   document.getElementById('root')
 );
