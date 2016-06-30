@@ -9,8 +9,14 @@
   max-width: 1370px;
 
   font-weight: 800;
-  font-size: 67px;
+  font-size: 56px;
   line-height: 1.2;
+
+  @media all and (max-width: 1385px) {
+    margin: 11.55234657039711vw auto 15.88447653429603vw;
+    padding: 0 6.137184115523466vw;
+    font-size: 4.043321299638989vw;
+  }
 }
 
 .home__archive {

@@ -27,7 +27,8 @@ export default function Home({archive}) {
         <p>
           My name is <Max />. I write code for the web. Sometimes
           I share the code that I've written. Sometimes I give talks
-          about code. This is my website. This is where I focus on
+          about code.<br />
+          This is my website. This is where I focus on
           writing about code.
         </p>
       </div>
