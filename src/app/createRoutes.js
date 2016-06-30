@@ -4,6 +4,7 @@ import {Route, IndexRoute} from 'react-router';
 // static components
 import App from './components/App/App';
 import About from './components/Pages/About/About';
+import Contact from './components/Pages/Contact/Contact';
 import NotFound from './components/Pages/NotFound/NotFound';
 
 // dynamic components
@@ -22,6 +23,7 @@ export default function createRoutes() {
     <Route path="/" component={App}>
       <IndexRoute component={Home} />
       <Route path="about" component={About} />
+      <Route path="contact" component={Contact} />
       <Route path=":article" component={Article} />
       <Route path="*" component={NotFound} />
     </Route>
