@@ -56,17 +56,6 @@ export function getArchiveContents(archive) {
 
 /**
  * Parse a response from the
- * GitHub Api into json
- *
- * @returns {Function}
- */
-export function parseJSON() {
-  return response => response.json();
-}
-
-
-/**
- * Parse a response from the
  * GitHub Api into an article
  *
  * @returns {Function}
