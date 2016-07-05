@@ -75,9 +75,8 @@ export default function About() {
 
           </p>
           <p>
-            I love to make things come
-            to life. I sketched using pens or pencils on paper since as far
-            back as I can remember. I
+            I love to make things come to life. I sketched using pens or
+            pencils on paper since as far back as I can remember.
           </p>
         </section>
       </div>
