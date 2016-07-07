@@ -10,12 +10,15 @@ import configureStore from '../app/redux/configureStore';
 const initialState = window.__INITIAL_STATE__; // eslint-disable-line no-underscore-dangle
 const store = configureStore(initialState);
 
+const routes = createRoutes();
+const renderer = applyRouterMiddleware(useScroll());
+
 ReactDOM.render(
   <Provider store={store}>
     <Router
       history={browserHistory}
-      routes={createRoutes()}
-      render={applyRouterMiddleware(useScroll())}
+      routes={routes}
+      render={renderer}
     />
   </Provider>,
   document.getElementById('root')
