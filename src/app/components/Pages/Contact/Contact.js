@@ -1,42 +1,24 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import Entry from '../../Entry/Entry';
-
 import './Contact.scss';
 
 export default function Contact() {
   return (
-    <Entry title="Go ahead, ask me anything">
+    <main className="contact">
       <Helmet
-        title="Contact"
+        title="Get in touch"
         meta={[{
           name: 'description',
-          content: 'Get in touch'
+          content: 'Max Panas is a web developer with six years of experience ' +
+                   'working mostly on the front-end side of the stack.'
         }]}
       />
-
-      <form
-        method="post"
-        action={`localhost:8000/contact/?referer=${encodeURIComponent(' ')}`}
-        onSubmit={event => {
-          event.preventDefault();
-
-
-        }}
-      >
-        <p>
-          <label htmlFor="contact-name">Name</label>
-          <br />
-          <input type="text" id="contact-name" name="name" />
-        </p>
-        <p>
-          <label htmlFor="contact-message">Message</label>
-          <br />
-          <textarea id="contact-message" name="message" />
-        </p>
-      </form>
-
-    </Entry>
+      <h1 className="contact__title">
+        Let's Talk
+      </h1>
+      <section className="contact__details">
+      </section>
+    </main>
   );
 }

@@ -1,0 +1,26 @@
+/* =========================================
+        Contact
+   ========================================= */
+
+@import "../../../theme/typography";
+
+.contact {
+  font-size: 22px;
+  margin: 100px auto;
+  max-width: 1400px;
+
+  p {
+    line-height: 1.5;
+  }
+}
+
+.contact__title {
+  margin: 0 auto 0.5em;
+  max-width: 5em;
+  font-size: 160px;
+  font-family: $t-display;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.05em;
+  line-height: 0.9;
+}
