@@ -29,7 +29,7 @@ export default function Home({archive}) {
           I share the code that I've written. Sometimes I give talks
           about code.<br />
           This is my website. This is where I focus on
-          writing about code.
+          writing <em>about</em> code.
         </p>
       </div>
       <div className="home__archive">

@@ -22,10 +22,15 @@ export default function About() {
         <section className="about__story about__story--bio">
           <h2>Short Story</h2>
           <p>
-            I have been professionally writing code for the web for the past
-            six years. I am currently working as a software engineer at Agile
-            Actors where I work on a hybrid mobile application for Camelot UK
-            built on Cordova, Angular and Ionic.
+            I have been professionally writing code for the web for the past six
+            years. I am currently working as a Software Engineer at Agile Actors
+            where I work on a hybrid mobile application for Camelot UK built on
+            Cordova, Angular and Ionic.
+          </p>
+          <p>
+            I am most proficient on the front end and in node servers but over
+            the years I have developed an intense interest in all things
+            programming.
           </p>
           <p>
             In the last two and half years I have been diving deeper and deeper
@@ -35,9 +40,30 @@ export default function About() {
             JavaScript".
           </p>
           <p>
-            I strongly believe the open source movement is one of the factors
-            that make the industry of web programming great. Over the years
-            I've also produced a number
+            Now and then I get the chance to publish some of my work into the
+            open. The first open source project I ever published was a plugin
+            for WordPress called Media Vault. Later, at Mozaik, a creative
+            agency I worked for, I created a WordPress theme starter that was
+            focused on making our team there as happy and productive as we could
+            possibly be. You can find most of my open source work on my GitHub
+            profile.
+          </p>
+          <p>
+
+          </p>
+
+
+          <p>
+            I have gained an incredible amount from the community that exists
+            around programming and have strived to contribute.
+            Apart from the private projects that I've had the opportunity to
+            work on over the years
+          </p>
+          <p>
+            I strongly believe the open source movement is one of the key
+            factors that make the software industry great. I cannot begin to
+            imagine where I personally would be right now, if I had not had the
+            support of the sharing and caring community that exists
           </p>
         </section>
         <section className="about__story about__story--back-story">
@@ -53,7 +79,7 @@ export default function About() {
             early as middle school and although I was interested in the
             things they did, I could never have imagined that years later I
             would be sitting in front of a big bright screen writing about
-            how it had come to be that I was a professional software
+            how it had come to be that I was now a professional software
             developer. Sure, the signs were there that I might possibly be
             good at this sort of thing, but I definitely did not see them
             then.
