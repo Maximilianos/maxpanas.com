@@ -28,11 +28,6 @@ export default function About() {
             Cordova, Angular and Ionic.
           </p>
           <p>
-            I am most proficient on the front end and in node servers but over
-            the years I have developed an intense interest in all things
-            programming.
-          </p>
-          <p>
             In the last two and half years I have been diving deeper and deeper
             into the world of JavaScript and functional programming. This year I
             gave my first couple of talks at local meet-ups, on topics such as
@@ -47,23 +42,6 @@ export default function About() {
             focused on making our team there as happy and productive as we could
             possibly be. You can find most of my open source work on my GitHub
             profile.
-          </p>
-          <p>
-
-          </p>
-
-
-          <p>
-            I have gained an incredible amount from the community that exists
-            around programming and have strived to contribute.
-            Apart from the private projects that I've had the opportunity to
-            work on over the years
-          </p>
-          <p>
-            I strongly believe the open source movement is one of the key
-            factors that make the software industry great. I cannot begin to
-            imagine where I personally would be right now, if I had not had the
-            support of the sharing and caring community that exists
           </p>
         </section>
         <section className="about__story about__story--back-story">
