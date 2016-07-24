@@ -1,6 +1,12 @@
 import React, {PropTypes} from 'react';
 
-function Html({lang, helmet, bodyHtml, cssFilename}) {
+Html.propTypes = {
+  lang: PropTypes.string.isRequired,
+  helmet: PropTypes.object.isRequired,
+  bodyHtml: PropTypes.string.isRequired,
+  cssFilename: PropTypes.string
+};
+export default function Html({lang, helmet, bodyHtml, cssFilename}) {
   return (
     <html lang={lang}>
       <head>
@@ -17,12 +23,3 @@ function Html({lang, helmet, bodyHtml, cssFilename}) {
     </html>
   );
 }
-
-Html.propTypes = {
-  lang: PropTypes.string.isRequired,
-  helmet: PropTypes.object.isRequired,
-  bodyHtml: PropTypes.string.isRequired,
-  cssFilename: PropTypes.string
-};
-
-export default Html;
