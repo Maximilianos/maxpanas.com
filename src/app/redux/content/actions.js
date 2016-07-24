@@ -92,13 +92,13 @@ async function throwResponseError(response) {
  * @param parseResponse
  * @returns {Function}
  */
-function fetchContent(content, {responseParser: parseResponse = () => response => response}) {
+function fetchContent(content, {responseParser: parseResponse}) {
   return (dispatch, getState) => {
     dispatch(requestPending(content));
 
     return fetch(content)
       .then(throwResponseError)
-      .then(parseResponse(dispatch, getState))
+      .then(parseResponse && parseResponse(dispatch, getState))
       .then(data => dispatch(requestSuccess(content, data)))
       .catch(
         ({code = 500, message = 'Something went wrong'} = {}) =>
@@ -118,12 +118,9 @@ function fetchContent(content, {responseParser: parseResponse = () => response =
  * @returns {boolean}
  */
 function shouldFetchContent({content}, contentID) {
-  return Boolean(
-    typeof content[contentID] === 'undefined'
-    || (
-      content[contentID].fetching === false
-      && content[contentID].error !== false
-    )
+  return typeof content[contentID] === 'undefined' || (
+    content[contentID].fetching === false
+    && content[contentID].error !== false
   );
 }
 
