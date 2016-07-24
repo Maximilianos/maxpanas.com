@@ -44,9 +44,7 @@ function getAppHtml(store, renderProps) {
  */
 function getScriptHtml(state, jsFilename) {
   return `
-    <script>
-      window.__INITIAL_STATE__ = ${serialize(state)};
-    </script>
+    <script>window.__INITIAL_STATE__ = ${serialize(state)}</script>
     <script src="${jsFilename}"></script>
   `;
 }
