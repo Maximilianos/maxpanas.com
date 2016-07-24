@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import connectFetchActions from '../../utils/redux-react-router-fetch/connectFetchActions';
+import connectFetchActions from '../../utils/universal-redux-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
 import {getArchivePath, parseArchive} from '../redux/content/github';
 import Archive from '../components/Articles/Archive/Archive';

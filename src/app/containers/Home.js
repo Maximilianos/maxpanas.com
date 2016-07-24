@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import connectFetchActions, {fetchOnceOnRoute}
-  from '../../utils/redux-react-router-fetch/connectFetchActions';
+  from '../../utils/universal-redux-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
 import {getArchivePath, parseArchive} from '../redux/content/github';
 import Home from '../components/Pages/Home/Home';

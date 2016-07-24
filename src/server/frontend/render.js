@@ -12,7 +12,7 @@ import createRoutes from '../../app/createRoutes';
 import configureStore from '../../app/redux/configureStore';
 
 import runComponentFetchActions
-  from '../../utils/redux-react-router-fetch/runComponentFetchActions';
+  from '../../utils/universal-redux-fetch/runComponentFetchActions';
 
 import Html from './Html';
 

@@ -1,7 +1,10 @@
 import runFetchAction from './runFetchAction';
 
 /**
- *
+ * Run the current route's top level component's fetch
+ * actions to populate the store. Used on the server to
+ * populate the redux store before synchronously
+ * rendering the html
  *
  * @param store
  * @param components
