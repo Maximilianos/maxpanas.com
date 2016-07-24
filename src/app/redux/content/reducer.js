@@ -22,8 +22,8 @@ export default function content(state = {}, {type, contentID, ...payload}) {
       return {
         ...state,
         [contentID]: {
-          error: false,
-          data: false,
+          error: null,
+          data: null,
           ...state[contentID],
           fetching: true
         }
@@ -35,7 +35,7 @@ export default function content(state = {}, {type, contentID, ...payload}) {
         ...state,
         [contentID]: {
           fetching: false,
-          error: false,
+          error: null,
           data: payload.data
         }
       };
@@ -47,7 +47,7 @@ export default function content(state = {}, {type, contentID, ...payload}) {
         [contentID]: {
           fetching: false,
           error: payload.error,
-          data: false
+          data: null
         }
       };
     }

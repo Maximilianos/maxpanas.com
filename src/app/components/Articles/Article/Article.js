@@ -24,7 +24,7 @@ function NoArticleFound() {
 
 Article.propTypes = {
   fetching: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  error: PropTypes.object,
   title: PropTypes.string,
   description: PropTypes.string,
   body: PropTypes.string

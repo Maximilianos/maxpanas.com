@@ -6,8 +6,8 @@ import './Archive.scss';
 
 Archive.propTypes = {
   fetching: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  archive: PropTypes.oneOfType([PropTypes.bool, PropTypes.arrayOf(PropTypes.string)])
+  error: PropTypes.object,
+  archive: PropTypes.arrayOf(PropTypes.string)
 };
 export default function Archive({fetching, error, archive}) {
   let modifier;

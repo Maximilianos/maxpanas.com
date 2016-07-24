@@ -6,7 +6,7 @@ import './Teaser.scss';
 
 Teaser.propTypes = {
   fetching: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  error: PropTypes.object,
   article: PropTypes.string,
   title: PropTypes.string,
   excerpt: PropTypes.string
