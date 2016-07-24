@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
-import connectFetchActions from '../../utils/redux-react-router-fetch/connectFetchActions';
+import connectFetchActions, {fetchOnceOnRoute}
+  from '../../utils/redux-react-router-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
 import {getArchivePath, parseArchive} from '../redux/content/github';
 import Home from '../components/Pages/Home/Home';
@@ -31,27 +32,18 @@ function mapStateToProps() {
  * Create the archive fetching
  * action
  *
- * @param key
- * @param prevKey
  * @returns {function()}
  */
-function fetchArchive({
-  props: {location: {key}},
-  prevProps: {location: {key: prevKey}}
-}) {
-  return dispatch => {
-    if (key !== prevKey) {
-      return dispatch(fetchContentIfNeeded(
-        getArchivePath(archive),
-        {responseParser: parseArchive}
-      ));
-    }
-  };
+function fetchArchive() {
+  return fetchContentIfNeeded(
+    getArchivePath(archive),
+    {responseParser: parseArchive}
+  );
 }
 
 
 export default connect(mapStateToProps)(
-  connectFetchActions(fetchArchive)(
+  connectFetchActions(fetchOnceOnRoute(fetchArchive))(
     Home
   )
 );

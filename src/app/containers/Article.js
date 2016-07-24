@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
-import connectFetchActions from '../../utils/redux-react-router-fetch/connectFetchActions';
+import connectFetchActions, {fetchOnceOnRoute}
+  from '../../utils/redux-react-router-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
 import {getArticlePath, parseArticle} from '../redux/content/github';
 import Article from '../components/Articles/Article/Article';
@@ -36,27 +37,18 @@ function mapStateToProps({content}, {params: {article}}) {
  * action
  *
  * @param article
- * @param key
- * @param prevKey
  * @returns {Function}
  */
-function fetchArticle({
-  props: {location: {key}, params: {article}},
-  prevProps: {location: {key: prevKey}}
-}) {
-  return dispatch => {
-    if (key !== prevKey) {
-      return dispatch(fetchContentIfNeeded(
-        getArticlePath(article),
-        {responseParser: parseArticle}
-      ));
-    }
-  };
+function fetchArticle({props: {params: {article}}}) {
+  return fetchContentIfNeeded(
+    getArticlePath(article),
+    {responseParser: parseArticle}
+  );
 }
 
 
 export default connect(mapStateToProps)(
-  connectFetchActions(fetchArticle)(
+  connectFetchActions(fetchOnceOnRoute(fetchArticle))(
     Article
   )
 );

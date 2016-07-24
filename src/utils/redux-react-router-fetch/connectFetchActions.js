@@ -1,6 +1,34 @@
 import React, {PropTypes, Component} from 'react';
 import runFetchAction from './runFetchAction';
 
+/**
+ * Higher order action to make sure
+ * a given action is not fired more
+ * than once if the current route
+ * has not changed
+ *
+ * @param action
+ * @returns {Function}
+ */
+export function fetchOnceOnRoute(action) {
+  return props => {
+    // 1. Extract the route keys from the current and
+    // previous route locations
+    const {
+      props: {location: {key}},
+      prevProps: {location: {key: prevKey}}
+    } = props;
+
+    return dispatch => {
+      // 2. Only dispatch the given action if the
+      // previous and current route keys are different
+      if (key !== prevKey) {
+        return dispatch(action(props));
+      }
+    };
+  };
+}
+
 
 /**
  * Container decorator used to
