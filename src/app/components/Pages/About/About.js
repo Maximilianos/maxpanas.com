@@ -37,11 +37,11 @@ export default function About() {
           <p>
             Now and then I get the chance to publish some of my work into the
             open. The first open source project I ever published was a plugin
-            for WordPress called Media Vault. Later, at Mozaik, a creative
-            agency I worked for, I created a WordPress theme starter that was
-            focused on making our team there as happy and productive as we could
-            possibly be. You can find most of my open source work on my GitHub
-            profile.
+            for WordPress called Media Vault. Later, at a creative agency I
+            worked for called Mozaik, I created a WordPress theme starter that
+            was focused on making our team there as happy and productive as we
+            could possibly be. You can find most of my open source work on my
+            GitHub profile.
           </p>
         </section>
         <section className="about__story about__story--back-story">

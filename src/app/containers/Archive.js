@@ -34,7 +34,7 @@ function mapStateToProps({content}, {archive}) {
  * action
  *
  * @param archive
- * @returns {function()}
+ * @returns {Function}
  */
 function fetchArchive({props: {archive}}) {
   return dispatch => {
