@@ -23,8 +23,8 @@ gulp.task('clean', () => del('build/*'));
 
 gulp.task('build', ['env'], webpackBuild);
 
-gulp.task('lint', () => gulp
-  .src([
+gulp.task('lint', () =>
+  gulp.src([
     'gulpfile.babel.js',
     'src/**/*.js',
     'webpack/*.js'
