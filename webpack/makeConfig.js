@@ -6,14 +6,11 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
 
 import webpackIsomorphicAssets from './assets';
-import {
-  SRC_DIR,
-  BUILD_DIR,
-  HOT_RELOAD_PORT,
-} from './constants';
+import {SRC_DIR, BUILD_DIR, HOT_RELOAD_PORT} from './constants';
 
 
-const serverIp = ip.address();
+const SERVER_IP = ip.address();
+
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicAssets);
 
 
@@ -39,28 +36,24 @@ export default function makeConfig(isDevelopment) {
      */
     entry: {
       app: (
-        isDevelopment ? [
-          `webpack-hot-middleware/client?path=http://${serverIp}:${HOT_RELOAD_PORT}/__webpack_hmr`,
-          path.join(SRC_DIR, 'browser/index.js')
-        ] : [
-          path.join(SRC_DIR, 'browser/index.js')
-        ]
-      )
+        isDevelopment
+          ? [`webpack-hot-middleware/client?path=http://${SERVER_IP}:${HOT_RELOAD_PORT}/__webpack_hmr`]
+          : []
+      ).concat(path.join(SRC_DIR, 'browser/index.js'))
     },
 
     /**
      * Output
      */
-    output: isDevelopment ? {
-      path: BUILD_DIR,
-      filename: '[name].js',
-      chunkFilename: '[name]-[chunkhash].js',
-      publicPath: `http://${serverIp}:${HOT_RELOAD_PORT}/build/`
-    } : {
+    output: {
       path: BUILD_DIR,
       filename: '[name]-[hash].js',
-      chunkFileName: '[name]-[chunkhash].js',
-      publicPath: '/assets/'
+      chunkFilename: '[name]-[chunkhash].js',
+      publicPath: (
+        isDevelopment
+          ? `http://${SERVER_IP}:${HOT_RELOAD_PORT}/build/`
+          : '/assets/'
+      )
     },
 
     /**
