@@ -9,8 +9,8 @@ export const FETCH_CONTENT_FAILURE = 'FETCH_CONTENT_FAILURE';
  * Notify state that a content
  * request is pending
  *
- * @param contentID
- * @returns {{type: string, content: *}}
+ * @param {string} contentID
+ * @returns {{type: string, contentID: string}}
  */
 function requestPending(contentID) {
   return {
@@ -25,9 +25,9 @@ function requestPending(contentID) {
  * received from a content
  * request
  *
- * @param contentID
- * @param data
- * @returns {{type: string, content: *, data: *}}
+ * @param {string} contentID
+ * @param {*} data
+ * @returns {{type: string, contentID: string, data: *}}
  */
 function requestSuccess(contentID, data) {
   return {
@@ -46,7 +46,7 @@ function requestSuccess(contentID, data) {
  * @param {string} contentID
  * @param {number} code
  * @param {string} message
- * @returns {{type: string, content: *, error: *}}
+ * @returns {{type: string, contentID: string, error: {code: number, message: string}}}
  */
 function requestFailure(contentID, code, message) {
   return {
@@ -65,8 +65,8 @@ function requestFailure(contentID, code, message) {
  * status codes and force throw them as
  * errors. Useful in fetch promise chains
  *
- * @param response
- * @returns {*}
+ * @param {Object} response
+ * @returns {Object}
  */
 async function throwResponseError(response) {
   if (response.status >= 200 && response.status < 300) {
@@ -118,8 +118,8 @@ function fetchContent(contentID, {responseParser}) {
  * been fetched and cached or is in the
  * process of being fetched and cached
  *
- * @param content
- * @param contentID
+ * @param {Object} content
+ * @param {string} contentID
  * @returns {boolean}
  */
 function shouldFetchContent({content}, contentID) {
@@ -134,14 +134,14 @@ function shouldFetchContent({content}, contentID) {
  * Fetch the requested content only if
  * it has not already been fetched
  *
- * @param content
- * @param responseParser
+ * @param {string} contentID
+ * @param {Function} responseParser
  * @returns {Function}
  */
-export function fetchContentIfNeeded(content, {responseParser}) {
+export function fetchContentIfNeeded(contentID, {responseParser}) {
   return (dispatch, getState) => {
-    if (shouldFetchContent(getState(), content)) {
-      return dispatch(fetchContent(content, {responseParser}));
+    if (shouldFetchContent(getState(), contentID)) {
+      return dispatch(fetchContent(contentID, {responseParser}));
     }
   };
 }
