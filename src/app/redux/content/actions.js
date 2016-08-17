@@ -65,10 +65,9 @@ function requestFailure(contentID, code, message) {
  * status codes and force throw them as
  * errors. Useful in fetch promise chains
  *
- * @param {Object} response
- * @returns {Object}
+ * @param {object} response
+ * @returns {object}
  */
-async function throwResponseError(response) {
 function throwResponseError(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -90,8 +89,8 @@ function throwResponseError(response) {
  * accordingly
  *
  * @param {string} contentID
- * @param {Function} responseParser
- * @returns {Function}
+ * @param {function} responseParser
+ * @returns {function}
  */
 function fetchContent(contentID, {responseParser}) {
   return (dispatch, getState) => {
@@ -119,7 +118,7 @@ function fetchContent(contentID, {responseParser}) {
  * been fetched and cached or is in the
  * process of being fetched and cached
  *
- * @param {Object} content
+ * @param {object} content
  * @param {string} contentID
  * @returns {boolean}
  */
@@ -136,8 +135,8 @@ function shouldFetchContent({content}, contentID) {
  * it has not already been fetched
  *
  * @param {string} contentID
- * @param {Function} responseParser
- * @returns {Function}
+ * @param {function} responseParser
+ * @returns {function}
  */
 export function fetchContentIfNeeded(contentID, {responseParser}) {
   return (dispatch, getState) => {
