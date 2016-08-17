@@ -69,6 +69,7 @@ function requestFailure(contentID, code, message) {
  * @returns {Object}
  */
 async function throwResponseError(response) {
+function throwResponseError(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
