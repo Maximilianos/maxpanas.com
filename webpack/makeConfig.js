@@ -60,47 +60,46 @@ export default function makeConfig(isDevelopment) {
      * Loaders
      */
     module: {
-      loaders: [{
+      loaders: [
+        // image loader
+        {
+          test: /\.(gif|jpg|png|svg|ico)$/,
+          loader: 'url?limit=1'
+        },
 
-        // images loaders
-        test: /\.(gif|jpg|png|svg)$/,
-        loader: 'url?limit=1'
-      }, {
-
-        // favicon loaders
-        test: /favicon\.ico$/,
-        loader: 'url?limit=1'
-      }, {
-
-        // font loaders
-        test: /\.(eot|ttf|woff|woff2)$/,
-        loader: 'url?limit=1',
-      }, {
+        // font loader
+        {
+          test: /\.(eot|ttf|woff|woff2)$/,
+          loader: 'url?limit=1',
+        },
 
         // css loaders
-        test: /\.(css|s(c|a)ss)/,
-        loader: (
-          isDevelopment
-            ? 'style!css!postcss!sass'
-            : ExtractTextPlugin.extract('style', 'css!postcss!sass')
-        )
-      }, {
+        {
+          test: /\.(css|scss)/,
+          loader: (
+            isDevelopment
+              ? 'style!css!postcss!sass'
+              : ExtractTextPlugin.extract('style', 'css!postcss!sass')
+          )
+        },
 
-        // javascript loaders
-        test: /\.js$/,
-        loader: 'babel',
-        exclude: /node_modules/,
-        query: {
-          cacheDirectory: true,
-          plugins: ['transform-runtime', 'add-module-exports'],
-          presets: ['es2015', 'react', 'stage-1'],
-          env: {
-            development: {
-              presets: ['react-hmre']
+        // javascript loader
+        {
+          test: /\.js$/,
+          loader: 'babel',
+          exclude: /node_modules/,
+          query: {
+            cacheDirectory: true,
+            plugins: ['transform-runtime', 'add-module-exports'],
+            presets: ['es2015', 'react', 'stage-1'],
+            env: {
+              development: {
+                presets: ['react-hmre']
+              }
             }
           }
         }
-      }]
+      ]
     },
 
     /**
