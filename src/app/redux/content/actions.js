@@ -88,21 +88,26 @@ async function throwResponseError(response) {
  * actions to update the state
  * accordingly
  *
- * @param content
- * @param parseResponse
+ * @param {string} contentID
+ * @param {Function} responseParser
  * @returns {Function}
  */
-function fetchContent(content, {responseParser: parseResponse}) {
+function fetchContent(contentID, {responseParser}) {
   return (dispatch, getState) => {
-    dispatch(requestPending(content));
+    dispatch(requestPending(contentID));
 
-    return fetch(content)
+    return fetch(contentID)
       .then(throwResponseError)
-      .then(parseResponse && parseResponse(dispatch, getState))
-      .then(data => dispatch(requestSuccess(content, data)))
+      .then(
+        typeof responseParser === 'function'
+        && responseParser(dispatch, getState)
+      )
+      .then(data => dispatch(requestSuccess(contentID, data)))
       .catch(
-        ({code = 500, message = 'Something went wrong'} = {}) =>
-          dispatch(requestFailure(content, code, message))
+        ({
+          code = 500,
+          message = 'Something went wrong'
+        } = {}) => dispatch(requestFailure(contentID, code, message))
       );
   };
 }
