@@ -33,7 +33,10 @@ export default function Home({archive}) {
         </p>
       </div>
       <div className="home__archive">
-        <Archive archive={archive} />
+        <Archive
+          title="Latest Articles"
+          archive={archive}
+        />
       </div>
     </main>
   );

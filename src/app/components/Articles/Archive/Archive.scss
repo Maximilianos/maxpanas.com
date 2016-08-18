@@ -2,9 +2,30 @@
     Archive
    ========================================= */
 
+@import "../../../theme/typography";
+@import "../../../theme/colors";
+
 .archive {
   &:not(.archive--list) {
     text-align: center;
+  }
+}
+
+.archive__title {
+  box-sizing: border-box;
+  margin: 0 auto 40px;
+  padding: 0 30px;
+  max-width: 760px;
+
+  color: $c-body-copy;
+  font-family: $t-display;
+  font-size: 25px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+
+  &:after {
+    content: ':';
+    color: $c-brand;
   }
 }
 

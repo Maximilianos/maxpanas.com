@@ -7,9 +7,10 @@ import './Archive.scss';
 Archive.propTypes = {
   fetching: PropTypes.bool,
   error: PropTypes.object,
+  title: PropTypes.string,
   archive: PropTypes.arrayOf(PropTypes.string)
 };
-export default function Archive({fetching, error, archive}) {
+export default function Archive({fetching, error, title, archive}) {
   let modifier;
   let content;
 
@@ -36,8 +37,11 @@ export default function Archive({fetching, error, archive}) {
   }
 
   return (
-    <div className={`archive archive--${modifier}`}>
+    <section className={`archive archive--${modifier}`}>
+      {title && <h2 className="archive__title">
+        {title}
+      </h2>}
       {content}
-    </div>
+    </section>
   );
 }
