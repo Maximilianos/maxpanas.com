@@ -68,7 +68,7 @@ function requestFailure(contentID, code, message) {
  * @param {object} response
  * @returns {object}
  */
-function throwResponseError(response) {
+function validateResponse(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
@@ -96,19 +96,24 @@ function fetchContent(contentID, {responseParser}) {
   return (dispatch, getState) => {
     dispatch(requestPending(contentID));
 
+    const parseResponse = (
+      typeof responseParser === 'function'
+      && responseParser(dispatch, getState)
+    );
+
     return fetch(contentID)
-      .then(throwResponseError)
-      .then(
-        typeof responseParser === 'function'
-        && responseParser(dispatch, getState)
-      )
-      .then(data => dispatch(requestSuccess(contentID, data)))
-      .catch(
-        ({
-          code = 500,
-          message = 'Something went wrong'
-        } = {}) => dispatch(requestFailure(contentID, code, message))
-      );
+      .then(validateResponse)
+      .then(parseResponse)
+      .then(dispatchSuccess)
+      .catch(dispatchFailure);
+
+    function dispatchSuccess(data) {
+      return dispatch(requestSuccess(contentID, data));
+    }
+
+    function dispatchFailure({code = 500, message = 'Something went wrong'}) {
+      return dispatch(requestFailure(contentID, code, message));
+    }
   };
 }
 
