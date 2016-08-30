@@ -13,6 +13,7 @@ import Home from '../components/Pages/Home/Home';
  * @type {string}
  */
 const archive = 'articles';
+const archivePath = getArchivePath(archive);
 
 
 /**
@@ -22,9 +23,7 @@ const archive = 'articles';
  * @returns {{archive}}
  */
 function mapStateToProps() {
-  return {
-    archive
-  };
+  return {archive};
 }
 
 
@@ -35,10 +34,9 @@ function mapStateToProps() {
  * @returns {function()}
  */
 function fetchArchive() {
-  return fetchContentIfNeeded(
-    getArchivePath(archive),
-    {responseParser: parseArchive}
-  );
+  return fetchContentIfNeeded(archivePath, {
+    responseParser: parseArchive
+  });
 }
 
 
