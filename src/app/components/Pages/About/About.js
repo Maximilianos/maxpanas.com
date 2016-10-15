@@ -54,7 +54,7 @@ export default function About() {
         forward to hearing from you!
       </p>
       <section>
-        <h2 className="about__section-title">
+        <h2 id="Open-Source" className="about__section-title">
           Open Source
         </h2>
         <p>
@@ -128,7 +128,7 @@ export default function About() {
         </ul>
       </section>
       <section>
-        <h2 className="about__section-title">
+        <h2 id="Speaking" className="about__section-title">
           Speaking
         </h2>
         <p>
