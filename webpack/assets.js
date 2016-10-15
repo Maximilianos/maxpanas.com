@@ -3,7 +3,7 @@ import * as plugin from 'webpack-isomorphic-tools/plugin';
 export default {
   assets: {
     images: {
-      extensions: ['gif', 'jpg', 'png', 'ico'],
+      extensions: ['gif', 'jpg', 'jpeg', 'png', 'ico'],
       parser: plugin.url_loader_parser
     },
     fonts: {

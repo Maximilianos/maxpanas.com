@@ -63,7 +63,7 @@ export default function makeConfig(isDevelopment) {
       loaders: [
         // image loader
         {
-          test: /\.(gif|jpg|png|svg|ico)$/,
+          test: /\.(gif|jpe?g|png|svg|ico)$/,
           loader: 'url?limit=1'
         },
 
