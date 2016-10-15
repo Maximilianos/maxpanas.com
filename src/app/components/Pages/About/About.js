@@ -1,6 +1,8 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
+import {Link} from 'react-router';
+
 import './About.scss';
 import profilePic from './max.jpeg';
 
@@ -19,40 +21,40 @@ export default function About() {
           )
         }]}
       />
-      <div className="about__text">
-        <img
-          className="about__intro-figure"
-          width="460"
-          height="460"
-          src={profilePic}
-          alt="Max GJ Panas"
-        />
-        <h1>
-          About Me
-        </h1>
-        <p>
-          Hey, my name is Max Panas. I'm {age} years old and I just
-          moved to London from sunny Athens, Greece. I work here as a
-          software engineer at Camelot Global, working to deliver one
-          of their mobile apps.
-        </p>
-        <p>
-          I have been professionally writing code for web and mobile
-          for the past six years. Within the workplace I find great
-          enjoyment in sharing whatever I have learnt, mentoring and
-          getting people to work together. This blog is where I hope
-          to write down some of the moments and thoughts that I find
-          most interesting or useful during my life in software
-          development.
-        </p>
-        <p>
-          If you want to say hi, feel free to drop me a line or hit
-          me up on Twitter where I tweet as @mgjp_. I look forward to
-          hearing from you!
-        </p>
-      </div>
+      <img
+        className="about__intro-figure"
+        width="460"
+        height="460"
+        src={profilePic}
+        alt="Max GJ Panas"
+      />
+      <h1>
+        About Me
+      </h1>
+      <p>
+        Hey, my name is Max Panas. I'm {age} years old and I just
+        moved to London from sunny Athens, Greece. I work here as a
+        software engineer at <a href="http://www.camelotglobal.com/">
+        Camelot Global</a>, working to deliver one of their mobile
+        apps.
+      </p>
+      <p>
+        I have been professionally writing code for web and mobile
+        for the past six years. Within the workplace I find great
+        enjoyment in sharing whatever I have learnt, mentoring and
+        getting people to work together. This blog is where I hope
+        to write down some of the moments and thoughts that I find
+        most interesting or useful during my life in software
+        development.
+      </p>
+      <p>
+        If you want to say hi, feel free to <Link to="contact">drop
+        me a line</Link> or hit me up on Twitter where I tweet
+        as <a href="https://twitter.com/mgjp_">@mgjp_</a>. I look
+        forward to hearing from you!
+      </p>
       <section>
-        <h2>
+        <h2 className="about__section-title">
           Open Source
         </h2>
         <p>
@@ -63,18 +65,29 @@ export default function About() {
           following are a few open source projects that I've had the
           chance to kick off myself:
         </p>
-        <ul>
+        <ul className="about__list about__list--big">
           <li>
-            The Mozaik WP Theme Starter - This is the project I am
-            most proud of. Built for what the rest of the development
-            team and I dreamed our development environment should be
-            able to support and do. This theme starter became the
-            starting point for almost every project within the
-            company and since its release has seen adoption across
-            the globe.
+            <h3 className="about__list-title">
+              <a href="https://github.com/MozaikAgency/wp-theme-starter">
+                The Mozaik WP Theme Starter
+              </a>
+            </h3>
+            <p>
+              This is the project I am most proud of. Built for what
+              the rest of the development team and I dreamed our
+              development environment should be able to support and
+              do. This theme starter became the starting point for
+              almost every project within the company and since its
+              release has seen adoption across the globe.
+            </p>
           </li>
           <li>
-            Media Vault - This is the project I am most ashamed of.
+            <h3 className="about__list-title">
+              <a href="https://wordpress.org/plugins/media-vault/">
+                Media Vault
+              </a>
+            </h3>
+            This is the project I am most ashamed of.
             Not because of code quality or bad reception, but because
             I stopped supporting it. This WordPress plugin to allow
             users to block access to any file they wanted within
@@ -84,12 +97,22 @@ export default function About() {
             support it.
           </li>
           <li>
-            eqheights - Using ES6 and native DOM operations and no
+            <h3 className="about__list-title">
+              <a href="https://github.com/Maximilianos/eqheights">
+                eqheights
+              </a>
+            </h3>
+            Using ES6 and native DOM operations and no
             runtime dependencies to make all elements in a selection the
             same height was fun when implementing this tiny helper.
           </li>
           <li>
-            solve-conversion-path - This one is another fun one. I
+            <h3 className="about__list-title">
+              <a href="https://github.com/Maximilianos/solve-conversion-path">
+                solve-conversion-path
+              </a>
+            </h3>
+            This one is another fun one. I
             wrote it to solve a problem I was having with a color
             manipulation library I was writing at the time. The
             problem was: Given a set of converters, as a human, I
@@ -98,12 +121,14 @@ export default function About() {
             wanted my library to be able to do just that.
           </li>
           <li>
-            and others...
+            <a href="https://github.com/Maximilianos">
+              and others&hellip;
+            </a>
           </li>
         </ul>
       </section>
       <section>
-        <h2>
+        <h2 className="about__section-title">
           Speaking
         </h2>
         <p>
@@ -112,9 +137,11 @@ export default function About() {
           given my first couple of talks now and I am already
           planning to do more in the future. No looking back!
         </p>
-        <ul>
+        <ul className="about__list">
           <li>
-            GreeceJS 2016
+            <a href="https://greecejs.org/">
+              GreeceJS 2016
+            </a>
             <ul>
               <li>
                 GraphQL vs Rest
