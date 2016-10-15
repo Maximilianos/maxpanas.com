@@ -12,6 +12,10 @@
   margin: 0 auto;
   padding: 10px 20px;
   max-width: 1400px;
+
+  @media all and (min-width: 1460px) {
+    padding: 20px;
+  }
 }
 
 .app-header__logo {
