@@ -3,44 +3,39 @@
    ========================================= */
 
 @import "../../../style/theme/typography";
+@import "../../../style/utils/clearfix";
 
 .about {
+  margin: 5em auto 0;
+  padding: 0 20px;
+  max-width: 36em;
+
   font-size: 22px;
-  margin: 100px auto;
-  max-width: 1400px;
+  line-height: 1.5;
+}
 
+.about__text {
+  @include clearfix;
+  margin: -1em;
+
+  figure,
+  li,
   p {
-    line-height: 1.5;
+    margin: 1em;
   }
 }
 
-.about__title {
-  margin: 0 auto 0.5em;
-  max-width: 5em;
-  font-size: 160px;
-  font-family: $t-display;
-  text-transform: uppercase;
-  text-align: center;
-  letter-spacing: 0.05em;
-  line-height: 0.9;
-}
+.about__intro-figure {
+  box-sizing: border-box;
+  float: left;
+  margin-top: -35px;
+  margin-left: -140px;
+  padding: 55px 55px 35px;
+  width: 420px;
+  height: auto;
 
-.about__stories {
-  display: flex;
-}
-
-.about__story {
-  margin-right: 3em;
-  &:first-child {
-    margin-left: 3em;
-  }
-
-  &--bio {
-    flex: 1;
-    text-align: right;
-  }
-
-  &--back-story {
-    flex: 1.1;
+  @supports (shape-outside:circle()) {
+    border-radius: 100%;
+    shape-outside: circle(210px at 70px 165px);
   }
 }

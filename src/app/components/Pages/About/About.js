@@ -2,88 +2,130 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import './About.scss';
+import profilePic from './max.jpeg';
 
 
 export default function About() {
+  const age = (new Date()).getFullYear() - 1988;
   return (
     <main className="about">
       <Helmet
         title="My Story"
         meta={[{
           name: 'description',
-          content: 'Max Panas is a web developer with six years of experience ' +
-                   'working mostly on the front-end side of the stack.'
+          content: (
+            'Max Panas is a web developer with six years of experience ' +
+            'working mostly on the front-end side of the stack.'
+          )
         }]}
       />
-      <h1 className="about__title">
-        My Web Story
-      </h1>
-      <div className="about__stories">
-        <section className="about__story about__story--bio">
-          <h2>Short Story</h2>
-          <p>
-            I have been professionally writing code for the web for the past six
-            years. I am currently working as a Software Engineer at Agile Actors
-            where I work on a hybrid mobile application for Camelot UK built on
-            Cordova, Angular and Ionic.
-          </p>
-          <p>
-            In the last two and half years I have been diving deeper and deeper
-            into the world of JavaScript and functional programming. This year I
-            gave my first couple of talks at local meet-ups, on topics such as
-            "GraphQL vs Rest" and "Why You Need to Understand Modules in
-            JavaScript".
-          </p>
-          <p>
-            Now and then I get the chance to publish some of my work into the
-            open. The first open source project I ever published was a plugin
-            for WordPress called Media Vault. Later, at a creative agency I
-            worked for called Mozaik, I created a WordPress theme starter that
-            was focused on making our team there as happy and productive as we
-            could possibly be. You can find most of my open source work on my
-            GitHub profile.
-          </p>
-        </section>
-        <section className="about__story about__story--back-story">
-          <h2>Long Story</h2>
-          <p>
-            I didn't start coding when I was eight. I do not have a computer
-            science degree. I hadn't even really considered I might become a
-            programmer until about a year after I finished my undergraduate
-            degree in Business Administration and Entrepreneurship.
-          </p>
-          <p>
-            I looked on as some of my friends chose the programmer's path as
-            early as middle school and although I was interested in the
-            things they did, I could never have imagined that years later I
-            would be sitting in front of a big bright screen writing about
-            how it had come to be that I was now a professional software
-            developer. Sure, the signs were there that I might possibly be
-            good at this sort of thing, but I definitely did not see them
-            then.
-          </p>
-          <p>
-            One thing I have always had, was a knack for tinkering with
-            electronics. When I was a kid we had a computer running
-            DOS in my big sister's room, but all I knew how to do on that
-            was get into Snake and a really obscure game called Dots that I
-            never fully understood how to play.
-          </p>
-          <p>
-            The first bit of code I wrote was years later, probably when I
-            was around sixteen. I had been playing a game called Morrowind
-            for about a year and I decided I wanted to mod it. So I
-            downloaded the <em>The Elder Scrolls Construction Set</em>
-
-            <a href="http://wiki.theassimilationlab.com/mmw/Scripting_for_Dummies#Scripting_Tutorial"></a>
-
-          </p>
-          <p>
-            I love to make things come to life. I sketched using pens or
-            pencils on paper since as far back as I can remember.
-          </p>
-        </section>
+      <div className="about__text">
+        <img
+          className="about__intro-figure"
+          width="460"
+          height="460"
+          src={profilePic}
+          alt="Max GJ Panas"
+        />
+        <h1>
+          About Me
+        </h1>
+        <p>
+          Hey, my name is Max Panas. I'm {age} years old and I just
+          moved to London from sunny Athens, Greece. I work here as a
+          software engineer at Camelot Global, working to deliver one
+          of their mobile apps.
+        </p>
+        <p>
+          I have been professionally writing code for web and mobile
+          for the past six years. Within the workplace I find great
+          enjoyment in sharing whatever I have learnt, mentoring and
+          getting people to work together. This blog is where I hope
+          to write down some of the moments and thoughts that I find
+          most interesting or useful during my life in software
+          development.
+        </p>
+        <p>
+          If you want to say hi, feel free to drop me a line or hit
+          me up on Twitter where I tweet as @mgjp_. I look forward to
+          hearing from you!
+        </p>
       </div>
+      <section>
+        <h2>
+          Open Source
+        </h2>
+        <p>
+          I can easily say that open source and the community
+          surrounding it were some of the main reasons I ever got to
+          where I am today and one of the main things that make me
+          really happy and proud to be in software development. The
+          following are a few open source projects that I've had the
+          chance to kick off myself:
+        </p>
+        <ul>
+          <li>
+            The Mozaik WP Theme Starter - This is the project I am
+            most proud of. Built for what the rest of the development
+            team and I dreamed our development environment should be
+            able to support and do. This theme starter became the
+            starting point for almost every project within the
+            company and since its release has seen adoption across
+            the globe.
+          </li>
+          <li>
+            Media Vault - This is the project I am most ashamed of.
+            Not because of code quality or bad reception, but because
+            I stopped supporting it. This WordPress plugin to allow
+            users to block access to any file they wanted within
+            their uploads folder was the first piece of open source I
+            ever released. I am proud of what it does, but have found
+            it incredibly difficult to find the time to go back and
+            support it.
+          </li>
+          <li>
+            eqheights - Using ES6 and native DOM operations and no
+            runtime dependencies to make all elements in a selection the
+            same height was fun when implementing this tiny helper.
+          </li>
+          <li>
+            solve-conversion-path - This one is another fun one. I
+            wrote it to solve a problem I was having with a color
+            manipulation library I was writing at the time. The
+            problem was: Given a set of converters, as a human, I
+            can easily pick out the conversions I would need to run
+            in order to go from one color format to the next and I
+            wanted my library to be able to do just that.
+          </li>
+          <li>
+            and others...
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>
+          Speaking
+        </h2>
+        <p>
+          Speaking has been something I've wanted to do for a long
+          time, but only recently built up the courage to do. I've
+          given my first couple of talks now and I am already
+          planning to do more in the future. No looking back!
+        </p>
+        <ul>
+          <li>
+            GreeceJS 2016
+            <ul>
+              <li>
+                GraphQL vs Rest
+              </li>
+              <li>
+                Why You Need to Understand JavaScript Modules
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
     </main>
   );
 }
