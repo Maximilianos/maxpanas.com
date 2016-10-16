@@ -58,12 +58,12 @@ export default function About() {
           Open Source
         </h2>
         <p>
-          I can easily say that open source and the community
-          surrounding it were some of the main reasons I ever got to
-          where I am today and one of the main things that make me
-          really happy and proud to be in software development. The
-          following are a few open source projects that I've had the
-          chance to kick off myself:
+          I can easily say that the open culture of software development
+          and the community surrounding it were some of the main reasons
+          I ever got to where I am today and one of the main things that
+          make me really happy and proud to be in software development.
+          The following are a few open source projects that I've had the
+          chance to create myself:
         </p>
         <ul className="about__list about__list--big">
           <li>
@@ -102,9 +102,9 @@ export default function About() {
                 eqheights
               </a>
             </h3>
-            Using ES6 and native DOM operations and no
-            runtime dependencies to make all elements in a selection the
-            same height was fun when implementing this tiny helper.
+            Using ES6, native DOM operations and no runtime dependencies
+            to make all elements in a selection the same height was fun
+            when implementing this tiny helper.
           </li>
           <li>
             <h3 className="about__list-title">
@@ -112,13 +112,12 @@ export default function About() {
                 solve-conversion-path
               </a>
             </h3>
-            This one is another fun one. I
-            wrote it to solve a problem I was having with a color
-            manipulation library I was writing at the time. The
-            problem was: Given a set of converters, as a human, I
-            can easily pick out the conversions I would need to run
-            in order to go from one color format to the next and I
-            wanted my library to be able to do just that.
+            This one is another fun one. I wrote it to solve a problem I
+            was having with a color manipulation library I was writing
+            at the time. The problem was: Given a set of converters, as
+            a human, I can easily pick out the conversions I would need
+            to run in order to go from one color format to the next. Why
+            shouldn't my library be able to do that too?
           </li>
           <li>
             <a href="https://github.com/Maximilianos">
