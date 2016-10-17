@@ -18,6 +18,7 @@ export default class Input extends Component {
   };
 
   static defaultProps = {
+    size: 'full',
     type: 'text'
   };
 
