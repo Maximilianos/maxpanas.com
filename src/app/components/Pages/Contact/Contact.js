@@ -1,7 +1,10 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
+import Input from '../../Form/Input';
+
 import './Contact.scss';
+
 
 export default function Contact() {
   return (
@@ -14,11 +17,40 @@ export default function Contact() {
                    'working mostly on the front-end side of the stack.'
         }]}
       />
-      <h1 className="contact__title">
-        Let's Talk
+      <h1>
+        Contact
       </h1>
-      <section className="contact__details">
-      </section>
+      <p>
+        If you'd like to say hi, I'm <a href="https://twitter.com/mgjp_">
+        @mgjp_</a> on Twitter. Of course, you can also shoot me an email
+        at <a href="mailto:m@maxpanas.com">m@maxpanas.com</a> or send me
+        a message using the form below.
+      </p>
+      <p>
+        I look forward to hearing from you!
+      </p>
+      <form method="post">
+        <Input
+          size="half"
+          label="Name"
+          name="name"
+        />
+        <Input
+          size="half"
+          type="email"
+          label="Email"
+          name="email"
+        />
+        <Input
+          type="textarea"
+          label="Message"
+          name="message"
+        />
+        <button>
+          Send Message
+        </button>
+
+      </form>
     </main>
   );
 }

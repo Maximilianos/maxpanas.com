@@ -1,0 +1,45 @@
+/* =========================================
+    Input
+   ========================================= */
+
+@import "../../style/theme/colors";
+
+.input {
+  $input-padding: 3em;
+
+  box-sizing: border-box;
+  position: relative;
+  float: left;
+  margin-top: 2em;
+  width: 100%;
+
+  &--half {
+    width: calc(50% - #{$input-padding / 2});
+    & + & {
+      margin-left: $input-padding;
+    }
+  }
+}
+
+.input__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transition: 0.2s ease-out;
+  transform-origin: left top;
+
+  .input--focused > &,
+  .input:not(.input--empty) > & {
+    transform: scale(0.6) translateY(-100%);
+  }
+}
+
+.input__field {
+  // reset
+  border: none;
+  outline: none;
+
+  border-bottom: 1px solid $c-brand;
+  width: 100%;
+}

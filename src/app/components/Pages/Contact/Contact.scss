@@ -4,25 +4,28 @@
 
 // TODO: Make component out of the shared styles with About.scss
 
-@import "../../../style/theme/typography";
+@import "../../../style/theme/colors";
+@import "../../../style/utils/clearfix";
 
 .contact {
+  @include clearfix;
+
+  margin: 5em auto;
+  padding: 0 20px;
+  max-width: 36em;
+
   font-size: 22px;
-  margin: 100px auto;
-  max-width: 1400px;
+  line-height: 1.5;
 
-  p {
-    line-height: 1.5;
+  p { margin: 0; }
+  p + p { margin-top: 1em; }
+
+  a {
+    color: $c-brand;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
-}
-
-.contact__title {
-  margin: 0 auto 0.5em;
-  max-width: 5em;
-  font-size: 160px;
-  font-family: $t-display;
-  text-transform: uppercase;
-  text-align: center;
-  letter-spacing: 0.05em;
-  line-height: 0.9;
 }
