@@ -36,10 +36,6 @@
   .input:not(.input--empty) > & {
     transform: scale(0.6) translateY(-100%);
   }
-
-  .input--invalid & {
-    // color: $c-brand;
-  }
 }
 
 .input__field {
