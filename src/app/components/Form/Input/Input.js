@@ -38,37 +38,39 @@ export default class Input extends Component {
     };
   }
 
-  validateAsync = value => {
+  validateAsync = async value => {
     let {validators, errorMessage} = this.props;
     if (!validators) {
-      return;
+      return Promise.resolve(true);
     }
 
     if (typeof validators === 'function') {
       validators = {validator: validators};
     }
 
-    Promise
-      .all(Object.values(validators).map(validator => validator(value)))
-      .then(validations => {
-        const valid = validations.every(result => result);
+    const validations = await Promise.all(
+      Object.values(validators).map(validator => validator(value))
+    );
 
-        let error = !valid && errorMessage;
-        if (error && typeof errorMessage === 'function') {
-          const errors = Object.keys(validators)
-            .reduce((results, validation, index) => ({
-              ...results,
-              [validation]: !validations[index]
-            }), {});
+    const valid = validations.every(result => result === true);
 
-          error = errorMessage(errors);
-        }
+    let error = !valid && errorMessage;
+    if (error && typeof errorMessage === 'function') {
+      const errors = Object.keys(validators)
+        .reduce((results, validation, index) => ({
+          ...results,
+          [validation]: !validations[index]
+        }), {});
 
-        this.setState({
-          error,
-          wasInvalid: this.state.wasInvalid || !valid,
-        });
-      });
+      error = errorMessage(errors);
+    }
+
+    this.setState({
+      error,
+      wasInvalid: this.state.wasInvalid || !valid,
+    });
+
+    return valid;
   };
 
   onInputChange = event => {
@@ -96,13 +98,15 @@ export default class Input extends Component {
     }
   }
 
-  componentDidUpdate() {
-    this.refs.inputElement.dataset.valid = !this.state.error;
-  }
+  componentDidMount = this.exposeValidate;
+  componentDidUpdate = this.exposeValidate;
 
-  setInputRef = input => {
-    debugger;
-    this.refs.inputElement = input;
+  exposeValidate = () => {
+    this.inputElement.validateAsync = this.validateAsync.bind(this, this.state.value);
+  };
+
+  setInputRef = label => {
+    this.inputElement = label && label.control;
   };
 
   render() {
@@ -120,7 +124,7 @@ export default class Input extends Component {
       : Input.NativeInput;
 
     return (
-      <label className={classNames}>
+      <label className={classNames} ref={this.setInputRef}>
         {label && (
           <span className="input__label">
             {label}
@@ -130,7 +134,6 @@ export default class Input extends Component {
           type={type}
           value={value}
           className="input__field"
-          ref="inputElement"
           onFocus={this.onInputFocus}
           onChange={this.onInputChange}
           onBlur={this.onInputBlur}
