@@ -1,0 +1,27 @@
+/* =========================================
+    Form
+   ========================================= */
+
+@import "../../style/theme/colors";
+
+.form {
+  margin: 1em 0;
+}
+
+.form__submit {
+  cursor: pointer;
+  margin-top: 0.5em;
+  border: 1px solid $c-brand;
+  border-radius: 5px;
+  padding: 0.25em 0.75em;
+
+  color: $c-brand;
+  background-color: white;
+
+  transition: 0.3s ease;
+
+  &:hover {
+    color: white;
+    background-color: $c-brand;
+  }
+}

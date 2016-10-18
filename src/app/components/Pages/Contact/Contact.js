@@ -1,7 +1,11 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 
-import Input from '../../Form/Input';
+import Form from '../../Form/Form';
+import Input from '../../Form/Input/Input';
+
+import isNotEmpty from '../../Form/validators/isNotEmpty';
+import isEmail from 'validator/lib/isEmail';
 
 import './Contact.scss';
 
@@ -14,7 +18,7 @@ export default function Contact() {
         meta={[{
           name: 'description',
           content: 'Max Panas is a web developer with six years of experience ' +
-                   'working mostly on the front-end side of the stack.'
+          'working mostly on the front-end side of the stack.'
         }]}
       />
       <h1>
@@ -29,28 +33,55 @@ export default function Contact() {
       <p>
         I look forward to hearing from you!
       </p>
-      <form method="post">
-        <Input
-          size="half"
-          label="Name"
-          name="name"
-        />
-        <Input
-          size="half"
-          type="email"
-          label="Email"
-          name="email"
-        />
-        <Input
-          type="textarea"
-          label="Message"
-          name="message"
-        />
-        <button>
-          Send Message
-        </button>
 
-      </form>
+      <Form method="post">
+        {form => (
+          <div>
+
+            <Input
+              required
+              size="half"
+              label="Name"
+              name="name"
+              validate={form.wasSubmitted}
+              validators={isNotEmpty}
+              errorMessage="I need to know who to say hi to"
+            />
+
+            <Input
+              required
+              size="half"
+              type="email"
+              label="Email"
+              name="email"
+              validate={form.wasSubmitted}
+              validators={{isNotEmpty, isEmail}}
+              errorMessage={
+                errors => errors.isNotEmpty
+                  ? 'I need to know where to send my reply'
+                  : 'Sorry, this isn\'t a valid email'
+              }
+            />
+
+            <Input
+              required
+              type="textarea"
+              label="Message"
+              name="message"
+              rows="3"
+              validate={form.wasSubmitted}
+              validators={isNotEmpty}
+              errorMessage="Please, tell me what you would like from me"
+            />
+
+            <button className="form__submit">
+              Send Message
+            </button>
+
+          </div>
+        )}
+      </Form>
+
     </main>
   );
 }

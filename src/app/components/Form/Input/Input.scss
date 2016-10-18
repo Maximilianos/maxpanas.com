@@ -2,7 +2,7 @@
     Input
    ========================================= */
 
-@import "../../style/theme/colors";
+@import "../../../style/theme/colors";
 
 .input {
   $input-padding: 3em;
@@ -10,13 +10,15 @@
   box-sizing: border-box;
   position: relative;
   float: left;
-  margin-top: 2em;
+  padding: 1em 0;
   width: 100%;
 
-  &--half {
-    width: calc(50% - #{$input-padding / 2});
-    & + & {
-      margin-left: $input-padding;
+  @media all and (min-width: 650px) {
+    &--half {
+      width: calc(50% - #{$input-padding / 2});
+      & + & {
+        margin-left: $input-padding;
+      }
     }
   }
 }
@@ -24,7 +26,7 @@
 .input__label {
   pointer-events: none;
   position: absolute;
-  top: 0;
+  top: 1em;
   left: 0;
   z-index: 1;
   transition: 0.2s ease-out;
@@ -34,13 +36,36 @@
   .input:not(.input--empty) > & {
     transform: scale(0.6) translateY(-100%);
   }
+
+  .input--invalid & {
+    // color: $c-brand;
+  }
 }
 
 .input__field {
   // reset
-  border: none;
   outline: none;
+  border: none;
+  padding: 0;
 
+  vertical-align: middle;
   border-bottom: 1px solid $c-brand;
   width: 100%;
+  color: black;
+
+  .input--invalid & {
+    color: $c-brand;
+    border-color: crimson;
+  }
+}
+
+.input__error {
+  pointer-events: none;
+  position: absolute;
+  bottom: 0.2em;
+  left: 0;
+  z-index: 1;
+
+  font-size: 0.6em;
+  color: $c-brand;
 }
