@@ -19,7 +19,7 @@ export default function Html({lang, helmet, bodyHtml, cssFilename}) {
         {cssFilename && <link rel="stylesheet" href={cssFilename} />}
         {helmet.script.toComponent()}
       </head>
-      <body dangerouslySetInnerHTML={{__html: bodyHtml}} />
+      <body className="no-js" dangerouslySetInnerHTML={{__html: bodyHtml}} />
     </html>
   );
 }

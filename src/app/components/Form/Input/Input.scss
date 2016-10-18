@@ -32,6 +32,7 @@
   transition: 0.2s ease-out;
   transform-origin: left top;
 
+  .no-js &,
   .input--focused > &,
   .input:not(.input--empty) > & {
     transform: scale(0.6) translateY(-100%);
