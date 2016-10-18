@@ -15,12 +15,18 @@ export default class Form extends React.Component {
     };
   }
 
-  onSubmit = event => {
+  onSubmit = async event => {
     event.preventDefault();
 
     this.setState({wasSubmitted: true});
 
-    debugger;
+    const validations = Array.from(event.target.elements)
+      .filter(element => !!element.name)
+      .map(element => element.validateAsync());
+
+    const results = await Promise.all(validations);
+
+    console.log(results.every(result => result === true));
   };
 
   render() {
