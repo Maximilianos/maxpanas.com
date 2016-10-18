@@ -18,15 +18,16 @@ export default class Form extends React.Component {
   onSubmit = async event => {
     event.preventDefault();
 
-    this.setState({wasSubmitted: true});
 
     const validations = Array.from(event.target.elements)
-      .filter(element => !!element.name)
+      .filter(element => typeof element.validateAsync === 'function')
       .map(element => element.validateAsync());
 
     const results = await Promise.all(validations);
 
     console.log(results.every(result => result === true));
+
+    this.setState({wasSubmitted: true});
   };
 
   render() {

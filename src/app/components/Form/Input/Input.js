@@ -41,7 +41,7 @@ export default class Input extends Component {
   validateAsync = async value => {
     let {validators, errorMessage} = this.props;
     if (!validators) {
-      return Promise.resolve(true);
+      return true;
     }
 
     if (typeof validators === 'function') {
