@@ -48,7 +48,7 @@ function getScriptHtml(state, jsFilename) {
       document.body.className = 'js';
       window.__INITIAL_STATE__ = ${serialize(state)};
     </script>
-    <script src="${jsFilename}"></script>
+    <script async src="${jsFilename}"></script>
   `;
 }
 
