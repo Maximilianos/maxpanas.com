@@ -34,7 +34,13 @@ export default function Contact() {
         I look forward to hearing from you!
       </p>
 
-      <Form method="post">
+      <Form
+        noValidate
+        method="post"
+        onSubmit={(event, {validations}) => {
+          console.log(validations);
+        }}
+      >
         {form => (
           <div>
 
@@ -56,11 +62,11 @@ export default function Contact() {
               name="email"
               validate={form.wasSubmitted}
               validators={{isNotEmpty, isEmail}}
-              errorMessage={
-                errors => errors.isNotEmpty
-                  ? 'I need to know where to send my reply'
-                  : 'Sorry, this isn\'t a valid email'
-              }
+              errorMessage={({isNotEmpty}) => (
+                isNotEmpty
+                  ? 'Sorry, this isn\'t a valid email'
+                  : 'I need to know where to send my reply'
+              )}
             />
 
             <Input

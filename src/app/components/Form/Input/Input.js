@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import omit from 'object.omit';
 
 import './Input.scss';
 
@@ -23,8 +24,9 @@ export default class Input extends Component {
     return <input {...props} />;
   }
 
-  static NativeTextarea({type, ...props}) {
-    return <textarea {...props} />;
+  static NativeTextarea(props) {
+    const textareaProps = omit(props, 'type');
+    return <textarea {...textareaProps} />;
   }
 
   constructor() {
@@ -38,43 +40,51 @@ export default class Input extends Component {
     };
   }
 
-  validateAsync = async value => {
-    let {validators, errorMessage} = this.props;
+  validateAsync = async (value = this.state.value) => {
+    let {validators} = this.props;
     if (!validators) {
       return true;
     }
 
     if (typeof validators === 'function') {
-      validators = {validator: validators};
+      const validation = validators.name || 'valid';
+      validators = {[validation]: validators};
     }
 
-    const validations = await Promise.all(
-      Object.values(validators).map(validator => validator(value))
-    );
-
-    const valid = validations.every(result => result === true);
-
-    let error = !valid && errorMessage;
-    if (error && typeof errorMessage === 'function') {
-      const errors = Object.keys(validators)
-        .reduce((results, validation, index) => ({
-          ...results,
-          [validation]: !validations[index]
-        }), {});
-
-      error = errorMessage(errors);
-    }
+    const validations = (await Promise.all(
+      Object.entries(validators).map(([validation, validator]) =>
+        Promise.resolve(validator(value)).then(result => ({validation, result}))
+      )
+    )).reduce(({valid, details}, {validation, result}) => ({
+      valid: result && valid,
+      details: {
+        ...details,
+        [validation]: result
+      },
+    }), {valid: true});
 
     this.setState({
-      error,
-      wasInvalid: this.state.wasInvalid || !valid,
+      wasInvalid: this.state.wasInvalid || !validations.valid,
     });
 
-    return valid;
+    this.setErrorMessage(validations);
+
+    return validations;
   };
 
+  setErrorMessage({valid, details}) {
+    const {errorMessage} = this.props;
+    const error = !valid && (
+        typeof errorMessage === 'function'
+          ? errorMessage(details)
+          : errorMessage
+      );
+
+    this.setState({error});
+  }
+
   onInputChange = event => {
-    const value = event.target.value;
+    const {value} = event.target;
 
     this.setState({value});
 
@@ -84,11 +94,17 @@ export default class Input extends Component {
   };
 
   onInputFocus = () => this.setState({focused: true});
-  onInputBlur = event => {
+  onInputBlur = () => {
     this.setState({focused: false});
 
     if (this.props.validate) {
-      this.validateAsync(event.target.value);
+      this.validateAsync();
+    }
+  };
+
+  exposeValidateAsync = label => {
+    if (label) {
+      label.control.validateAsync = this.validateAsync.bind(this, undefined);
     }
   };
 
@@ -98,19 +114,8 @@ export default class Input extends Component {
     }
   }
 
-  componentDidMount = this.exposeValidate;
-  componentDidUpdate = this.exposeValidate;
-
-  exposeValidate = () => {
-    this.inputElement.validateAsync = this.validateAsync.bind(this, this.state.value);
-  };
-
-  setInputRef = label => {
-    this.inputElement = label && label.control;
-  };
-
   render() {
-    const {size, type, label, validate, validators, errorMessages, ...props} = this.props;
+    const {size, type, label, ...props} = this.props;
     const {focused, value, error} = this.state;
 
     let classNames = 'input';
@@ -123,21 +128,28 @@ export default class Input extends Component {
       ? Input.NativeTextarea
       : Input.NativeInput;
 
+    const extraInputProps = omit(props, [
+      'validate', 'validators', 'errorMessages'
+    ]);
+
     return (
-      <label className={classNames} ref={this.setInputRef}>
+      <label
+        className={classNames}
+        ref={this.exposeValidateAsync}
+      >
         {label && (
           <span className="input__label">
             {label}
           </span>
         )}
         <FieldEl
+          {...extraInputProps}
           type={type}
           value={value}
           className="input__field"
           onFocus={this.onInputFocus}
           onChange={this.onInputChange}
           onBlur={this.onInputBlur}
-          {...props}
         />
         {error && (
           <span className="input__error">

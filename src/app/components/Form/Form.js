@@ -2,9 +2,10 @@ import React, {Component, PropTypes} from 'react';
 
 import './Form.scss';
 
-export default class Form extends React.Component {
-  static propType = {
-    children: PropTypes.func
+export default class Form extends Component {
+  static propTypes = {
+    children: PropTypes.func,
+    onSubmit: PropTypes.func
   };
 
   constructor() {
@@ -16,28 +17,44 @@ export default class Form extends React.Component {
   }
 
   onSubmit = async event => {
-    event.preventDefault();
-
-
-    const validations = Array.from(event.target.elements)
-      .filter(element => typeof element.validateAsync === 'function')
-      .map(element => element.validateAsync());
-
-    const results = await Promise.all(validations);
-
-    console.log(results.every(result => result === true));
-
     this.setState({wasSubmitted: true});
+
+    const {onSubmit} = this.props;
+    if (typeof onSubmit === 'function') {
+      event.preventDefault();
+
+      const form = event.target;
+      const inputs = Array.from(form.elements)
+        .filter(input => typeof input.validateAsync === 'function');
+
+      const validations = (await Promise.all(inputs.map(
+        input => input.validateAsync().then(result => ({
+          name: input.name,
+          result
+        }))
+      ))).reduce(({valid, details}, {name, result}) => ({
+        valid: result.valid && valid,
+        details: {
+          ...details,
+          [name]: result
+        }
+      }), {valid: true});
+
+      onSubmit(event, {
+        form,
+        inputs,
+        validations
+      });
+    }
   };
 
   render() {
     const {children, ...props} = this.props;
     return (
       <form
-        noValidate
+        {...props}
         className="form"
         onSubmit={this.onSubmit}
-        {...props}
       >
         {children({
           wasSubmitted: this.state.wasSubmitted
