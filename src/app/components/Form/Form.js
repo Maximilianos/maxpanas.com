@@ -43,7 +43,7 @@ export default class Form extends Component {
       onSubmit(event, {
         form,
         inputs,
-        validations
+        validation
       });
     }
   };
