@@ -27,7 +27,7 @@ export default class Form extends Component {
       const inputs = Array.from(form.elements)
         .filter(input => typeof input.validateAsync === 'function');
 
-      const validations = (await Promise.all(inputs.map(
+      const validation = (await Promise.all(inputs.map(
         input => input.validateAsync().then(result => ({
           name: input.name,
           result
