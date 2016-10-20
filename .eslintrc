@@ -56,7 +56,8 @@
   "settings": {
     "import/ignore": [
       "node_modules",
-      "\\.json$"
+      "\\.json$",
+      "\\.ico$"
     ],
     "import/parser": "babel-eslint",
     "import/resolve": {

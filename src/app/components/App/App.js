@@ -11,7 +11,7 @@ import '../../assets/fonts/avenir/webfonts.css';
 import './base.scss';
 import './App.scss';
 
-import favicon from '../../assets/favicon/favicon.ico'; // eslint-disable-line
+import favicon from '../../assets/favicon/favicon.ico';
 
 
 App.propTypes = {
