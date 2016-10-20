@@ -9,7 +9,7 @@ app.use(compression());
 app.use(favicon('src/app/assets/favicon/favicon.ico'));
 
 // hook up static file serving
-app.use('/assets', express.static('build', {maxAge: '200d'}));
+app.use(express.static('build', {maxAge: '200d'}));
 
 app.get('*', render);
 
