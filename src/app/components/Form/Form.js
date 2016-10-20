@@ -27,15 +27,15 @@ export default class Form extends Component {
       const inputs = Array.from(form.elements)
         .filter(input => typeof input.validateAsync === 'function');
 
-      const validation = (await Promise.all(inputs.map(
+      const formState = (await Promise.all(inputs.map(
         input => input.validateAsync().then(result => ({
           name: input.name,
           result
         }))
-      ))).reduce(({valid, details}, {name, result}) => ({
+      ))).reduce(({valid, elements}, {name, result}) => ({
         valid: result.valid && valid,
-        details: {
-          ...details,
+        elements: {
+          ...elements,
           [name]: result
         }
       }), {valid: true});
@@ -43,7 +43,7 @@ export default class Form extends Component {
       onSubmit(event, {
         form,
         inputs,
-        validation
+        formState
       });
     }
   };

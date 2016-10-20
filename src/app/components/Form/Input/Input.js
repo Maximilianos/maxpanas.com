@@ -43,7 +43,7 @@ export default class Input extends Component {
   validateAsync = async (value = this.state.value) => {
     let {validators} = this.props;
     if (!validators) {
-      return true;
+      return {valid: true};
     }
 
     if (typeof validators === 'function') {
@@ -55,10 +55,11 @@ export default class Input extends Component {
       Object.entries(validators).map(([validation, validator]) =>
         Promise.resolve(validator(value)).then(result => ({validation, result}))
       )
-    )).reduce(({valid, details}, {validation, result}) => ({
+    )).reduce(({valid, validations}, {validation, result}) => ({
+      value,
       valid: result && valid,
-      details: {
-        ...details,
+      validations: {
+        ...validations,
         [validation]: result
       },
     }), {valid: true});
@@ -72,11 +73,11 @@ export default class Input extends Component {
     return validations;
   };
 
-  setErrorMessage({valid, details}) {
+  setErrorMessage({valid, validations}) {
     const {errorMessage} = this.props;
     const error = !valid && (
         typeof errorMessage === 'function'
-          ? errorMessage(details)
+          ? errorMessage(validations)
           : errorMessage
       );
 

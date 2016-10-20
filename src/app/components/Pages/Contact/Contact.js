@@ -37,8 +37,8 @@ export default function Contact() {
       <Form
         noValidate
         method="post"
-        onSubmit={(event, {validation}) => {
-          console.log(validation);
+        onSubmit={async (event, {formState}) => {
+          console.log(formState);
         }}
       >
         {form => (
