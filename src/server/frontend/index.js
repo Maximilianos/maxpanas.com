@@ -1,11 +1,9 @@
 import express from 'express';
-import compression from 'compression';
 import favicon from 'serve-favicon';
 import render from './render';
 
 const app = express();
 
-app.use(compression());
 app.use(favicon('src/app/assets/favicon/favicon.ico'));
 
 // hook up static file serving
