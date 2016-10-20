@@ -73,6 +73,7 @@
     "isomorphic-fetch": "2.2.1",
     "js-base64": "2.1.9",
     "marked": "0.3.5",
+    "morgan": "1.7.0",
     "nodemon": "1.9.2",
     "normalize.css": "4.2.0",
     "object.omit": "2.0.0",
