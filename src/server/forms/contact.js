@@ -4,7 +4,6 @@
  *
  * @param req
  * @param res
- * @param next
  */
 export default function contactFormHandler(req, res) {
   res.json({
