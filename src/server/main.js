@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import compression from 'compression';
 
+import forms from './forms';
 import frontend from './frontend';
 import errorHandler from './errors/errorHandler';
 
@@ -17,6 +18,7 @@ app.use(compression());
 
 // app handlers
 app.use(frontend);
+app.use('/api/forms', forms);
 app.use(errorHandler);
 
 app.listen(port, () => {

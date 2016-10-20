@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import fetch from 'isomorphic-fetch';
 
 import Form from '../../Form/Form';
 import Input from '../../Form/Input/Input';
@@ -39,6 +40,22 @@ export default function Contact() {
         method="post"
         onSubmit={async (event, {formState}) => {
           console.log(formState);
+          if (!formState.valid) {
+            return;
+          }
+
+          try {
+            const response = await fetch('api/forms/contact', {
+              method: 'POST'
+            });
+
+            const json = await response.json();
+
+            console.log(json);
+
+          } catch (error) {
+            console.error(error);
+          }
         }}
       >
         {form => (
