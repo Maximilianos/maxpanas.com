@@ -22,8 +22,8 @@ export default function content(state = {}, {type, contentID, ...payload}) {
       return {
         ...state,
         [contentID]: {
-          error: null,
-          data: null,
+          error: undefined,
+          data: undefined,
           ...state[contentID],
           fetching: true
         }
@@ -35,7 +35,7 @@ export default function content(state = {}, {type, contentID, ...payload}) {
         ...state,
         [contentID]: {
           fetching: false,
-          error: null,
+          error: undefined,
           data: payload.data
         }
       };
@@ -47,7 +47,7 @@ export default function content(state = {}, {type, contentID, ...payload}) {
         [contentID]: {
           fetching: false,
           error: payload.error,
-          data: null
+          data: undefined
         }
       };
     }
