@@ -40,13 +40,23 @@ export default function Contact() {
         method="post"
         onSubmit={async (event, {formState}) => {
           console.log(formState);
-          if (!formState.valid) {
-            return;
-          }
+
+          // if (!formState.valid) {
+          //  return;
+          // }
 
           try {
+            const formData = Object.keys(formState.elements).reduce((data, key) => ({
+              ...data,
+              [key]: formState.elements[key].value
+            }), {});
+
+            console.log(formData);
+
             const response = await fetch('api/forms/contact', {
-              method: 'POST'
+              method: 'POST',
+              headers: new Headers({'Content-Type': 'application/json'}),
+              body: JSON.stringify(formData)
             });
 
             const json = await response.json();
