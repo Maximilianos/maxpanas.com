@@ -1,13 +1,13 @@
 # editor stuff
-.idea
+/.idea
 
 # build stuff
-node_modules
-npm-debug.log
-webpack-assets.json
-build
+/node_modules/
+/npm-debug.log
+/webpack-assets.json
+/build/
 
-src/app/assets/fonts/avenir/
-src/app/assets/fonts/filson-pro/
 # private stuff
 /secrets.json
+/src/app/assets/fonts/avenir/
+/src/app/assets/fonts/filson-pro/
