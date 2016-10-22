@@ -102,7 +102,7 @@ export default class Input extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.validate && !this.props.validate) {
-      this.validateAsync(this.state.value);
+      this.validateAsync();
     }
   }
 
