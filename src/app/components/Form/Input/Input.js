@@ -49,7 +49,7 @@ export default class Input extends Component {
     }
 
     if (typeof validators === 'function') {
-      const validation = validators.name || 'valid';
+      const validation = validators.name || 'isValid';
       validators = {[validation]: validators};
     }
 
