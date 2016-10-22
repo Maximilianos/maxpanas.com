@@ -2,11 +2,11 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import fetch from 'isomorphic-fetch';
 
+import isEmail from 'validator/lib/isEmail';
+import isNotEmpty from '../../../../utils/validator/validators/isNotEmpty';
+
 import Form from '../../Form/Form';
 import Input from '../../Form/Input/Input';
-
-import isNotEmpty from '../../Form/validators/isNotEmpty';
-import isEmail from 'validator/lib/isEmail';
 
 import './Contact.scss';
 

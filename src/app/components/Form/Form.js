@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
+import getValidationResults from '../../../utils/validator/getValidationResults';
+
 import './Form.scss';
 
 export default class Form extends Component {
@@ -24,26 +26,19 @@ export default class Form extends Component {
       event.preventDefault();
 
       const form = event.target;
+
       const inputs = Array.from(form.elements)
         .filter(input => typeof input.validateAsync === 'function');
 
-      const formState = (await Promise.all(inputs.map(
-        input => input.validateAsync().then(result => ({
-          name: input.name,
-          result
-        }))
-      ))).reduce(({valid, elements}, {name, result}) => ({
-        valid: result.valid && valid,
-        elements: {
-          ...elements,
-          [name]: result
-        }
-      }), {valid: true});
+      const validations = inputs.map(async ({name, validateAsync}) => ({
+        field: name,
+        result: await validateAsync()
+      }));
 
       onSubmit(event, {
         form,
         inputs,
-        formState
+        formState: await getValidationResults(validations)
       });
     }
   };

@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import omit from 'object.omit';
 
+import validateValue from '../../../../utils/validator/validateValue';
+
 import './Input.scss';
 
 
@@ -51,18 +53,7 @@ export default class Input extends Component {
       validators = {[validation]: validators};
     }
 
-    const validations = (await Promise.all(
-      Object.entries(validators).map(([validation, validator]) =>
-        Promise.resolve(validator(value)).then(result => ({validation, result}))
-      )
-    )).reduce(({valid, validations}, {validation, result}) => ({
-      value,
-      valid: result && valid,
-      validations: {
-        ...validations,
-        [validation]: result
-      },
-    }), {valid: true});
+    const validations = await validateValue(validators, value);
 
     this.setState({
       wasInvalid: this.state.wasInvalid || !validations.valid,
