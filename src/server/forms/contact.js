@@ -24,6 +24,22 @@ const schema = {
  */
 export default async function contactFormHandler(req, res) {
   const formData = req.body;
+  const formFields = Object.keys(formData);
+  const ruleEntries = Object.entries(schema);
+
+  if (
+    formFields.length !== ruleEntries.length
+    || !formFields.every(field => schema.hasOwnProperty(field))
+  ) {
+    res.status(400).json({
+      error: {
+        code: 'INCORRECT',
+        message: 'The submission was missing data or contained invalid fields'
+      }
+    });
+
+    return;
+  }
 
   const validationResult = await validateData(schema, formData);
 
