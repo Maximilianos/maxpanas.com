@@ -1,27 +1,6 @@
-import isEmpty from 'validator/lib/isEmpty';
 import isEmail from 'validator/lib/isEmail';
-
-function isNotEmpty(str) {
-  return !isEmpty(str);
-}
-
-async function validateAsync(rules, value) {
-  const validationResults = await Promise.all(
-    Object.entries(rules).map(([validation, validator]) =>
-      Promise.resolve(validator(value)).then(result => ({validation, result}))
-    )
-  );
-
-  return validationResults
-    .reduce(({valid, validations}, {validation, result}) => ({
-      value,
-      valid: result && valid,
-      validations: {
-        ...validations,
-        [validation]: result
-      }
-    }), {valid: true});
-}
+import isNotEmpty from '../../utils/validator/validators/isNotEmpty';
+import validateData from '../../utils/validator/validateData';
 
 const schema = {
   name: {
@@ -46,23 +25,10 @@ const schema = {
 export default async function contactFormHandler(req, res) {
   const formData = req.body;
 
-  const validationData = (await Promise.all(
-    Object.entries(schema).map(([field, rules]) =>
-      validateAsync(rules, formData[field]).then(validation => ({
-        field,
-        validation
-      }))
-    )
-  )).reduce(({valid, elements}, {field, validation}) => ({
-    valid: valid && validation.valid,
-    elements: {
-      ...elements,
-      [field]: validation,
-    }
-  }), {valid: true});
+  const validationResult = await validateData(schema, formData);
 
-  if (!validationData.valid) {
-    const errorDetails = Object.entries(validationData.elements)
+  if (!validationResult.valid) {
+    const errorDetails = Object.entries(validationResult.elements)
       .reduce((result, [field, {valid, validations}]) => ({
         ...result,
         [field]: {valid, validations}
