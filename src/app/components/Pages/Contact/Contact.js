@@ -46,10 +46,8 @@ export default function Contact() {
           // }
 
           try {
-            const formData = Object.keys(formState.elements).reduce((data, key) => ({
-              ...data,
-              [key]: formState.elements[key].value
-            }), {});
+            const formData = Object.entries(formState.elements)
+              .reduce((data, [field, {value}]) => ({...data, [field]: value}), {});
 
             console.log(formData);
 
