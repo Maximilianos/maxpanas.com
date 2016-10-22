@@ -130,7 +130,7 @@ function fetchContent(contentID, {responseParser}) {
 function shouldFetchContent({content}, contentID) {
   return typeof content[contentID] === 'undefined' || (
     content[contentID].fetching === false
-    && content[contentID].error !== null
+    && content[contentID].error !== undefined
   );
 }
 
