@@ -7,6 +7,7 @@ npm-debug.log
 webpack-assets.json
 build
 
-# private fonts
 src/app/assets/fonts/avenir/
 src/app/assets/fonts/filson-pro/
+# private stuff
+/secrets.json
