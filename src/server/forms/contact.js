@@ -41,7 +41,7 @@ export default async function contactFormHandler(req, res) {
       res.status(400).json({
         error: {
           code: 'INCORRECT',
-          message: 'The submission was missing data or contained invalid fields.'
+          summary: 'The submission was missing data or contained invalid fields.'
         }
       });
 
