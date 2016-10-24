@@ -68,7 +68,6 @@ export default async function contactFormHandler(req, res) {
       return;
     }
 
-    /*
     nodemailer.createTransport({
       service: secrets.mail.service,
       auth: {
@@ -95,14 +94,6 @@ export default async function contactFormHandler(req, res) {
 
       console.log(info);
       res.json({success: true});
-    });
-    */
-
-    res.status(500).json({
-      error: {
-        code: 'MAIL_ERROR',
-        summary: 'There was an error sending your email, please try again.'
-      }
     });
 
   } catch (error) {
