@@ -26,8 +26,6 @@ const schema = {
  * @param res
  */
 export default async function contactFormHandler(req, res) {
-  await new Promise(resolve => setTimeout(resolve, 3000));
-
   try {
     const formData = req.body;
 
@@ -79,9 +77,8 @@ export default async function contactFormHandler(req, res) {
       to: secrets.mail.to,
       subject: `maxpanas.com - ${formData.name} has a message for ya!`,
       text: formData.message
-    }, (error, info) => {
+    }, (error) => {
       if (error) {
-        console.log(error);
         res.status(500).json({
           error: {
             code: 'MAIL_ERROR',
@@ -92,12 +89,10 @@ export default async function contactFormHandler(req, res) {
         return;
       }
 
-      console.log(info);
       res.json({success: true});
     });
 
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       error: {
         code: 'GENERIC_ERROR',
