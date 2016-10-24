@@ -61,7 +61,7 @@ export default class ContactForm extends Component {
 
         this.setState({
           sending: false,
-          message: 'Your message was sent! Thank you for your message!'
+          message: '✓ Your message was sent! Thank you for your message!'
         });
       } else {
         this.setState({
