@@ -1,12 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import fetch from 'isomorphic-fetch';
 
-import isEmail from 'validator/lib/isEmail';
-import isNotEmpty from '../../../../utils/validator/validators/isNotEmpty';
-
-import Form from '../../Form/Form';
-import Input from '../../Form/Input/Input';
+import ContactForm from './ContactForm';
 
 import './Contact.scss';
 
@@ -22,6 +17,7 @@ export default function Contact() {
           'working mostly on the front-end side of the stack.'
         }]}
       />
+
       <h1>
         Contact
       </h1>
@@ -35,83 +31,7 @@ export default function Contact() {
         I look forward to hearing from you!
       </p>
 
-      <Form
-        noValidate
-        method="post"
-        onSubmit={async (event, {formState}) => {
-          console.log(formState);
-
-          // if (!formState.valid) {
-          //  return;
-          // }
-
-          try {
-            const formData = Object.entries(formState.elements)
-              .reduce((data, [field, {value}]) => ({...data, [field]: value}), {});
-
-            console.log(formData);
-
-            const response = await fetch('api/forms/contact', {
-              method: 'POST',
-              headers: new Headers({'Content-Type': 'application/json'}),
-              body: JSON.stringify(formData)
-            });
-
-            const json = await response.json();
-
-            console.log(json);
-
-          } catch (error) {
-            console.error(error);
-          }
-        }}
-      >
-        {form => (
-          <div>
-
-            <Input
-              required
-              size="half"
-              label="Name"
-              name="name"
-              validate={form.wasSubmitted}
-              validators={isNotEmpty}
-              errorMessage="I need to know who to say hi to"
-            />
-
-            <Input
-              required
-              size="half"
-              type="email"
-              label="Email"
-              name="email"
-              validate={form.wasSubmitted}
-              validators={{isNotEmpty, isEmail}}
-              errorMessage={({isNotEmpty}) => (
-                isNotEmpty
-                  ? 'Sorry, this isn\'t a valid email'
-                  : 'I need to know where to send my reply'
-              )}
-            />
-
-            <Input
-              required
-              type="textarea"
-              label="Message"
-              name="message"
-              rows="3"
-              validate={form.wasSubmitted}
-              validators={isNotEmpty}
-              errorMessage="Please, tell me what you would like from me"
-            />
-
-            <button className="form__submit">
-              Send Message
-            </button>
-
-          </div>
-        )}
-      </Form>
+      <ContactForm />
 
     </main>
   );

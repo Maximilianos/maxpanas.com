@@ -6,41 +6,32 @@ import './Form.scss';
 
 export default class Form extends Component {
   static propTypes = {
-    children: PropTypes.func,
+    children: PropTypes.node,
     onSubmit: PropTypes.func
   };
 
-  constructor() {
-    super();
-
-    this.state = {
-      wasSubmitted: false
-    };
-  }
-
   onSubmit = async event => {
-    this.setState({wasSubmitted: true});
-
-    const {onSubmit} = this.props;
-    if (typeof onSubmit === 'function') {
-      event.preventDefault();
-
-      const form = event.target;
-
-      const inputs = Array.from(form.elements)
-        .filter(input => typeof input.validateAsync === 'function');
-
-      const validations = inputs.map(async ({name, validateAsync}) => ({
-        field: name,
-        result: await validateAsync()
-      }));
-
-      onSubmit(event, {
-        form,
-        inputs,
-        formState: await getValidationResults(validations)
-      });
+    if (typeof this.props.onSubmit !== 'function') {
+      return;
     }
+
+    const form = event.target;
+
+    const inputs = Array.from(form.elements)
+      .filter(input => typeof input.validateAsync === 'function');
+
+    this.props.onSubmit(event, {
+      form,
+      inputs,
+      async getFormState() {
+        const validations = inputs.map(async ({name, validateAsync}) => ({
+          field: name,
+          result: await validateAsync()
+        }));
+
+        return await getValidationResults(validations);
+      }
+    });
   };
 
   render() {
@@ -51,9 +42,7 @@ export default class Form extends Component {
         className="form"
         onSubmit={this.onSubmit}
       >
-        {children({
-          wasSubmitted: this.state.wasSubmitted
-        })}
+        {children}
       </form>
     );
   }

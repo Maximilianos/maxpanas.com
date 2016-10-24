@@ -52,7 +52,7 @@
 
   .input--invalid & {
     color: $c-brand;
-    border-color: crimson;
+    border-color: $c-error;
   }
 }
 

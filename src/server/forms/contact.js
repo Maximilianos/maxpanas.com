@@ -26,6 +26,8 @@ const schema = {
  * @param res
  */
 export default async function contactFormHandler(req, res) {
+  await new Promise(resolve => setTimeout(resolve, 3000));
+
   try {
     const formData = req.body;
 
@@ -39,7 +41,7 @@ export default async function contactFormHandler(req, res) {
       res.status(400).json({
         error: {
           code: 'INCORRECT',
-          message: 'The submission was missing data or contained invalid fields'
+          message: 'The submission was missing data or contained invalid fields.'
         }
       });
 
@@ -58,7 +60,7 @@ export default async function contactFormHandler(req, res) {
       res.status(400).json({
         error: {
           code: 'INVALID',
-          summary: 'The data provided was invalid',
+          summary: 'The data provided was invalid.',
           details: errorDetails
         }
       });
@@ -66,6 +68,7 @@ export default async function contactFormHandler(req, res) {
       return;
     }
 
+    /*
     nodemailer.createTransport({
       service: secrets.mail.service,
       auth: {
@@ -83,7 +86,7 @@ export default async function contactFormHandler(req, res) {
         res.status(500).json({
           error: {
             code: 'MAIL_ERROR',
-            summary: 'There was an error sending your email'
+            summary: 'There was an error sending your email, please try again.'
           }
         });
 
@@ -93,13 +96,21 @@ export default async function contactFormHandler(req, res) {
       console.log(info);
       res.json({success: true});
     });
+    */
+
+    res.status(500).json({
+      error: {
+        code: 'MAIL_ERROR',
+        summary: 'There was an error sending your email, please try again.'
+      }
+    });
 
   } catch (error) {
     console.log(error);
     res.status(500).json({
       error: {
         code: 'GENERIC_ERROR',
-        summary: 'There was an error processing your request'
+        summary: 'There was an error processing your request.'
       }
     });
   }

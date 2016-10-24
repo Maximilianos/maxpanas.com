@@ -42,6 +42,14 @@ export default class Input extends Component {
     };
   }
 
+  reset = () => {
+    this.setState({
+      value: '',
+      error: false,
+      wasInvalid: false
+    });
+  };
+
   validateAsync = async (value = this.state.value) => {
     let {validators} = this.props;
     if (!validators) {
@@ -94,9 +102,12 @@ export default class Input extends Component {
     }
   };
 
-  exposeValidateAsync = label => {
+  // TODO: This is pretty clearly not the react way...
+  exposePublicMethods = label => {
     if (label) {
-      label.control.validateAsync = this.validateAsync.bind(this, undefined);
+      const inputElement = label.control;
+      inputElement.validateAsync = this.validateAsync.bind(this, undefined);
+      inputElement.reset = this.reset;
     }
   };
 
@@ -127,7 +138,7 @@ export default class Input extends Component {
     return (
       <label
         className={classNames}
-        ref={this.exposeValidateAsync}
+        ref={this.exposePublicMethods}
       >
         {label && (
           <span className="input__label">

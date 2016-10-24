@@ -6,6 +6,7 @@ import contact from './contact';
 const app = express();
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 app.post('/contact', contact);
 
