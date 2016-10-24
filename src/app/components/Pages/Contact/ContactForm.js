@@ -79,6 +79,16 @@ export default class ContactForm extends Component {
     }
   };
 
+  onFormInputFocus = () => {
+    if (
+      this.state.submittedOnce
+      && !this.state.sending
+      && !this.state.error
+    ) {
+      this.setState({message: ''});
+    }
+  };
+
   render() {
     const {sending, message, error, submittedOnce} = this.state;
     return (
@@ -87,6 +97,7 @@ export default class ContactForm extends Component {
         method="post"
         action="api/forms/contact"
         onSubmit={this.onSubmit}
+        onFocus={this.onFormInputFocus}
       >
         <Input
           required
