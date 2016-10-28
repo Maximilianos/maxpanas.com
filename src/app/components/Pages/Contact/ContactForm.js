@@ -99,6 +99,7 @@ export default class ContactForm extends Component {
         onSubmit={this.onSubmit}
         onFocus={this.onFormInputFocus}
       >
+
         <Input
           required
           size="half"
