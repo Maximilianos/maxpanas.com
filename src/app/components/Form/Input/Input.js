@@ -31,8 +31,8 @@ export default class Input extends Component {
     return <textarea {...textareaProps} />;
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       focused: false,
@@ -52,9 +52,6 @@ export default class Input extends Component {
 
   validateAsync = async (value = this.state.value) => {
     let {validators} = this.props;
-    if (!validators) {
-      return {valid: true};
-    }
 
     if (typeof validators === 'function') {
       const validation = validators.name || 'isValid';
