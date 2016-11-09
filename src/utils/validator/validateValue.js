@@ -22,5 +22,9 @@ export default async function validateValue(rules, value) {
       ...validations,
       [validation]: result
     }
-  }), {valid: true});
+  }), {
+    value,
+    valid: true,
+    validations: {}
+  });
 }
