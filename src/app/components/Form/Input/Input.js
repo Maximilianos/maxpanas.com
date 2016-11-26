@@ -1,162 +1,83 @@
-import React, {Component, PropTypes} from 'react';
+import React, {PropTypes} from 'react';
 import omit from 'object.omit';
-
-import validateValue from '../../../../utils/validator/validateValue';
 
 import './Input.scss';
 
+function NativeInput(props) {
+  return <input {...props} />;
+}
 
-export default class Input extends Component {
-  static propTypes = {
-    size: PropTypes.oneOf(['full', 'half']),
-    type: PropTypes.string,
-    label: PropTypes.string,
-    validate: PropTypes.bool,
-    validators: PropTypes.oneOfType([PropTypes.func, PropTypes.objectOf(PropTypes.func)]),
-    errorMessage: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-  };
+function NativeTextarea(props) {
+  const textareaProps = omit(props, 'type');
+  return <textarea {...textareaProps} />;
+}
 
-  static defaultProps = {
-    size: 'full',
-    type: 'text',
-    validate: true
-  };
-
-  static NativeInput(props) {
-    return <input {...props} />;
-  }
-
-  static NativeTextarea(props) {
-    const textareaProps = omit(props, 'type');
-    return <textarea {...textareaProps} />;
-  }
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      focused: false,
-      value: '',
-      error: false,
-      wasInvalid: false
-    };
-  }
-
-  reset = () => {
-    this.setState({
-      value: '',
-      error: false,
-      wasInvalid: false
-    });
-  };
-
-  validateAsync = async (value = this.state.value) => {
-    let {validators} = this.props;
-
-    if (typeof validators === 'function') {
-      const validation = validators.name || 'isValid';
-      validators = {[validation]: validators};
-    }
-
-    const validations = await validateValue(validators, value);
-
-    this.setState({
-      wasInvalid: this.state.wasInvalid || !validations.valid,
-    });
-
-    this.setErrorMessage(validations);
-
-    return validations;
-  };
-
-  setErrorMessage({valid, validations}) {
-    const {errorMessage} = this.props;
-    const error = !valid && (
-        typeof errorMessage === 'function'
-          ? errorMessage(validations)
-          : errorMessage
-      );
-
-    this.setState({error});
-  }
-
-  onInputChange = event => {
-    const {value} = event.target;
-
-    this.setState({value});
-
-    if (this.props.validate && this.state.wasInvalid) {
-      this.validateAsync(value);
-    }
-  };
-
-  onInputFocus = () => this.setState({focused: true});
-  onInputBlur = () => {
-    this.setState({focused: false});
-
-    if (this.props.validate) {
-      this.validateAsync();
-    }
-  };
-
-  // TODO: This is pretty clearly not the react way...
-  exposePublicMethods = label => {
-    if (label) {
-      const inputElement = label.control;
-      inputElement.validateAsync = this.validateAsync.bind(this, undefined);
-      inputElement.reset = this.reset;
-    }
-  };
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.validate && !this.props.validate) {
-      this.validateAsync();
-    }
-  }
-
-  render() {
-    const {size, type, label, ...props} = this.props;
-    const {focused, value, error} = this.state;
-
-    let classNames = 'input';
-    if (error) classNames += ' input--invalid';
-    if (focused) classNames += ' input--focused';
-    if (value === '') classNames += ' input--empty';
-    if (size === 'half') classNames += ' input--half';
-
-    const FieldEl = type === 'textarea'
-      ? Input.NativeTextarea
-      : Input.NativeInput;
-
-    const extraInputProps = omit(props, [
-      'validate', 'validators', 'errorMessages'
-    ]);
-
-    return (
-      <label
-        className={classNames}
-        ref={this.exposePublicMethods}
-      >
-        {label && (
-          <span className="input__label">
-            {label}
-          </span>
-        )}
-        <FieldEl
-          {...extraInputProps}
-          type={type}
-          value={value}
-          className="input__field"
-          onFocus={this.onInputFocus}
-          onChange={this.onInputChange}
-          onBlur={this.onInputBlur}
-        />
-        {error && (
-          <span className="input__error">
-            {error}
-          </span>
-        )}
-      </label>
+Input.propTypes = {
+  type: PropTypes.string,
+  value: PropTypes.string,
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  size: PropTypes.oneOf(['full', 'half']),
+  label: PropTypes.string,
+  focused: PropTypes.bool,
+  valid: PropTypes.bool,
+  validations: PropTypes.objectOf(PropTypes.bool),
+  errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  onMount: PropTypes.func,
+  onFocus: PropTypes.func,
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+};
+export default function Input({
+  type = 'text',
+  value = '',
+  focused = false,
+  label = false,
+  size = 'full',
+  valid,
+  validations,
+  errorMessage,
+  onFocus,
+  onChange,
+  onBlur,
+  ...props
+}) {
+  const error = valid === false && (
+      typeof errorMessage === 'function'
+        ? errorMessage(validations)
+        : errorMessage
     );
-  }
+
+  const FieldEl = type === 'textarea'
+    ? NativeTextarea
+    : NativeInput;
+
+  let classNames = 'input';
+  if (error) classNames += ' input--invalid';
+  if (focused) classNames += ' input--focused';
+  if (value === '') classNames += ' input--empty';
+  if (size === 'half') classNames += ' input--half';
+
+  return (
+    <label className={classNames}>
+      {label && (
+        <span className="input__label">
+          {label}
+        </span>
+      )}
+      <FieldEl
+        {...props}
+        className="input__field"
+        type={type}
+        value={value}
+        onFocus={onFocus}
+        onChange={onChange}
+        onBlur={onBlur}
+      />
+      {error && (
+        <span className="input__error">
+          {error}
+        </span>
+      )}
+    </label>
+  );
 }
