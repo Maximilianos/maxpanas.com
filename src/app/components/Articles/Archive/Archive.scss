@@ -14,19 +14,28 @@
 
 .archive__title {
   box-sizing: border-box;
-  margin: 0 auto 40px;
-  padding: 0 30px;
+  margin: 0 auto 1em;
+  padding: 0 20px;
   max-width: 760px;
 
   color: $c-body-copy;
   font-family: $t-display;
-  font-size: 25px;
+  font-size: 15px;
   text-transform: uppercase;
   letter-spacing: 3px;
 
   &:after {
     content: ':';
     color: $c-brand;
+  }
+
+  @media all and (min-width: 425px) {
+    font-size: 18px;
+  }
+
+  @media all and (min-width: 670px) {
+    margin: 0 auto 40px;
+    font-size: 25px;
   }
 }
 

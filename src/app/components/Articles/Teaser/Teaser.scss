@@ -7,17 +7,22 @@
 .teaser {
   margin: 0 auto 30px;
   max-width: 760px;
+
+  font-size: 18px;
+
+  @media all and (min-width: 670px) {
+    font-size: 24px;
+  }
 }
 
 .teaser__link {
   display: block;
-  border-radius: 3px;
-  padding: 20px 30px;
+  padding: 20px;
 
   color: inherit;
   text-decoration: none;
 
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: 0.3s ease-in-out;
 
   &:hover {
@@ -25,15 +30,29 @@
     background-color: $c-brand;
     box-shadow: 2px 2px 6px rgba($c-brand, 0.4);
   }
+
+  @media all and (min-width: 760px) {
+    border-radius: 3px;
+    padding: 20px 30px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .teaser__title {
-  margin: 0 0 25px;
+  margin: 0 0 0.5em;
   text-transform: uppercase;
-  font-size: 42px;
+  font-size: 25px;
   font-weight: 800;
+
+  @media all and (min-width: 670px) {
+    font-size: 42px;
+  }
 }
 
 .teaser__excerpt {
-  font-size: 24px;
+  font-size: 18px;
+
+  @media all and (min-width: 670px) {
+    font-size: 24px;
+  }
 }

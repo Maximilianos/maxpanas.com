@@ -52,15 +52,27 @@ $center-header: $b-tablet;
 }
 
 .app-header__nav-list {
-  @include list--inline;
+  @include list--no;
+
+  display: flex;
+  justify-content: space-between;
+
   margin: 10px 0;
+
+  @media all and (min-width: 350px) {
+    display: block;
+  }
+}
+
+.app-header__nav-item {
+  display: inline-block;
 }
 
 .app-header__nav-link {
   display: block;
-  padding: 0.5em 1em;
+  padding: 0.5em 20px;
   font-family: $t-display;
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
