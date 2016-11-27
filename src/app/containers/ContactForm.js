@@ -7,12 +7,12 @@ import ContactForm from '../components/Pages/Contact/ContactForm';
 
 
 /**
+ * Validate the form's data on the client side
  *
- *
- * @param name
- * @param email
- * @param message
- * @returns {{}}
+ * @param {string} name
+ * @param {string} email
+ * @param {string} message
+ * @returns {object}
  */
 function validate({name, email, message}) {
   const errors = {};
@@ -31,6 +31,7 @@ function validate({name, email, message}) {
     errors.message = 'Please, tell me what you would like from me';
   }
 
+  // display a form-level error if any of the validations above failed
   if (Object.keys(errors).length) {
     errors._error = 'Please, fill in the form correctly.'; // eslint-disable-line
   }
@@ -40,9 +41,9 @@ function validate({name, email, message}) {
 
 
 /**
+ * Handle the contact form submission on the client side
  *
- *
- * @param values
+ * @param {object} values
  */
 async function onSubmit(values) {
   let json;
@@ -84,7 +85,7 @@ async function onSubmit(values) {
 FormMessageProvider.propTypes = {
   submitSucceeded: PropTypes.bool,
   submitFailed: PropTypes.bool,
-  error: PropTypes.error
+  error: PropTypes.string
 };
 function FormMessageProvider(props) {
   const {submitSucceeded, submitFailed, error} = props;
