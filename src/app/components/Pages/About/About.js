@@ -26,7 +26,7 @@ export default function About() {
         width="460"
         height="460"
         src={profilePic}
-        alt="Max GJ Panas"
+        alt="A pic of me, Max GJ Panas"
       />
       <h1>
         About Me
