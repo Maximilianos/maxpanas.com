@@ -13,13 +13,26 @@ function NativeTextarea(props) {
 }
 
 Input.propTypes = {
-
+  size: PropTypes.string,
+  type: PropTypes.string,
+  showError: PropTypes.bool,
+  label: PropTypes.string,
+  input: PropTypes.shape({
+    value: PropTypes.string,
+    onFocus: PropTypes.func,
+    onChange: PropTypes.func,
+    onBlur: PropTypes.func
+  }),
+  meta: PropTypes.shape({
+    active: PropTypes.bool,
+    error: PropTypes.string
+  })
 };
 export default function Input({
-  type = 'text',
-  label = false,
   size = 'full',
+  type = 'text',
   showError = true,
+  label,
   input: {
     value = '',
     onFocus,

@@ -57,7 +57,8 @@
     "import/ignore": [
       "node_modules",
       "\\.json$",
-      "\\.ico$"
+      "\\.ico$",
+      "\\.jpe?g$"
     ],
     "import/parser": "babel-eslint",
     "import/resolve": {
