@@ -2,17 +2,20 @@
     About
    ========================================= */
 
+// TODO: Make component out of the shared styles with Contact.scss
+
 @import "../../../style/theme/colors";
+@import "../../../style/theme/breakpoints";
 @import "../../../style/utils/clearfix";
 
 .about {
   @include clearfix;
 
-  margin: 5em auto;
+  margin: 3vw auto;
   padding: 0 20px;
   max-width: 36em;
 
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.5;
 
   p { margin: 0; }
@@ -26,20 +29,46 @@
       text-decoration: underline;
     }
   }
+
+  @media all and (min-width: $b-tablet) {
+    margin: 5em auto;
+    font-size: 22px;
+  }
 }
 
 .about__intro-figure {
   box-sizing: border-box;
-  float: left;
-  margin-top: -35px;
-  margin-left: -140px;
-  padding: 55px 55px 35px;
-  width: 420px;
+  display: table;
+  margin: 0 auto;
+  border-radius: 100%;
+  width: 40vw;
   height: auto;
 
-  @supports (shape-outside:circle()) {
-    border-radius: 100%;
-    shape-outside: circle(210px at 70px 165px);
+  @media all and (min-width: 390px) {
+    float: left;
+    border-radius: 0;
+    margin-top: -5.2vw;
+    margin-left: -21vw;
+    padding: 8.5vw 8.5vw 5.5vw;
+    width: 63vw;
+    height: auto;
+
+    @supports (shape-outside:circle()) {
+      border-radius: 100%;
+      shape-outside: circle(30vw at 12vw 25vw);
+    }
+  }
+
+  @media all and (min-width: $b-tablet) {
+    margin-top: -35px;
+    margin-left: -140px;
+    padding: 55px 55px 35px;
+    width: 420px;
+    height: auto;
+
+    @supports (shape-outside:circle()) {
+      shape-outside: circle(210px at 70px 165px);
+    }
   }
 }
 
@@ -47,8 +76,16 @@
   margin: 1.5em 0 0.75em;
 }
 
+// TODO: move about__list styles to a reusable mixin?
 .about__list {
-  ul { margin-top: 0.5em; }
+  $indent: 1.1em;
+
+  padding-left: $indent;
+
+  ul { // nested lists
+    margin-top: 0.5em;
+    padding-left: $indent;
+  }
 
   li { margin: 0; }
   li + li { margin-top: 0.5em; }

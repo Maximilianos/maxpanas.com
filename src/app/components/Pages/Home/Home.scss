@@ -2,15 +2,23 @@
     Home
    ========================================= */
 
-.home__hero {
-  box-sizing: border-box;
-  margin: 160px auto 220px;
-  padding: 0 85px;
-  max-width: 1370px;
+@import "../../../style/theme/breakpoints";
 
-  font-weight: 800;
-  font-size: 56px;
-  line-height: 1.2;
+.home__hero {
+  // hero hidden on mobile
+  display: none;
+
+  @media all and (min-width: $b-tablet) {
+    display: block;
+    box-sizing: border-box;
+    margin: 160px auto 220px;
+    padding: 0 85px;
+    max-width: 1370px;
+
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 1.2;
+  }
 
   @media all and (max-width: 1385px) {
     margin: 11.55234657039711vw auto 15.88447653429603vw;
@@ -20,5 +28,9 @@
 }
 
 .home__archive {
-  margin: 150px 0;
+  margin: 5vw 0;
+
+  @media all and (min-width: $b-tablet) {
+    margin: 150px 0;
+  }
 }
