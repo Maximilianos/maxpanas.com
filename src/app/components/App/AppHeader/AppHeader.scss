@@ -4,9 +4,10 @@
 
 @import "../../../style/theme/colors";
 @import "../../../style/theme/typography";
+@import "../../../style/theme/breakpoints";
 
 $mini-header: 425px;
-$center-header: 670px;
+$center-header: $b-tablet;
 
 .app-header {
   margin: 0 auto;
