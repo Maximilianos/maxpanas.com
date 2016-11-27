@@ -56,7 +56,8 @@ const mapDispatchToProps = form => (dispatch, {name, validators}) => {
   }
 };
 
-export default connect()(class InputProvider extends Component {
+
+class InputProvider extends Component {
   static contextTypes = {
     form: PropTypes.string.isRequired
   };
@@ -68,4 +69,9 @@ export default connect()(class InputProvider extends Component {
       mapDispatchToProps(form)
     )(Input), this.props);
   }
-});
+}
+
+
+export default connect(
+  null, null
+)(InputProvider);
