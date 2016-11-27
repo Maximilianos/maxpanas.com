@@ -7,11 +7,10 @@ Form.propTypes = {
   action: PropTypes.string,
   onSubmit: PropTypes.func
 };
-export default function Form({onSubmit, ...props}) {
+export default function Form(props) {
   return (
     <form
       {...props}
-      onSubmit={onSubmit}
       className="form"
     />
   );

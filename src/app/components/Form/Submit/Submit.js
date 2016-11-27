@@ -21,7 +21,7 @@ export default function Submit({sending, error, message}) {
         {sending ? 'Sending' : 'Send'} Message
       </button>
       <div className="submit__message">
-        {message || (sending && <Loader />)}
+        {(sending && <Loader />) || message}
       </div>
     </div>
   );

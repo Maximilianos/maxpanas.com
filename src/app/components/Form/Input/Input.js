@@ -13,47 +13,32 @@ function NativeTextarea(props) {
 }
 
 Input.propTypes = {
-  type: PropTypes.string,
-  value: PropTypes.string,
-  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  size: PropTypes.oneOf(['full', 'half']),
-  label: PropTypes.string,
-  focused: PropTypes.bool,
-  valid: PropTypes.bool,
-  validations: PropTypes.objectOf(PropTypes.bool),
-  errorMessage: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  onMount: PropTypes.func,
-  onFocus: PropTypes.func,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
+
 };
 export default function Input({
   type = 'text',
-  value = '',
-  focused = false,
   label = false,
   size = 'full',
-  valid,
-  validations,
-  errorMessage,
-  onFocus,
-  onChange,
-  onBlur,
+  showError = true,
+  input: {
+    value = '',
+    onFocus,
+    onChange,
+    onBlur,
+  },
+  meta: {
+    active = false,
+    error
+  },
   ...props
 }) {
-  const error = valid === false && (
-      typeof errorMessage === 'function'
-        ? errorMessage(validations)
-        : errorMessage
-    );
-
   const FieldEl = type === 'textarea'
     ? NativeTextarea
     : NativeInput;
 
   let classNames = 'input';
-  if (error) classNames += ' input--invalid';
-  if (focused) classNames += ' input--focused';
+  if (error && showError) classNames += ' input--invalid';
+  if (active) classNames += ' input--focused';
   if (value === '') classNames += ' input--empty';
   if (size === 'half') classNames += ' input--half';
 
@@ -73,7 +58,7 @@ export default function Input({
         onChange={onChange}
         onBlur={onBlur}
       />
-      {error && (
+      {error && showError && (
         <span className="input__error">
           {error}
         </span>
