@@ -5,13 +5,24 @@
 @import "../../../style/theme/colors";
 @import "../../../style/theme/typography";
 
+$mini-header: 425px;
+$center-header: 670px;
+
 .app-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   margin: 0 auto;
-  padding: 10px 20px;
+  padding: 10px 0;
   max-width: 1400px;
+  text-align: center;
+
+  @media all and (min-width: $mini-header) {
+    padding: 10px 20px;
+  }
+
+  @media all and (min-width: $center-header) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
   @media all and (min-width: 1460px) {
     padding: 20px;
@@ -19,15 +30,29 @@
 }
 
 .app-header__logo {
-  margin: 0;
+  margin: 10px 0 13px;
+
+  @media all and (min-width: $center-header) {
+    margin: 0;
+  }
 }
 
 .app-header__logo-link {
   &, abbr[title] {
     border: none;
-    font-size: 72px;
+    font-size: 52px;
     text-decoration: none;
+
+    @media all and (min-width: $mini-header) {
+      font-size: 72px;
+    }
   }
+}
+
+.app-header__nav-list {
+  margin: 10px 0;
+  padding: 0;
+  list-style: none;
 }
 
 .app-header__nav-item {
@@ -36,9 +61,9 @@
 
 .app-header__nav-link {
   display: block;
-  padding: 10px 20px;
+  padding: 0.5em 1em;
   font-family: $t-display;
-  font-size: 20px;
+  font-size: 16px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
@@ -48,5 +73,9 @@
 
   &:hover {
     color: $c-body-copy;
+  }
+
+  @media all and (min-width: $mini-header) {
+    font-size: 20px;
   }
 }
