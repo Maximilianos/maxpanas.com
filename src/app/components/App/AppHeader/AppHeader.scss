@@ -5,6 +5,7 @@
 @import "../../../style/theme/colors";
 @import "../../../style/theme/typography";
 @import "../../../style/theme/breakpoints";
+@import "../../../style/utils/list";
 
 $mini-header: 425px;
 $center-header: $b-tablet;
@@ -51,13 +52,8 @@ $center-header: $b-tablet;
 }
 
 .app-header__nav-list {
+  @include list--inline;
   margin: 10px 0;
-  padding: 0;
-  list-style: none;
-}
-
-.app-header__nav-item {
-  display: inline-block;
 }
 
 .app-header__nav-link {

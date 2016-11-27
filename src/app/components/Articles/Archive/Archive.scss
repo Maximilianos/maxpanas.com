@@ -2,8 +2,9 @@
     Archive
    ========================================= */
 
-@import "../../../style/theme/typography";
 @import "../../../style/theme/colors";
+@import "../../../style/theme/typography";
+@import "../../../style/utils/list";
 
 .archive {
   &:not(.archive--list) {
@@ -30,7 +31,5 @@
 }
 
 .archive__list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  @include list--no;
 }
