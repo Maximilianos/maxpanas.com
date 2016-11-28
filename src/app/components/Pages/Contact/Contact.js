@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import myYearsExperience from '../../../../utils/myYearsExperience';
 
 import ContactForm from '../../../containers/ContactForm';
 
@@ -7,14 +8,18 @@ import './Contact.scss';
 
 
 export default function Contact() {
+  const exp = myYearsExperience();
+
   return (
     <main className="contact">
       <Helmet
         title="Get in touch"
         meta={[{
           name: 'description',
-          content: 'Max Panas is a web developer with six years of experience ' +
-          'working mostly on the front-end side of the stack.'
+          content: (
+            `Max Panas is a web developer with ${exp} years of experience ` +
+            'working mostly on the front-end side of the stack.'
+          )
         }]}
       />
 

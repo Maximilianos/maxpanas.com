@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import myYearsExperience from '../../../../utils/myYearsExperience';
 
 import {Link} from 'react-router';
 
@@ -9,6 +10,8 @@ import profilePic from './max.jpeg';
 
 export default function About() {
   const age = (new Date()).getFullYear() - 1988;
+  const exp = myYearsExperience();
+
   return (
     <main className="about">
       <Helmet
@@ -16,7 +19,7 @@ export default function About() {
         meta={[{
           name: 'description',
           content: (
-            'Max Panas is a web developer with six years of experience ' +
+            `Max Panas is a web developer with ${exp} years of experience ` +
             'working mostly on the front-end side of the stack.'
           )
         }]}
@@ -40,7 +43,7 @@ export default function About() {
       </p>
       <p>
         I have been professionally writing code for web and mobile
-        for the past six years. Within the workplace I find great
+        for the past {exp} years. Within the workplace I find great
         enjoyment in sharing whatever I have learnt, mentoring and
         getting people to work together. This blog is where I hope
         to write down some of the moments and thoughts that I find
