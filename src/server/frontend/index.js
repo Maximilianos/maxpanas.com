@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 
 // middleware and request handlers
 import createStore from './createStore';
+import contact from './formHandlers/contact';
 import render from './render';
 
 const app = express();
@@ -18,6 +19,14 @@ app.use(createStore);
 
 // serve the frontend of the app
 app.get('*', render);
+
+// handle a contact form submission
+app.post(
+  '/contact',
+  bodyParser.urlencoded({extended: false}),
+  contact,
+  render
+);
 
 app.on('mount', () => {
   console.log('App is available at %s', app.mountpath);
