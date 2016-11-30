@@ -14,7 +14,7 @@ import ContactForm from '../components/Pages/Contact/ContactForm';
  * @param {string} message
  * @returns {object}
  */
-function validate({name, email, message}) {
+export function validate({name, email, message} = {}) {
   const errors = {};
 
   if (!name) {
@@ -44,19 +44,21 @@ function validate({name, email, message}) {
  * Handle the contact form submission on the client side
  *
  * @param {object} values
+ * @param {function} dispatch
+ * @param {object} props
+ * @param {string} urlBase
  */
-async function onSubmit(values) {
+export async function onSubmit(values, dispatch, props, urlBase = '') {
   let json;
 
   try {
-    const response = await fetch('api/forms/contact', {
+    const response = await fetch(`${urlBase}api/forms/contact`, {
       method: 'POST',
       headers: new Headers({'Content-Type': 'application/json'}),
       body: JSON.stringify(values)
     });
 
     json = await response.json();
-
   } catch (error) {
     throw new SubmissionError({
       _error: 'There was a problem submitting your form. Please, try again.'
