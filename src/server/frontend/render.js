@@ -9,7 +9,6 @@ import NestedStatus from 'react-nested-status';
 
 import * as config from '../config';
 import createRoutes from '../../app/createRoutes';
-import configureStore from '../../app/redux/configureStore';
 
 import runComponentFetchActions
   from '../../utils/universal-redux-fetch/runComponentFetchActions';
@@ -94,15 +93,19 @@ function renderPage(store, renderProps) {
  * Handle requests to the frontend
  * and send responses appropriately
  *
- * @param req
+ * @param url
+ * @param store
  * @param res
  * @param next
  */
-export default function render(req, res, next) {
-  const store = configureStore();
+export default function render({url, store}, res, next) {
+  if (!store) {
+    next(new Error('The redux store was not initialized before rendering was attempted.'));
+    return;
+  }
 
   const routes = createRoutes();
-  const location = createMemoryHistory().createLocation(req.url);
+  const location = createMemoryHistory().createLocation(url);
 
   match({routes, location}, async (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
