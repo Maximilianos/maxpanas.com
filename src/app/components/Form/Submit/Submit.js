@@ -6,22 +6,22 @@ import './Submit.scss';
 
 
 Submit.propTypes = {
-  sending: PropTypes.bool,
-  error: PropTypes.bool,
-  message: PropTypes.string
+  submitting: PropTypes.bool,
+  submitFailed: PropTypes.bool,
+  formMessage: PropTypes.string
 };
-export default function Submit({sending, error, message}) {
+export default function Submit({submitting, submitFailed, formMessage}) {
   let classNames = 'submit';
-  if (error) classNames += ' submit--error';
-  if (sending) classNames += ' submit--sending';
+  if (submitFailed) classNames += ' submit--error';
+  if (submitting) classNames += ' submit--sending';
 
   return (
     <div className={classNames}>
-      <button className="submit__button" disabled={sending}>
-        {sending ? 'Sending' : 'Send'} Message
+      <button className="submit__button" disabled={submitting}>
+        {submitting ? 'Sending' : 'Send'} Message
       </button>
       <div className="submit__message">
-        {(sending && <Loader />) || message}
+        {(submitting && <Loader />) || formMessage}
       </div>
     </div>
   );

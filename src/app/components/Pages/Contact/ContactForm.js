@@ -51,9 +51,9 @@ export default function ContactForm({
       />
 
       <Submit
-        sending={submitting}
-        error={submitFailed}
-        message={formMessage}
+        submitting={submitting}
+        submitFailed={submitFailed}
+        formMessage={formMessage}
       />
 
     </Form>
