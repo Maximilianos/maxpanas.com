@@ -56,26 +56,28 @@ export default function Input({
   if (size === 'half') classNames += ' input--half';
 
   return (
-    <label className={classNames}>
-      {label && (
-        <span className="input__label">
-          {label}
-        </span>
-      )}
-      <FieldEl
-        {...props}
-        className="input__field"
-        type={type}
-        value={value}
-        onFocus={onFocus}
-        onChange={onChange}
-        onBlur={onBlur}
-      />
-      {error && showError && (
-        <span className="input__error">
-          {error}
-        </span>
-      )}
-    </label>
+    <div className={classNames}>
+      <label>
+        {label && (
+          <div className="input__label">
+            {label}
+          </div>
+        )}
+        <FieldEl
+          {...props}
+          className="input__field"
+          type={type}
+          value={value}
+          onFocus={onFocus}
+          onChange={onChange}
+          onBlur={onBlur}
+        />
+        {error && showError && (
+          <span className="input__error">
+            {error}
+          </span>
+        )}
+      </label>
+    </div>
   );
 }
