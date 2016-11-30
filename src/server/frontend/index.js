@@ -7,6 +7,8 @@ import createStore from './createStore';
 import contact from './forms/contact';
 import render from './render';
 
+const urlDecode = bodyParser.urlencoded({extended: false});
+
 const app = express();
 
 app.use(favicon('src/app/assets/favicon/favicon.ico'));
@@ -21,12 +23,7 @@ app.use(createStore);
 app.get('*', render);
 
 // handle a no-js contact form submission
-app.post(
-  '/contact',
-  bodyParser.urlencoded({extended: false}),
-  contact,
-  render
-);
+app.post('/contact', urlDecode, contact, render);
 
 app.on('mount', () => {
   console.log('App is available at %s', app.mountpath);

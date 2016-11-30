@@ -6,16 +6,9 @@ import validateData from '../../../utils/validator/validateData';
 import secrets from '../../../../secrets.json';
 
 const schema = {
-  name: {
-    isNotEmpty
-  },
-  email: {
-    isNotEmpty,
-    isEmail
-  },
-  message: {
-    isNotEmpty
-  }
+  name: {isNotEmpty},
+  email: {isNotEmpty, isEmail},
+  message: {isNotEmpty}
 };
 
 /**
