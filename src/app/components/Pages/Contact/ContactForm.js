@@ -19,10 +19,7 @@ export default function ContactForm({
   formMessage
 }) {
   return (
-    <Form
-      noValidate
-      onSubmit={handleSubmit}
-    >
+    <Form onSubmit={handleSubmit}>
 
       <Field
         required
