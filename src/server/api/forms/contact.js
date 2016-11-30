@@ -1,9 +1,9 @@
 import nodemailer from 'nodemailer';
 import isEmail from 'validator/lib/isEmail';
-import isNotEmpty from '../../utils/validator/validators/isNotEmpty';
-import validateData from '../../utils/validator/validateData';
+import isNotEmpty from '../../../utils/validator/validators/isNotEmpty';
+import validateData from '../../../utils/validator/validateData';
 
-import secrets from '../../../secrets.json';
+import secrets from '../../../../secrets.json';
 
 const schema = {
   name: {
