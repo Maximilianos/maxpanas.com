@@ -2,9 +2,10 @@ import express from 'express';
 import morgan from 'morgan';
 import compression from 'compression';
 
-import forms from './forms';
-import frontend from './frontend';
 import errorHandler from './errors/errorHandler';
+import frontend from './frontend';
+
+import forms from './api/forms';
 
 import {port} from './config';
 
