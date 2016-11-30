@@ -6,6 +6,15 @@ import fetch from 'isomorphic-fetch';
 import ContactForm from '../components/Pages/Contact/ContactForm';
 
 
+const formMessages = {
+  success: '✓ Your message was sent! Thank you, I will try to get back to you as soon as possible!',
+  error: {
+    invalid: 'Please, fill in the form correctly.',
+    generic: 'There was a problem submitting your form. Please, try again.'
+  }
+};
+
+
 /**
  * Validate the form's data on the client side
  *
@@ -33,7 +42,7 @@ export function validate({name, email, message} = {}) {
 
   // display a form-level error if any of the validations above failed
   if (Object.keys(errors).length) {
-    errors._error = 'Please, fill in the form correctly.'; // eslint-disable-line
+    errors._error = formMessages.error.invalid; // eslint-disable-line no-underscore-dangle
   }
 
   return errors;
@@ -61,7 +70,7 @@ export async function onSubmit(values, dispatch, props, urlBase = '') {
     json = await response.json();
   } catch (error) {
     throw new SubmissionError({
-      _error: 'There was a problem submitting your form. Please, try again.'
+      _error: formMessages.error.generic
     });
   }
 
@@ -74,12 +83,12 @@ export async function onSubmit(values, dispatch, props, urlBase = '') {
   if (code === 'INVALID') {
     throw new SubmissionError({
       ...details,
-      _error: 'Please, fill in the form correctly.'
+      _error: formMessages.error.invalid
     });
   }
 
   throw new SubmissionError({
-    _error: 'There was a problem submitting your form. Please, try again.'
+    _error: formMessages.error.generic
   });
 }
 
@@ -92,7 +101,7 @@ FormMessageProvider.propTypes = {
 function FormMessageProvider(props) {
   const {submitSucceeded, submitFailed, error} = props;
   const formMessage = (
-    (submitSucceeded && '✓ Your message was sent! Thank you for your message!')
+    (submitSucceeded && formMessages.success)
     || (submitFailed && error)
     || ''
   );
