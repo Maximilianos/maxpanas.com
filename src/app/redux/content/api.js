@@ -2,6 +2,15 @@ import {fetchContentIfNeeded} from './actions';
 
 
 /**
+ * Base url for all content api
+ * fetch requests
+ *
+ * @type {string}
+ */
+export const API_BASE = '/api/content';
+
+
+/**
  * Return the api endpoint on
  * the local api for the given
  * article
@@ -10,7 +19,7 @@ import {fetchContentIfNeeded} from './actions';
  * @returns {string}
  */
 export function getArticlePath(article) {
-  return `/articles/${article}`;
+  return `${API_BASE}/articles/${article}`;
 }
 
 
@@ -23,7 +32,7 @@ export function getArticlePath(article) {
  * @returns {string}
  */
 export function getArchivePath(archive) {
-  return `/archives/${archive}`;
+  return `${API_BASE}/archives/${archive}`;
 }
 
 
