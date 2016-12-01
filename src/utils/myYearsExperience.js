@@ -7,7 +7,7 @@
  * @returns {String}
  */
 export default function myYearsExperience() {
-  const experience = (new Date()).getFullYear();
+  const experience = (new Date()).getFullYear() - 2010;
   const words = {
     6: 'six', 7: 'seven', 8: 'eight',
     9: 'nine', 10: 'ten', 11: 'over ten'
