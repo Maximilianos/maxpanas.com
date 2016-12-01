@@ -12,7 +12,7 @@ app.get('/archives/:archive', (req, res, next) => {
 });
 
 app.on('mount', () => {
-  console.log('Content api available at %s', app.mountpath);
+  console.log('Content API available at %s', app.mountpath);
 });
 
 export default app;

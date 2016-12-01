@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.post('/contact', contact);
 
 app.on('mount', () => {
-  console.log('Form handlers available at %s', app.mountpath);
+  console.log('Form API available at %s', app.mountpath);
 });
 
 export default app;
