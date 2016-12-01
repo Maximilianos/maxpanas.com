@@ -7,7 +7,7 @@ import {fetchContentIfNeeded} from './actions';
  *
  * @type {string}
  */
-export const API_BASE = '/api/content';
+export const API_BASE = 'http://localhost:8000/api/content';
 
 
 /**
