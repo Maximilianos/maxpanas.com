@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import connectFetchActions, {fetchOnceOnRoute}
   from '../../utils/universal-redux-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
-import {getArticlePath, parseJSON} from '../redux/content/api.js';
+import {getArticlePath, parseArticle} from '../redux/content/api.js';
 import Article from '../components/Articles/Article/Article';
 
 
@@ -42,7 +42,7 @@ function mapStateToProps({content}, {params: {article}}) {
 function fetchArticle({props: {params: {article}}}) {
   return fetchContentIfNeeded(
     getArticlePath(article),
-    {responseParser: parseJSON}
+    {responseParser: parseArticle}
   );
 }
 

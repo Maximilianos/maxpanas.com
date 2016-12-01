@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import connectFetchActions, {fetchOnceOnRoute}
   from '../../utils/universal-redux-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
-import {getArchivePath, parseJSON} from '../redux/content/api';
+import {getArchivePath, parseArchive} from '../redux/content/api';
 import Home from '../components/Pages/Home/Home';
 
 
@@ -35,7 +35,7 @@ function mapStateToProps() {
  */
 function fetchArchive() {
   return fetchContentIfNeeded(archivePath, {
-    responseParser: parseJSON
+    responseParser: parseArchive
   });
 }
 

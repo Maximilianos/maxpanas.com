@@ -1,12 +1,4 @@
-/**
- * Parse a response from the
- * local api
- *
- * @returns {function}
- */
-export function parseJSON() {
-  return response => response.json();
-}
+import {fetchContentIfNeeded} from './actions';
 
 
 /**
@@ -32,4 +24,38 @@ export function getArticlePath(article) {
  */
 export function getArchivePath(archive) {
   return `/archives/${archive}`;
+}
+
+
+/**
+ * Parse a response from the
+ * local api into an article
+ *
+ * @returns {function}
+ */
+export function parseArticle() {
+  return response => response.json();
+}
+
+
+/**
+ * Parse a response from the
+ * local api into an archive
+ * and load the contained
+ * articles as well
+ *
+ * @param {function} dispatch
+ * @returns {function}
+ */
+export function parseArchive(dispatch) {
+  return response => response.json().then(archive => {
+    const articles = archive.map(
+      article => dispatch(fetchContentIfNeeded(
+        getArticlePath(article),
+        {responseParser: parseArticle}
+      ))
+    );
+
+    return Promise.all(articles).then(() => archive);
+  });
 }

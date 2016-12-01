@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import connectFetchActions from '../../utils/universal-redux-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
-import {getArchivePath, parseJSON} from '../redux/content/api';
+import {getArchivePath, parseArchive} from '../redux/content/api';
 import Archive from '../components/Articles/Archive/Archive';
 
 
@@ -41,7 +41,7 @@ function fetchArchive({props: {archive}}) {
     if (archive) {
       return dispatch(fetchContentIfNeeded(
         getArchivePath(archive),
-        {responseParser: parseJSON}
+        {responseParser: parseArchive}
       ));
     }
   };

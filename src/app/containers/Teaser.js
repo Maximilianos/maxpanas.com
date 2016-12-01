@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import connectFetchActions from '../../utils/universal-redux-fetch/connectFetchActions';
 import {fetchContentIfNeeded} from '../redux/content/actions';
-import {getArticlePath, parseJSON} from '../redux/content/api';
+import {getArticlePath, parseArticle} from '../redux/content/api';
 import Teaser from '../components/Articles/Teaser/Teaser';
 
 
@@ -42,7 +42,7 @@ function fetchArticle({props: {article}}) {
     if (article) {
       return dispatch(fetchContentIfNeeded(
         getArticlePath(article),
-        {responseParser: parseJSON}
+        {responseParser: parseArticle}
       ));
     }
   };
