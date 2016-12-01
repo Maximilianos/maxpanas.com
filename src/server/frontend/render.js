@@ -7,7 +7,9 @@ import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
 import NestedStatus from 'react-nested-status';
 
-import * as config from '../config';
+import {isProduction} from '../config';
+import webpackIsomorphicTools from '../tools';
+
 import createRoutes from '../../app/createRoutes';
 
 import runComponentFetchActions
@@ -66,7 +68,7 @@ function renderPage(store, renderProps) {
     javascript: {app: jsFilename}
   } = webpackIsomorphicTools.assets();
 
-  if (!config.isProduction) {
+  if (!isProduction) {
     webpackIsomorphicTools.refresh();
   }
 
@@ -82,7 +84,7 @@ function renderPage(store, renderProps) {
         lang="en"
         helmet={Helmet.rewind()}
         bodyHtml={bodyHtml}
-        cssFilename={config.isProduction ? cssFilename : null}
+        cssFilename={isProduction ? cssFilename : null}
       />
     )
   }`;

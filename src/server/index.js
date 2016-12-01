@@ -6,17 +6,4 @@ if (!process.env.NODE_ENV) {
 }
 
 require('babel-register');
-require('isomorphic-fetch');
-
-const rootDir = require('path').resolve(__dirname, '..', '..');
-
-const WebpackIsomorphicTools = require('webpack-isomorphic-tools');
-const webpackIsomorphicAssets = require('../../webpack/assets');
-
-const config = require('./config');
-
-global.webpackIsomorphicTools = (
-  new WebpackIsomorphicTools(webpackIsomorphicAssets)
-    .development(!config.isProduction)
-    .server(rootDir, () => require('./main'))
-);
+require('./tools');
