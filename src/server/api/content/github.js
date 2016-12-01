@@ -2,7 +2,7 @@ import marked from 'marked';
 import frontMatter from 'front-matter';
 import {Base64} from 'js-base64';
 
-import {fetchContentIfNeeded} from './actions';
+import {fetchContentIfNeeded} from '../../../app/redux/content/actions';
 
 const GITHUB_API = 'https://api.github.com';
 const REPOS_API = `${GITHUB_API}/repos`;
