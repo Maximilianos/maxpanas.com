@@ -18,12 +18,12 @@ app.use(morgan('dev'));
 // enable gzip compression
 app.use(compression());
 
-// app handlers
-app.use(frontend);
-
 // api handlers
 app.use('/api/content', content);
 app.use('/api/forms', forms);
+
+// app handlers
+app.use(frontend);
 
 app.use(errorHandler);
 
