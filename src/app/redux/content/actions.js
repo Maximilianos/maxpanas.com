@@ -143,7 +143,7 @@ function shouldFetchContent({content}, contentID) {
  * @param {function} responseParser
  * @returns {function}
  */
-export function fetchContentIfNeeded(contentID, {responseParser}) {
+export function fetchContentIfNeeded(contentID, {responseParser} = {}) {
   return (dispatch, getState) => {
     if (shouldFetchContent(getState(), contentID)) {
       return dispatch(fetchContent(contentID, {responseParser}));
