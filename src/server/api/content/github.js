@@ -2,8 +2,6 @@ import marked from 'marked';
 import frontMatter from 'front-matter';
 import {Base64} from 'js-base64';
 
-import {fetchContentIfNeeded} from '../../../app/redux/content/actions';
-
 const GITHUB_API = 'https://api.github.com';
 const REPOS_API = `${GITHUB_API}/repos`;
 
@@ -41,27 +39,14 @@ export function getArchivePath(archive) {
 
 
 /**
- * Get a list of contents from
- * a given archive
- *
- * @param {*} archive
- * @returns {Array}
- */
-export function getArchiveContents(archive) {
-  return archive && archive.length
-    ? archive.map(({name}) => name.slice(0, name.lastIndexOf('.')))
-    : [];
-}
-
-
-/**
  * Parse a response from the
  * GitHub Api into an article
  *
- * @returns {Function}
+ * @param {Response} response
+ * @returns {Promise}
  */
-export function parseArticle() {
-  return response => response.json()
+export function parseArticle(response) {
+  return response.json()
     .then(json => Base64.decode(json.content))
     .then(file => frontMatter(file))
     .then(({attributes, body}) => ({...attributes, body: marked(body)}));
@@ -74,22 +59,24 @@ export function parseArticle() {
  * and load the contained
  * articles as well
  *
- * @param {Function} dispatch
- * @returns {Function}
+ * @param {Response} response
+ * @returns {Promise}
  */
-export function parseArchive(dispatch) {
-  return response => response.json().then(archive => {
+export function parseArchive(response) {
+  return response.json()
+    .then(getArchiveContents);
+}
 
-    const archiveContents = getArchiveContents(archive);
 
-    const articles = archiveContents.map(
-      article => dispatch(fetchContentIfNeeded(
-        getArticlePath(article),
-        {responseParser: parseArticle}
-      ))
-    );
-
-    return Promise.all(articles)
-      .then(() => archiveContents);
-  });
+/**
+ * Get a list of contents from
+ * a given archive
+ *
+ * @param {*} archive
+ * @returns {Array}
+ */
+function getArchiveContents(archive) {
+  return archive && archive.length
+    ? archive.map(({name}) => name.slice(0, name.lastIndexOf('.')))
+    : [];
 }
