@@ -6,7 +6,6 @@ if (!process.env.NODE_ENV) {
 }
 
 require('babel-register');
-require('isomorphic-fetch');
 
 const rootDir = require('path').resolve(__dirname, '..', '..');
 
