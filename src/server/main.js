@@ -5,6 +5,7 @@ import compression from 'compression';
 import errorHandler from './errors/errorHandler';
 import frontend from './frontend';
 
+import content from './api/content';
 import forms from './api/forms';
 
 import {port} from './config';
@@ -19,7 +20,11 @@ app.use(compression());
 
 // app handlers
 app.use(frontend);
+
+// api handlers
+app.use('/api/content', content);
 app.use('/api/forms', forms);
+
 app.use(errorHandler);
 
 app.listen(port, () => {
