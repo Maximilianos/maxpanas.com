@@ -1,5 +1,5 @@
 import express from 'express';
-import fetch from 'isomorphic-fetch';
+import fetchContent from './fetchContent';
 import {
   getArticlePath,
   getArchivePath,
@@ -9,25 +9,15 @@ import {
 
 const app = express();
 
-app.get('/articles/:article', async (req, res) => {
-  try {
-    const response = await fetch(getArticlePath(req.params.article));
-    const json = await parseArticle(response);
-    res.status(200).send(json);
-  } catch (error) {
-    res.status(500).send({error});
-  }
-});
+app.get('/articles/:article', fetchContent({
+  endpoint: req => getArticlePath(req.params.article),
+  parser: parseArticle
+}));
 
-app.get('/archives/:archive', async (req, res) => {
-  try {
-    const response = await fetch(getArchivePath(req.params.archive));
-    const json = await parseArchive(response);
-    res.status(200).send(json);
-  } catch (error) {
-    res.status(500).send({error});
-  }
-});
+app.get('/archives/:archive', fetchContent({
+  endpoint: req => getArchivePath(req.params.archive),
+  parser: parseArchive
+}));
 
 app.on('mount', () => {
   console.log('Content API available at %s', app.mountpath);
