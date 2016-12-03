@@ -1,4 +1,5 @@
 import marked from 'marked';
+import Prism from 'prismjs';
 import frontMatter from 'front-matter';
 import {Base64} from 'js-base64';
 
@@ -49,7 +50,9 @@ export function parseArticle(response) {
   return response.json()
     .then(json => Base64.decode(json.content))
     .then(file => frontMatter(file))
-    .then(({attributes, body}) => ({...attributes, body: marked(body)}));
+    .then(({attributes, body}) => ({...attributes, body: marked(body, {
+      highlight: (code, lang) => Prism.highlight(code, Prism.languages[lang])
+    })}));
 }
 
 

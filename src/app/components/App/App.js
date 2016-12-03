@@ -6,6 +6,7 @@ import AppHeader from './AppHeader/AppHeader';
 import AppFooter from './AppFooter/AppFooter';
 
 import 'normalize.css';
+import 'prismjs/themes/prism-dark.css';
 import '../../assets/fonts/filson-pro/webfonts.css';
 import '../../assets/fonts/avenir/webfonts.css';
 import './base.scss';
