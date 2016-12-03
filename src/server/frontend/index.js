@@ -2,6 +2,8 @@ import express from 'express';
 import favicon from 'serve-favicon';
 import bodyParser from 'body-parser';
 
+import cache from '../cache';
+
 // middleware and request handlers
 import createStore from './createStore';
 import contact from './forms/contact';
@@ -20,7 +22,7 @@ app.use('/assets', express.static('build', {maxAge: '200d'}));
 app.use(createStore);
 
 // serve the frontend of the app
-app.get('*', render);
+app.get('*', cache.route(), render);
 
 // handle a no-js contact form submission
 app.post('/contact', urlDecode, contact, render);

@@ -1,4 +1,6 @@
 import express from 'express';
+import cache from '../../cache';
+
 import fetchContent from './fetchContent';
 import {
   getArticlePath,
@@ -8,6 +10,8 @@ import {
 } from './github';
 
 const app = express();
+
+app.use(cache.route());
 
 app.get('/articles/:article', fetchContent({
   endpoint: req => getArticlePath(req.params.article),
