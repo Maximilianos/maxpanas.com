@@ -3,6 +3,8 @@ import Helmet from 'react-helmet';
 import Entry from '../../Entry/Entry';
 import Error from '../../Error/Error';
 
+import './Article.scss';
+
 
 function ArticleError() {
   return (
@@ -45,14 +47,21 @@ export default function Article({
       ? <NoArticleFound />
       : <ArticleError />;
   }
-
   return (
-    <Entry title={title}>
+    <article className="article">
       <Helmet
         title={title}
         meta={[{name: 'description', content: description}]}
       />
-      <div dangerouslySetInnerHTML={{__html: body}} />
-    </Entry>
+      <header className="article__header">
+        <h1 className="article__title">
+          {title}
+        </h1>
+      </header>
+      <div
+        className="article__body"
+        dangerouslySetInnerHTML={{__html: body}}
+      />
+    </article>
   );
 }
