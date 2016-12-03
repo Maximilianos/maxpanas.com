@@ -1,16 +1,16 @@
 {
-  "name": "max",
+  "name": "maxpanas.com",
   "version": "0.10.0",
-  "description": "blog",
-  "main": "build/server",
-  "private": true,
+  "description": "My universal reactjs blog",
+  "repository": "Maximilianos/maxpanas.com",
   "scripts": {
     "dev": "gulp",
     "lint": "gulp lint",
     "start": "gulp -p"
   },
-  "author": "Max GJ Panas <m@maxpanas.com>",
+  "author": "Max GJ Panas <m@maxpanas.com> (http://maxpanas.com)",
   "license": "MIT",
+  "private": true,
   "devDependencies": {
     "autoprefixer": "6.3.6",
     "babel-core": "6.10.4",
