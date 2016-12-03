@@ -13,7 +13,17 @@ export default function fetchContent({endpoint, parser}) {
   return async (req, res) => {
     try {
       const response = await fetch(isFunc(endpoint) ? endpoint(req) : endpoint);
-      const output = isFunc(parser) ? await parser(response) : response;
+      if (response.status !== 200) {
+        res.status(500).json({error: {
+          code: response.status,
+          ...(await response.json())
+        }});
+        return;
+      }
+
+      const output = isFunc(parser)
+        ? await parser(response)
+        : response;
 
       res.status(200).json(output);
 
