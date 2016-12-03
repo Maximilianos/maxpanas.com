@@ -2,36 +2,6 @@
         Contact
    ========================================= */
 
-// TODO: Make component out of the shared styles with About.scss
+@import "../../../style/utils/content";
 
-@import "../../../style/theme/colors";
-@import "../../../style/theme/breakpoints";
-@import "../../../style/utils/clearfix";
-
-.contact {
-  @include clearfix;
-
-  margin: 3vw auto;
-  padding: 0 20px;
-  max-width: 36em;
-
-  font-size: 20px;
-  line-height: 1.5;
-
-  p { margin: 0; }
-  p + p { margin-top: 1em; }
-
-  a {
-    color: $c-brand;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  @media all and (min-width: $b-tablet) {
-    margin: 5em auto;
-    font-size: 22px;
-  }
-}
+.contact { @include content-block; }

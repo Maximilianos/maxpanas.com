@@ -2,38 +2,10 @@
     About
    ========================================= */
 
-// TODO: Make component out of the shared styles with Contact.scss
-
-@import "../../../style/theme/colors";
 @import "../../../style/theme/breakpoints";
-@import "../../../style/utils/clearfix";
+@import "../../../style/utils/content";
 
-.about {
-  @include clearfix;
-
-  margin: 3vw auto;
-  padding: 0 20px;
-  max-width: 36em;
-
-  font-size: 20px;
-  line-height: 1.5;
-
-  p { margin: 0; }
-  p + p { margin-top: 1em; }
-
-  a {
-    color: $c-brand;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  @media all and (min-width: $b-tablet) {
-    margin: 5em auto;
-    font-size: 22px;
-  }
-}
+.about { @include content-block; }
 
 .about__intro-figure {
   box-sizing: border-box;
@@ -75,20 +47,7 @@
   margin: 1.5em 0 0.75em;
 }
 
-// TODO: move about__list styles to a reusable mixin?
 .about__list {
-  $indent: 1.1em;
-
-  padding-left: $indent;
-
-  ul { // nested lists
-    margin-top: 0.5em;
-    padding-left: $indent;
-  }
-
-  li { margin: 0; }
-  li + li { margin-top: 0.5em; }
-
   &--big {
     li + li { margin-top: 1em; }
   }

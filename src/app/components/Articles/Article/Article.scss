@@ -6,38 +6,8 @@
 
 @import "../../../style/theme/colors";
 @import "../../../style/theme/breakpoints";
-@import "../../../style/utils/clearfix";
+@import "../../../style/utils/content";
 
 .article {
-  margin: 3vw auto;
-  padding: 0 20px;
-  max-width: 36em;
-
-  font-size: 20px;
-  line-height: 1.5;
-
-  pre {
-    overflow-x: auto;
-    margin: 1.5em 0;
-    padding: 2em 2em;
-    font-size: 0.8em;
-    color: #efefef;
-    background-color: #444;
-  }
-
-  p { margin: 0 }
-  p + p { margin-top: 1em; }
-
-  a {
-    color: $c-brand;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  @media all and (min-width: $b-tablet) {
-    margin: 5em auto;
-    font-size: 22px;
-  }
+  @include content-block;
 }
