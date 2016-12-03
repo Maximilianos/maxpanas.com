@@ -27,7 +27,7 @@ gulp.task('lint', () =>
   gulp.src([
     'gulpfile.babel.js',
     'src/**/*.js',
-    'webpack/*.js'
+    'webpack/**/*.js'
   ])
   .pipe(eslint())
   .pipe(eslint.format())
