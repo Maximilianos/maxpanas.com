@@ -7,6 +7,9 @@
 /webpack-assets.json
 /build/
 
+# db/cache stuff
+/dump.rdb
+
 # private stuff
 /secrets.json
 /src/app/assets/fonts/avenir/
