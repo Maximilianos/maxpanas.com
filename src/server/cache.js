@@ -1,8 +1,17 @@
 import redisCache from 'express-redis-cache';
+import {isProduction} from './config';
 
-const cache = redisCache();
+// TODO: Enable intelligent cache invalidation so that cache can
+//       be enabled in dev mode as well
 
-cache.on('connected', () => console.log('Redis Cache Connected'));
-cache.on('error', error => console.log(error));
+let cache = { // eslint-disable-line import/no-mutable-exports
+  route: () => (req, res, next) => next()
+};
+
+if (isProduction) {
+  cache = redisCache();
+  cache.on('connected', () => console.log('Redis Cache Connected'));
+  cache.on('error', error => console.log(error));
+}
 
 export default cache;
