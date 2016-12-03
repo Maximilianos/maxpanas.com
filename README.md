@@ -8,7 +8,7 @@ Notice how there is no goal to write amazingly engaging articles in the followin
 Scope creep is the name of the game! So the list below is likely going to keep growing
 for a while. Hopefully, one day I will actually finish this project.
 
-- [ ] Responsive
+- [x] Responsive
 - [x] Progressively Enhanced - works (almost) equally well without JS
   - [x] Server & Client Universal Rendering
   - [x] Server & Client Universal Form Handling
