@@ -1,7 +1,8 @@
+import {Base64} from 'js-base64';
+import frontMatter from 'front-matter';
 import marked from 'marked';
 import Prism from 'prismjs';
-import frontMatter from 'front-matter';
-import {Base64} from 'js-base64';
+import 'prismjs/components/prism-markdown';
 
 const GITHUB_API = 'https://api.github.com';
 const REPOS_API = `${GITHUB_API}/repos`;
@@ -12,7 +13,7 @@ const REPOS_API = `${GITHUB_API}/repos`;
  *
  * @type {string}
  */
-export const API_BASE = `${REPOS_API}/Maximilianos/articles/contents`;
+const API_BASE = `${REPOS_API}/Maximilianos/articles/contents`;
 
 
 /**
@@ -50,9 +51,25 @@ export function parseArticle(response) {
   return response.json()
     .then(json => Base64.decode(json.content))
     .then(file => frontMatter(file))
-    .then(({attributes, body}) => ({...attributes, body: marked(body, {
-      highlight: (code, lang) => Prism.highlight(code, Prism.languages[lang])
-    })}));
+    .then(({attributes, body}) => ({
+      ...attributes,
+      body: marked(body, {highlight})
+    }));
+}
+
+
+/**
+ * Highlight a code block using
+ * Prism
+ *
+ * @param code
+ * @param lang
+ * @returns {*}
+ */
+function highlight(code, lang) {
+  return Prism.languages.hasOwnProperty(lang)
+    ? Prism.highlight(code, Prism.languages[lang])
+    : code;
 }
 
 
