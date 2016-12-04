@@ -5,6 +5,8 @@ import fetch from 'isomorphic-fetch';
  * Fetch content from the given endpoint and
  * parse it with the given parser
  *
+ * TODO: implement conditional requests https://developer.github.com/v3/#conditional-requests
+ *
  * @param endpoint
  * @param parser
  * @returns {function(*=, *)}
