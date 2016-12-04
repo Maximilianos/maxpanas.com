@@ -14,6 +14,8 @@ export default function fetchContent({endpoint, parser}) {
     try {
       const response = await fetch(isFunc(endpoint) ? endpoint(req) : endpoint);
       if (response.status !== 200) {
+        console.error(response.status);
+
         res.status(500).json({error: {
           code: response.status,
           ...(await response.json())
@@ -28,6 +30,8 @@ export default function fetchContent({endpoint, parser}) {
       res.status(200).json(output);
 
     } catch (error) {
+      console.error(error);
+
       res.status(500).json({error});
     }
   };
