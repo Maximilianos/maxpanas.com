@@ -31,6 +31,7 @@
   z-index: 1;
   transition: 0.2s ease-out;
   transform-origin: left top;
+  will-change: transform;
 
   .no-js &,
   .input--focused &,
