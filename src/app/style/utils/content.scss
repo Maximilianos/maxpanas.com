@@ -38,10 +38,16 @@
   pre {
     overflow-x: auto;
     margin: 1.5em 0;
-    padding: 2em 2em;
+    padding: 2em 0;
     font-size: 0.8em;
     color: $c-pre-copy;
     background-color: $c-pre-bg;
+
+    // TODO: rework this to not use box shadow.
+    box-shadow: 13em 0 $c-pre-bg,
+               -13em 0 $c-pre-bg,
+                36em 0 $c-pre-bg,
+               -36em 0 $c-pre-bg;
 
     code {
       // reset code inside pre

@@ -9,8 +9,8 @@ $c-error: crimson;
 $c-body-bg: white;
 $c-body-copy: #444;
 
-$c-pre-bg: #333;
-$c-pre-copy: #eee;
+$c-pre-bg: #fbfbfb;
+$c-pre-copy: $c-body-copy;
 
-$c-code-bg: #eee;
-$c-code-copy: #333;
+$c-code-bg: darken($c-pre-bg, 2%);
+$c-code-copy: $c-body-copy;
