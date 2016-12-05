@@ -5,11 +5,18 @@ import Helmet from 'react-helmet';
 import AppHeader from './AppHeader/AppHeader';
 import AppFooter from './AppFooter/AppFooter';
 
-import 'normalize.css';
-import 'prismjs/themes/prism-twilight.css';
+// fonts
+import '../../assets/fonts/inconsolata/webfonts.css';
 import '../../assets/fonts/filson-pro/webfonts.css';
 import '../../assets/fonts/avenir/webfonts.css';
+
+// vendor styles
+import 'normalize.css';
+import 'highlight.js/styles/atom-one-light.css';
+
+// base styles
 import './base.scss';
+
 import './App.scss';
 
 import favicon from '../../assets/favicon/favicon.ico';

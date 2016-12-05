@@ -2,6 +2,7 @@
     Content Mixins
    ========================================= */
 
+@import "../theme/typography";
 @import "../theme/colors";
 @import "../theme/breakpoints";
 @import "./clearfix";
@@ -19,6 +20,10 @@
   @media all and (min-width: $b-tablet) {
     margin: 5em auto;
     font-size: 22px;
+  }
+
+  pre, code {
+    font-family: $t-code;
   }
 
   code {
