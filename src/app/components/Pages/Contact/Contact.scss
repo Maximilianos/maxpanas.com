@@ -4,4 +4,6 @@
 
 @import "../../../style/utils/content";
 
-.contact { @include content-block; }
+.contact {
+  @include content-block;
+}

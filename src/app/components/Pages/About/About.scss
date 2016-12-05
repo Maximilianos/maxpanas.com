@@ -5,7 +5,9 @@
 @import "../../../style/theme/breakpoints";
 @import "../../../style/utils/content";
 
-.about { @include content-block; }
+.about {
+  @include content-block;
+}
 
 .about__intro-figure {
   box-sizing: border-box;
