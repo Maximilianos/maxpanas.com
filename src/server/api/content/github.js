@@ -1,8 +1,7 @@
 import {Base64} from 'js-base64';
 import frontMatter from 'front-matter';
 import marked from 'marked';
-import Prism from 'prismjs';
-import 'prismjs/components/prism-markdown';
+import hljs from 'highlight.js';
 
 const GITHUB_API = 'https://api.github.com';
 const REPOS_API = `${GITHUB_API}/repos`;
@@ -60,16 +59,28 @@ export function parseArticle(response) {
 
 /**
  * Highlight a code block using
- * Prism
+ * HighlightJS
  *
  * @param code
  * @param lang
  * @returns {*}
  */
 function highlight(code, lang) {
-  return Prism.languages.hasOwnProperty(lang)
-    ? Prism.highlight(code, Prism.languages[lang])
-    : code;
+  let html = code;
+
+  try {
+    if (lang === undefined) {
+      const {value} = hljs.highlightAuto(code);
+      html = value;
+    } else if (hljs.getLanguage(lang)) {
+      const {value} = hljs.highlight(lang, code);
+      html = value;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+
+  return html;
 }
 
 
