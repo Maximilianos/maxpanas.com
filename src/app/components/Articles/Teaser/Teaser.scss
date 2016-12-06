@@ -2,6 +2,7 @@
     Teaser
    ========================================= */
 
+@import "../../../style/theme/breakpoints";
 @import "../../../style/theme/colors";
 
 .teaser {
@@ -10,7 +11,7 @@
 
   font-size: 18px;
 
-  @media all and (min-width: 670px) {
+  @media all and (min-width: $b-tablet) {
     font-size: 24px;
   }
 }
@@ -44,7 +45,7 @@
   font-size: 25px;
   font-weight: 800;
 
-  @media all and (min-width: 670px) {
+  @media all and (min-width: $b-tablet) {
     font-size: 42px;
   }
 }
@@ -52,7 +53,7 @@
 .teaser__excerpt {
   font-size: 18px;
 
-  @media all and (min-width: 670px) {
+  @media all and (min-width: $b-tablet) {
     font-size: 24px;
   }
 }
