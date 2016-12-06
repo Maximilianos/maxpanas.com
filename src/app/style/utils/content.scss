@@ -6,6 +6,7 @@
 @import "../theme/colors";
 @import "../theme/breakpoints";
 @import "./clearfix";
+@import "./links";
 
 @mixin content-block {
   @include clearfix;
@@ -68,11 +69,5 @@
   li { margin: 0; }
   li + li { margin-top: 0.5em; }
 
-  a {
-    color: $c-brand;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+  a { @include link; }
 }

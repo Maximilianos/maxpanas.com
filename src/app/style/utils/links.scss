@@ -1,0 +1,13 @@
+/* =========================================
+    Links
+   ========================================= */
+
+@import "../theme/colors";
+
+@mixin link {
+  color: $c-brand;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
