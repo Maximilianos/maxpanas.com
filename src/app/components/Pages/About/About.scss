@@ -22,7 +22,7 @@
     border-radius: 0;
     margin-top: -5.2vw;
     margin-left: -21vw;
-    padding: 8.5vw 8.5vw 5.5vw;
+    padding: 8.5vw;
     width: 63vw;
     height: auto;
 
@@ -33,9 +33,9 @@
   }
 
   @media all and (min-width: $b-tablet) {
-    margin-top: -35px;
+    margin-top: -45px;
     margin-left: -140px;
-    padding: 55px 55px 35px;
+    padding: 55px;
     width: 420px;
     height: auto;
 
