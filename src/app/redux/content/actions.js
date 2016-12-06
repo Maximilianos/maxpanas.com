@@ -69,7 +69,9 @@ function requestFailure(contentID, code, message) {
  * @returns {object}
  */
 function validateResponse(response) {
-  if (response.status >= 200 && response.status < 300) {
+  // TODO: conditional requests (Etag & Expires headers)?
+  //       redirects?
+  if (response.status === 200) {
     return response;
   }
 
