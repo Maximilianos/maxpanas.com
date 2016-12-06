@@ -10,7 +10,9 @@ Error.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.string,
   message: PropTypes.string,
-  router: PropTypes.node
+  router: PropTypes.shape({
+    goBack: PropTypes.func
+  })
 };
 export default function Error({
   code = 500,
