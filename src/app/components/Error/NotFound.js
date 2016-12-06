@@ -7,7 +7,7 @@ export default function NotFound() {
     <Error
       code={404}
       title="404"
-      subtitle="Not Found."
+      subtitle="Not Found"
       message="The page you are looking for does not exist"
     />
   );
