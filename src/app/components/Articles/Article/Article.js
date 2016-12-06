@@ -2,27 +2,10 @@ import React, {PropTypes} from 'react';
 import Helmet from 'react-helmet';
 
 import Loader from '../../Loader/Loader';
+import NotFound from '../../Error/NotFound';
 import Error from '../../../containers/Error';
 
 import './Article.scss';
-
-
-function ArticleError() {
-  return (
-    <Error code={500} title="Error 500">
-      Sorry there was a problem completing this request
-    </Error>
-  );
-}
-
-
-function NoArticleFound() {
-  return (
-    <Error code={404} title="Error 404">
-      Sorry there is no article at this url
-    </Error>
-  );
-}
 
 
 Article.propTypes = {
@@ -50,8 +33,8 @@ export default function Article({
 
   if (error) {
     return error.code === 404
-      ? <NoArticleFound />
-      : <ArticleError />;
+      ? <NotFound />
+      : <Error />;
   }
 
   return (
