@@ -4,13 +4,8 @@
 
 @import "../../../style/theme/colors";
 @import "../../../style/theme/typography";
+@import "../../../style/theme/breakpoints";
 @import "../../../style/utils/list";
-
-.archive {
-  &:not(.archive--list) {
-    text-align: center;
-  }
-}
 
 .archive__title {
   box-sizing: border-box;
@@ -33,9 +28,20 @@
     font-size: 18px;
   }
 
-  @media all and (min-width: 670px) {
+  @media all and (min-width: $b-tablet) {
     margin: 0 auto 40px;
     font-size: 25px;
+  }
+}
+
+.archive__message {
+  display: table;
+  margin: 5vw auto;
+  padding: 0 20px;
+  font-size: 2em;
+
+  @media all and (min-width: $b-tablet) {
+    margin: 3em auto;
   }
 }
 

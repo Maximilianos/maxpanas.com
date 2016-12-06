@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import Teaser from '../../../containers/Teaser';
+import Loader from '../../Loader/Loader';
 
 import './Archive.scss';
 
@@ -16,13 +17,13 @@ export default function Archive({fetching, error, title, archive}) {
 
   if (fetching) {
     modifier = 'loading';
-    content = 'Loading Archive...';
+    content = <div className="archive__message"><Loader />Loading<Loader /></div>;
   } else if (error || !archive) {
     modifier = 'error';
-    content = 'Error Loading Archive.';
+    content = <div className="archive__message">Error Loading Archive.</div>;
   } else if (!archive.length) {
     modifier = 'empty';
-    content = 'There are no articles in this archive';
+    content = <div className="archive__message">There are no articles in this archive</div>;
   } else {
     modifier = 'list';
     content = (
