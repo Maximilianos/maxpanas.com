@@ -5,7 +5,7 @@ import {Route, IndexRoute} from 'react-router';
 import App from './components/App/App';
 import About from './components/Pages/About/About';
 import Contact from './components/Pages/Contact/Contact';
-import NotFound from './components/Pages/NotFound/NotFound';
+import NotFound from './components/Error/NotFound';
 
 // dynamic components
 import Home from './containers/Home';
