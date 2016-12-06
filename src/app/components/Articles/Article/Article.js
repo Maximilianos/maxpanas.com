@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 import Helmet from 'react-helmet';
 
-import Error from '../../Error/Error';
 import Loader from '../../Loader/Loader';
+import Error from '../../../containers/Error';
 
 import './Article.scss';
 

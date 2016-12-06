@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import {withRouter, Link} from 'react-router';
+import {Link} from 'react-router';
 import NestedStatus from 'react-nested-status';
 import Helmet from 'react-helmet';
 
@@ -12,7 +12,7 @@ Error.propTypes = {
   message: PropTypes.string,
   router: PropTypes.node
 };
-export default withRouter(function Error({
+export default function Error({
   code = 500,
   title = '500',
   subtitle = 'Error',
@@ -55,4 +55,4 @@ export default withRouter(function Error({
       </ul>
     </article>
   );
-});
+}
