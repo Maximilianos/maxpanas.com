@@ -22,8 +22,8 @@ export default function configureStore(initialState = {}) {
   ];
 
   const createReduxStore = (
-    BROWSER_DEVELOPMENT && window.devToolsExtension
-      ? compose(applyMiddleware(...middleware), window.devToolsExtension())
+    BROWSER_DEVELOPMENT && global.devToolsExtension
+      ? compose(applyMiddleware(...middleware), global.devToolsExtension())
       : applyMiddleware(...middleware)
   );
 
