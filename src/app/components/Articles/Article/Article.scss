@@ -7,3 +7,10 @@
 .article {
   @include content-block;
 }
+
+.article__loader {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+}

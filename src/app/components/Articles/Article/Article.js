@@ -23,10 +23,13 @@ export default function Article({
   body
 }) {
   if (fetching) {
-    // TODO: find a better loader
     return (
       <div className="article">
-        <h1>Loading <Loader /></h1>
+        <h1 className="article__loader">
+          <Loader />
+          Loading
+          <Loader />
+        </h1>
       </div>
     );
   }
