@@ -1,5 +1,15 @@
 import fetch from 'isomorphic-fetch';
 
+/**
+ * Error messages for given status codes
+ *
+ * @type {{string}}
+ */
+const errors = {
+  404: 'The requested content does not exist',
+  500: 'There was an error fetching the requested content'
+};
+
 
 /**
  * Fetch content from the given endpoint and
@@ -16,11 +26,10 @@ export default function fetchContent({endpoint, parser}) {
     try {
       const response = await fetch(isFunc(endpoint) ? endpoint(req) : endpoint);
       if (response.status !== 200) {
-        console.error(response.status);
-
-        res.status(500).json({error: {
-          code: response.status,
-          ...(await response.json())
+        const status = response.status === 404 ? 404 : 500;
+        res.status(status).json({error: {
+          status,
+          message: errors[status]
         }});
         return;
       }
@@ -32,9 +41,10 @@ export default function fetchContent({endpoint, parser}) {
       res.status(200).json(output);
 
     } catch (error) {
-      console.error(error);
-
-      res.status(500).json({error});
+      res.status(500).json({error: {
+        status: 500,
+        message: errors[500]
+      }});
     }
   };
 }
