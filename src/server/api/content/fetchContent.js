@@ -65,6 +65,7 @@ async function fetchContent(req, {endpoint, parser}) {
   }
 }
 
+
 /**
  * Respond to content request with fetched and
  * parsed content
