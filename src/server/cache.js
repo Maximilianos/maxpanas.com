@@ -9,7 +9,7 @@ let cache = { // eslint-disable-line import/no-mutable-exports
 };
 
 // TODO: Cache does not cache response codes... must fix
-if (false) {
+if (isProduction) {
   cache = redisCache();
   cache.on('connected', () => console.log('Redis Cache Connected'));
   cache.on('error', error => console.log(error));
