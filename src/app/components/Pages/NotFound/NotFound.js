@@ -1,5 +1,4 @@
 import React from 'react';
-import {IndexLink} from 'react-router';
 import Error from '../../Error/Error';
 
 
@@ -9,12 +8,7 @@ export default function NotFound() {
       code={404}
       title="404"
       subtitle="Not Found."
-    >
-      <p>
-        <IndexLink to="/">
-          Back Home?
-        </IndexLink>
-      </p>
-    </Error>
+      message="The page you are looking for does not exist"
+    />
   );
 }

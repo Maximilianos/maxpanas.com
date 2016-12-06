@@ -1,0 +1,54 @@
+/* =========================================
+    Error
+   ========================================= */
+
+@import "../../style/theme/typography";
+@import "../../style/utils/content";
+@import "../../style/utils/links";
+@import "../../style/utils/reset";
+@import "../../style/utils/list";
+
+$header-bottom-margin: 95px;
+
+.error {
+  @include content-block;
+
+  text-align: center;
+}
+
+.error__title {
+  margin: 100px 0 $header-bottom-margin;
+  padding: 0 20px;
+  text-transform: uppercase;
+  font-family: $t-display;
+  font-size: 98px;
+  font-weight: 900;
+  font-style: normal;
+  line-height: 1.1;
+  letter-spacing: 0.1em;
+}
+
+.error__subtitle {
+  @extend .error__title;
+
+  display: block;
+  margin: #{10px - $header-bottom-margin} 0 $header-bottom-margin;
+  font-size: 28px;
+}
+
+.error__links {
+  @include list--inline;
+
+  margin: 3em 0;
+
+  li:not(:last-child):after {
+    content: '•';
+    margin: 0 1em;
+    vertical-align: middle;
+  }
+}
+
+.error__back-button {
+  @include reset;
+  @include link;
+}
