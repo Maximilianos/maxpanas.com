@@ -18,7 +18,7 @@ export default function Error({
   code = 500,
   title = '500',
   subtitle = 'Error',
-  message = 'There was a problem completing your request',
+  message = 'The server had a problem completing your request',
   router
 }) {
   return (
@@ -34,7 +34,7 @@ export default function Error({
       <h1 className="error__title">
         {title}
         <span className="error__subtitle">
-          {subtitle}
+          &nbsp;{subtitle}
         </span>
       </h1>
       <p className="error__message">
