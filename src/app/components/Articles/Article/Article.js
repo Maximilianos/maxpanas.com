@@ -1,7 +1,8 @@
 import React, {PropTypes} from 'react';
 import Helmet from 'react-helmet';
-import Entry from '../../Entry/Entry';
+
 import Error from '../../Error/Error';
+import Loader from '../../Loader/Loader';
 
 import './Article.scss';
 
@@ -39,7 +40,12 @@ export default function Article({
   body
 }) {
   if (fetching) {
-    return <Entry title="Loading..." />;
+    // TODO: find a better loader
+    return (
+      <div className="article">
+        <h1>Loading <Loader /></h1>
+      </div>
+    );
   }
 
   if (error) {
@@ -47,6 +53,7 @@ export default function Article({
       ? <NoArticleFound />
       : <ArticleError />;
   }
+
   return (
     <article className="article">
       <Helmet
