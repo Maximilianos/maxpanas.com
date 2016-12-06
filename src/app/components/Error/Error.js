@@ -41,6 +41,7 @@ export default function Error({
         {message}
       </p>
       <ul className="error__links">
+        {/* global.history is never true on the server... */}
         {!!(global.history && global.history.length) && <li>
           <button
             className="error__back-button"
