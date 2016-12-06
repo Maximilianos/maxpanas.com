@@ -43,15 +43,10 @@ export default function Article({
         title={title}
         meta={[{name: 'description', content: description}]}
       />
-      <header className="article__header">
-        <h1 className="article__title">
-          {title}
-        </h1>
-      </header>
-      <div
-        className="article__body"
-        dangerouslySetInnerHTML={{__html: body}}
-      />
+      <h1>
+        {title}
+      </h1>
+      <div dangerouslySetInnerHTML={{__html: body}} />
     </article>
   );
 }
