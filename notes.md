@@ -17,7 +17,7 @@
 - Display each article immediately when loaded to make it appear archive
   loads faster
 - Add Pagination to archive list (not needed for mvp ?)
-- DONE! - Only show articles with marked "status:published" when in
+- DONE! - Only show articles marked with "status:published" when in
   production mode
 
 ## Cache
