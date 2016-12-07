@@ -49,8 +49,13 @@ function fetchError(status) {
  */
 async function fetchContent(req, {endpoint, parser}) {
   try {
-    const response = await fetch(isFunc(endpoint) ? endpoint(req) : endpoint);
+    const url = isFunc(endpoint)
+      ? endpoint(req)
+      : endpoint;
+
+    const response = await fetch(url);
     const {status} = response;
+
     if (status !== 200) {
       return fetchError(status === 404 ? 404 : 500);
     }
