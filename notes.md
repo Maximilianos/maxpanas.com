@@ -13,3 +13,7 @@
 - app/style/utils/contents.scss
 - app/style/theme/colors.scss
 - update package json
+
+## Random
+
+- Add MathJax to the markdown parser for articles?
