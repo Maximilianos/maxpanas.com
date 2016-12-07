@@ -1,5 +1,25 @@
 # My Blog - Miscellaneous Notes
 
+## Dev / Testing
+
+- Add unit tests for code...
+- Run tests on automatically travis ci
+- Add ability to specify different environments
+- Put project in container for easy deployment (?)
+- Split api and frontend server into separate projects (?)
+- Create monorepo with articles included to facilitate development (?)
+
+## Functionality
+
+- Add Archive page to make it easier for people to find articles (?)
+- Display placeholders for Teasers in Archive component to make archive
+  appear to load faster
+- Display each article immediately when loaded to make it appear archive
+  loads faster
+- Add Pagination to archive list (not needed for mvp ?)
+- Allow for marking articles as "drafts" and only showing them in 
+  development mode
+
 ## Cache
 
 - Static cache should invalidate when the year changes to update 
