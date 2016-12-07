@@ -23,15 +23,13 @@ function isFunc(thing) {
 function fetchError(status) {
   const errors = {
     404: 'The requested content does not exist',
+    403: 'The requested content is not available',
     500: 'There was an error fetching the requested content'
   };
 
   return {
-    status,
-    payload: {error: {
-      status,
-      message: errors[status] || errors[500]
-    }}
+    status: errors[status] ? status : 500,
+    payload: {error: errors[status] || errors[500]}
   };
 }
 
@@ -53,6 +51,8 @@ async function fetchContent(req, {endpoint, parser}) {
       ? endpoint(req)
       : endpoint;
 
+    console.log(url);
+
     const response = await fetch(url);
     const {status} = response;
 
@@ -66,7 +66,7 @@ async function fetchContent(req, {endpoint, parser}) {
 
     return {status, payload};
   } catch (error) {
-    return fetchError(500);
+    return fetchError(error.status);
   }
 }
 
@@ -84,4 +84,16 @@ export default function fetchContentHandler({endpoint, parser}) {
     const {status, payload} = await fetchContent(req, {endpoint, parser});
     res.status(status).json(payload);
   };
+}
+
+
+/**
+ * Really simple error class to represent
+ * a forbidden response
+ *
+ */
+export class ResponseForbiddenError {
+  constructor() {
+    this.status = 403;
+  }
 }

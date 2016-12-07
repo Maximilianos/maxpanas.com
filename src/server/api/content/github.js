@@ -3,6 +3,9 @@ import frontMatter from 'front-matter';
 import marked from 'marked';
 import hljs from 'highlight.js';
 
+import {ResponseForbiddenError} from './fetchContent';
+import {isProduction} from '../../config';
+
 const GITHUB_API = 'https://api.github.com';
 const REPOS_API = `${GITHUB_API}/repos`;
 
@@ -50,6 +53,11 @@ export async function parseArticle(response) {
   const {content} = await response.json();
   const file = Base64.decode(content);
   const {attributes, body} = frontMatter(file);
+
+  if (isProduction && attributes.status !== 'published') {
+    throw new ResponseForbiddenError();
+  }
+
   return {
     ...attributes,
     body: marked(body, {highlight})

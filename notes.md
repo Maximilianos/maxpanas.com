@@ -17,8 +17,8 @@
 - Display each article immediately when loaded to make it appear archive
   loads faster
 - Add Pagination to archive list (not needed for mvp ?)
-- Allow for marking articles as "drafts" and only showing them in 
-  development mode
+- DONE! - Only show articles with marked "status:published" when in
+  production mode
 
 ## Cache
 
