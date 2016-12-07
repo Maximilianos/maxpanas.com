@@ -12,8 +12,24 @@
 
 - app/style/utils/contents.scss
 - app/style/theme/colors.scss
-- update package json
+- update packages in package json
 
 ## Random
 
 - Add MathJax to the markdown parser for articles?
+
+## Analytics
+
+- Server-side logging
+  - log page request
+
+
+- Client-side analytics event tracking. Events to track:
+  - page view
+  - contact form
+    - touched (?)
+    - partially filled in (?)
+    - fully filled in
+    - submission
+      - success
+      - failure - note reason
