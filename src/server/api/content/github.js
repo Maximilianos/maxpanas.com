@@ -44,16 +44,16 @@ export function getArchivePath(archive) {
  * GitHub Api into an article
  *
  * @param {Response} response
- * @returns {Promise}
+ * @returns {{}}
  */
-export function parseArticle(response) {
-  return response.json()
-    .then(json => Base64.decode(json.content))
-    .then(file => frontMatter(file))
-    .then(({attributes, body}) => ({
-      ...attributes,
-      body: marked(body, {highlight})
-    }));
+export async function parseArticle(response) {
+  const {content} = await response.json();
+  const file = Base64.decode(content);
+  const {attributes, body} = frontMatter(file);
+  return {
+    ...attributes,
+    body: marked(body, {highlight})
+  };
 }
 
 
