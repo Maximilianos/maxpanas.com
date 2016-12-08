@@ -3,7 +3,7 @@
 ## Dev / Testing
 
 - Add unit tests for code...
-- Run tests on automatically travis ci
+- Run tests automatically on travis ci
 - Add ability to specify different environments
 - Put project in container for easy deployment (?)
 - Split api and frontend server into separate projects (?)
