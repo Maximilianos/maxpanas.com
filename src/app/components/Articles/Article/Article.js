@@ -18,6 +18,7 @@ Article.propTypes = {
 export default function Article({
   fetching,
   error,
+  published,
   title,
   description,
   body
@@ -46,9 +47,14 @@ export default function Article({
         title={title}
         meta={[{name: 'description', content: description}]}
       />
-      <h1>
-        {title}
-      </h1>
+      <header>
+        <h1>
+          {title}
+        </h1>
+        <ul className="article__meta">
+          {!!published && <li>Published: {published}</li>}
+        </ul>
+      </header>
       <div
         className="article__body"
         dangerouslySetInnerHTML={{__html: body}}

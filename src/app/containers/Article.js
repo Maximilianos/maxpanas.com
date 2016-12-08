@@ -19,15 +19,21 @@ function mapStateToProps({content}, {params: {article}}) {
   const {
     fetching,
     error,
-    data: {title, description, body} = {}
+    data: {
+      published,
+      title,
+      description,
+      body
+    } = {}
   } = content[contentID] || {};
 
   return {
     fetching,
     error,
+    published,
     title,
     description,
-    body
+    body,
   };
 }
 

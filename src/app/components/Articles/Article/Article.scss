@@ -3,7 +3,9 @@
    ========================================= */
 
 @import "../../../style/theme/breakpoints";
+@import "../../../style/theme/typography";
 @import "../../../style/utils/content";
+@import "../../../style/utils/list";
 
 .article {
   @include content-block;
@@ -14,6 +16,17 @@
   align-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.article__meta {
+  @include list--no;
+
+  margin: -0.75em 0 1.5em; // margin top negative to move closer to header
+  padding-left: 0 !important; // override for content-block styles
+
+  font-family: $t-code;
+  font-size: 0.75em;
+  color: lighten($c-body-copy, 50%);
 }
 
 .article__body {
