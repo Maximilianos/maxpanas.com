@@ -30,7 +30,7 @@
 - Articles
   - DONE! - Only show articles marked with "status:published" when in
             production mode
-  - Add published date
+  - DONE! - Add published date
   - Add date of last update
   - Add author(s) avatar(s)
   - Add contributor(s) avatar(s)
