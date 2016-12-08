@@ -15,18 +15,25 @@
   - Add honeypot to email sender to reduce spam
   - Add server side cool-off rate limiter for multiple submissions
   - Use a better service to send emails to me (?)
+  
 - Archive
+  - Sort archive articles by publish date
+  - Only include articles marked with "status:published" when in 
+    production mode
   - Add Archive page to make it easier for people to find articles (?)
   - Display placeholders for Teasers in Archive component to make archive
     appear to load faster
   - Display each article immediately when loaded to make it appear archive
     loads faster
   - Add Pagination to archive list (not needed for mvp ?)
+  
 - Articles
   - DONE! - Only show articles marked with "status:published" when in
-    production mode
+            production mode
   - Add published date
   - Add date of last update
+  - Add author(s) avatar(s)
+  - Add contributor(s) avatar(s)
 
 ## Cache
 
