@@ -13,7 +13,8 @@
 
 - Contact Form
   - Add honeypot to email sender to reduce spam
-  - Add server side cool-off limiter for multiple submissions
+  - Add server side cool-off rate limiter for multiple submissions
+  - Use a better service to send emails to me (?)
 - Archive
   - Add Archive page to make it easier for people to find articles (?)
   - Display placeholders for Teasers in Archive component to make archive
@@ -24,6 +25,8 @@
 - Articles
   - DONE! - Only show articles marked with "status:published" when in
     production mode
+  - Add published date
+  - Add date of last update
 
 ## Cache
 
