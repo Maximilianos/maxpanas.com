@@ -49,7 +49,10 @@ export default function Article({
       <h1>
         {title}
       </h1>
-      <div dangerouslySetInnerHTML={{__html: body}} />
+      <div
+        className="article__body"
+        dangerouslySetInnerHTML={{__html: body}}
+      />
     </article>
   );
 }

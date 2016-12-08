@@ -2,6 +2,7 @@
     Article
    ========================================= */
 
+@import "../../../style/theme/breakpoints";
 @import "../../../style/utils/content";
 
 .article {
@@ -13,4 +14,13 @@
   align-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.article__body {
+  @media all and (min-width: $b-tablet) {
+    > p:first-child {
+      font-size: 1.3em;
+      line-height: 1.4;
+    }
+  }
 }
