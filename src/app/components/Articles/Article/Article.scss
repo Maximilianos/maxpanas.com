@@ -19,14 +19,22 @@
 }
 
 .article__meta {
+  $gutter: 1.5em;
   @include list--no;
 
-  margin: -0.75em 0 1.5em; // margin top negative to move closer to header
+  display: flex;
+  flex-wrap: wrap;
+
+  margin: -0.75em 0 1.5em #{-$gutter}; // margin top negative to move closer to header
   padding-left: 0 !important; // override for content-block styles
 
   font-family: $t-code;
   font-size: 0.75em;
   color: lighten($c-body-copy, 50%);
+
+  li {
+    margin: 0 0 0 $gutter !important; // override for content-block styles
+  }
 }
 
 .article__body {

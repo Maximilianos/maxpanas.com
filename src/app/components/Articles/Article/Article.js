@@ -11,6 +11,8 @@ import './Article.scss';
 Article.propTypes = {
   fetching: PropTypes.bool,
   error: PropTypes.object,
+  authors: PropTypes.array,
+  published: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
   body: PropTypes.string
@@ -18,6 +20,7 @@ Article.propTypes = {
 export default function Article({
   fetching,
   error,
+  authors,
   published,
   title,
   description,
@@ -52,7 +55,10 @@ export default function Article({
           {title}
         </h1>
         <ul className="article__meta">
-          {!!published && <li>Published: {published}</li>}
+          {authors && !!authors.length && (
+            <li>Author{authors.length > 1 && 's'}: {authors.join(', ')}</li>
+          )}
+          {published && <li>Published: {published}</li>}
         </ul>
       </header>
       <div

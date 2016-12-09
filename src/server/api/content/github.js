@@ -52,7 +52,14 @@ export function getArchivePath(archive) {
 export async function parseArticle(response) {
   const {content} = await response.json();
   const file = Base64.decode(content);
-  const {attributes, body} = frontMatter(file);
+  const {
+    attributes: {
+      author,
+      authors,
+      ...attributes
+    },
+    body
+  } = frontMatter(file);
 
   if (isProduction && attributes.status !== 'published') {
     throw new ResponseForbiddenError();
@@ -60,8 +67,44 @@ export async function parseArticle(response) {
 
   return {
     ...attributes,
+    authors: parseAuthors({author, authors}),
     body: marked(body, {highlight})
   };
+}
+
+
+/**
+ * Merge and de-duplicate the author and authors
+ * properties into a single array of authors
+ *
+ * @param author
+ * @param authors
+ * @returns {[*]}
+ */
+function parseAuthors({author, authors}) {
+  const authorArr = wordsArray(author);
+  const authorsArr = wordsArray(authors);
+
+  // return a de-duped concatenation of the two arrays
+  return [...new Set([...authorArr, ...authorsArr])];
+}
+
+
+/**
+ * Get an array of words from the given
+ * string or array
+ *
+ * @param words
+ * @returns {Array}
+ */
+function wordsArray(words) {
+  try {
+    const array = Array.isArray(words)
+      ? words : words.split(/\s*,\s*|\s+/);
+    return array.map(str => str.trim());
+  } catch (error) {
+    return [];
+  }
 }
 
 
@@ -116,6 +159,6 @@ export function parseArchive(response) {
  */
 function getArchiveContents(archive) {
   return archive && archive.length
-    ? archive.map(({name}) => name.slice(0, name.lastIndexOf('.')))
+    ? archive.map(({name}) => name.slice(0, name.indexOf('.')))
     : [];
 }
