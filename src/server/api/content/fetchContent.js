@@ -40,19 +40,12 @@ function fetchError(status) {
  *
  * TODO: implement conditional requests https://developer.github.com/v3/#conditional-requests
  *
- * @param req
- * @param endpoint
+ * @param url
  * @param parser
  * @returns {*}
  */
-async function fetchContent(req, {endpoint, parser}) {
+export async function fetchContent(url, {parser}) {
   try {
-    const url = isFunc(endpoint)
-      ? endpoint(req)
-      : endpoint;
-
-    console.log(url);
-
     const response = await fetch(url);
     const {status} = response;
 
@@ -79,9 +72,13 @@ async function fetchContent(req, {endpoint, parser}) {
  * @param parser
  * @returns {function(*=, *)}
  */
-export default function fetchContentHandler({endpoint, parser}) {
+export default function fetchContentMiddlewareFactory({endpoint, parser}) {
   return async (req, res) => {
-    const {status, payload} = await fetchContent(req, {endpoint, parser});
+    const url = isFunc(endpoint)
+      ? endpoint(req)
+      : endpoint;
+
+    const {status, payload} = await fetchContent(url, {parser});
     res.status(status).json(payload);
   };
 }
