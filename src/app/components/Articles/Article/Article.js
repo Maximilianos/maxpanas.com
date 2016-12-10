@@ -59,28 +59,32 @@ export default function Article({
         </h1>
         <ul className="article__meta">
           {authors && !!authors.length && (
-            <li>Author{authors.length > 1 && 's'}: {authors.map(({username, avatar, name}) => (
-              <Avatar
-                key={username}
-                className="article__avatar"
-                src={avatar}
-                alt={username}
-                title={name || username}
-                size={23}
-              />
-            ))}</li>
+            <li>Author{authors.length > 1 && 's'}:&nbsp;
+              {authors.map(({username, avatar, name}) => (
+                <Avatar
+                  key={username}
+                  className="article__avatar"
+                  src={avatar}
+                  alt={username}
+                  title={name || username}
+                  size={23}
+                />
+              ))}
+            </li>
           )}
           {contributors && !!contributors.length && (
-            <li>Contributor{authors.length > 1 && 's'}: {contributors.map(({username, avatar, name}) => (
-              <Avatar
-                key={username}
-                className="article__avatar"
-                src={avatar}
-                alt={username}
-                title={name || username}
-                size={23}
-              />
-            ))}</li>
+            <li>Contributor{authors.length > 1 && 's'}:&nbsp;
+              {contributors.map(({username, avatar, name}) => (
+                <Avatar
+                  key={username}
+                  className="article__avatar"
+                  src={avatar}
+                  alt={username}
+                  title={name || username}
+                  size={23}
+                />
+              ))}
+            </li>
           )}
           {published && <li>Published: {published}</li>}
         </ul>
