@@ -37,6 +37,12 @@
   }
 }
 
+.article__avatar {
+  &:not(:first-child) {
+    margin-left: 0.3em;
+  }
+}
+
 .article__body {
   @media all and (min-width: $b-tablet) {
     > p:first-child {

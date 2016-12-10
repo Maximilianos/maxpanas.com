@@ -60,10 +60,11 @@ export default function Article({
             <li>Author{authors.length > 1 && 's'}: {authors.map(({username, avatar, name}) => (
               <Avatar
                 key={username}
+                className="article__avatar"
                 src={avatar}
                 alt={username}
                 title={name || username}
-                size={25}
+                size={23}
               />
             ))}</li>
           )}
