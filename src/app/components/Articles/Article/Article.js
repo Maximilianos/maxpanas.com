@@ -13,6 +13,7 @@ Article.propTypes = {
   fetching: PropTypes.bool,
   error: PropTypes.object,
   authors: PropTypes.array,
+  contributors: PropTypes.array,
   published: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
@@ -22,6 +23,7 @@ export default function Article({
   fetching,
   error,
   authors,
+  contributors,
   published,
   title,
   description,
@@ -58,6 +60,18 @@ export default function Article({
         <ul className="article__meta">
           {authors && !!authors.length && (
             <li>Author{authors.length > 1 && 's'}: {authors.map(({username, avatar, name}) => (
+              <Avatar
+                key={username}
+                className="article__avatar"
+                src={avatar}
+                alt={username}
+                title={name || username}
+                size={23}
+              />
+            ))}</li>
+          )}
+          {contributors && !!contributors.length && (
+            <li>Contributor{authors.length > 1 && 's'}: {contributors.map(({username, avatar, name}) => (
               <Avatar
                 key={username}
                 className="article__avatar"

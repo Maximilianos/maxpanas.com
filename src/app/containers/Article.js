@@ -21,6 +21,7 @@ function mapStateToProps({content}, {params: {article}}) {
     error,
     data: {
       authors,
+      contributors,
       published,
       title,
       description,
@@ -32,6 +33,7 @@ function mapStateToProps({content}, {params: {article}}) {
     fetching,
     error,
     authors,
+    contributors,
     published,
     title,
     description,
