@@ -1,3 +1,5 @@
+import qs from 'querystring';
+import parseLinks from 'parse-link-header';
 import {Base64} from 'js-base64';
 import frontMatter from 'front-matter';
 import marked from 'marked';
@@ -6,17 +8,18 @@ import hljs from 'highlight.js';
 import {fetchContent, ResponseForbiddenError} from './fetchContent';
 import {isProduction} from '../../config';
 
+const USER = 'Maximilianos';
+const REPO = 'articles';
+const ARTICLES_BASE_DIR = 'articles';
+
 const GITHUB_API = 'https://api.github.com';
-const REPOS_API = `${GITHUB_API}/repos`;
+
 const USERS_API = `${GITHUB_API}/users`;
 
-/**
- * Base url for all api fetch
- * requests
- *
- * @type {string}
- */
-const REPO_API_BASE = `${REPOS_API}/Maximilianos/articles/contents`;
+const REPOS_API = `${GITHUB_API}/repos`;
+const REPO_API = `${REPOS_API}/${USER}/${REPO}`;
+const REPO_CONTENT_API = `${REPO_API}/contents`;
+const REPO_COMMITS_API = `${REPO_API}/commits`;
 
 
 /**
@@ -27,7 +30,26 @@ const REPO_API_BASE = `${REPOS_API}/Maximilianos/articles/contents`;
  * @returns {string}
  */
 export function getArticlePath(article) {
-  return `${REPO_API_BASE}/articles/${article}.md`;
+  return `${REPO_CONTENT_API}/${ARTICLES_BASE_DIR}/${article}.md`;
+}
+
+
+/**
+ * Return the api endpoint on
+ * github for the updates to a
+ * given article
+ *
+ * @param article
+ * @param perPage
+ * @param page
+ * @returns {string}
+ */
+export function getArticleUpdatesPath(article, {perPage = 100, page = 1} = {}) {
+  return `${REPO_COMMITS_API}?${qs.stringify({
+    path: `/${ARTICLES_BASE_DIR}/${article}.md`,
+    per_page: perPage,
+    page
+  })}`;
 }
 
 
@@ -39,7 +61,7 @@ export function getArticlePath(article) {
  * @returns {string}
  */
 export function getArchivePath(archive) {
-  return `${REPO_API_BASE}/${archive}`;
+  return `${REPO_CONTENT_API}/${archive}`;
 }
 
 
@@ -63,7 +85,7 @@ function getAuthorPath(username) {
  * @returns {{}}
  */
 export async function parseArticle(response) {
-  const {content} = await response.json();
+  const {name, content} = await response.json();
   const file = Base64.decode(content);
   const {
     attributes: {
@@ -83,8 +105,82 @@ export async function parseArticle(response) {
   return {
     ...attributes,
     authors: await fetchAuthorData(authorUsernames),
+    contributors: await fetchContributorData(removeExtension(name)),
     body: marked(body, {highlight})
   };
+}
+
+
+/**
+ * Fetch contributor data for
+ * the given article
+ *
+ * @param article
+ * @returns {*}
+ */
+async function fetchContributorData(article) {
+  const {payload} = await fetchContent(
+    getArticleUpdatesPath(article),
+    {parser: collatePaginatedContent(parseJson)}
+  );
+
+  return payload
+    .map(({
+      commit: {author: {name}},
+      author: {login, avatar_url}
+    }) => ({username: login, avatar: avatar_url, name}))
+    .reduce(aggregateContributions, []);
+}
+
+export function collatePaginatedContent(parser) {
+  return async function collater(response) {
+    const payload = await parser(response);
+    if (!Array.isArray(payload)) {
+      throw new TypeError('Error: Payload must be an array in order to be collated');
+    }
+
+    const linkHeader = response.headers.get('Link');
+    if (!linkHeader) {
+      return payload;
+    }
+
+    const {next} = parseLinks(linkHeader);
+    if (!next) {
+      return payload;
+    }
+
+    const {payload: nextPayload} = await fetchContent(next.url, {
+      parser: collater
+    });
+
+    if (nextPayload.error) {
+      throw new Error('Error: Collation failed because one of the requests to failed');
+    }
+
+    return payload.concat(nextPayload);
+  };
+}
+
+function parseJson(response) {
+  return response.json();
+}
+
+
+function aggregateContributions(agg, {username, avatar, name, contributions = 1}) {
+  const indexOfExisting = agg.findIndex(c => c.username === username);
+  if (indexOfExisting >= 0) {
+    agg[indexOfExisting] = {
+      ...agg[indexOfExisting],
+      contributions: agg[indexOfExisting].contributions + contributions
+    };
+
+    return agg;
+  }
+
+  return agg.concat({
+    username, avatar, name,
+    contributions,
+  });
 }
 
 
@@ -209,6 +305,18 @@ export function parseArchive(response) {
  */
 function getArchiveContents(archive) {
   return archive && archive.length
-    ? archive.map(({name}) => name.slice(0, name.indexOf('.')))
+    ? archive.map(({name}) => removeExtension(name))
     : [];
+}
+
+
+/**
+ * Simplistic remove extension from
+ * file path
+ *
+ * @param {string} path
+ * @returns {string}
+ */
+function removeExtension(path) {
+  return path.slice(0, path.indexOf('.'));
 }
