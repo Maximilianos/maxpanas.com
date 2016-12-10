@@ -3,11 +3,12 @@ import frontMatter from 'front-matter';
 import marked from 'marked';
 import hljs from 'highlight.js';
 
-import {ResponseForbiddenError} from './fetchContent';
+import {fetchContent, ResponseForbiddenError} from './fetchContent';
 import {isProduction} from '../../config';
 
 const GITHUB_API = 'https://api.github.com';
 const REPOS_API = `${GITHUB_API}/repos`;
+const USERS_API = `${GITHUB_API}/users`;
 
 /**
  * Base url for all api fetch
@@ -15,7 +16,7 @@ const REPOS_API = `${GITHUB_API}/repos`;
  *
  * @type {string}
  */
-const API_BASE = `${REPOS_API}/Maximilianos/articles/contents`;
+const REPO_API_BASE = `${REPOS_API}/Maximilianos/articles/contents`;
 
 
 /**
@@ -26,7 +27,7 @@ const API_BASE = `${REPOS_API}/Maximilianos/articles/contents`;
  * @returns {string}
  */
 export function getArticlePath(article) {
-  return `${API_BASE}/articles/${article}.md`;
+  return `${REPO_API_BASE}/articles/${article}.md`;
 }
 
 
@@ -38,7 +39,19 @@ export function getArticlePath(article) {
  * @returns {string}
  */
 export function getArchivePath(archive) {
-  return `${API_BASE}/${archive}`;
+  return `${REPO_API_BASE}/${archive}`;
+}
+
+
+/**
+ * Return the api endpoint on
+ * github for the given user
+ *
+ * @param username
+ * @returns {string}
+ */
+function getAuthorPath(username) {
+  return `${USERS_API}/${username}`;
 }
 
 
@@ -65,11 +78,48 @@ export async function parseArticle(response) {
     throw new ResponseForbiddenError();
   }
 
+  const authorUsernames = parseAuthors({author, authors});
+
   return {
     ...attributes,
-    authors: parseAuthors({author, authors}),
+    authors: await fetchAuthorData(authorUsernames),
     body: marked(body, {highlight})
   };
+}
+
+
+/**
+ * Parse a response from the
+ * GitHub Api into an author
+ *
+ * @param response
+ * @returns {{username, avatar_url, name}}
+ */
+async function parseAuthor(response) {
+  const {login, avatar_url, name} = await response.json();
+  return {
+    username: login,
+    avatar_url,
+    name
+  };
+}
+
+
+/**
+ * Fetch author data for all given
+ * usernames
+ *
+ * @param usernames
+ * @returns {*}
+ */
+async function fetchAuthorData(usernames) {
+  const requests = usernames.map(username => fetchContent(
+    getAuthorPath(username),
+    {parser: parseAuthor})
+  );
+
+  const data = await Promise.all(requests);
+  return data.map(({payload}) => payload);
 }
 
 
