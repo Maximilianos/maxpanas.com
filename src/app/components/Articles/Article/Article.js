@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import Helmet from 'react-helmet';
 
+import Avatar from '../../Avatar/Avatar';
 import Loader from '../../Loader/Loader';
 import NotFound from '../../Error/NotFound';
 import Error from '../../../containers/Error';
@@ -56,7 +57,15 @@ export default function Article({
         </h1>
         <ul className="article__meta">
           {authors && !!authors.length && (
-            <li>Author{authors.length > 1 && 's'}: {authors.join(', ')}</li>
+            <li>Author{authors.length > 1 && 's'}: {authors.map(({username, avatar, name}) => (
+              <Avatar
+                key={username}
+                src={avatar}
+                alt={username}
+                title={name || username}
+                size={25}
+              />
+            ))}</li>
           )}
           {published && <li>Published: {published}</li>}
         </ul>

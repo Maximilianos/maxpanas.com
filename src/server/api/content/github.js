@@ -99,7 +99,7 @@ async function parseAuthor(response) {
   const {login, avatar_url, name} = await response.json();
   return {
     username: login,
-    avatar_url,
+    avatar: avatar_url,
     name
   };
 }
