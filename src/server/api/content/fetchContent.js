@@ -59,6 +59,7 @@ export async function fetchContent(url, {parser}) {
 
     return {status, payload};
   } catch (error) {
+    console.log(error);
     return fetchError(error.status);
   }
 }
