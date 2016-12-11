@@ -1,5 +1,6 @@
 import qs from 'querystring';
 import parseLinks from 'parse-link-header';
+
 import {Base64} from 'js-base64';
 import frontMatter from 'front-matter';
 import marked from 'marked';
@@ -125,13 +126,19 @@ async function fetchContributorData(article) {
   );
 
   return payload
-    .map(({
-      commit: {author: {name}},
-      author: {login, avatar_url}
-    }) => ({username: login, avatar: avatar_url, name}))
+    .map(({commit: {author: {name}}, author: {login, avatar_url}}) => ({
+      username: login, avatar: avatar_url, name
+    }))
     .reduce(aggregateContributions, []);
 }
 
+
+/**
+ *
+ *
+ * @param parser
+ * @returns {function}
+ */
 export function collatePaginatedContent(parser) {
   return async function collater(response) {
     const payload = await parser(response);
@@ -161,11 +168,28 @@ export function collatePaginatedContent(parser) {
   };
 }
 
+
+/**
+ *
+ *
+ * @param response
+ * @returns {Promise}
+ */
 function parseJson(response) {
   return response.json();
 }
 
 
+/**
+ *
+ *
+ * @param agg
+ * @param username
+ * @param avatar
+ * @param name
+ * @param contributions
+ * @returns {array}
+ */
 function aggregateContributions(agg, {username, avatar, name, contributions = 1}) {
   const indexOfExisting = agg.findIndex(c => c.username === username);
   if (indexOfExisting >= 0) {
