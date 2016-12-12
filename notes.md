@@ -8,6 +8,8 @@
 - Put project in container for easy deployment (?)
 - Split api and frontend server into separate projects (?)
 - Create monorepo with articles included to facilitate maintenance (?)
+- set up staging environment
+- set up production environment
 
 ## Functionality
 
