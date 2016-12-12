@@ -5,11 +5,29 @@ import validateData from '../../../utils/validator/validateData';
 
 import secrets from '../../../../secrets.json';
 
+
+const errors = {
+  invalid: {
+    code: 'INVALID',
+    summary: 'The data provided was invalid.'
+  },
+  mail: {
+    code: 'MAIL_ERROR',
+    summary: 'There was an error sending your email, please try again.'
+  },
+  generic: {
+    code: 'GENERIC_ERROR',
+    summary: 'There was an error processing your request.'
+  }
+};
+
+
 const schema = {
   name: {isNotEmpty},
   email: {isNotEmpty, isEmail},
   message: {isNotEmpty}
 };
+
 
 /**
  * Handle submissions to the contact
@@ -30,32 +48,16 @@ export default async function contactFormHandler(req, res) {
       || !formFields.every(field => schema.hasOwnProperty(field))
     ) {
       res.status(400).json({
-        error: {
-          code: 'INCORRECT',
-          summary: 'The submission was missing data or contained invalid fields.'
-        }
+        error: errors.invalid
       });
-
       return;
     }
 
     const validationResult = await validateData(schema, formData);
-
     if (!validationResult.valid) {
-      const errorDetails = Object.entries(validationResult.elements)
-        .reduce((result, [field, {valid, validations}]) => ({
-          ...result,
-          [field]: {valid, validations}
-        }), {});
-
       res.status(400).json({
-        error: {
-          code: 'INVALID',
-          summary: 'The data provided was invalid.',
-          details: errorDetails
-        }
+        error: errors.invalid
       });
-
       return;
     }
 
@@ -73,24 +75,19 @@ export default async function contactFormHandler(req, res) {
     }, (error) => {
       if (error) {
         res.status(500).json({
-          error: {
-            code: 'MAIL_ERROR',
-            summary: 'There was an error sending your email, please try again.'
-          }
+          error: errors.mail
         });
-
         return;
       }
 
-      res.json({success: true});
+      res.json({
+        success: true
+      });
     });
 
   } catch (error) {
     res.status(500).json({
-      error: {
-        code: 'GENERIC_ERROR',
-        summary: 'There was an error processing your request.'
-      }
+      error: errors.generic
     });
   }
 }
