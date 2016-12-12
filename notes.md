@@ -16,7 +16,7 @@
   - make content api calls use absolute url not relative
 
 - Contact Form
-  - Add honeypot to email sender to reduce spam
+  - DONE! - Add honeypot to email sender to reduce spam
   - Add server side cool-off rate limiter for multiple submissions
   - Use a better service to send emails to me (?)
   
