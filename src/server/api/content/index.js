@@ -2,12 +2,8 @@ import express from 'express';
 import cache from '../../cache';
 
 import fetchContent from './fetchContent';
-import {
-  getArticlePath,
-  getArchivePath,
-  parseArticle,
-  parseArchive
-} from './github';
+import {getArticlePath, parseArticle} from './github/types/article';
+import {getArchivePath, parseArchive} from './github/types/archive';
 
 const app = express();
 
