@@ -11,6 +11,10 @@
 
 ## Functionality
 
+- Api calls
+  - make contact form use absolute url not relative for api submission
+  - make content api calls use absolute url not relative
+
 - Contact Form
   - Add honeypot to email sender to reduce spam
   - Add server side cool-off rate limiter for multiple submissions
