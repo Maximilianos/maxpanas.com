@@ -1,5 +1,6 @@
 import {Base64} from 'js-base64';
 import frontMatter from 'front-matter';
+import readingTime from 'reading-time';
 import marked from 'marked';
 import hljs from 'highlight.js';
 
@@ -85,6 +86,7 @@ export async function parseArticle(response) {
     authors: await authorsData,
     contributors: getContributorData(allUpdates),
     latestUpdate: getLatestUpdateData(allUpdates),
+    readingTime: readingTime(body),
     body: marked(body, {highlight})
   };
 }

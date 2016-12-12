@@ -41,6 +41,7 @@
   - DONE! - Add date of last update
   - DONE! - Add author(s) avatar(s)
   - DONE! - Add contributor(s) avatar(s)
+  - do something with reading time data
   - add social sharing buttons
   - add comment form
   - add comment feed
