@@ -16,12 +16,13 @@
 - Api calls
   - DONE! - make contact form use absolute url not relative for api submission
   - DONE! - make content api calls use absolute url not relative
+  - cache all successful api calls in redis db
 
 - Contact Form
   - DONE! - Add honeypot to email sender to reduce spam
   - Add server side cool-off rate limiter for multiple submissions
   - Use a better service to send emails to me (?)
-  
+
 - Archive
   - DONE! - Sort archive articles by publish date
   - DONE! - Only include articles marked with "status:published" when in 
@@ -32,7 +33,7 @@
   - Display each article immediately when loaded to make it appear archive
     loads faster
   - Add Pagination to archive list (not needed for mvp ?)
-  
+
 - Articles
   - DONE! - Only show articles marked with "status:published" when in
             production mode
@@ -40,6 +41,9 @@
   - DONE! - Add date of last update
   - DONE! - Add author(s) avatar(s)
   - DONE! - Add contributor(s) avatar(s)
+  - add social sharing buttons
+  - add comment form
+  - add comment feed
 
 ## Cache
 
