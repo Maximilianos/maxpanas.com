@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import myYearsExperience from '../../../../utils/myYearsExperience';
+import myYearsExperience from '../../../utils/myYearsExperience';
 
 import ContactForm from '../../../containers/ContactForm';
 

@@ -1,6 +1,5 @@
 import {initialize, startSubmit, stopSubmit} from 'redux-form';
 import {onSubmit, validate} from '../../../app/containers/ContactForm';
-import isNonEmptyObject from '../../../utils/isNonEmptyObject';
 
 
 /**
@@ -52,4 +51,15 @@ export default async function contact(req, res, next) {
     dispatch(initialize(form, req.body));
     dispatch(stopSubmit(form, errors));
   }
+}
+
+
+/**
+ * Determine if thing is a non empty Object
+ *
+ * @param thing
+ * @returns {boolean}
+ */
+function isNonEmptyObject(thing) {
+  return thing.constructor === Object && Object.keys(thing).length > 0;
 }
