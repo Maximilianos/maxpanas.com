@@ -21,9 +21,10 @@ const formMessages = {
  * @param {string} name
  * @param {string} email
  * @param {string} message
+ * @param {string} botpot
  * @returns {object}
  */
-export function validate({name, email, message} = {}) {
+export function validate({name, email, message, botpot} = {}) {
   const errors = {};
 
   if (!name) {
@@ -38,6 +39,10 @@ export function validate({name, email, message} = {}) {
 
   if (!message) {
     errors.message = 'Please, tell me what you would like from me';
+  }
+
+  if (botpot) {
+    errors.botpot = true;
   }
 
   // display a form-level error if any of the validations above failed

@@ -3,6 +3,7 @@ import React, {PropTypes} from 'react';
 import {Field} from 'redux-form';
 import Form from '../../Form/Form';
 import Input from '../../Form/Input/Input';
+import BotPot from '../../Form/BotPot/BotPot';
 import Submit from '../../Form/Submit/Submit';
 
 
@@ -49,6 +50,8 @@ export default function ContactForm({
         component={Input}
         showError={submitFailed}
       />
+
+      <BotPot />
 
       <Submit
         submitting={submitting}
