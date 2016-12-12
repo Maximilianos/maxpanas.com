@@ -16,7 +16,6 @@
 - Api calls
   - DONE! - make contact form use absolute url not relative for api submission
   - DONE! - make content api calls use absolute url not relative
-  - make endpoints for api calls configurable
 
 - Contact Form
   - DONE! - Add honeypot to email sender to reduce spam
@@ -24,9 +23,9 @@
   - Use a better service to send emails to me (?)
   
 - Archive
-  - Sort archive articles by publish date
-  - Only include articles marked with "status:published" when in 
-    production mode
+  - DONE! - Sort archive articles by publish date
+  - DONE! - Only include articles marked with "status:published" when in 
+            production mode
   - Add Archive page to make it easier for people to find articles (?)
   - Display placeholders for Teasers in Archive component to make archive
     appear to load faster
