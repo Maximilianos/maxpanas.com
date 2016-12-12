@@ -8,12 +8,21 @@ import Error from '../../../containers/Error';
 
 import './Article.scss';
 
+const AuthorInterface = {
+  username: PropTypes.string,
+  avatar: PropTypes.string,
+  name: PropTypes.string
+};
+
+const AuthorsInterface = PropTypes.arrayOf(
+  PropTypes.shape(AuthorInterface)
+);
 
 Article.propTypes = {
   fetching: PropTypes.bool,
   error: PropTypes.object,
-  authors: PropTypes.array,
-  contributors: PropTypes.array,
+  authors: AuthorsInterface,
+  contributors: AuthorsInterface,
   published: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
