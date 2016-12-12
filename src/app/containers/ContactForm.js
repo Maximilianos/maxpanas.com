@@ -3,6 +3,7 @@ import {reduxForm, SubmissionError} from 'redux-form';
 import isEmail from 'validator/lib/isEmail';
 import fetch from 'isomorphic-fetch';
 
+import {FORM_API} from '../config';
 import ContactForm from '../components/Pages/Contact/ContactForm';
 
 
@@ -58,15 +59,12 @@ export function validate({name, email, message, botpot} = {}) {
  * Handle the contact form submission on the client side
  *
  * @param {object} values
- * @param {function} dispatch
- * @param {object} props
- * @param {string} urlBase
  */
-export async function onSubmit(values, dispatch, props, urlBase = '') {
+export async function onSubmit(values) {
   let json;
 
   try {
-    const response = await fetch(`${urlBase}api/forms/contact`, {
+    const response = await fetch(`${FORM_API}/contact`, {
       method: 'POST',
       headers: new Headers({'Content-Type': 'application/json'}),
       body: JSON.stringify(values)

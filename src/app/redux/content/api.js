@@ -1,13 +1,5 @@
 import {fetchContentIfNeeded} from './actions';
-
-
-/**
- * Base url for all content api
- * fetch requests
- *
- * @type {string}
- */
-export const API_BASE = 'http://localhost:8000/api/content';
+import {CONTENT_API} from '../../config';
 
 
 /**
@@ -19,7 +11,7 @@ export const API_BASE = 'http://localhost:8000/api/content';
  * @returns {string}
  */
 export function getArticlePath(article) {
-  return `${API_BASE}/articles/${article}`;
+  return `${CONTENT_API}/articles/${article}`;
 }
 
 
@@ -32,7 +24,7 @@ export function getArticlePath(article) {
  * @returns {string}
  */
 export function getArchivePath(archive) {
-  return `${API_BASE}/archives/${archive}`;
+  return `${CONTENT_API}/archives/${archive}`;
 }
 
 

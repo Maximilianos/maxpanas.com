@@ -30,7 +30,7 @@ export default async function contact(req, res, next) {
   }
 
   try {
-    await onSubmit(req.body, null, null, `${req.protocol}://${req.get('host')}/`);
+    await onSubmit(req.body);
   } catch (error) {
     dispatchFailure(error.errors);
     next();

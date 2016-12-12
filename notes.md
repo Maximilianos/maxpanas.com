@@ -12,8 +12,9 @@
 ## Functionality
 
 - Api calls
-  - make contact form use absolute url not relative for api submission
-  - make content api calls use absolute url not relative
+  - DONE! - make contact form use absolute url not relative for api submission
+  - DONE! - make content api calls use absolute url not relative
+  - make endpoints for api calls configurable
 
 - Contact Form
   - DONE! - Add honeypot to email sender to reduce spam
@@ -55,7 +56,7 @@
 
 ## Random
 
-- Add MathJax to the markdown parser for articles?
+- Add MathJax to the markdown parser for articles (?)
 
 ## Analytics
 
