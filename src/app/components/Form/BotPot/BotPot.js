@@ -11,10 +11,7 @@ export default function BotPot({name = 'botpot'}) {
     <div className="bot-pot">
       <label>
         Don't fill this field in, if you are human<br />
-        <Field
-          name={name}
-          component="input"
-        />
+        <Field name={name} component="input" />
       </label>
     </div>
   );
