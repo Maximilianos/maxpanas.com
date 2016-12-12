@@ -1,5 +1,6 @@
 import qs from 'querystring';
 import parseLinks from 'parse-link-header';
+import moment from 'moment';
 
 import {Base64} from 'js-base64';
 import frontMatter from 'front-matter';
@@ -113,6 +114,7 @@ export async function parseArticle(response) {
     ...attributes,
     authors: await authorsData,
     contributors: getContributorData(allUpdates),
+    latestUpdate: getLatestUpdateData(allUpdates),
     body: marked(body, {highlight})
   };
 }
@@ -120,8 +122,30 @@ export async function parseArticle(response) {
 
 /**
  *
- * @param article
+ * @param allUpdates
  * @returns {*}
+ */
+function getLatestUpdateData(allUpdates) {
+  const {
+    commit: {author: {name, date}, message},
+    author: {login, avatar_url}
+  } = allUpdates[0];
+
+  return {
+    date: moment(date).format('DD/MM/YYYY'),
+    message,
+    author: {
+      username: login,
+      avatar: avatar_url,
+      name
+    }
+  };
+}
+
+
+/**
+ *
+ * @param article
  */
 async function fetchUpdatesData(article) {
   const response = await fetchContent(
