@@ -229,7 +229,7 @@ function aggregateContributions(agg, {username, avatar, name, contributions = 1}
  * GitHub Api into an author
  *
  * @param response
- * @returns {{username, avatar_url, name}}
+ * @returns {{username, avatar, name}}
  */
 async function parseAuthor(response) {
   const {login, avatar_url, name} = await response.json();
