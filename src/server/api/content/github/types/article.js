@@ -6,12 +6,30 @@ import hljs from 'highlight.js';
 import {isProduction} from '../../../../config';
 import {ARTICLES_BASE_DIR, REPO_CONTENT_API} from '../config';
 
-import {ResponseForbiddenError} from '../../fetchContent';
+import {fetchContent, ResponseForbiddenError} from '../../fetchContent';
 import {removeFileExtension} from '../utils';
 import {fetchUserData} from './user';
 import {parseAuthors} from './user/author';
 import {getContributorData} from './user/contributor';
 import {fetchUpdatesData, getLatestUpdateData} from './updates';
+
+
+/**
+ * Fetch article data for the given
+ * article slugs
+ *
+ * @param articles
+ * @returns {*}
+ */
+export async function fetchArticleData(articles) {
+  const requests = articles.map(username => fetchContent(
+    getArticlePath(username),
+    {parser: parseArticle})
+  );
+
+  const data = await Promise.all(requests);
+  return data.map(({payload}) => payload);
+}
 
 
 /**
@@ -60,6 +78,7 @@ export async function parseArticle(response) {
   const allUpdates = await fetchUpdatesData(article);
 
   return {
+    slug: article,
     ...attributes,
     authors: await authorsData,
     contributors: getContributorData(allUpdates),

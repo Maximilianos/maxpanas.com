@@ -1,5 +1,6 @@
 import {REPO_CONTENT_API} from '../config';
 import {removeFileExtension} from '../utils';
+import {fetchArticleData} from './article';
 
 
 /**
@@ -25,7 +26,13 @@ export function getArchivePath(archive) {
  */
 export function parseArchive(response) {
   return response.json()
-    .then(getArchiveContents);
+    .then(getArchiveArticles)
+    .then(fetchArticleData)
+    .then(articles => articles
+      .filter(({error}) => !error)
+      .sort((a, b) => a.published < b.published)
+      .map(({slug}) => slug)
+    );
 }
 
 
@@ -36,7 +43,7 @@ export function parseArchive(response) {
  * @param {*} archive
  * @returns {Array}
  */
-function getArchiveContents(archive) {
+function getArchiveArticles(archive) {
   return archive && archive.length
     ? archive.map(({name}) => removeFileExtension(name))
     : [];
