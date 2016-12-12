@@ -101,14 +101,35 @@ export async function parseArticle(response) {
     throw new ResponseForbiddenError();
   }
 
+  // dispatch requests for author data
   const authorUsernames = parseAuthors({author, authors});
+  const authorsData = fetchAuthorData(authorUsernames);
+
+  // dispatch requests for latest update and contributor data
+  const article = removeExtension(name);
+  const allUpdates = await fetchUpdatesData(article);
 
   return {
     ...attributes,
-    authors: await fetchAuthorData(authorUsernames),
-    contributors: await fetchContributorData(removeExtension(name)),
+    authors: await authorsData,
+    contributors: getContributorData(allUpdates),
     body: marked(body, {highlight})
   };
+}
+
+
+/**
+ *
+ * @param article
+ * @returns {*}
+ */
+async function fetchUpdatesData(article) {
+  const response = await fetchContent(
+    getArticleUpdatesPath(article),
+    {parser: collatePaginatedContent(parseJson)}
+  );
+
+  return response.payload;
 }
 
 
@@ -116,16 +137,11 @@ export async function parseArticle(response) {
  * Fetch contributor data for
  * the given article
  *
- * @param article
+ * @param allUpdates
  * @returns {*}
  */
-async function fetchContributorData(article) {
-  const {payload} = await fetchContent(
-    getArticleUpdatesPath(article),
-    {parser: collatePaginatedContent(parseJson)}
-  );
-
-  return payload
+function getContributorData(allUpdates) {
+  return allUpdates
     .map(({commit: {author: {name}}, author: {login, avatar_url}}) => ({
       username: login, avatar: avatar_url, name
     }))
