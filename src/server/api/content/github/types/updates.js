@@ -1,10 +1,9 @@
 import qs from 'querystring';
-import moment from 'moment';
 
 import {ARTICLES_BASE_DIR, REPO_COMMITS_API} from '../config';
 
 import {fetchContent} from '../../fetchContent';
-import {collatePaginatedContent} from '../utils';
+import {formatDate, collatePaginatedContent} from '../utils';
 
 
 /**
@@ -21,7 +20,7 @@ export function getLatestUpdateData(allUpdates) {
   } = allUpdates[0];
 
   return {
-    date: moment(date).format('DD/MM/YYYY'),
+    date: formatDate(date),
     message,
     author: {
       username: login,

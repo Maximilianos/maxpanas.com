@@ -1,5 +1,24 @@
+import moment from 'moment';
 import parseLinks from 'parse-link-header';
 import {fetchContent} from '../fetchContent';
+
+
+/**
+ * Format a given date string to the format required
+ * for the front end
+ *
+ * @param dateString
+ * @param inputFormat
+ * @param outputFormat
+ * @returns {string}
+ */
+export function formatDate(dateString, {
+  from: inputFormat,
+  to: outputFormat = 'YYYY/MM/DD'
+}) {
+  return moment(dateString, inputFormat)
+    .format(outputFormat);
+}
 
 
 /**

@@ -7,7 +7,7 @@ import {isProduction} from '../../../../config';
 import {ARTICLES_BASE_DIR, REPO_CONTENT_API} from '../config';
 
 import {fetchContent, ResponseForbiddenError} from '../../fetchContent';
-import {removeFileExtension} from '../utils';
+import {formatDate, removeFileExtension} from '../utils';
 import {fetchUserData} from './user';
 import {parseAuthors} from './user/author';
 import {getContributorData} from './user/contributor';
@@ -60,6 +60,7 @@ export async function parseArticle(response) {
     attributes: {
       author,
       authors,
+      published,
       ...attributes
     },
     body
@@ -80,6 +81,7 @@ export async function parseArticle(response) {
   return {
     slug: article,
     ...attributes,
+    published: formatDate(published, {from: 'DD/MM/YYYY'}),
     authors: await authorsData,
     contributors: getContributorData(allUpdates),
     latestUpdate: getLatestUpdateData(allUpdates),
