@@ -30,17 +30,21 @@ function mapStateToProps({content}, {params: {article}}) {
     } = {}
   } = content[contentID] || {};
 
-  const authorUsernames = authors.map(({username}) => username);
-  const contributorsWithoutAuthors = contributors
-    .filter(({username}) => authorUsernames.indexOf(username) < 0);
+  let contributorsButNotAuthors = contributors;
+  if (authors && authors.length && contributors && contributors.length) {
+    const authorUsernames = authors.map(({username}) => username);
+    contributorsButNotAuthors = contributors.filter(
+      ({username}) => authorUsernames.indexOf(username) < 0
+    );
+  }
 
   return {
     fetching,
     error,
     authors,
-    contributors: contributorsWithoutAuthors,
+    contributors: contributorsButNotAuthors,
     published,
-    latestUpdate: latestUpdate.date > published ? latestUpdate : null,
+    latestUpdate: latestUpdate && latestUpdate.date > published ? latestUpdate : null,
     title,
     description,
     body
