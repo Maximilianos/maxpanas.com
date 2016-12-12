@@ -29,11 +29,15 @@ function mapStateToProps({content}, {params: {article}}) {
     } = {}
   } = content[contentID] || {};
 
+  const authorUsernames = authors.map(({username}) => username);
+  const contributorsWithoutAuthors = contributors
+    .filter(({username}) => authorUsernames.indexOf(username) < 0);
+
   return {
     fetching,
     error,
     authors,
-    contributors,
+    contributors: contributorsWithoutAuthors,
     published,
     title,
     description,
