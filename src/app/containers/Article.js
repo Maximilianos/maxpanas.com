@@ -23,6 +23,7 @@ function mapStateToProps({content}, {params: {article}}) {
       authors,
       contributors,
       published,
+      latestUpdate,
       title,
       description,
       body
@@ -39,6 +40,7 @@ function mapStateToProps({content}, {params: {article}}) {
     authors,
     contributors: contributorsWithoutAuthors,
     published,
+    latestUpdate: latestUpdate.date > published ? latestUpdate : null,
     title,
     description,
     body

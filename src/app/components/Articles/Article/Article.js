@@ -24,6 +24,10 @@ Article.propTypes = {
   authors: AuthorsInterface,
   contributors: AuthorsInterface,
   published: PropTypes.string,
+  latestUpdate: PropTypes.shape({
+    date: PropTypes.string,
+    message: PropTypes.string
+  }),
   title: PropTypes.string,
   description: PropTypes.string,
   body: PropTypes.string
@@ -34,6 +38,7 @@ export default function Article({
   authors,
   contributors,
   published,
+  latestUpdate,
   title,
   description,
   body
@@ -96,6 +101,14 @@ export default function Article({
             </li>
           )}
           {published && <li>Published: {published}</li>}
+          {latestUpdate && (
+            <li>
+              Updated:&nbsp;
+              <span title={latestUpdate.message}>
+                {latestUpdate.date}
+              </span>
+            </li>
+          )}
         </ul>
       </header>
       <div
