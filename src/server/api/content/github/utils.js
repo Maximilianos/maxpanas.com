@@ -15,7 +15,7 @@ import {fetchContent} from '../fetchContent';
 export function formatDate(dateString, {
   from: inputFormat,
   to: outputFormat = 'YYYY/MM/DD'
-}) {
+} = {}) {
   return moment(dateString, inputFormat)
     .format(outputFormat);
 }
