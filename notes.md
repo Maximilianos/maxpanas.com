@@ -48,11 +48,21 @@
 
 ## Cache
 
-- Static cache should invalidate when the year changes to update 
-  myYearsExperience and the copyright across the site
+- setup
+  - cache must **only** be populated if the response has _no_ errors 
+  - cache parsed content api responses. Key: `api.content.parsed.${type}.${id}`
+    -- should invalidate when server restarts
+  - cache raw github api responses for content. Key: `api.content.raw.${type}.${id}`
+    -- should invalidate when content changes on github
+       (implemented with git hook ?)
+  - cache frontend page renderings `frontend.${route}`
 
-- Static cache should invalidate when an article is added so that the
-  archive pages and the article page are created/updated
+
+- Invalidation
+  - Static cache should invalidate when the year changes to update 
+    myYearsExperience and the copyright across the site
+  - Static cache should invalidate when an article is added so that the
+    archive pages and the article page are created/updated
 
 ## Refactor Opportunity
 
