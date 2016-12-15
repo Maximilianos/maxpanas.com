@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import cache from '../../cache';
 
 
 /**
@@ -79,8 +80,18 @@ export default function fetchContentMiddlewareFactory({endpoint, parser}) {
       ? endpoint(req)
       : endpoint;
 
-    const {status, payload} = await fetchContent(url, {parser});
-    res.status(status).json(payload);
+    const cacheKey = `${url}${parser}`;
+    let response = cache.get(cacheKey);
+    if (!response) {
+      response = await fetchContent(url, {parser});
+      if (response.status === 200) {
+        cache.put(cacheKey, response);
+      }
+    }
+
+    res
+      .status(response.status)
+      .json(response.payload);
   };
 }
 
