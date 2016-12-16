@@ -14,8 +14,8 @@
 ## Performance
 
 - General
-  - Make custom builds of the fonts with only the glyphs actually being used
-    included for each font. (not really applicable to the body font)
+  - (subsetting) Make custom builds of the fonts with only the glyphs actually
+    being used included for each font. (not really applicable to the body font)
 
 
 - Time to first Meaningful Paint
