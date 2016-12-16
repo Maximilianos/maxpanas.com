@@ -1,6 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import cache from '../../cache';
 
+import {Base64} from 'js-base64';
+import secrets from './secrets.json';
 
 /**
  * Return whether a given thing is a function
@@ -41,13 +43,18 @@ function fetchError(status) {
  *
  * TODO: implement conditional requests https://developer.github.com/v3/#conditional-requests
  *
+ * TODO: remove hardcoded basic authorization from here
+ *
  * @param url
  * @param parser
  * @returns {*}
  */
 export async function fetchContent(url, {parser}) {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {headers: new Headers({
+      Authorization: `Basic ${Base64.encode(`${secrets.login}:${secrets.password}`)}`
+    })});
+
     const {status} = response;
 
     if (status !== 200) {

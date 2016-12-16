@@ -11,6 +11,7 @@
 /dump.rdb
 
 # private stuff
+/src/server/api/content/secrets.json
 /src/server/api/forms/secrets.json
 /src/app/assets/fonts/avenir/
 /src/app/assets/fonts/filson-pro/
