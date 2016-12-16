@@ -90,6 +90,7 @@
 
 ## Random
 
+- Use an SVG for the site Logo instead of text and a font (?)
 - Add MathJax to the markdown parser for articles (?)
 - Make sure no-js class is removed only when js generally executes successfully (?)
 
