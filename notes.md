@@ -11,6 +11,18 @@
 - set up production environment
 - set up staging environment
 
+## Performance
+
+- General
+  - Make custom builds of the fonts with only the glyphs actually being used
+    included for each font. (not really applicable to the body font)
+
+
+- Time to first Meaningful Paint
+  - DONE! - font loading strategy that replaces FOIT (Flash of Invisible Text)
+            with FOUT (Flash of Unstyled Text), thus making the content 
+            accessible earlier (no-js should not be affected)
+
 ## Functionality
 
 - Api calls
@@ -79,6 +91,7 @@
 ## Random
 
 - Add MathJax to the markdown parser for articles (?)
+- Make sure no-js class is removed only when js generally executes successfully (?)
 
 ## Analytics
 
