@@ -65,6 +65,7 @@
     "yargs": "4.7.1"
   },
   "dependencies": {
+    "bluebird": "3.4.6",
     "body-parser": "1.15.2",
     "compression": "1.6.2",
     "express": "4.14.0",
@@ -90,6 +91,7 @@
     "react-router": "2.5.1",
     "react-router-scroll": "0.2.0",
     "reading-time": "1.1.0",
+    "redis": "2.6.3",
     "redux": "3.5.2",
     "redux-form": "6.2.0",
     "redux-thunk": "2.1.0",
