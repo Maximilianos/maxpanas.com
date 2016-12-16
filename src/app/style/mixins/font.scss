@@ -12,8 +12,10 @@
   // the .font-loaded classNames are added to the html element
   // so we need to handle the selector differently for that case
   @if inspect(&) == inspect((html,)) {
+    &.no-js,
     &.font-loaded\:#{$font-class} { font-family: $font, $fallback; }
   } @else {
+    .no-js &,
     .font-loaded\:#{$font-class} & { font-family: $font, $fallback; }
   }
 }
