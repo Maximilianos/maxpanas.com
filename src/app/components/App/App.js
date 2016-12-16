@@ -6,9 +6,7 @@ import AppHeader from './AppHeader/AppHeader';
 import AppFooter from './AppFooter/AppFooter';
 
 // fonts
-import '../../assets/fonts/inconsolata/webfonts.css';
-import '../../assets/fonts/filson-pro/webfonts.css';
-import '../../assets/fonts/avenir/webfonts.css';
+import './fonts';
 
 // vendor styles
 import 'normalize.css';

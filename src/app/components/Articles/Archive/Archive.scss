@@ -5,16 +5,18 @@
 @import "../../../style/theme/colors";
 @import "../../../style/theme/typography";
 @import "../../../style/theme/breakpoints";
+@import "../../../style/mixins/font";
 @import "../../../style/mixins/list";
 
 .archive__title {
+  @include font($t-display, $t-display-system);
+
   box-sizing: border-box;
   margin: 0 auto 1em;
   padding: 0 20px;
   max-width: 760px;
 
   color: $c-body-copy;
-  font-family: $t-display;
   font-size: 15px;
   text-transform: uppercase;
   letter-spacing: 3px;

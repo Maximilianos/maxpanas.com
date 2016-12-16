@@ -1,0 +1,19 @@
+/* =========================================
+    Font
+   ========================================= */
+
+@import "../functions/string";
+
+@mixin font($font, $fallback) {
+  $font-class: str-replace(to-lower-case($font), " ", "-");
+
+  font-family: $fallback;
+
+  // the .font-loaded classNames are added to the html element
+  // so we need to handle the selector differently for that case
+  @if inspect(&) == inspect((html,)) {
+    &.font-loaded\:#{$font-class} { font-family: $font, $fallback; }
+  } @else {
+    .font-loaded\:#{$font-class} & { font-family: $font, $fallback; }
+  }
+}

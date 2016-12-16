@@ -8,7 +8,7 @@
 $logo-transition: color 0.3s ease;
 
 .max {
-  font-family: $t-logo;
+  font-family: $t-logo, $t-logo-fallback;
   font-weight: 900;
   letter-spacing: 0.04em;
   line-height: 1;
@@ -24,7 +24,7 @@ $logo-transition: color 0.3s ease;
 }
 
 .max__dot {
-  font-family: $t-body;
+  font-family: $t-body, $t-body-fallback;
   color: $c-body-copy;
   transition: $logo-transition;
 

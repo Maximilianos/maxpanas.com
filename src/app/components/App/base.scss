@@ -4,9 +4,11 @@
 
 @import "../../style/theme/colors";
 @import "../../style/theme/typography";
+@import "../../style/mixins/font";
 
 html {
-  font-family: $t-body;
+  @include font($t-body, $t-body-fallback);
+
   font-weight: 400;
   font-style: normal;
 

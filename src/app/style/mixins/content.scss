@@ -7,6 +7,7 @@
 @import "../theme/breakpoints";
 @import "./clearfix";
 @import "./links";
+@import "./font";
 
 @mixin content-block {
   @include clearfix;
@@ -24,7 +25,7 @@
   }
 
   pre, code {
-    font-family: $t-code;
+    @include font($t-code, $t-code-fallback);
   }
 
   code {

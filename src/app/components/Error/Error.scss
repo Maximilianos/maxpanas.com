@@ -8,6 +8,7 @@
 @import "../../style/mixins/links";
 @import "../../style/mixins/reset";
 @import "../../style/mixins/list";
+@import "../../style/mixins/font";
 
 .error {
   @include content-block;
@@ -16,10 +17,11 @@
 }
 
 .error__title {
+  @include font($t-display, $t-display-system);
+
   margin: 5vw 0 4vw;
   padding: 0 20px;
   text-transform: uppercase;
-  font-family: $t-display;
   font-size: 98px;
   font-weight: 900;
   font-style: normal;

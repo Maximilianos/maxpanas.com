@@ -5,6 +5,7 @@
 @import "../../../style/theme/breakpoints";
 @import "../../../style/theme/typography";
 @import "../../../style/mixins/content";
+@import "../../../style/mixins/font";
 @import "../../../style/mixins/list";
 
 .article {
@@ -21,6 +22,7 @@
 .article__meta {
   $gutter: 1.5em;
   @include list--no;
+  @include font($t-code, $t-code-fallback);
 
   display: flex;
   flex-wrap: wrap;
@@ -28,7 +30,6 @@
   margin: -0.75em 0 1.5em #{-$gutter}; // margin top negative to move closer to header
   padding-left: 0 !important; // override for content-block styles
 
-  font-family: $t-code;
   font-size: 0.75em;
   color: lighten($c-body-copy, 50%);
 

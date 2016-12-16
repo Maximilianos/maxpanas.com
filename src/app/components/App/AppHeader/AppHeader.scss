@@ -5,6 +5,7 @@
 @import "../../../style/theme/colors";
 @import "../../../style/theme/typography";
 @import "../../../style/theme/breakpoints";
+@import "../../../style/mixins/font";
 @import "../../../style/mixins/list";
 
 $mini-header: 425px;
@@ -69,9 +70,10 @@ $center-header: $b-tablet;
 }
 
 .app-header__nav-link {
+  @include font($t-display, $t-display-system);
+
   display: block;
   padding: 0.5em 20px;
-  font-family: $t-display;
   font-size: 15px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
