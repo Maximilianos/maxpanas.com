@@ -29,7 +29,7 @@ export default function makeConfig(isDevelopment) {
     hotPort: HOT_RELOAD_PORT,
     cache: isDevelopment,
     debug: isDevelopment,
-    devtool: isDevelopment && 'eval-source-map',
+    devtool: isDevelopment && 'source-map',
 
     /**
      * Entry
