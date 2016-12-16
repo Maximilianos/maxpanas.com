@@ -3,7 +3,7 @@
    ========================================= */
 
 @import "../../../style/theme/breakpoints";
-@import "../../../style/utils/content";
+@import "../../../style/mixins/content";
 
 .about {
   @include content-block;

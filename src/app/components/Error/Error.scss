@@ -4,10 +4,10 @@
 
 @import "../../style/theme/breakpoints";
 @import "../../style/theme/typography";
-@import "../../style/utils/content";
-@import "../../style/utils/links";
-@import "../../style/utils/reset";
-@import "../../style/utils/list";
+@import "../../style/mixins/content";
+@import "../../style/mixins/links";
+@import "../../style/mixins/reset";
+@import "../../style/mixins/list";
 
 .error {
   @include content-block;

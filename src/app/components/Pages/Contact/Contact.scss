@@ -2,7 +2,7 @@
         Contact
    ========================================= */
 
-@import "../../../style/utils/content";
+@import "../../../style/mixins/content";
 
 .contact {
   @include content-block;

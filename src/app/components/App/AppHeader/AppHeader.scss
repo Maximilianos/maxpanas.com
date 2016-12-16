@@ -5,7 +5,7 @@
 @import "../../../style/theme/colors";
 @import "../../../style/theme/typography";
 @import "../../../style/theme/breakpoints";
-@import "../../../style/utils/list";
+@import "../../../style/mixins/list";
 
 $mini-header: 425px;
 $center-header: $b-tablet;

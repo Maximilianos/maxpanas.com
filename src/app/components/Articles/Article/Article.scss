@@ -4,8 +4,8 @@
 
 @import "../../../style/theme/breakpoints";
 @import "../../../style/theme/typography";
-@import "../../../style/utils/content";
-@import "../../../style/utils/list";
+@import "../../../style/mixins/content";
+@import "../../../style/mixins/list";
 
 .article {
   @include content-block;
