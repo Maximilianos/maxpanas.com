@@ -34,6 +34,7 @@
   - DONE! - Add honeypot to email sender to reduce spam
   - Add server side cool-off rate limiter for multiple submissions
   - Use a better service to send emails to me (?)
+  - Store submissions somewhere... (?)
 
 - Archive
   - DONE! - Sort archive articles by publish date
