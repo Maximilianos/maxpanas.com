@@ -58,7 +58,10 @@ function flush() {
  * Export the cache interaction API
  */
 export default {
-  put, get, del, flush
+  put,
+  get,
+  del,
+  flush
 };
 
 
