@@ -23,12 +23,18 @@
             with FOUT (Flash of Unstyled Text), thus making the content 
             accessible earlier (no-js should not be affected)
 
+
+- Time to Interactive
+  - code-split app for each route so as to download the minimum required js for
+    each page
+
 ## Functionality
 
 - Api calls
   - DONE! - make contact form use absolute url not relative for api submission
   - DONE! - make content api calls use absolute url not relative
   - cache all successful api calls in redis db
+  - split up cache so that each microservice has its own cache
 
 - Contact Form
   - DONE! - Add honeypot to email sender to reduce spam
