@@ -27,7 +27,7 @@
   display: flex;
   flex-wrap: wrap;
 
-  margin: -0.75em 0 1.5em #{-$gutter}; // margin top negative to move closer to header
+  margin: -1.45em 0 1.5em #{-$gutter}; // margin top negative to move closer to header
   padding-left: 0 !important; // override for content-block styles
 
   font-size: 0.75em;
@@ -41,14 +41,5 @@
 .article__avatar {
   &:not(:first-child) {
     margin-left: 0.3em;
-  }
-}
-
-.article__body {
-  @media all and (min-width: $b-tablet) {
-    > p:first-child {
-      font-size: 1.3em;
-      line-height: 1.4;
-    }
   }
 }
