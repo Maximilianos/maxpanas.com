@@ -60,11 +60,11 @@ export default {
  * @param next
  */
 export function cacheMiddleware({url}, res, next) {
-  const cachedResponseBpdy = get(url);
-  if (!cachedResponseBpdy) {
+  const cached = get(url);
+  if (!cached) {
     next();
     return;
   }
 
-  res.send(cachedResponseBpdy);
+  res.send(cached);
 }
