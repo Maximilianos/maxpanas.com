@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import myYearsExperience from '../../../utils/myYearsExperience';
+import {myAge, myYearsExperienceInWords} from '../../../utils/max';
 
 import {Link} from 'react-router';
 
@@ -9,8 +9,8 @@ import profilePic from './max.jpeg';
 
 
 export default function About() {
-  const age = (new Date()).getFullYear() - 1988;
-  const exp = myYearsExperience();
+  const age = myAge();
+  const exp = myYearsExperienceInWords();
 
   return (
     <main className="about">

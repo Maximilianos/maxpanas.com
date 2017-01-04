@@ -12,7 +12,11 @@ Teaser.propTypes = {
   excerpt: PropTypes.string
 };
 export default function Teaser({fetching, error, article, title, excerpt}) {
-  return error || fetching ? null : (
+  if (fetching) {
+    return <div className="teaser teaser--empty" />;
+  }
+
+  return error ? null : (
     <article className="teaser">
       <Link className="teaser__link" to={article}>
         <h2 className="teaser__title">

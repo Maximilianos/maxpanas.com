@@ -49,7 +49,9 @@ export function parseArticle() {
  * @returns {function}
  */
 export function parseArchive(dispatch) {
-  return response => response.json().then(archive => {
+  return async response => {
+    const archive = await response.json();
+
     const articles = archive.map(
       article => dispatch(fetchContentIfNeeded(
         getArticlePath(article),
@@ -57,6 +59,12 @@ export function parseArchive(dispatch) {
       ))
     );
 
-    return Promise.all(articles).then(() => archive);
-  });
+    // only wait for the articles to fully
+    // download if we are on the server
+    if (!process.env.IS_BROWSER) {
+      await Promise.all(articles);
+    }
+
+    return archive;
+  };
 }

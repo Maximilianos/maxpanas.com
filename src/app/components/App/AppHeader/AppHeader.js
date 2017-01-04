@@ -35,9 +35,13 @@ export default function AppHeader() {
         <ul className="app-header__nav-list">
           {navLinks.map(({to, text}) => (
             <li key={to} className="app-header__nav-item">
-              <Link to={to} className="app-header__nav-link">
+              <IndexLink
+                to={to}
+                className="app-header__nav-link"
+                activeClassName="app-header__nav-link--active"
+              >
                 {text}
-              </Link>
+              </IndexLink>
             </li>
           ))}
         </ul>

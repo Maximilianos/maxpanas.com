@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import myYearsExperience from '../../../utils/myYearsExperience';
+import {myYearsExperienceInWords} from '../../../utils/max';
 
 import ContactForm from '../../../containers/ContactForm';
 
@@ -8,7 +8,7 @@ import './Contact.scss';
 
 
 export default function Contact() {
-  const exp = myYearsExperience();
+  const exp = myYearsExperienceInWords();
 
   return (
     <main className="contact">
