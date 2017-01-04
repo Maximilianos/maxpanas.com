@@ -6,7 +6,7 @@
  *
  * @type {{}}
  */
-const cache = {};
+let cache = {};
 
 
 /**
@@ -44,10 +44,20 @@ function del(key) {
 
 
 /**
+ * Delete all entries in the cache
+ *
+ * @returns {{}}
+ */
+function flush() {
+  return (cache = {});
+}
+
+
+/**
  * Export the cache interaction API
  */
 export default {
-  put, get, del
+  put, get, del, flush
 };
 
 
