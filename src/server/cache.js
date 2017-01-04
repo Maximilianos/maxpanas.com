@@ -46,10 +46,11 @@ function del(key) {
 /**
  * Delete all entries in the cache
  *
- * @returns {{}}
+ * @returns {boolean}
  */
 function flush() {
-  return (cache = {});
+  cache = {};
+  return true;
 }
 
 
