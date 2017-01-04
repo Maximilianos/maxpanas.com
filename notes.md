@@ -40,10 +40,10 @@
   - DONE! - Only include articles marked with "status:published" when in 
             production mode
   - Add Archive page to make it easier for people to find articles (?)
-  - Display placeholders for Teasers in Archive component to make archive
-    appear to load faster
-  - Display each article immediately when loaded to make it appear archive
-    loads faster
+  - DONE! - Display placeholders for Teasers in Archive component to make archive
+            appear to load faster
+  - DONE! - Display each article immediately when loaded to make it appear archive
+            loads faster
   - Add Pagination to archive list (not needed for mvp ?)
 
 - Articles
