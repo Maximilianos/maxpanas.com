@@ -86,6 +86,23 @@ $center-header: $b-tablet;
     color: $c-body-copy;
   }
 
+  &:after {
+    content: '';
+    display: block;
+    height: 3px;
+    background-color: currentcolor;
+
+    transform-origin: center;
+    transform: scaleX(0);
+
+    transition: transform 0.15s ease-in;
+  }
+
+  &--active:after {
+    transition-timing-function: ease-out;
+    transform: scaleX(0.25);
+  }
+
   @media all and (min-width: $mini-header) {
     font-size: 20px;
   }
