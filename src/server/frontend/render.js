@@ -9,7 +9,7 @@ import NestedStatus from 'react-nested-status';
 
 import {isProduction} from '../config';
 import webpackIsomorphicTools from '../tools';
-import cache from '../cache';
+import {cachePage} from './cache';
 
 import createRoutes from '../../app/createRoutes';
 
@@ -135,11 +135,11 @@ export default function render({url, store}, res, next) {
 
       const status = isNotFoundRoute ? 404 : nestedStatus;
 
-      if (status === 200) {
-        cache.put(url, html);
-      }
-
       res.status(status).send(html);
+
+      if (status === 200) {
+        cachePage(url, html);
+      }
     } catch (e) {
       next(e);
     }

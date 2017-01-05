@@ -3,7 +3,7 @@ import favicon from 'serve-favicon';
 import bodyParser from 'body-parser';
 
 // middleware and request handlers
-import {cacheMiddleware} from '../cache';
+import {pageCacheMiddleware} from './cache';
 import createStore from './createStore';
 import contact from './forms/contact';
 import render from './render';
@@ -18,7 +18,7 @@ app.use(favicon('src/app/assets/favicon/favicon.ico'));
 app.use('/assets', express.static('build', {maxAge: '200d'}));
 
 // serve the frontend of the app
-app.get('*', cacheMiddleware, createStore, render);
+app.get('*', pageCacheMiddleware, createStore, render);
 
 // handle a no-js contact form submission
 app.post('/contact', urlDecode, createStore, contact, render);
