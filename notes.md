@@ -68,18 +68,18 @@
 ## Cache
 
 - setup
-  - cache must **only** be populated if the response has _no_ errors
+  - DONE! - cache must **only** be populated if the response has _no_ errors
   - cache can keep data until the data is invalidated
   - long term cache vs short term cache (?)
   - cache parsed content api responses. Key: `api.content.parsed.${type}.${id}`
-    -- should invalidate when server restarts
+    - should invalidate when server restarts
   - cache raw github api responses for content. Key: `api.content.raw.${type}.${id}`
-    -- should invalidate when content changes on github
+    - should invalidate when content changes on github
        (implemented with git hook ?)
   - cache frontend page renderings `frontend.${route}`
-    -- should invalidate all pages when the year changes to update
-       myYearsExperience and the copyright across the site
-    -- should invalidate archive pages and specific article pages when a specific
+    - DONE! - should invalidate all pages when the year changes to update
+               myYearsExperience and the copyright across the site
+    - should invalidate archive pages and specific article pages when a specific
        bit of content gets updated
 
 
