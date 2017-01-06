@@ -63,6 +63,11 @@ export function cachePage(url, html) {
 export function pageCacheMiddleware({url}, res, next) {
   const key = getPageCacheKey(url);
 
+  if (!cache.connected) {
+    next();
+    return;
+  }
+
   cache.get(key, (error, html) => {
     if (error || !html) {
       next();
