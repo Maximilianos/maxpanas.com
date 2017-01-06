@@ -17,6 +17,7 @@
 ## Performance
 
 - General
+  - switch to graphql + relay or lokka instead of REST
   - (subsetting) Make custom builds of the fonts with only the glyphs actually
     being used included for each font. (not really applicable to the body font)
 
@@ -55,6 +56,8 @@
   - DONE! - Display each article immediately when loaded to make it appear archive
             loads faster
   - Add Pagination to archive list (not needed for mvp ?)
+  - Create a new endpoint for each archive teaser so as not to download the entire
+    article's content
 
 - Articles
   - DONE! - Only show articles marked with "status:published" when in
