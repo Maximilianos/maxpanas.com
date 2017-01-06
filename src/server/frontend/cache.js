@@ -4,8 +4,18 @@ import moment from 'moment';
 
 const cache = createClient();
 
-cache.on('error', error => console.log(error));
-cache.on('connect', () => console.log('App Cache Connected'));
+cache.on('error', error => console.log(error.toString()));
+cache.on('connect', () => {
+  console.log('App Cache Connected');
+
+  // flush the cache whenever the server restarts in development
+  // mode because it is very likely that code has changed that will
+  // affect how pages should be rendered
+  if (process.env.NODE_ENV === 'development') {
+    console.log('App Cache Flushed for Development');
+    cache.flushall();
+  }
+});
 
 
 /**
