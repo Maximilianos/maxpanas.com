@@ -3,7 +3,7 @@
 ## Dev / Testing
 
 - Move to WebPack 2
-- Update Node to Latest
+- DONE! - Update Node to Latest
 - Update Node Modules to Latest
 - Add unit tests for code...
 - Run tests automatically on travis ci

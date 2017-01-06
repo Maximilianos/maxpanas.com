@@ -13,6 +13,10 @@
   "author": "Max GJ Panas <m@maxpanas.com> (http://maxpanas.com)",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": "7.4.0",
+    "npm": "4.0.5"
+  },
   "devDependencies": {
     "autoprefixer": "6.3.6",
     "babel-core": "6.10.4",
