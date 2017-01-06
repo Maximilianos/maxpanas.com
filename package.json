@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "gulp",
     "lint": "gulp lint",
-    "start": "gulp -p"
+    "start": "gulp -p",
+    "redis": "redis-server",
+    "redis-cli": "redis-cli"
   },
   "author": "Max GJ Panas <m@maxpanas.com> (http://maxpanas.com)",
   "license": "MIT",
