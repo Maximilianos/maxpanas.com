@@ -1,5 +1,5 @@
 import React from 'react';
-import {IndexLink, Link} from 'react-router';
+import {IndexLink} from 'react-router';
 
 import Max from '../../Logo/Max';
 
