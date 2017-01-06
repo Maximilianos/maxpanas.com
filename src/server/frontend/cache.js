@@ -1,11 +1,13 @@
+import LRU from 'lru-cache';
 import {createClient} from 'redis';
 import moment from 'moment';
 
 
-const cache = createClient();
+const lru = LRU(50);
+const redis = createClient();
 
-cache.on('error', error => console.log(error.toString()));
-cache.on('connect', () => {
+redis.on('error', error => console.log(error.toString()));
+redis.on('connect', () => {
   console.log('App Cache Connected');
 
   // flush the cache whenever the server restarts in development
@@ -13,7 +15,7 @@ cache.on('connect', () => {
   // affect how pages should be rendered
   if (process.env.NODE_ENV === 'development') {
     console.log('App Cache Flushed for Development');
-    cache.flushall();
+    redis.flushall();
   }
 });
 
@@ -40,13 +42,16 @@ function getPageCacheKey(url) {
 export function cachePage(url, html) {
   const key = getPageCacheKey(url);
 
-  // expiry expects ttl in seconds not milliseconds, so need to convert
-  // Math.ceil to make sure the cache is always updated after the date
-  // has passed
-  const expiry = Math.ceil(getPageTimeToExpiry(url) / 1000);
+  const expiry = getPageTimeToExpiry(url);
 
-  cache.set(key, html);
-  cache.expire(key, expiry);
+  lru.set(key, html, expiry);
+
+  redis.set(key, html);
+
+  // redis expiry expects ttl in seconds not milliseconds, so need to
+  // convert. Math.ceil is used to make sure the cache is always updated
+  // AFTER the expiry date has passed
+  redis.expire(key, Math.ceil(expiry / 1000));
 }
 
 
@@ -63,12 +68,18 @@ export function cachePage(url, html) {
 export function pageCacheMiddleware({url}, res, next) {
   const key = getPageCacheKey(url);
 
-  if (!cache.connected) {
+  const html = lru.get(key);
+  if (html) {
+    res.send(html);
+    return;
+  }
+
+  if (!redis.connected) {
     next();
     return;
   }
 
-  cache.get(key, (error, html) => {
+  redis.get(key, (error, html) => {
     if (error || !html) {
       next();
       return;
