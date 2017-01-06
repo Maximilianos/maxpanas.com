@@ -25,7 +25,7 @@ cache.on('connect', () => {
  * @returns {string}
  */
 function getPageCacheKey(url) {
-  return `frontend:page:${url}`;
+  return `frontend:${url}`;
 }
 
 
