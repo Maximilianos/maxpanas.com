@@ -7,7 +7,7 @@ import hljs from 'highlight.js';
 import {isProduction} from '../../../../config';
 import {ARTICLES_BASE_DIR, REPO_CONTENT_API} from '../config';
 
-import {fetchContent, ResponseForbiddenError} from '../../fetchContent';
+import {fetchContentCached, ResponseForbiddenError} from '../../fetchContent';
 import {formatDate, removeFileExtension} from '../utils';
 import {fetchUserData} from './user';
 import {parseAuthors} from './user/author';
@@ -23,7 +23,7 @@ import {fetchUpdatesData, getLatestUpdateData} from './updates';
  * @returns {*}
  */
 export async function fetchArticleData(articles) {
-  const requests = articles.map(username => fetchContent(
+  const requests = articles.map(username => fetchContentCached(
     getArticlePath(username),
     {parser: parseArticle})
   );

@@ -2,7 +2,7 @@ import qs from 'querystring';
 
 import {ARTICLES_BASE_DIR, REPO_COMMITS_API} from '../config';
 
-import {fetchContent} from '../../fetchContent';
+import {fetchContentCached} from '../../fetchContent';
 import {formatDate, collatePaginatedContent} from '../utils';
 
 
@@ -39,7 +39,7 @@ export function getLatestUpdateData(allUpdates) {
  * @returns {*}
  */
 export async function fetchUpdatesData(article) {
-  const response = await fetchContent(
+  const response = await fetchContentCached(
     getArticleUpdatesPath(article),
     {parser: collatePaginatedContent(parseUpdates)}
   );

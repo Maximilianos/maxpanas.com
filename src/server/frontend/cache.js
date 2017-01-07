@@ -8,13 +8,13 @@ const redis = createClient();
 
 redis.on('error', error => console.log(error.toString()));
 redis.on('connect', () => {
-  console.log('App Cache Connected');
+  console.log('App Redis Cache Connected');
 
   // flush the cache whenever the server restarts in development
   // mode because it is very likely that code has changed that will
   // affect how pages should be rendered
   if (process.env.NODE_ENV === 'development') {
-    console.log('App Cache Flushed for Development');
+    console.log('App Redis Cache Flushed for Development');
     redis.flushall();
   }
 });

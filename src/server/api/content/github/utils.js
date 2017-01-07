@@ -1,6 +1,6 @@
 import moment from 'moment';
 import parseLinks from 'parse-link-header';
-import {fetchContent} from '../fetchContent';
+import {fetchContentCached} from '../fetchContent';
 
 
 /**
@@ -58,12 +58,12 @@ export function collatePaginatedContent(parser) {
       return payload;
     }
 
-    const {payload: nextPayload} = await fetchContent(next.url, {
+    const {payload: nextPayload} = await fetchContentCached(next.url, {
       parser: collatingParser
     });
 
     if (nextPayload.error) {
-      throw new Error('Error: Collation failed because one of the requests to failed');
+      throw new Error('Error: Collation failed because one of the requests failed');
     }
 
     return payload.concat(nextPayload);

@@ -1,8 +1,10 @@
 import fetch from 'isomorphic-fetch';
-import cache from '../../cache';
+import {getResponseFromCache, putResponseInCache} from './cache';
 
+import sha1 from 'sha1';
 import {Base64} from 'js-base64';
 import secrets from './secrets.json';
+
 
 /**
  * Return whether a given thing is a function
@@ -49,7 +51,7 @@ function fetchError(status) {
  * @param parser
  * @returns {*}
  */
-export async function fetchContent(url, {parser}) {
+async function fetchContent(url, {parser}) {
   try {
     const response = await fetch(url, {headers: new Headers({
       Authorization: `Basic ${Base64.encode(`${secrets.login}:${secrets.password}`)}`
@@ -74,6 +76,34 @@ export async function fetchContent(url, {parser}) {
 
 
 /**
+ * Check if content exists in cache and fetch
+ * it from there if it does, otherwise fetch it
+ * from the given endpoint and parse it with the
+ * given parser
+ *
+ * @param url
+ * @param parser
+ * @returns {Promise.<*>}
+ */
+export async function fetchContentCached(url, {parser}) {
+  const resource = `${url}:${parser.name}:${sha1(parser)}`;
+
+  const cachedResponse = await getResponseFromCache(resource);
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+
+  const response = await fetchContent(url, {parser});
+
+  if (response.status === 200) {
+    putResponseInCache(resource, response);
+  }
+
+  return response;
+}
+
+
+/**
  * Respond to content request with fetched and
  * parsed content
  *
@@ -87,14 +117,7 @@ export default function fetchContentMiddlewareFactory({endpoint, parser}) {
       ? endpoint(req)
       : endpoint;
 
-    const cacheKey = `${url}${parser}`;
-    let response = cache.get(cacheKey);
-    if (!response) {
-      response = await fetchContent(url, {parser});
-      if (response.status === 200) {
-        cache.put(cacheKey, response);
-      }
-    }
+    const response = await fetchContentCached(url, {parser});
 
     res
       .status(response.status)

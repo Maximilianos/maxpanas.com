@@ -1,5 +1,5 @@
 import {USERS_API} from '../../config';
-import {fetchContent} from '../../../fetchContent';
+import {fetchContentCached} from '../../../fetchContent';
 
 
 /**
@@ -10,7 +10,7 @@ import {fetchContent} from '../../../fetchContent';
  * @returns {*}
  */
 export async function fetchUserData(usernames) {
-  const requests = usernames.map(username => fetchContent(
+  const requests = usernames.map(username => fetchContentCached(
     getUserPath(username),
     {parser: parseUser})
   );

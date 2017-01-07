@@ -1,17 +1,17 @@
 import express from 'express';
 
-import fetchContent from './fetchContent';
+import fetchContentMiddleware from './fetchContent';
 import {getArticlePath, parseArticle} from './github/types/article';
 import {getArchivePath, parseArchive} from './github/types/archive';
 
 const app = express();
 
-app.get('/articles/:article', fetchContent({
+app.get('/articles/:article', fetchContentMiddleware({
   endpoint: req => getArticlePath(req.params.article),
   parser: parseArticle
 }));
 
-app.get('/archives/:archive', fetchContent({
+app.get('/archives/:archive', fetchContentMiddleware({
   endpoint: req => getArchivePath(req.params.archive),
   parser: parseArchive
 }));
