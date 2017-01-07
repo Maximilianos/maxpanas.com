@@ -14,6 +14,11 @@
 - set up production environment
 - set up staging environment
 
+## Security
+
+- Add a Content Security Policy
+- Use Let's Encrypt to implement HTTPS
+
 ## Performance
 
 - General
