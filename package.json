@@ -14,8 +14,8 @@
   "license": "MIT",
   "private": true,
   "engines": {
-    "node": "7.4.0",
-    "npm": "4.0.5"
+    "node": "6.9.4",
+    "npm": "3.10.10"
   },
   "devDependencies": {
     "autoprefixer": "6.3.6",
