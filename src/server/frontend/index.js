@@ -12,6 +12,8 @@ const urlDecode = bodyParser.urlencoded({extended: false});
 
 const app = express();
 
+app.disable('x-powered-by');
+
 app.use(favicon('src/app/assets/favicon/favicon.ico'));
 
 // hook up static file serving

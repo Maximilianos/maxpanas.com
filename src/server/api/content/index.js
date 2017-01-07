@@ -6,6 +6,8 @@ import {getArchivePath, parseArchive} from './github/types/archive';
 
 const app = express();
 
+app.disable('x-powered-by');
+
 app.get('/articles/:article', fetchContentMiddleware({
   endpoint: req => getArticlePath(req.params.article),
   parser: parseArticle

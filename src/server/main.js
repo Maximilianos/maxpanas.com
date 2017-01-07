@@ -12,6 +12,8 @@ import {port} from './config';
 
 const app = express();
 
+app.disable('x-powered-by');
+
 // enable logging
 app.use(morgan('dev'));
 

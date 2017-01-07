@@ -5,6 +5,8 @@ import contact from './contact';
 
 const app = express();
 
+app.disable('x-powered-by');
+
 app.use(bodyParser.json());
 
 app.post('/contact', contact);
