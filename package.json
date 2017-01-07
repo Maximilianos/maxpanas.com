@@ -8,7 +8,8 @@
     "lint": "gulp lint",
     "start": "gulp -p",
     "redis": "redis-server",
-    "redis-cli": "redis-cli"
+    "redis-cli": "redis-cli",
+    "ngrok": "ngrok http 8000"
   },
   "author": "Max GJ Panas <m@maxpanas.com> (http://maxpanas.com)",
   "license": "MIT",
