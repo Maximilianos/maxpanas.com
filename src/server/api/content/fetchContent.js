@@ -54,7 +54,7 @@ function fetchError(status) {
 async function fetchContent(url, {parser}) {
   try {
     const response = await fetch(url, {headers: new Headers({
-      Authorization: `Basic ${Base64.encode(`${secrets.login}:${secrets.password}`)}`
+      Authorization: `Basic ${Base64.encode(`${secrets.auth.login}:${secrets.auth.password}`)}`
     })});
 
     const {status} = response;
