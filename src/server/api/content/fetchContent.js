@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import {getResponseFromCache, putResponseInCache} from './cache';
 
-import sha1 from 'sha1';
+import crypto from 'crypto';
 import {Base64} from 'js-base64';
 import secrets from './secrets.json';
 
@@ -86,7 +86,12 @@ async function fetchContent(url, {parser}) {
  * @returns {Promise.<*>}
  */
 export async function fetchContentCached(url, {parser}) {
-  const resource = `${url}:${parser.name}:${sha1(parser)}`;
+  const parserHash = crypto
+    .createHash('sha1')
+    .update(parser.toString())
+    .digest('hex');
+
+  const resource = `${url}:${parser.name}:${parserHash}`;
 
   const cachedResponse = await getResponseFromCache(resource);
   if (cachedResponse) {
