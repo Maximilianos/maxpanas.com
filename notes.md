@@ -78,6 +78,8 @@
 
 ## Cache
 
+- consolidate cache handling between frontend server and content api server
+- promisify redis cache client and use async/await for better readability
 - add authentication when interfacing with Redis Server
 - add testing for Lua script - based on: 
   http://ilyapimenov.com/blog/2014/09/19/lua-scripts-in-redis-within-nodejs.html
