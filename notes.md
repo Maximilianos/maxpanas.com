@@ -78,6 +78,11 @@
 
 ## Cache
 
+- add authentication when interfacing with Redis Server
+- add testing for Lua script - based on: 
+  http://ilyapimenov.com/blog/2014/09/19/lua-scripts-in-redis-within-nodejs.html
+- redis setup likely needs rearchitecting, particularly because of the operations
+  to selectively clean up cached items when modifications are made to articles
 - setup
   - DONE! - cache must **only** be populated if the response has _no_ errors
   - cache can keep data until the data is invalidated
