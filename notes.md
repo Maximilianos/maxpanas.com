@@ -46,6 +46,7 @@
   - split up cache so that each microservice has its own cache
 
 - Contact Form
+  - Fix bug with contact form when no-js and submitting two separate forms
   - DONE! - Add honeypot to email sender to reduce spam
   - Add server side cool-off rate limiter for multiple submissions
   - Use a better service to send emails to me (?)
@@ -65,6 +66,7 @@
     article's content
 
 - Articles
+  - should move the url for article pages to /articles/:article (?)
   - DONE! - Only show articles marked with "status:published" when in
             production mode
   - DONE! - Add published date

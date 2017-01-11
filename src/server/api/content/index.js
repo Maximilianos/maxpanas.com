@@ -7,6 +7,8 @@ import {getArchivePath, parseArchive} from './github/types/archive';
 import {authWebhookPushRequest} from './github/utils';
 import {updateCache} from './cache';
 
+const jsonDecode = bodyparser.json();
+
 const app = express();
 
 app.disable('x-powered-by');
@@ -29,12 +31,7 @@ app.get('/archives/:archive', fetchContentMiddleware({
  * the content API cache when a change is made to the
  * content repository
  */
-app.post(
-  '/update',
-  bodyparser.json(),
-  authWebhookPushRequest,
-  updateCache
-);
+app.post('/update-cache', jsonDecode, authWebhookPushRequest, updateCache);
 
 
 app.on('mount', () => {
