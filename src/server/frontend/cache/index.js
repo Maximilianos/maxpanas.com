@@ -166,14 +166,14 @@ export function updateCache({body: {commits}}, res) {
       modifications: []
     });
 
-  // archives are modified only when articles are added, renamed or removed,
-  // so additions and removals are the only lists we care about here
+  // rendered archives are modified when articles are added, renamed, removed or
+  // modified, so we care about all lists here
   const modifiedArchives = union(additions, removals, modifications)
     .map(file => path.basename(path.dirname(file)))
     .filter(unique);
 
-  // articles will be in cache only if they existed and were removed or were
-  // modified, so removals and modifications are the only lists we care about
+  // rendered articles will be in cache only if they existed and were removed or
+  // were modified, so removals and modifications are the only lists we care about
   const modifiedArticles = union(removals, modifications)
     .map(file => path.basename(file))
     .filter(unique);
