@@ -18,6 +18,8 @@
 
 - Add a Content Security Policy
 - Use Let's Encrypt to implement HTTPS
+- Secure Redis Server
+- Secure Node/Express Server
 
 ## Performance
 
