@@ -73,8 +73,10 @@ function renderPage(store, renderProps) {
     webpackIsomorphicTools.refresh();
   }
 
-  const state = store.getState();
   const appHtml = getAppHtml(store, renderProps);
+  const helmet = Helmet.rewind();
+
+  const state = store.getState();
   const scriptHtml = getScriptHtml(state, jsFilename);
 
   const bodyHtml = `<div id="root">${appHtml}</div>${scriptHtml}`;
@@ -83,9 +85,10 @@ function renderPage(store, renderProps) {
     ReactDOMServer.renderToStaticMarkup(
       <Html
         lang="en"
-        helmet={Helmet.rewind()}
+        helmet={helmet}
         bodyHtml={bodyHtml}
         cssFilename={isProduction ? cssFilename : null}
+        robots={isProduction ? null : 'noindex, nofollow'}
       />
     )
   }`;
