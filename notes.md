@@ -2,6 +2,7 @@
 
 ## Dev / Testing
 
+- Add docblocks to functions that are missing them
 - Move to WebPack 2
 - DONE! - Update Node to Latest
 - Update Node Modules to Latest
@@ -16,6 +17,7 @@
 
 ## Security
 
+- DONE! - Add meta robots noindex nofollow for development mode
 - Add a Content Security Policy
 - Use Let's Encrypt to implement HTTPS
 - Secure Redis Server
@@ -44,8 +46,8 @@
 - Api calls
   - DONE! - make contact form use absolute url not relative for api submission
   - DONE! - make content api calls use absolute url not relative
-  - cache all successful api calls in redis db
-  - split up cache so that each microservice has its own cache
+  - DONE! - cache all successful api calls in redis db
+  - DONE! - split up cache so that each microservice has its own cache
 
 - Contact Form
   - Fix bug with contact form when no-js and submitting two separate forms
@@ -82,7 +84,7 @@
 
 ## Cache
 
-- consolidate cache handling between frontend server and content api server
+- DONE! - consolidate cache handling between frontend server and content api server
 - promisify redis cache client and use async/await for better readability
 - add authentication when interfacing with Redis Server
 - add testing for Lua script - based on: 
@@ -91,24 +93,24 @@
   to selectively clean up cached items when modifications are made to articles
 - setup
   - DONE! - cache must **only** be populated if the response has _no_ errors
-  - cache can keep data until the data is invalidated
-  - long term cache vs short term cache (?)
-  - cache parsed content api responses. Key: `api.content.parsed.${type}.${id}`
+  - DONE! - cache can keep data until the data is invalidated
+  - DONE! - long term cache vs short term cache (?)
+  - DONE! - cache parsed content api responses. Key: `api.content.parsed.${type}.${id}`
     - should invalidate when server restarts
-  - cache raw github api responses for content. Key: `api.content.raw.${type}.${id}`
-    - should invalidate when content changes on github
+  - N/A - cache raw github api responses for content. Key: `api.content.raw.${type}.${id}`
+    - DONE! - should invalidate when content changes on github
        (implemented with git hook ?)
-  - cache frontend page renderings `frontend.${route}`
+  - DONE! - cache frontend page renderings `frontend.${route}`
     - DONE! - should invalidate all pages when the year changes to update
                myYearsExperience and the copyright across the site
-    - should invalidate archive pages and specific article pages when a specific
+    - DONE! - should invalidate archive pages and specific article pages when a specific
        bit of content gets updated
 
 
 - Invalidation
-  - Static cache should invalidate when the year changes to update 
+  - DONE! - Static cache should invalidate when the year changes to update 
     myYearsExperience and the copyright across the site
-  - Static cache should invalidate when an article is added so that the
+  - DONE! - Static cache should invalidate when an article is added so that the
     archive pages and the article page are created/updated
 
 ## Refactor Opportunity
