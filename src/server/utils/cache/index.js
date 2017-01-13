@@ -104,7 +104,7 @@ export default function createCacheClient({
    * @param asJSONinRedis
    * @returns {Promise.<*>}
    */
-  async function get(resource, {asJSONinRedis}) {
+  async function get(resource, {asJSONinRedis} = {}) {
     const key = getCacheKey(resource);
 
     const payload = lru.get(key);
@@ -140,7 +140,7 @@ export default function createCacheClient({
    * @param asJSONinRedis
    * @returns {Promise.<void>}
    */
-  async function put(resource, payload, {expiry, asJSONinRedis}) {
+  async function put(resource, payload, {expiry, asJSONinRedis} = {}) {
     const key = getCacheKey(resource);
 
     lru.set(key, payload, expiry);
