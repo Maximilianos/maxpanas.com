@@ -4,10 +4,12 @@ import bodyparser from 'body-parser';
 import fetchContentMiddleware from './fetchContent';
 import {getArticlePath, parseArticle} from './github/types/article';
 import {getArchivePath, parseArchive} from './github/types/archive';
-import {authWebhookPushRequest} from './github/utils';
-import {updateCache} from './cache';
 
-const jsonDecode = bodyparser.json();
+import {updateCache} from './cache';
+import {authWebhookPushRequest, webhookHandler} from '../../utils/github';
+
+import secrets from './secrets.json';
+
 
 const app = express();
 
@@ -31,7 +33,12 @@ app.get('/archives/:archive', fetchContentMiddleware({
  * the content API cache when a change is made to the
  * content repository
  */
-app.post('/update-cache', jsonDecode, authWebhookPushRequest, updateCache);
+app.post(
+  '/update-cache',
+  bodyparser.json(),
+  authWebhookPushRequest(secrets.hooks.updateCache.secret),
+  webhookHandler(updateCache)
+);
 
 
 app.on('mount', () => {

@@ -1,0 +1,194 @@
+import fs from 'fs';
+import path from 'path';
+
+import LRU from 'lru-cache';
+import {createClient} from 'redis';
+
+
+/**
+ * Redis Lua script to delete any entries from cache that
+ * contain the given strings in their keys
+ *
+ * @type string
+ */
+const flushWhereKeyContainsScript = path.join(
+  __dirname,
+  'flush-where-key-contains.lua'
+);
+
+
+/**
+ *
+ *
+ * @param name
+ * @param keyPrefix
+ */
+export default function createCacheClient({
+  name = '',
+  keyPrefix = ''
+}) {
+  const lru = LRU(50);
+  const redis = createClient();
+
+  redis.on('error', error => console.log(error.toString()));
+  redis.on('connect', () => {
+    console.log(`${name && `${name} `}Redis Cache Connected`);
+
+    // flush the cache whenever the server restarts in development
+    // mode because it is very likely that code has changed that will
+    // affect how pages should be rendered
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`${name && `${name} `}Redis Cache Flushed for Development`);
+      redis.flushall();
+    }
+  });
+
+
+  /**
+   * Load the given Lua script into the redis server and return
+   * it's sha hash to be used with the redis.evalsha command
+   *
+   * @param scriptPath
+   * @param callback
+   */
+  const loadRedisLuaScript = (() => {
+    const loadedScripts = {};
+
+    return (scriptPath, callback) => {
+      if (loadedScripts.hasOwnProperty(scriptPath)) {
+        callback(null, loadedScripts[scriptPath]);
+        return;
+      }
+
+      fs.readFile(scriptPath, 'UTF-8', (error, script) => {
+        if (error) {
+          callback(error);
+          return;
+        }
+
+        redis.script('load', script, (error, hash) => {
+          if (error) {
+            callback(error);
+            return;
+          }
+
+          loadedScripts[scriptPath] = hash;
+          callback(null, hash);
+        });
+      });
+    };
+  })();
+
+
+  return {
+    get,
+    put,
+    flushWhereKeyContains
+  };
+
+  /**
+   *
+   *
+   * @param resource
+   * @returns {string}
+   */
+  function getCacheKey(resource) {
+    return `${keyPrefix}${resource}`;
+  }
+
+
+  /**
+   *
+   *
+   * @param resource
+   * @param asJSONinRedis
+   * @returns {Promise.<*>}
+   */
+  async function get(resource, {asJSONinRedis}) {
+    const key = getCacheKey(resource);
+
+    const payload = lru.get(key);
+    if (payload) {
+      return payload;
+    }
+
+    if (!redis.connected) {
+      return null;
+    }
+
+    return new Promise(resolve => redis.get(key, (error, payload) => {
+      if (error) {
+        resolve(null);
+        return;
+      }
+
+      const finalPayload = asJSONinRedis
+        ? JSON.parse(payload)
+        : payload;
+
+      resolve(finalPayload || null);
+    }));
+  }
+
+
+  /**
+   *
+   *
+   * @param resource
+   * @param payload
+   * @param expiry
+   * @param asJSONinRedis
+   * @returns {Promise.<void>}
+   */
+  async function put(resource, payload, {expiry, asJSONinRedis}) {
+    const key = getCacheKey(resource);
+
+    lru.set(key, payload, expiry);
+
+    const redisPayload = asJSONinRedis
+      ? JSON.stringify(payload)
+      : payload;
+
+    redis.set(key, redisPayload);
+    if (expiry) {
+      // redis expiry expects ttl in seconds not milliseconds, so need to
+      // convert. Math.ceil is used to make sure the cache is always updated
+      // AFTER the expiry date has passed
+      redis.expire(key, Math.ceil(expiry / 1000));
+    }
+  }
+
+
+  /**
+   *
+   *
+   * @param keyWildcards
+   * @returns {Promise<Promise<T>|Promise>}
+   */
+  function flushWhereKeyContains(keyWildcards) {
+    // delete the relevant cache entries from the lru cache
+    lru.keys()
+      .filter(key => keyWildcards.some(item => key.includes(item)))
+      .forEach(key => lru.del(key));
+
+    // delete the relevant cache entries from redis
+    // NOTE: the following script will block the redis server until it has completed.
+    //       It will adversely affect the response time of the redis cache server while
+    //       the following script is running. As such it should be used with caution.
+    // TODO: do I really need atomicity here? Or can I clear the cache without blocking?
+    return new Promise(resolve =>
+      loadRedisLuaScript(flushWhereKeyContainsScript, (error, hash) => {
+        if (error) {
+          redis.flushall();
+          resolve();
+          return;
+        }
+
+        redis.evalsha(hash, 0, keyPrefix, ...keyWildcards, error => {
+          if (error) redis.flushall();
+          resolve();
+        });
+      })
+    );
+  }
+}

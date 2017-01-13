@@ -11,7 +11,7 @@
 /dump.rdb
 
 # private stuff
-/src/server/utils/github/secrets.json
+/src/server/frontend/secrets.json
 /src/server/api/content/secrets.json
 /src/server/api/forms/secrets.json
 

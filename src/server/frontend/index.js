@@ -2,15 +2,15 @@ import express from 'express';
 import favicon from 'serve-favicon';
 import bodyParser from 'body-parser';
 
-// middleware and request handlers
-import {authWebhookPushRequest} from './cache/github';
-import {pageCacheMiddleware, updateCache} from './cache';
 import createStore from './createStore';
 import contact from './forms/contact';
 import render from './render';
 
-const urlDecode = bodyParser.urlencoded({extended: false});
-const jsonDecode = bodyParser.json();
+import {authWebhookPushRequest, webhookHandler} from '../utils/github';
+import {pageCacheMiddleware, updateCache} from './cache';
+
+import secrets from './secrets.json';
+
 
 const app = express();
 
@@ -27,7 +27,13 @@ app.get('*', pageCacheMiddleware, createStore, render);
 
 
 // handle a no-js contact form submission
-app.post('/contact', urlDecode, createStore, contact, render);
+app.post(
+  '/contact',
+  bodyParser.urlencoded({extended: false}),
+  createStore,
+  contact,
+  render
+);
 
 
 /**
@@ -35,7 +41,12 @@ app.post('/contact', urlDecode, createStore, contact, render);
  * the frontend cache when a change is made to the
  * content repository
  */
-app.post('/update-cache', jsonDecode, authWebhookPushRequest, updateCache);
+app.post(
+  '/update-cache',
+  bodyParser.json(),
+  authWebhookPushRequest(secrets.hooks.updateCache.secret),
+  webhookHandler(updateCache)
+);
 
 
 app.on('mount', () => {
