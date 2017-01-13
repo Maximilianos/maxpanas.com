@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "gulp",
     "lint": "gulp lint",
-    "start": "gulp -p",
+    "start": "redis-cli flushall && gulp -p",
     "redis": "redis-server",
     "redis-cli": "redis-cli",
     "ngrok": "ngrok http 8000"
