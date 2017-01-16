@@ -22,11 +22,16 @@ app.use(favicon('src/app/assets/favicon/favicon.ico'));
 app.use('/assets', express.static('build', {maxAge: '200d'}));
 
 
-// serve the frontend of the app
+/**
+ * Handle all normal rendering of the website
+ */
 app.get('*', pageCacheMiddleware, createStore, render);
 
 
-// handle a no-js contact form submission
+/**
+ * Endpoint to handle when a submission is made to the contact form
+ * from a user with no javascript
+ */
 app.post(
   '/contact',
   bodyParser.urlencoded({extended: false}),
@@ -37,9 +42,9 @@ app.post(
 
 
 /**
- * Github Webhook listener to update the relevant parts of
- * the frontend cache when a change is made to the
- * content repository
+ * Endpoint to handle a Github Webhook push event to update the
+ * relevant parts of the frontend cache when a change is made to
+ * the content repository
  */
 app.post(
   '/update-cache',

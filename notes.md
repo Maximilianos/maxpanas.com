@@ -2,7 +2,6 @@
 
 ## Dev / Testing
 
-- Add docblocks to functions that are missing them
 - Move to WebPack 2
 - DONE! - Update Node to Latest
 - Update Node Modules to Latest

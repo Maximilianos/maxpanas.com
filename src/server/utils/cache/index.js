@@ -18,10 +18,16 @@ const flushWhereKeyContainsScript = path.join(
 
 
 /**
- *
+ * Create a client wrapper and handler to the caching
+ * strategy
  *
  * @param name
  * @param keyPrefix
+ * @returns {{
+ *    get: Function.<Promise.<*>>,
+ *    put: Function.<Promise.<*>>,
+ *    flushWhereKeyContains: Function.<Promise.<*>>
+ * }}
  */
 export default function createCacheClient({
   name = '',
@@ -87,7 +93,8 @@ export default function createCacheClient({
   };
 
   /**
-   *
+   * Get the final cache key for a given resource, taking
+   * into account the configured cache keyPrefix
    *
    * @param resource
    * @returns {string}
@@ -98,7 +105,12 @@ export default function createCacheClient({
 
 
   /**
+   * Retrieve an item from the cache, try to retrieve it
+   * from the in-memory cache first and if that fails then
+   * try to retrieve it from the redis cache
    *
+   * Also handle the case that the value needed to be saved
+   * in redis as a stringified JSON object
    *
    * @param resource
    * @param asJSONinRedis
@@ -132,7 +144,9 @@ export default function createCacheClient({
 
 
   /**
-   *
+   * Save a value into both the in-memory cache and the redis
+   * cache and if applicable apply an expiry (given in milliseconds)
+   * and also if applicable save as a JSON into the redis cache
    *
    * @param resource
    * @param payload
@@ -160,7 +174,8 @@ export default function createCacheClient({
 
 
   /**
-   *
+   * Delete items from both the in-memory and the redis cache whose
+   * keys contain values contained in the given array of keyWildcards
    *
    * @param keyWildcards
    * @returns {Promise<Promise<T>|Promise>}
