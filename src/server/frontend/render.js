@@ -116,12 +116,12 @@ export default function render({url, store}, res, next) {
   match({routes, location}, async (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(301, redirectLocation.pathname + redirectLocation.search);
-      return;
+      return null;
     }
 
     if (error) {
       next(error);
-      return;
+      return null;
     }
 
     try {
@@ -139,10 +139,6 @@ export default function render({url, store}, res, next) {
       const status = isNotFoundRoute ? 404 : nestedStatus;
 
       res.status(status).send(html);
-
-      if (status === 200) {
-        cachePage(url, html);
-      }
     } catch (e) {
       next(e);
     }

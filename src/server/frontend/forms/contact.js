@@ -13,7 +13,7 @@ import {onSubmit, validate} from '../../../app/containers/ContactForm';
 export default async function contact(req, res, next) {
   if (!req.store) {
     next(new Error('Contact form submission attempted before store was created'));
-    return;
+    return null;
   }
 
   const form = 'contact';
@@ -25,7 +25,7 @@ export default async function contact(req, res, next) {
   if (isNonEmptyObject(errors)) {
     dispatchFailure(errors);
     next();
-    return;
+    return null;
   }
 
   try {
@@ -33,7 +33,7 @@ export default async function contact(req, res, next) {
   } catch (error) {
     dispatchFailure(error.errors);
     next();
-    return;
+    return null;
   }
 
   // if we get here, the form submission has succeeded! :)

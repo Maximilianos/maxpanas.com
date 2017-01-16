@@ -47,6 +47,26 @@ export async function pageCacheMiddleware({url}, res, next) {
     return null;
   }
 
+  // replace the res.status method with our own that
+  // will save the response to the cache if the status
+  // code is a 200 valid response
+  const status = res.status;
+  res.status = code => {
+    const resWithStatus = status.call(res, code);
+
+    // we need to replace the send method on the returned
+    // response object to actually cache it after its sent
+    const send = resWithStatus.send;
+    resWithStatus.send = html => {
+      send.call(resWithStatus, html);
+      if (code === 200) {
+        cachePage(url, html);
+      }
+    };
+
+    return resWithStatus;
+  };
+
   next();
 }
 
