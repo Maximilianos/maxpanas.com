@@ -23,7 +23,7 @@ const cache = createCacheClient({
  * @param html
  * @returns {Promise.<void>}
  */
-export function cachePage(url, html) {
+function cachePage(url, html) {
   return cache.put(url, html, {
     expiry: getPageTimeToExpiry(url)
   });

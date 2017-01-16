@@ -9,7 +9,6 @@ import NestedStatus from 'react-nested-status';
 
 import {isProduction} from '../config';
 import webpackIsomorphicTools from '../tools';
-import {cachePage} from './cache';
 
 import createRoutes from '../../app/createRoutes';
 
