@@ -9,7 +9,7 @@ import * as config from '../config';
  * @param req
  * @param res
  */
-export default function errorHandler(err, req, res) {
+export default function errorHandler(err, req, res, next) {
   const errorDetails = err.stack || err;
 
   console.error('Error:', errorDetails);
