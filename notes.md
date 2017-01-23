@@ -9,10 +9,16 @@
 - Run tests automatically on travis ci
 - Add ability to specify different environments
 - Put project in container for easy deployment (?)
-- Split api and frontend server into separate projects (?)
+- Split api and frontend server into separate projects (?) <=
 - Create monorepo with articles included to facilitate maintenance (?)
 - set up production environment
 - set up staging environment
+
+## Server Error Handler
+
+- fix error handler so that it responds to errors correctly
+- Add separate error renderer for the api responses
+- and separate error renderer for the frontnend responses
 
 ## Security
 
@@ -122,7 +128,7 @@
 
 - Use an SVG for the site Logo instead of text and a font (?)
 - Add MathJax to the markdown parser for articles (?)
-- Make sure no-js class is removed only when js generally executes successfully (?)
+- DONE? - Make sure no-js class is removed only when js generally executes successfully (?)
 
 ## Analytics
 
