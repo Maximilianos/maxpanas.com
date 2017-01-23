@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import {myAge, myYearsExperienceInWords} from '../../../utils/max';
+import {myAge, myYearsExperienceInWords} from '../../../utils/me';
 
 import {Link} from 'react-router';
 
