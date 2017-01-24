@@ -13,6 +13,7 @@
 - Create monorepo with articles included to facilitate maintenance (?)
 - set up production environment
 - set up staging environment
+- find a way to remove webpackIsomorphicTools
 
 ## Server Error Handler
 
