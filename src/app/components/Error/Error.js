@@ -9,17 +9,13 @@ Error.propTypes = {
   code: PropTypes.number,
   title: PropTypes.string,
   subtitle: PropTypes.string,
-  message: PropTypes.string,
-  router: PropTypes.shape({
-    goBack: PropTypes.func
-  })
+  message: PropTypes.string
 };
 export default function Error({
   code = 500,
   title = '500',
   subtitle = 'Error',
   message = 'The server had a problem completing your request',
-  router
 }) {
   return (
     <article className="error">
@@ -41,15 +37,6 @@ export default function Error({
         {message}
       </p>
       <ul className="error__links">
-        {/* global.history is never true on the server... */}
-        {!!(global.history && global.history.length) && <li>
-          <button
-            className="error__back-button"
-            onClick={router.goBack}
-          >
-            Go Back
-          </button>
-        </li>}
         <li>
           <Link to="/">
             Go Home
