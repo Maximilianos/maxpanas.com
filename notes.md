@@ -19,6 +19,7 @@
 - fix error handler so that it responds to errors correctly
 - Add separate error renderer for the api responses
 - and separate error renderer for the frontnend responses
+- add suggestions on error page for potential misspelling of links
 
 ## Security
 
