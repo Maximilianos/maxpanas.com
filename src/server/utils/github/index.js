@@ -49,7 +49,7 @@ export function authWebhookPushRequest(key) {
 
 
 /**
- *
+ * Generic handler for reacting to GitHub Webhook requests
  *
  * @param payloadHandler
  * @returns {function({body: *}, *)}
@@ -89,7 +89,8 @@ export function getChangesFromCommits(commits) {
 
 
 /**
- *
+ * Get an array of root archive names from a given list
+ * of file URLs
  *
  * @param fileURLs
  * @returns {Array.<*>}
@@ -102,7 +103,8 @@ export function getArchivesFromFileUrls(...fileURLs) {
 
 
 /**
- *
+ * Get an array of article file names from a given list
+ * of file URLs
  *
  * @param fileURLs
  * @returns {Array.<*>}
