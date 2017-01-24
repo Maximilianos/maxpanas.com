@@ -55,7 +55,7 @@ export async function pageCacheMiddleware({url}, res, next) {
     const resWithStatus = status.call(res, code);
 
     // we need to replace the send method on the returned
-    // response object to actually cache it after its sent
+    // response object to actually cache it after it is sent
     const send = resWithStatus.send;
     resWithStatus.send = html => {
       send.call(resWithStatus, html);
