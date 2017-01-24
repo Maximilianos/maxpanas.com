@@ -16,10 +16,11 @@
 
 ## Server Error Handler
 
-- fix error handler so that it responds to errors correctly
+- DONE! - fix generic error handler so that it responds to errors
 - Add separate error renderer for the api responses
-- and separate error renderer for the frontnend responses
-- add suggestions on error page for potential misspelling of links
+- and separate error renderer for the frontend responses
+- add suggestions on frontend error page for potential misspelling of links
+- replace console.log with proper error logging software
 
 ## Security
 
