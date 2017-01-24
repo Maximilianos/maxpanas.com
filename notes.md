@@ -17,6 +17,7 @@
 ## Server Error Handler
 
 - DONE! - fix generic error handler so that it responds to errors
+- Propagate errors to error handling middleware, do not respond to them directly in handlers
 - Add separate error renderer for the api responses
 - and separate error renderer for the frontend responses
 - add suggestions on frontend error page for potential misspelling of links

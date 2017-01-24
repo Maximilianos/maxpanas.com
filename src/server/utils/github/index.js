@@ -52,17 +52,12 @@ export function authWebhookPushRequest(key) {
  * Generic handler for reacting to GitHub Webhook requests
  *
  * @param payloadHandler
- * @returns {function({body: *}, *)}
+ * @returns {function({body: object}, object)}
  */
 export function webhookHandler(payloadHandler) {
   return async ({body}, res) => {
-    try {
-      await payloadHandler(body);
-      res.status(204).end();
-    } catch (error) {
-      console.log(error);
-      res.status(500).end();
-    }
+    await payloadHandler(body);
+    res.status(204).end();
   };
 }
 
