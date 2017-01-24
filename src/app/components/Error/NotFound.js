@@ -1,5 +1,5 @@
 import React from 'react';
-import Error from '../../containers/Error';
+import Error from './Error';
 
 
 export default function NotFound() {

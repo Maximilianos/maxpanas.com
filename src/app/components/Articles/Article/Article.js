@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import Avatar from '../../Avatar/Avatar';
 import Loader from '../../Loader/Loader';
 import NotFound from '../../Error/NotFound';
-import Error from '../../../containers/Error';
+import Error from '../../Error/Error';
 
 import './Article.scss';
 
