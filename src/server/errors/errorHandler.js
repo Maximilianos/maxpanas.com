@@ -8,8 +8,9 @@ import * as config from '../config';
  * @param err
  * @param req
  * @param res
+ * @param next
  */
-export default function errorHandler(err, req, res, next) {
+export default function errorHandler(err, req, res, next) { // eslint-disable-line no-unused-vars
   const errorDetails = err.stack || err;
 
   console.error('Error:', errorDetails);
