@@ -1,5 +1,13 @@
 # My Blog - Miscellaneous Notes
 
+## Design
+
+- Make teasers more like Material Design cards
+  - make the hover more subtle (not full tomato background)
+  - make the card appear to lift off the page realistically
+  - page transition animation, when clicking the card: make it expand to 
+    fill the viewport and make sure the title takes it's correct place
+
 ## Dev / Testing
 
 - Move to WebPack 2
