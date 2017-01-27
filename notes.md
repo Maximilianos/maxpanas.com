@@ -2,7 +2,7 @@
 
 ## Design
 
-- Make teasers more like Material Design cards
+- Make teasers more like Material Design cards?
   - make the hover more subtle (not full tomato background)
   - make the card appear to lift off the page realistically
   - page transition animation, when clicking the card: make it expand to 
@@ -41,6 +41,10 @@
 - Secure Node/Express Server
 
 ## Performance
+
+- Make sure cache headers are set correctly
+  - cache-control: max-age=3600, immutable - https://code.facebook.com/posts/557147474482256/this-browser-tweak-saved-60-of-requests-to-facebook
+
 
 - General
   - switch to graphql + relay or lokka instead of REST
