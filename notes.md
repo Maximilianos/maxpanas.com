@@ -62,6 +62,9 @@
   - code-split app for each route so as to download the minimum required js for
     each page
 
+
+- Make sure images are using the responsive images apis
+
 ## Functionality
 
 - Api calls
