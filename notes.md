@@ -1,5 +1,10 @@
 # My Blog - Miscellaneous Notes
 
+## What do I need to do to deploy??
+
+- fix the fixed localhost paths in the app/config.js
+- figure out and implement let's encrypt for ssl certificate
+
 ## Design
 
 - Make teasers more like Material Design cards?
@@ -23,7 +28,6 @@
 - set up staging environment
 - find a way to remove webpackIsomorphicTools
 - fix the TODOs in the code
-- fix the fixed localhost paths in the app/config.js
 
 ## Server Error Handler
 
@@ -34,6 +38,10 @@
 - add suggestions on frontend error page for potential misspelling of links
 - replace console.log with proper error logging software
 
+## Accessibility
+
+- check site for WCAG compliance
+
 ## Security
 
 - DONE! - Add meta robots noindex nofollow for development mode
@@ -41,6 +49,8 @@
 - Use Let's Encrypt to implement HTTPS
 - Secure Redis Server
 - Secure Node/Express Server
+- make sure observatory by mozilla comes back with a high score
+- make sure no unnecessary ports are open on the deployment server
 
 ## Performance
 
