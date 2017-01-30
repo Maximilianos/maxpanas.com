@@ -77,7 +77,7 @@ export async function onSubmit(values) {
   }
 
   if (json.success) {
-    return;
+    return null;
   }
 
   const {code, details} = json.error;

@@ -10,4 +10,4 @@ export const CONTENT_API = 'http://localhost:8000/api/content';
  *
  * @type {string}
  */
-export const FORM_API = 'http://localhost:8000/api/form';
+export const FORM_API = 'http://localhost:8000/api/forms';
