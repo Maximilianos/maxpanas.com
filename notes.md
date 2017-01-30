@@ -1,9 +1,12 @@
 # My Blog - Miscellaneous Notes
 
-## What do I need to do to deploy??
+## What do I need to do to deploy to a staging environment?
 
 - fix the fixed localhost paths in the app/config.js
-- figure out and implement let's encrypt for ssl certificate
+
+## What do I need to do to deploy to the live environment?
+
+- 
 
 ## Design
 
