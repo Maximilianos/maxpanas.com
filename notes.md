@@ -32,7 +32,7 @@
 - find a way to remove webpackIsomorphicTools
 - fix the TODOs in the code
 
-## Server Error Handler
+## Error Handling
 
 - DONE! - fix generic error handler so that it responds to errors
 - Propagate errors to error handling middleware, do not respond to them directly in handlers
@@ -72,8 +72,11 @@
   - code-split app for each route so as to download the minimum required js for
     each page
 - Make sure images are using the responsive images apis
+- Use an SVG for the site Logo instead of text and a font (?)
 
 ## Functionality
+
+- DONE? - Make sure no-js class is removed only when js generally executes successfully (?)
 
 - Api calls
   - DONE! - make contact form use absolute url not relative for api submission
@@ -113,6 +116,7 @@
   - add social sharing buttons
   - add comment form
   - add comment feed
+  - Add MathJax to the markdown parser for articles (?)
 
 ## Cache
 
@@ -145,17 +149,6 @@
   - DONE! - Static cache should invalidate when an article is added so that the
     archive pages and the article page are created/updated
 
-## Refactor Opportunity
-
-- app/style/utils/contents.scss
-- app/style/theme/colors.scss
-- update packages in package json
-
-## Random
-
-- Use an SVG for the site Logo instead of text and a font (?)
-- Add MathJax to the markdown parser for articles (?)
-- DONE? - Make sure no-js class is removed only when js generally executes successfully (?)
 
 ## Analytics
 
