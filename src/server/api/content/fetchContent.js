@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch';
 import {getResponseFromCache, putResponseInCache} from './cache';
 
 import crypto from 'crypto';

@@ -1,5 +1,3 @@
-import fetch from 'isomorphic-fetch';
-
 export const FETCH_CONTENT_PENDING = 'FETCH_CONTENT_PENDING';
 export const FETCH_CONTENT_SUCCESS = 'FETCH_CONTENT_SUCCESS';
 export const FETCH_CONTENT_FAILURE = 'FETCH_CONTENT_FAILURE';

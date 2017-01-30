@@ -1,3 +1,6 @@
+// polyfill the fetch api for the browsers that don't support it
+import 'isomorphic-fetch';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, browserHistory, applyRouterMiddleware} from 'react-router';

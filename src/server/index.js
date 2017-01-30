@@ -6,4 +6,8 @@ if (['development', 'production'].indexOf(process.env.NODE_ENV) === -1) {
 }
 
 require('babel-register');
+
+// polyfill the fetch api for node.js
+require('isomorphic-fetch');
+
 require('./tools');

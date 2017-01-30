@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 import {reduxForm, SubmissionError} from 'redux-form';
 import isEmail from 'validator/lib/isEmail';
-import fetch from 'isomorphic-fetch';
 
 import {FORM_API} from '../config';
 import ContactForm from '../components/Pages/Contact/ContactForm';
