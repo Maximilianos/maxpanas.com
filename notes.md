@@ -22,6 +22,8 @@
 - set up production environment
 - set up staging environment
 - find a way to remove webpackIsomorphicTools
+- fix the TODOs in the code
+- fix the fixed localhost paths in the app/config.js
 
 ## Server Error Handler
 
@@ -42,27 +44,20 @@
 
 ## Performance
 
+- Only load polyfils when actually required
 - Make sure cache headers are set correctly
   - cache-control: max-age=3600, immutable - https://code.facebook.com/posts/557147474482256/this-browser-tweak-saved-60-of-requests-to-facebook
-
-
 - General
   - switch to graphql + relay or lokka instead of REST
   - (subsetting) Make custom builds of the fonts with only the glyphs actually
     being used included for each font. (not really applicable to the body font)
-
-
 - Time to first Meaningful Paint
   - DONE! - font loading strategy that replaces FOIT (Flash of Invisible Text)
             with FOUT (Flash of Unstyled Text), thus making the content 
             accessible earlier (no-js should not be affected)
-
-
 - Time to Interactive
   - code-split app for each route so as to download the minimum required js for
     each page
-
-
 - Make sure images are using the responsive images apis
 
 ## Functionality
