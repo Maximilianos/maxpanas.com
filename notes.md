@@ -76,6 +76,9 @@
 
 ## Functionality
 
+- Add ability to have a series of related articles, like a youtube playlist. I envision
+  it in the left sidebar on the article page (on mobile? where would I put it)
+
 - DONE? - Make sure no-js class is removed only when js generally executes successfully (?)
 
 - Api calls
