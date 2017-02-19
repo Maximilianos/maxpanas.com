@@ -60,6 +60,10 @@ export async function pageCacheMiddleware({url}, res, next) {
     resWithStatus.send = html => {
       send.call(resWithStatus, html);
       if (code === 200) {
+        // cachePage returns a promise but we don't care
+        // about it because even if caching fails we will
+        // just try to cache it again next time the page
+        // is requested
         cachePage(url, html);
       }
     };
@@ -74,9 +78,6 @@ export async function pageCacheMiddleware({url}, res, next) {
 /**
  * Remove items from the caches that were affected by the
  * changes made to the articles
- *
- * sends a no-content response because we don't want
- * to be sending any content back to github
  *
  * @param commits Array
  * @returns {Promise.<*>}

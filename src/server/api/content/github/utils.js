@@ -45,7 +45,7 @@ export function collatePaginatedContent(parser) {
   return async function collatingParser(response) {
     const payload = await parser(response);
     if (!Array.isArray(payload)) {
-      throw new TypeError('Error: Payload must be an array in order to be collated');
+      throw new TypeError('Payload must be an array in order to be collated');
     }
 
     const linkHeader = response.headers.get('Link');
@@ -63,7 +63,7 @@ export function collatePaginatedContent(parser) {
     });
 
     if (nextPayload.error) {
-      throw new Error('Error: Collation failed because one of the requests failed');
+      throw new Error('Collation failed because one of the requests failed');
     }
 
     return payload.concat(nextPayload);

@@ -49,9 +49,6 @@ export async function getResponseFromCache(resource) {
  * Remove items from the caches that were affected by the
  * changes made to the articles
  *
- * sends a no-content response because we don't want
- * to be sending any content back to github
- *
  * @param commits
  * @returns {Promise.<*>}
  */
