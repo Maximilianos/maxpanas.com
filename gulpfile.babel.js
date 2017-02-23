@@ -14,7 +14,7 @@ const args = yargs
   .argv;
 
 gulp.task('env', () => {
-  process.env.NODE_ENV = (
+  process.env.NODE_ENV = process.env.NODE_ENV || (
     args.production ? 'production' : 'development'
   );
 });

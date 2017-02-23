@@ -1,4 +1,3 @@
-import ip from 'ip';
 import path from 'path';
 import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
@@ -6,10 +5,15 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackIsomorphicToolsPlugin from 'webpack-isomorphic-tools/plugin';
 
 import webpackIsomorphicAssets from './assets';
-import {SRC_DIR, BUILD_DIR, HOT_RELOAD_PORT} from './constants';
-
-
-const SERVER_IP = ip.address();
+import {
+  NODE_ENV,
+  SRC_DIR,
+  BUILD_DIR,
+  SERVER_IP,
+  HOT_RELOAD_PORT,
+  CONTENT_API_ROOT,
+  FORM_API_ROOT
+} from './constants';
 
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicAssets);
 
@@ -105,15 +109,15 @@ export default function makeConfig(isDevelopment) {
     /**
      * Plugins
      */
-    postcss: [
-      autoprefixer({browsers: 'last 2 version'})
-    ],
+    postcss: [autoprefixer({browsers: 'last 2 version'})],
     plugins: [
       new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
-          NODE_ENV: JSON.stringify(isDevelopment ? 'development' : 'production'),
-          IS_BROWSER: true
+          IS_BROWSER: true,
+          NODE_ENV: JSON.stringify(NODE_ENV),
+          FORM_API_ROOT: JSON.stringify(FORM_API_ROOT),
+          CONTENT_API_ROOT: JSON.stringify(CONTENT_API_ROOT)
         }
       })
     ].concat(

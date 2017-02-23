@@ -1,7 +1,7 @@
+import express from 'express';
 import webpack from 'webpack';
 import webpackDev from 'webpack-dev-middleware';
 import webpackHot from 'webpack-hot-middleware';
-import express from 'express';
 
 import makeWebpackConfig from '../makeConfig';
 
