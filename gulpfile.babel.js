@@ -5,6 +5,7 @@ import eslint from 'gulp-eslint';
 import bg from 'gulp-bg';
 import shell from 'gulp-shell';
 import runSequence from 'run-sequence';
+import dotenv from 'dotenv';
 import yargs from 'yargs';
 
 import webpackBuild from './webpack/build';
@@ -14,6 +15,7 @@ const args = yargs
   .argv;
 
 gulp.task('env', () => {
+  dotenv.load();
   process.env.NODE_ENV = process.env.NODE_ENV || (
     args.production ? 'production' : 'development'
   );
