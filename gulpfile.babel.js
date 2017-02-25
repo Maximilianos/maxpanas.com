@@ -21,7 +21,10 @@ gulp.task('env', () => {
   );
 });
 
-gulp.task('clean', () => del('build/*'));
+gulp.task('clean', () => del('build/'));
+gulp.task('bleach', ['clean'], () => del([
+  'dump.rdb', 'webpack-assets.json'
+]));
 
 gulp.task('build', ['env'], webpackBuild);
 
