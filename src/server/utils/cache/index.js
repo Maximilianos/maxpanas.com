@@ -5,6 +5,13 @@ import LRU from 'lru-cache';
 import {createClient} from 'redis';
 
 
+import {
+  LRU_SIZE,
+  REDIS_PATH,
+  REDIS_PASSWORD
+} from './config';
+
+
 /**
  * Redis Lua script to delete any entries from cache that
  * contain the given strings in their keys
@@ -33,8 +40,10 @@ export default function createCacheClient({
   name = '',
   keyPrefix = ''
 }) {
-  const lru = LRU(50);
-  const redis = createClient();
+  const lru = LRU(LRU_SIZE);
+  const redis = createClient(REDIS_PATH, {
+    password: REDIS_PASSWORD
+  });
 
   redis.on('error', error => console.log(error.toString()));
   redis.on('connect', () => {
@@ -159,6 +168,10 @@ export default function createCacheClient({
 
     lru.set(key, payload, expiry);
 
+    if (!redis.connected) {
+      return null;
+    }
+
     const redisPayload = asJSONinRedis
       ? JSON.stringify(payload)
       : payload;
@@ -185,6 +198,10 @@ export default function createCacheClient({
     lru.keys()
       .filter(key => keyWildcards.some(item => key.includes(item)))
       .forEach(key => lru.del(key));
+
+    if (!redis.connected) {
+      return Promise.resolve();
+    }
 
     // delete the relevant cache entries from redis
     // NOTE: the following script will block the redis server until it has completed.
