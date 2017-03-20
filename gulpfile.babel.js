@@ -8,8 +8,6 @@ import runSequence from 'run-sequence';
 import dotenv from 'dotenv';
 import yargs from 'yargs';
 
-import webpackBuild from './webpack/build';
-
 const args = yargs
   .alias('p', 'production')
   .argv;
@@ -26,7 +24,9 @@ gulp.task('bleach', ['clean'], () => del([
   'dump.rdb', 'webpack-assets.json'
 ]));
 
-gulp.task('build', ['env'], webpackBuild);
+gulp.task('build', ['env'], done =>
+  require('./webpack/build')(done)
+);
 
 gulp.task('lint', () =>
   gulp.src([
