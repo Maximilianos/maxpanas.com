@@ -1,8 +1,5 @@
-import {getResponseFromCache, putResponseInCache} from './cache';
-
 import crypto from 'crypto';
-import {Base64} from 'js-base64';
-import secrets from './secrets.json';
+import {getResponseFromCache, putResponseInCache} from './cache';
 
 
 /**
@@ -52,9 +49,11 @@ function fetchError(status) {
  */
 async function fetchContent(url, {parser}) {
   try {
-    const response = await fetch(url, {headers: new Headers({
-      Authorization: `Basic ${Base64.encode(`${secrets.auth.login}:${secrets.auth.password}`)}`
-    })});
+    const headers = process.env.GITHUB_AUTH_TOKEN && new Headers({
+      Authorization: `token ${process.env.GITHUB_AUTH_TOKEN}`
+    });
+
+    const response = await fetch(url, {headers});
 
     const {status} = response;
 
@@ -68,6 +67,7 @@ async function fetchContent(url, {parser}) {
 
     return {status, payload};
   } catch (error) {
+    // TODO: implement better error logging and reporting than console.log
     console.log(error);
     return fetchError(error.status);
   }

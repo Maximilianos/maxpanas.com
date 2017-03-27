@@ -84,7 +84,7 @@
 - DONE? - Make sure no-js class is removed only when js generally executes successfully (?)
 
 - Api calls
-  - authenticate GitHub api calls with a token, so as not to incur limits on un-authenticated calls  
+  - DONE! - authenticate GitHub api calls with a token, so as not to incur limits on un-authenticated calls  
   - DONE! - make contact form use absolute url not relative for api submission
   - DONE! - make content api calls use absolute url not relative
   - DONE! - cache all successful api calls in redis db
