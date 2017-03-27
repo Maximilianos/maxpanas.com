@@ -41,20 +41,14 @@ function fetchError(status) {
  *
  * TODO: implement conditional requests https://developer.github.com/v3/#conditional-requests
  *
- * TODO: remove hardcoded basic authorization from here
- *
  * @param url
  * @param parser
+ * @param headers
  * @returns {*}
  */
-async function fetchContent(url, {parser}) {
+async function fetchContent(url, {parser, headers}) {
   try {
-    const headers = process.env.GITHUB_AUTH_TOKEN && new Headers({
-      Authorization: `token ${process.env.GITHUB_AUTH_TOKEN}`
-    });
-
     const response = await fetch(url, {headers});
-
     const {status} = response;
 
     if (status !== 200) {
@@ -82,9 +76,10 @@ async function fetchContent(url, {parser}) {
  *
  * @param url
  * @param parser
+ * @param headers
  * @returns {Promise.<*>}
  */
-export async function fetchContentCached(url, {parser}) {
+export async function fetchContentCached(url, {parser, headers}) {
   const parserHash = crypto
     .createHash('sha1')
     .update(parser.toString())
@@ -97,7 +92,7 @@ export async function fetchContentCached(url, {parser}) {
     return cachedResponse;
   }
 
-  const response = await fetchContent(url, {parser});
+  const response = await fetchContent(url, {parser, headers});
 
   if (response.status === 200) {
     putResponseInCache(resource, response);

@@ -13,18 +13,24 @@ import secrets from './secrets.json';
 
 const app = express();
 
+const headers = process.env.GITHUB_AUTH_TOKEN && new Headers({
+  Authorization: `token ${process.env.GITHUB_AUTH_TOKEN}`
+});
+
 app.disable('x-powered-by');
 
 
 app.get('/articles/:article', fetchContentMiddleware({
   endpoint: req => getArticlePath(req.params.article),
-  parser: parseArticle
+  parser: parseArticle,
+  headers
 }));
 
 
 app.get('/archives/:archive', fetchContentMiddleware({
   endpoint: req => getArchivePath(req.params.archive),
-  parser: parseArchive
+  parser: parseArchive,
+  headers
 }));
 
 
