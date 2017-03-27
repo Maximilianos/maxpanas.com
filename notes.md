@@ -1,12 +1,17 @@
 # My Blog - Miscellaneous Notes
 
-## What do I need to do to deploy to a staging environment?
+## What do I need to do to deploy to the staging environment?
 
-- fix the fixed localhost paths in the app/config.js
+- DONE! - setup the staging server with the project
+- DONE! - fix the fixed localhost paths in the app/config.js
+- DONE! - set up Let's Encrypt for staging
+- add better handling of staging environment related configuration and behavior
+  - configure meta robots in staging and dev to be noindex, nofollow (or configure proxy to serve robots.txt for staging)
 
 ## What do I need to do to deploy to the live environment?
 
-- 
+- DONE! - setup the live server with the project (it is the same as the staging server for now)
+- set up Let's Encrypt for live
 
 ## Design
 
@@ -23,12 +28,9 @@
 - Update Node Modules to Latest
 - Add unit tests for code...
 - Run tests automatically on travis ci
-- Add ability to specify different environments
 - Put project in container for easy deployment (?)
 - Split api and frontend server into separate projects (?) <=
 - Create monorepo with articles included to facilitate maintenance (?)
-- set up production environment
-- set up staging environment
 - find a way to remove webpackIsomorphicTools
 - fix the TODOs in the code
 
@@ -47,7 +49,7 @@
 
 ## Security
 
-- DONE! - Add meta robots noindex nofollow for development mode
+- DONE! - Add meta robots noindex, nofollow for development mode
 - Add a Content Security Policy
 - Use Let's Encrypt to implement HTTPS
 - Secure Redis Server
@@ -82,6 +84,7 @@
 - DONE? - Make sure no-js class is removed only when js generally executes successfully (?)
 
 - Api calls
+  - authenticate GitHub api calls with a token, so as not to incur limits on un-authenticated calls  
   - DONE! - make contact form use absolute url not relative for api submission
   - DONE! - make content api calls use absolute url not relative
   - DONE! - cache all successful api calls in redis db
