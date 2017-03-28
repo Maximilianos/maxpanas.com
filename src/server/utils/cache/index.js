@@ -43,8 +43,8 @@ export default function createCacheClient({
   const lru = LRU(LRU_SIZE);
   const redis = createClient(REDIS_PATH, {
     password: REDIS_PASSWORD,
-    retry_strategy({attempt, times_connected: timesConnected}) {
-      return timesConnected > 10
+    retry_strategy({attempt}) {
+      return attempt > 5
         ? new Error('Redis connection failed too many times, not trying to connect any more')
         : Math.min(attempt * 100, 3000);
     }
