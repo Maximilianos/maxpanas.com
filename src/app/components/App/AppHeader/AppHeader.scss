@@ -89,7 +89,9 @@ $center-header: $b-tablet;
   &:after {
     content: '';
     display: block;
+    margin: 0 auto;
     height: 3px;
+    width: 1em;
     background-color: currentcolor;
 
     transform-origin: center;
@@ -100,7 +102,7 @@ $center-header: $b-tablet;
 
   &--active:after {
     transition-timing-function: ease-out;
-    transform: scaleX(0.25);
+    transform: scaleX(1);
   }
 
   @media all and (min-width: $mini-header) {
