@@ -93,8 +93,8 @@
 - Contact Form
   - DONE! - Fix bug with contact form when no-js and submitting two separate forms
   - DONE! - Add honeypot to email sender to reduce spam
-  - Add server side cool-off rate limiter for multiple submissions
-  - Use a better service to send emails to me (?)
+  - Add server side cool-off rate limiter for multiple submissions from same IP
+  - DONE! - Use a better service to send emails (mailgun)
   - Store submissions somewhere... (?)
 
 - Archive
