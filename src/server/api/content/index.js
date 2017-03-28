@@ -8,9 +8,6 @@ import {getArchivePath, parseArchive} from './github/types/archive';
 import {updateCache} from './cache';
 import {authWebhookPushRequest, webhookHandler} from '../../utils/github';
 
-import secrets from './secrets.json';
-
-
 const app = express();
 
 const headers = process.env.GITHUB_AUTH_TOKEN && new Headers({
@@ -42,7 +39,7 @@ app.get('/archives/:archive', fetchContentMiddleware({
 app.post(
   '/update-cache',
   bodyparser.json(),
-  authWebhookPushRequest(secrets.hooks.updateCache.secret),
+  authWebhookPushRequest(process.env.GITHUB_SECRET_CONTENT_UPDATE),
   webhookHandler(updateCache)
 );
 

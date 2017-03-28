@@ -9,9 +9,6 @@ import render from './render';
 import {authWebhookPushRequest, webhookHandler} from '../utils/github';
 import {pageCacheMiddleware, updateCache} from './cache';
 
-import secrets from './secrets.json';
-
-
 const app = express();
 
 app.disable('x-powered-by');
@@ -49,7 +46,7 @@ app.post(
 app.post(
   '/update-cache',
   bodyParser.json(),
-  authWebhookPushRequest(secrets.hooks.updateCache.secret),
+  authWebhookPushRequest(process.env.GITHUB_SECRET_FRONTEND_UPDATE),
   webhookHandler(updateCache)
 );
 
