@@ -1,10 +1,8 @@
 import nodemailer from 'nodemailer';
+import mailgunTransport from 'nodemailer-mailgun-transport';
 import isEmail from 'validator/lib/isEmail';
 import isNotEmpty from './validator/validators/isNotEmpty';
 import validateData from './validator/validateData';
-
-import secrets from './secrets.json';
-
 
 const errors = {
   invalid: {
@@ -61,15 +59,16 @@ export default async function contactFormHandler(req, res) {
       return;
     }
 
-    nodemailer.createTransport({
-      service: secrets.mail.service,
+    const emailTransport = nodemailer.createTransport(mailgunTransport({
       auth: {
-        user: secrets.mail.user,
-        pass: secrets.mail.pass
+        api_key: process.env.MAILGUN_API_KEY,
+        domain: process.env.MAILGUN_DOMAIN
       }
-    }).sendMail({
+    }));
+
+    emailTransport.sendMail({
       from: formData.email,
-      to: secrets.mail.to,
+      to: process.env.CONTACT_EMAIL,
       subject: `maxpanas.com - ${formData.name} has a message for ya!`,
       text: formData.message
     }, (error) => {
