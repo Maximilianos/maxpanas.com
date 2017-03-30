@@ -79,6 +79,10 @@
 
 ## Functionality
 
+- Add RSS Feed for articles!
+- Add link in the header of the site to the RSS Feed
+- Add link in the site for the RSS Feed
+
 - Add ability to have a series of related articles, like a youtube playlist. I envision
   it in the left sidebar on the article page (on mobile? where would I put it)
 
