@@ -17,6 +17,7 @@ export default reducer.plugin({
  */
 function resetFieldsOnSuccess(state, action) {
   return action.type === actionTypes.SET_SUBMIT_SUCCEEDED
-    ? {submitSucceeded: true}
+    ? {submitSucceeded: true} // from the entire state object,
+                              // this is the only thing we want to keep
     : state;
 }
