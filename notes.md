@@ -63,16 +63,17 @@
 - Make sure cache headers are set correctly
   - cache-control: max-age=3600, immutable - https://code.facebook.com/posts/557147474482256/this-browser-tweak-saved-60-of-requests-to-facebook
 - General
-  - switch to graphql + relay or lokka instead of REST
+  - switch to graphql + apollo or relay or lokka instead of REST
   - (subsetting) Make custom builds of the fonts with only the glyphs actually
     being used included for each font. (not really applicable to the body font)
 - Time to first Meaningful Paint
   - DONE! - font loading strategy that replaces FOIT (Flash of Invisible Text)
             with FOUT (Flash of Unstyled Text), thus making the content 
             accessible earlier (no-js should not be affected)
+  - stream html to browser, don't wait to send it down as a big chunk ()
 - Time to Interactive
   - code-split app for each route so as to download the minimum required js for
-    each page
+    each page (or look at react-loadable to load js on a component basis ? )
 - Make sure images are using the responsive images apis
 - Use an SVG for the site Logo instead of text and a font (?)
 
@@ -91,6 +92,11 @@
   - DONE! - split up cache so that each microservice has its own cache
 
 - Contact Form
+  - change email subject to me to include a snippet of the message body so as to be easier
+    to scan in Gmail
+  - DONE! - clear contact form data after successful submission
+  - send email to sender to confirm the email from contact form has been delivered but only
+    in production
   - DONE! - Fix bug with contact form when no-js and submitting two separate forms
   - DONE! - Add honeypot to email sender to reduce spam
   - Add server side cool-off rate limiter for multiple submissions from same IP
@@ -128,7 +134,7 @@
 
 - DONE! - consolidate cache handling between frontend server and content api server
 - promisify redis cache client and use async/await for better readability
-- add authentication when interfacing with Redis Server
+- DONE! - add authentication when interfacing with Redis Server
 - add testing for Lua script - based on: 
   http://ilyapimenov.com/blog/2014/09/19/lua-scripts-in-redis-within-nodejs.html
 - redis setup likely needs rearchitecting, particularly because of the operations
