@@ -1,7 +1,7 @@
-import {reducer as formReducer} from 'redux-form';
+import {actionTypes, reducer} from 'redux-form';
 
 
-export default formReducer.plugin({
+export default reducer.plugin({
   contact: resetFieldsOnSuccess
 });
 
@@ -16,7 +16,7 @@ export default formReducer.plugin({
  * @returns {{submitSucceeded: boolean}}
  */
 function resetFieldsOnSuccess(state, action) {
-  return action.type === 'redux-form/SET_SUBMIT_SUCCEEDED'
+  return action.type === actionTypes.SET_SUBMIT_SUCCEEDED
     ? {submitSucceeded: true}
     : state;
 }
