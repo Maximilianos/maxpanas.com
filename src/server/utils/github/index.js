@@ -57,7 +57,7 @@ export function authWebhookPushRequest(key) {
 export function webhookHandler(payloadHandler) {
   return async ({body}, res) => {
     await payloadHandler(body);
-    res.status(204).end();
+    res.status(204).send();
   };
 }
 
