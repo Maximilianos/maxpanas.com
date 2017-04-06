@@ -198,14 +198,14 @@ export default function createCacheClient({
    * @param keyWildcards
    * @returns {Promise<Promise<T>|Promise>}
    */
-  function flushWhereKeyContains(keyWildcards) {
+  async function flushWhereKeyContains(keyWildcards) {
     // delete the relevant cache entries from the lru cache
     lru.keys()
       .filter(key => keyWildcards.some(item => key.includes(item)))
       .forEach(key => lru.del(key));
 
     if (!redis.connected) {
-      return Promise.resolve();
+      return null;
     }
 
     // delete the relevant cache entries from redis
