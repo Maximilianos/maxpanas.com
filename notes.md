@@ -136,6 +136,8 @@
 
 ## Cache
 
+- re-architect & re-implement the cache-update for the frontend to be tied to the 
+  cache updating on the api (so use only one webhook)
 - DONE! - consolidate cache handling between frontend server and content api server
 - promisify redis cache client and use async/await for better readability
 - DONE! - add authentication when interfacing with Redis Server
