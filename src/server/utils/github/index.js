@@ -137,8 +137,8 @@ function getRootArchiveFromFileUrl(fileURL) {
  * @returns {string}
  */
 function getArticleSlugFromFileUrl(fileURL) {
-  const {file, ext} = path.parse(fileURL);
-  return file.slice(0, -ext.length);
+  const {name, ext} = path.parse(fileURL);
+  return name.slice(0, -ext.length);
 }
 
 
