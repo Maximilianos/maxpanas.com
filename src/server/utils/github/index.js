@@ -145,13 +145,13 @@ function getArticleSlugFromFileUrl(fileURL) {
 /**
  * Filter out any file paths to things that are
  * definitely not articles because they are not
- * a valid article root directory
+ * in a valid article root directory
  *
  * @param filesPaths array
  * @returns {Array}
  */
 function validArchivesOnly(filesPaths) {
-  return filesPaths
-    .map(getRootArchiveFromFileUrl)
-    .filter(archive => VALID_ARCHIVES.includes(archive));
+  return filesPaths.filter(
+    archive => VALID_ARCHIVES.includes(getRootArchiveFromFileUrl(archive))
+  );
 }
