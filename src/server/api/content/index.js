@@ -1,5 +1,5 @@
 import express from 'express';
-import bodyparser from 'body-parser';
+import bodyParser from 'body-parser';
 
 import fetchContentMiddleware from './fetchContent';
 import {getArticlePath, parseArticle} from './github/types/article';
@@ -38,7 +38,7 @@ app.get('/archives/:archive', fetchContentMiddleware({
  */
 app.post(
   '/update-cache',
-  bodyparser.json(),
+  bodyParser.json(),
   authWebhookPushRequest(process.env.GITHUB_SECRET_CONTENT_UPDATE),
   webhookHandler(updateCache)
 );
