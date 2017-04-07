@@ -121,6 +121,12 @@
     article's content
 
 - Articles
+  - should add and use an excerpt field for articles
+  - should use the description as an excerpt if no excerpt has been set
+  - should use the beginning of the article as an excerpt if no excerpt and
+    no description has been set
+  - should use the beginning of the article as the description if the description
+    is not set (? or will it make me lazy ?)
   - should move the url for article pages to /articles/:article (?)
   - DONE! - Only show articles marked with "status:published" when in
             production mode
