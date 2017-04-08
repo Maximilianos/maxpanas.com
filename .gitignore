@@ -12,9 +12,6 @@
 
 # config stuff
 /.env
-/src/server/frontend/secrets.json
-/src/server/api/content/secrets.json
-/src/server/api/forms/secrets.json
 
 # fonts
 /src/app/assets/fonts/avenir/
