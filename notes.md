@@ -59,6 +59,7 @@
 
 ## Performance
 
+- Use react-loadable to split app per route (?)s
 - Only load polyfils when actually required
 - Make sure cache headers are set correctly
   - cache-control: max-age=3600, immutable - https://code.facebook.com/posts/557147474482256/this-browser-tweak-saved-60-of-requests-to-facebook
