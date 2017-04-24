@@ -5,13 +5,14 @@
 - DONE! - setup the staging server with the project
 - DONE! - fix the fixed localhost paths in the app/config.js
 - DONE! - set up Let's Encrypt for staging
-- add better handling of staging environment related configuration and behavior
-  - configure meta robots in staging and dev to be noindex, nofollow (or configure proxy to serve robots.txt for staging)
+- DONE! - add better handling of staging environment related configuration and behavior
+- DONE! - configure meta robots in staging and dev to be noindex, nofollow 
+- configure proxy to serve robots.txt for staging (?)
 
 ## What do I need to do to deploy to the live environment?
 
 - DONE! - setup the live server with the project (it is the same as the staging server for now)
-- set up Let's Encrypt for live
+- DONE! - set up Let's Encrypt for live
 
 ## Design
 
@@ -59,8 +60,8 @@
 
 ## Performance
 
-- Use react-loadable to split app per route (?)s
-- Only load polyfils when actually required
+- Use react-loadable to split app per route (?)
+- Only load polyfills when actually required (polyfill.io?)
 - Make sure cache headers are set correctly
   - cache-control: max-age=3600, immutable - https://code.facebook.com/posts/557147474482256/this-browser-tweak-saved-60-of-requests-to-facebook
 - General
@@ -71,11 +72,11 @@
   - DONE! - font loading strategy that replaces FOIT (Flash of Invisible Text)
             with FOUT (Flash of Unstyled Text), thus making the content 
             accessible earlier (no-js should not be affected)
-  - stream html to browser, don't wait to send it down as a big chunk ()
+  - stream html to browser, don't wait to send it down as a big chunk (?)
 - Time to Interactive
   - code-split app for each route so as to download the minimum required js for
-    each page (or look at react-loadable to load js on a component basis ? )
-- Make sure images are using the responsive images apis
+    each page (or look at react-loadable to load js on a component basis ?)
+- Make sure images are using the responsive images APIs
 - Use an SVG for the site Logo instead of text and a font (?)
 
 ## Functionality
@@ -148,9 +149,9 @@
 - DONE! - consolidate cache handling between frontend server and content api server
 - promisify redis cache client and use async/await for better readability
 - DONE! - add authentication when interfacing with Redis Server
-- add testing for Lua script - based on: 
+- add testing for Lua script - based on:
   http://ilyapimenov.com/blog/2014/09/19/lua-scripts-in-redis-within-nodejs.html
-- redis setup likely needs rearchitecting, particularly because of the operations
+- redis setup likely needs re-architecting, particularly because of the operations
   to selectively clean up cached items when modifications are made to articles
 - setup
   - DONE! - cache must **only** be populated if the response has _no_ errors
@@ -160,12 +161,12 @@
     - should invalidate when server restarts
   - N/A - cache raw github api responses for content. Key: `api.content.raw.${type}.${id}`
     - DONE! - should invalidate when content changes on github
-       (implemented with git hook ?)
+              (implemented with git hook ?)
   - DONE! - cache frontend page renderings `frontend.${route}`
     - DONE! - should invalidate all pages when the year changes to update
-               myYearsExperience and the copyright across the site
+              myYearsExperience and the copyright across the site
     - DONE! - should invalidate archive pages and specific article pages when a specific
-       bit of content gets updated
+              bit of content gets updated
 
 
 - Invalidation
