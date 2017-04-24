@@ -21,6 +21,7 @@
   - make the card appear to lift off the page realistically
   - page transition animation, when clicking the card: make it expand to 
     fill the viewport and make sure the title takes it's correct place
+- Add animations to contact form error messages when they appear and disappear
 
 ## Dev / Testing
 
