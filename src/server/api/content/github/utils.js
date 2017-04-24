@@ -14,7 +14,7 @@ import {fetchContentCached} from '../fetchContent';
  */
 export function formatDate(dateString, {
   from: inputFormat,
-  to: outputFormat = 'YYYY/MM/DD'
+  to: outputFormat = 'DD/MM/YYYY'
 } = {}) {
   return dateString && moment(dateString, inputFormat)
     .format(outputFormat);
