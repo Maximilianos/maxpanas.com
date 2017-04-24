@@ -140,7 +140,9 @@
   - add social sharing buttons
   - add comment form
   - add comment feed
-  - Add MathJax to the markdown parser for articles (?)
+  - add MathJax to the markdown parser for articles (?)
+  - format published and updated dates on the client and not on the server to support
+    date locale preferences
 
 ## Cache
 
