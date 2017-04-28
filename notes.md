@@ -61,6 +61,7 @@
 
 ## Performance
 
+- Use brotli instead of gzip for file compression (https://certsimple.com/blog/nginx-brotli) (?)
 - Use react-loadable to split app per route (?)
 - Only load polyfills when actually required (polyfill.io?)
 - Make sure cache headers are set correctly
