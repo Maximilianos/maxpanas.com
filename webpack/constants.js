@@ -17,3 +17,6 @@ export const HOT_RELOAD_PORT = process.env.HOT_RELOAD_PORT || 8080;
 const API_ROOT = 'http://localhost:8000/api';
 export const CONTENT_API_ROOT = process.env.CONTENT_API_ROOT || `${API_ROOT}/content`;
 export const FORM_API_ROOT = process.env.FORM_API_ROOT || `${API_ROOT}/forms`;
+
+// misc
+export const GA_TRACKING_ID = process.env.GA_TRACKING_ID;

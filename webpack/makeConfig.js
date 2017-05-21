@@ -12,7 +12,8 @@ import {
   SERVER_IP,
   HOT_RELOAD_PORT,
   CONTENT_API_ROOT,
-  FORM_API_ROOT
+  FORM_API_ROOT,
+  GA_TRACKING_ID
 } from './constants';
 
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIsomorphicAssets);
@@ -117,7 +118,8 @@ export default function makeConfig(isDevelopment) {
           IS_BROWSER: true,
           NODE_ENV: JSON.stringify(NODE_ENV),
           FORM_API_ROOT: JSON.stringify(FORM_API_ROOT),
-          CONTENT_API_ROOT: JSON.stringify(CONTENT_API_ROOT)
+          CONTENT_API_ROOT: JSON.stringify(CONTENT_API_ROOT),
+          GA_TRACKING_ID: JSON.stringify(GA_TRACKING_ID)
         }
       })
     ].concat(
