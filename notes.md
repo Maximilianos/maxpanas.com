@@ -182,12 +182,14 @@
 
 ## Analytics
 
-- Server-side logging
+- Server-side logging. Save to persistent logfile
   - log page request
 
 
 - Client-side analytics event tracking. Events to track:
-  - page view
+  - DONE - page view
+  - error loading archive view
+  - error loading article
   - contact form
     - touched (?)
     - partially filled in (?)
