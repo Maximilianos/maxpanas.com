@@ -85,7 +85,7 @@
     "lru-cache": "4.0.2",
     "marked": "0.3.5",
     "moment": "2.17.1",
-    "morgan": "1.7.0",
+    "morgan": "1.9.1",
     "nodemailer": "2.6.4",
     "nodemailer-mailgun-transport": "1.2.4",
     "nodemon": "1.9.2",
